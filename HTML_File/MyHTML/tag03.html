@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글자의 크기를 마음대로 조절하는 태그</title>
+</head>
+<body text="#000000" link="#ff0000" vlink="#00ff00" alink="0000ff">
+     <style>
+        table{
+            border-collapse: collapse;
+        }
+        thead {
+            text-align: center; background-color: rgb(168, 166, 166);
+        }
+        th, td{
+            min-width: 200px;
+            border: 1px solid black;
+        }
+    </style>
+    <table border="1">
+        <thead>
+        <tr >
+            <td width="10%" align=center><b>형식</b></td>
+            <td width="20%" align=center><b>구성</b></td>
+            <td width="40%" align=center><b>내용</b></td>
+        </tr>
+    </thead>
+        <tr>
+            <td>&lt;FONT SIZE=n&gt;</td>
+            <td>&lt;FONT SIZE=n&gt;....&lt;/FONT&gt;</td>
+            <td>글자의 크기를 마음대로 조절해줍니다. 뒤의 숫자는 1~7이며
+                7이 가장큰 크기입니다. 기본값은 3입니다.
+            </td>
+        </tr>      
+    </table>
+</body>
+</html>

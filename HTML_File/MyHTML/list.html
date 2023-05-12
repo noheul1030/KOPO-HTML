@@ -1,0 +1,131 @@
+<!--태그표 홈페이지 만들기(list)-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML실습 List</title>
+    <style>
+        ul{
+            list-style-type: disc;
+        }
+        li{
+            margin: 30px;
+        }
+        a{
+            text-decoration-line: none;
+            
+/*   text-decoration-line: underline; */
+/*   text-decoration-line: overline; */
+/*   text-decoration-line: line-through; */
+/*   text-decoration-line: underline line-through overline; */
+        }
+        a { text-decoration: none; color: black; }
+        a:visited { text-decoration: none; }
+        a:hover { text-decoration: none; }
+        a:focus { text-decoration: none; }
+        a:hover, a:active { text-decoration: none; }
+
+        .blinking-text {
+        animation: blink 0.1s linear infinite;
+      }
+
+      @keyframes blink {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+    }
+    .rainbow-text {
+        animation: rainbow-blink 1s linear infinite;
+      }
+
+      @keyframes rainbow-blink {
+        0% {
+          color: red;
+        }
+        16.7% {
+          color: orange;
+        }
+        33.3% {
+          color: yellow;
+        }
+        50% {
+          color: green;
+        }
+        66.7% {
+          color: blue;
+        }
+        83.3% {
+          color: indigo;
+        }
+        100% {
+          color: violet;
+        }
+      }
+
+      @keyframes blink {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
+</head>
+<body>
+    <a>
+    <ul>
+        <li type="disc">
+            <a href="./tag01.html" target="content" style="color : red" class="rainbow-text"> <u>1. 문서의 기본 구조를 나타내 주는 태그</u></a></li>       
+        <li type="disc">
+            2. <a href="./tag02.html" target="content">문단 혹은 줄을 바꾸는 태그</a></li>        
+        <li type="disc">
+            3. <a href="./tag03.html" target="content">글자의 크기를 마음대로 조절하는 태그</a></li>        
+        <li type="disc">
+            4. <a href="./tag04.html" target="content">선 그리기 태그</a></li>        
+        <li type="disc">
+            5. <a href="./tag05.html" target="content">이미지 맵을 처리하는 태그</a></li>        
+        <li type="disc">
+            6. <a href="./tag06.html" target="content">목록을 정리해 주는 태그</a></li>        
+        <li type="disc">
+            7. <a href="./tag07.html" target="content">문서를 가운데로 정렬시켜 주는 태그</a></li>        
+        <li type="disc">
+            8. <a href="./tag08.html" target="content">인용하기 태그</a></li>        
+        <li type="disc">
+            9. <a href="./tag09.html" target="content">글자의 모양을 정의해 주는 태그</a></li>        
+        <li type="disc">
+            10. <a href="./tag10.html" target="content">배경 이미지 작업하기1</a></li>        
+        <li type="disc">
+            11. <a href="./tag11.html" target="content">부분을 강조해 주는 태그</a></li>        
+        <li type="disc">
+            12. <a href="./tag12.html" target="content">연결하기 태그</a></li>        
+        <li type="disc">
+            13. <a href="./tag13.html" target="content">주소 및 편지 서비스</a></li>        
+        <li type="disc">
+            14. <a href="./tag14.html" target="content">색상 지정하기</a></li>        
+        <li type="disc">
+            15. <a href="./tag15.html" target="content">표 만들기 태그</a></li>        
+        <li type="disc">
+            16. <a href="./tag16.html" target="content">문서를 임의로 고정시키는 태그</a></li>        
+        <li type="disc">
+            17. <a href="./tag17.html" target="content">입력 폼 만들기</a></li>        
+        <li type="disc">
+            18. <a href="./tag18.html" target="content">창 만들기 태그</a></li>        
+        <li type="disc">
+            19. <a href="./tag19.html" target="content">이미지 다루기에 필요한 태그</a></li>                   
+    </ul>
+    </a>
+</body>
+</html>
