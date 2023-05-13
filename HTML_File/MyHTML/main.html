@@ -1,16 +1,18 @@
 <!--태그표 홈페이지 만들기(main)-->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!DOCTYPE html><!--시작을 html 형식으로 지정-->
+<html lang="en"><!--언어 english-->
+<head><!--head 시작-->
+    <meta charset="UTF-8"><!--작성 형태는 UTF-8로 한다.-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Home</title>
-</head>
-<body>
-    <div style="display: flex; width: 100%;">
+    <title>Main Home</title><!--title시작 문구 작성 title종료-->
+</head><!--head종료-->
+<body><!--body시작-->
+    <div style="display: flex; width: 100%;"><!--div(특정부분 그룹화)내부 요소 수평 정렬, 너비 100%사용-->
+		<!--iframe 다른 HTML페이지(list.html) 포함, frameborder 내부 테투리 유무 0(테두리 없음),width 너비 30% 사용, align 왼쪽 정렬, style 높이 100%사용-->
         <iframe src="list.html" frameborder="0" width="30%" align=left style="height:100vh;">aaa</iframe>
+		<!--iframe 다른 HTML페이지(tag01.html) 포함, name iframe이름 "content"지정, frameborder 내부 테투리 유무 0(테두리 없음),width 너비 70% 사용, align 왼쪽 정렬, style 높이 100%사용-->
         <iframe src="tag01.html" name="content" frameborder="0" width="70%" align=left style="height:100vh;">aaa</iframe>
-</div>
-</body>
-</html>
+	</div><!--div 종료-->
+</body><!--body 종료-->
+</html><!--html 종료-->
