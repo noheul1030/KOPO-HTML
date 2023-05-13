@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!DOCTYPE html><!--시작을 html 형식으로 지정-->
+<html lang="en"><!--언어 english-->
+<head><!--head 시작-->
+    <meta charset="UTF-8"><!--작성 형태는 UTF-8로 한다.-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>글자의 크기를 마음대로 조절하는 태그</title>
-</head>
+    <title>글자의 크기를 마음대로 조절하는 태그</title><!--title시작 문구 작성 title종료-->
+</head><!--head종료-->
+<!--body시작 text는 검정색 link는 빨강색 vlink는 초록색 alink는 파란색-->
 <body text="#000000" link="#ff0000" vlink="#00ff00" alink="0000ff">
-     <style>
+    <style>
         table{
             border-collapse: collapse;
         }
@@ -19,21 +20,21 @@
             border: 1px solid black;
         }
     </style>
-    <table border="1">
-        <thead>
-        <tr >
-            <td width="10%" align=center><b>형식</b></td>
-            <td width="20%" align=center><b>구성</b></td>
-            <td width="40%" align=center><b>내용</b></td>
-        </tr>
-    </thead>
-        <tr>
-            <td>&lt;FONT SIZE=n&gt;</td>
-            <td>&lt;FONT SIZE=n&gt;....&lt;/FONT&gt;</td>
-            <td>글자의 크기를 마음대로 조절해줍니다. 뒤의 숫자는 1~7이며
-                7이 가장큰 크기입니다. 기본값은 3입니다.
-            </td>
-        </tr>      
-    </table>
-</body>
-</html>
+    <table border="1"><!--table시작 border속성 굵기 1px지정(경계선 굵기 1) -->
+        <thead><!--thead시작-->
+			<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+				<td width="10%" align=center><b>형식</b></td><!--td(표에서 셀을 생성)가운데(center) 굵은글씨(<b>)로 셀 내용작성 td셀 작성종료-->
+				<td width="20%" align=center><b>구성</b></td><!--td(표에서 셀을 생성)가운데(center) 굵은글씨(<b>)로 셀 내용작성 td셀 작성종료-->
+				<td width="40%" align=center><b>내용</b></td><!--td(표에서 셀을 생성)가운데(center) 굵은글씨(<b>)로 셀 내용작성 td셀 작성종료-->
+			</tr><!--tr 종료-->
+		</thead><!--thead종료-->
+			<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+				<td>&lt;FONT SIZE=n&gt;</td><!--셀 내용작성 td셀 작성종료-->
+				<td>&lt;FONT SIZE=n&gt;....&lt;/FONT&gt;</td><!--셀 내용작성 td셀 작성종료-->
+				<td>글자의 크기를 마음대로 조절해줍니다. 뒤의 숫자는 1~7이며
+					7이 가장큰 크기입니다. 기본값은 3입니다.
+				</td><!--셀 내용작성 td셀 작성종료-->
+			</tr><!--tr 종료-->       
+    </table><!--table 종료-->
+</body><!--body 종료-->
+</html><!--html 종료-->

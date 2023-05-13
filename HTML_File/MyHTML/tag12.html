@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!DOCTYPE html><!--시작을 html 형식으로 지정-->
+<html lang="en"><!--언어 english-->
+<head><!--head 시작-->
+    <meta charset="UTF-8"><!--작성 형태는 UTF-8로 한다.-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>연결하기 태그</title>
-</head>
+    <title>연결하기 태그</title><!--title시작 문구 작성 title종료-->
+</head><!--head종료-->
+<!--body시작 text는 검정색 link는 빨강색 vlink는 초록색 alink는 파란색-->
 <body text="#000000" link="#ff0000" vlink="#00ff00" alink="0000ff">
     <style>
         table{
@@ -19,24 +20,23 @@
             border: 1px solid black;
         }
     </style>
-    <table border="1">
-        <thead>
-        <tr >
-            <td width="10%" align=center><b>형식</b></td>
-            <td width="20%" align=center><b>구성</b></td>
-            <td width="40%" align=center><b>내용</b></td>
-        </tr>
-    </thead>
-        <tr>
-            <td rowspan="2">&lt;A&gt;</td>
-            <td>&lt;A HREF= "....."&gt;....&lt;/A&gt;</td>
-            <td>다른 홈페이지와 연결시켜 줍니다.</td>
-        </tr>
-        <tr>
-            <td>&lt;A NAME="...."&gt;....&lt;/A&gt;</td>
-            <td>자신의 홈페이지 내에서 연결해 줍니다.</td>
-        </tr>
-          
-    </table>
-</body>
-</html>
+    <table border="1"><!--table시작 border속성 굵기 1px지정(경계선 굵기 1) -->
+        <thead><!--thead시작-->
+			<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+				<td width="10%" align=center><b>형식</b></td><!--td(표에서 셀을 생성)가운데(center) 굵은글씨(<b>)로 셀 내용작성 td셀 작성종료-->
+				<td width="20%" align=center><b>구성</b></td><!--td(표에서 셀을 생성)가운데(center) 굵은글씨(<b>)로 셀 내용작성 td셀 작성종료-->
+				<td width="40%" align=center><b>내용</b></td><!--td(표에서 셀을 생성)가운데(center) 굵은글씨(<b>)로 셀 내용작성 td셀 작성종료-->
+			</tr><!--tr 종료-->
+		</thead><!--thead종료-->
+			<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+				<td rowspan="2">&lt;A&gt;</td><!--rowspan 해당 셀의 2개행 병합 td셀 작성종료-->
+				<td>&lt;A HREF= "....."&gt;....&lt;/A&gt;</td><!--셀 내용작성 td셀 작성종료-->
+				<td>다른 홈페이지와 연결시켜 줍니다.</td><!--셀 내용작성 td셀 작성종료-->
+			</tr><!--tr 종료-->
+			<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+				<td>&lt;A NAME="...."&gt;....&lt;/A&gt;</td><!--셀 내용작성 td셀 작성종료-->
+				<td>자신의 홈페이지 내에서 연결해 줍니다.</td><!--셀 내용작성 td셀 작성종료-->
+			</tr><!--tr 종료-->       
+    </table><!--table 종료-->
+</body><!--body 종료-->
+</html><!--html 종료-->

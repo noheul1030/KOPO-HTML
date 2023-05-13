@@ -1,12 +1,13 @@
 <!--문서의 기본 구조를 나타내주는 태그-->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!DOCTYPE html> <!--시작을 html 형식으로 지정-->
+<html lang="en"><!--언어 english-->
+<head><!--head 시작-->
+    <meta charset="UTF-8"><!--작성 형태는 UTF-8로 한다.-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>문서의 기본 구조를 나타내주는 태그</title>
-</head>
+    <title>문서의 기본 구조를 나타내주는 태그</title><!--title시작 문구 작성 title종료-->
+</head><!--head종료-->
+<!--body시작 text는 검정색 link는 빨강색 vlink는 초록색 alink는 파란색-->
 <body text="#000000" link="#ff0000" vlink="#00ff00" alink="0000ff">
     <style>
         table{
@@ -19,49 +20,47 @@
             min-width: 200px;
             border: 1px solid black;
         }
-    </style>
-    <table border="1">
-        <thead>
-        <tr >
-            <td width="10%" align=center><b>형식</b></td>
-            <td width="20%" align=center><b>구성</b></td>
-            <td width="40%" align=center><b>내용</b></td>
-        </tr>
-    </thead>
-    <tr>
-        <td>&lt;HTML&gt;</td>
-        <td>&lt;HTML&gt;.....&lt;/HTML&gt;</td>
-        <td>HTML언어로 작성되어 있다는 것을 알려줍니다.</td>
-    </tr>
-    <tr>
-        <td>&lt;HEAD&gt;</td>
-        <td>&lt;HEAD&gt;.....&lt;/HEAD&gt;</td>
-        <td>Heading의 준말로 글의 머리말에 해당합니다.</td>
-    </tr>
-    <tr>
-        <td>&lt;BODY&gt;</td>
-        <td>&lt;BODY&gt;.....&lt;/BODY&gt;</td>
-        <td>본문에 해당하는 부분을 알려줍니다.</td>
-    </tr>
-    <tr>
-        <td>&lt;TITLE&gt;</td>
-        <td>&lt;TITLE&gt;.....&lt;/TITLE&gt;</td>
-        <td>타이틀바에 새겨질 글자를 정의합니다.</td>
-    </tr>
-    <tr>
-        <td>&lt;Hn&gt;</td>
-        <td>&lt;Hn&gt;.....&lt;/Hn&gt;</td>
-        <td>표제 부분에 들어갈 말을 정의합니다. 1~6까지의 숫자를 사용하고
-            숫자가 커질수로 표제는 작아집니다. 기본값은 H4입니다.
-        </td>
-    </tr>
-    <tr>
-        <td>&lt;!--...--&gt;</td>
-        <td>&lt;!--주석내용....--&gt;</td>
-        <td>주석을 달거나 잠시동안 이미지를 보이지 않게 할 때 사용합니다.가급적 요즘은 -2개 </td>
-    </tr>
-</table>
-
-
-</body>
-</html>
+	</style>
+    <table border="1"><!--table시작 border속성 굵기 1px지정(경계선 굵기 1) -->
+        <thead><!--thead시작-->
+			<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+				<td width="10%" align=center><b>형식</b></td><!--td(표에서 셀을 생성)가운데(center) 굵은글씨(<b>)로 셀 내용작성 td셀 작성종료-->
+				<td width="20%" align=center><b>구성</b></td><!--td(표에서 셀을 생성)가운데(center) 굵은글씨(<b>)로 셀 내용작성 td셀 작성종료-->
+				<td width="40%" align=center><b>내용</b></td><!--td(표에서 셀을 생성)가운데(center) 굵은글씨(<b>)로 셀 내용작성 td셀 작성종료-->
+			</tr><!--tr 종료-->
+		</thead><!--thead종료-->
+			<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+				<td>&lt;HTML&gt;</td><!--셀 내용작성 td셀 작성종료-->
+				<td>&lt;HTML&gt;.....&lt;/HTML&gt;</td><!--셀 내용작성 td셀 작성종료-->
+				<td>HTML언어로 작성되어 있다는 것을 알려줍니다.</td><!--셀 내용작성 td셀 작성종료-->
+			</tr><!--tr 종료-->
+			<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+				<td>&lt;HEAD&gt;</td><!--셀 내용작성 td셀 작성종료-->
+				<td>&lt;HEAD&gt;.....&lt;/HEAD&gt;</td><!--셀 내용작성 td셀 작성종료-->
+				<td>Heading의 준말로 글의 머리말에 해당합니다.</td><!--셀 내용작성 td셀 작성종료-->
+			</tr><!--tr 종료-->
+			<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+				<td>&lt;BODY&gt;</td><!--셀 내용작성 td셀 작성종료-->
+				<td>&lt;BODY&gt;.....&lt;/BODY&gt;</td><!--셀 내용작성 td셀 작성종료-->
+				<td>본문에 해당하는 부분을 알려줍니다.</td><!--셀 내용작성 td셀 작성종료-->
+			</tr><!--tr 종료-->
+			<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+				<td>&lt;TITLE&gt;</td><!--셀 내용작성 td셀 작성종료-->
+				<td>&lt;TITLE&gt;.....&lt;/TITLE&gt;</td><!--셀 내용작성 td셀 작성종료-->
+				<td>타이틀바에 새겨질 글자를 정의합니다.</td><!--셀 내용작성 td셀 작성종료-->
+			</tr><!--tr 종료-->
+			<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+				<td>&lt;Hn&gt;</td><!--셀 내용작성 td셀 작성종료-->
+				<td>&lt;Hn&gt;.....&lt;/Hn&gt;</td><!--셀 내용작성 td셀 작성종료-->
+				<td>표제 부분에 들어갈 말을 정의합니다. 1~6까지의 숫자를 사용하고
+					숫자가 커질수로 표제는 작아집니다. 기본값은 H4입니다.
+				</td><!--셀 내용작성 td셀 작성종료-->
+			</tr><!--tr 종료-->
+			<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+				<td>&lt;!--...--&gt;</td><!--셀 내용작성 td셀 작성종료-->
+				<td>&lt;!--주석내용....--&gt;</td><!--셀 내용작성 td셀 작성종료-->
+				<td>주석을 달거나 잠시동안 이미지를 보이지 않게 할 때 사용합니다.가급적 요즘은 -2개 </td><!--셀 내용작성 td셀 작성종료-->
+			</tr><!--tr 종료-->
+	</table><!--table 종료-->
+</body><!--body 종료-->
+</html><!--html 종료-->
