@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object</title> <!--title-->
+    <style>
+        body {
+            font-family: 'Nanum Gothic Coding', monospace;
+            font-size: 20px;
+        }
+
+    </style>
+</head> <!--head ends-->
+<body> <!--body-->
+    <script>
+
+
+    </script>
+    <table style="max-width: 450px">
+        <thead>
+            <tr>
+                <td rowspan="3" style="width: 150px; min-width: 150px">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emart_Logo.svg/2560px-Emart_Logo.svg.png",
+                        style="width: 120px;">
+                </td>
+                <td style="font-size: 15px; width:300px; height: 16px; overflow: hidden; white-space: nowrap;">이마트죽전점(031)888-1234</td>
+            </tr>
+            <tr>
+                <td style="font-size: 15px; width:300px; height: 16px; overflow: hidden; white-space: nowrap;">206-86-50913 강희석</td>
+            </tr>
+            <tr>
+                <td style="font-size: 15px; width: 300px; height: 16px; overflow: hidden; white-space: nowrap;">용인 수지구 포은대로 552</td>
+            </tr>
+        </thead>
+        <thead>
+            <tr><td style="font-size: 15px;">영수증 미지참시 교환/환불 불가</td></tr>
+            <tr><td style="font-size: 15px;">정상상품에 한함, 20일 이내(신선 7일)</td></tr>
+            <tr><td style="font-size: 15px;">※일부 브랜드매장 제외(매장 고지물참조)</td></tr>
+            <tr><td style="font-size: 15px;">교환/환불 구매점에서 가능(결제카드 지참)</td></tr>
+            <br>
+            <tr><td style="font-size: 15px;">[구 매]<span id="date"></span></td></tr>
+        </thead>
+
+    </table>
+    
+
+    
+    
+    <table>
+    </table>
+    <h4>폰트 테스트</h4>
+    <h1>font test</h1>
+
+<script>
+        function getStringFromByteLength(contents, length) {
+             let str_character;
+             let int_char_count = 0;
+             let int_contents_length = contents.length;
+ 
+             let returnValue = '';
+ 
+             for (k = 0; k < int_contents_length; k++) {
+                 str_character = contents.charAt(k);
+                 if (escape(str_character).length > 4)
+                     int_char_count += 2;
+                 else
+                     int_char_count++;
+ 
+                 if (int_char_count > length) {
+                     break;
+                 }
+                 returnValue += str_character;
+             }
+             return returnValue;
+         }
+    let 한글 = "한글길이 테스트";
+    let 영어 = "english length";
+    console.log("한글", 한글.length, getStringFromByteLength(한글, 6));
+    console.log("영어", 영어.length, getStringFromByteLength(영어, 6));
+
+    let date = new Date;
+    let year = date.getFullYear();
+    const id_d = document.getElementById("date");
+    id_d.innerText = year;
+ </script>
+ </body> <!--body ends-->
+ </html> <!--html ends-->

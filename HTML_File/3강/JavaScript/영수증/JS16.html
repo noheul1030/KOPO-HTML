@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 구글 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        font-family: "Nanum Gothic Coding";
+    }
+    .top{
+        border-top : 1px dashed;
+    }
+    .bottom{
+        border-bottom : 1px dashed;
+    }
+</style>
+
+<script>
+
+    var itemName = ["해피홈 SAFE365 핸드크림", "(G)LH원형유리화병 10개입", "상투과자E", "더블링 나일론 깡 롤", "해피홈 SAFE 핸드워시", "농심 신라면120g*5",
+        "(대)국내산삼겹살찌개", "오뚜기 진비빔면 156g", "GAP 죽장사과 4-6입/", "순 유기농 바나나(봉)", "피코크 탄두리 닭가슴", "(달콤)순살닭강정(g)",
+        "DZ주니어양말3족C_BK", "DZ주니어양말3족C_WH", "프리미엄생연어초밥", "피코크 들깨미역국500", "남양 맛있는우유GT 저지방우유", "녹차원흑당시럽10입",
+        "진라면소컵(매)65g*6", "케라시스 앰플 트리트", "푸르밀 미숫가루우유", "자일로스갈색설탕500g", "CJ 비비고칩 20G", "피코크 들깨미역국500",
+        "흑원당 말차 밀크티", "1+ 등급란 10개입 특", "동원양반볶음김치기획", "양파(1.8kg/망)", "소불고기(신세계푸드)", "엠엔엔즈피넛150g", "물"];
+
+    var itemPrice = [15000, 6900, 5980, 3300, 5500, 3380, 6610, 2750, 10800, 4980, 2480, 10240, 4980, 4980, 7130, 3980,
+        4480, 4980, 3210, 6950, 2980, 1990, 1980, 3980, 4480, 3480, 7980, 2780, 10000, 2680, 1000];
+
+    var itemAmount = [3, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 2, 6];
+
+    var taxFree = [false, false, false, false, false, false, true, false, true, false, false, false, false, false, false, false, true,
+        false, false, false, false, false, false, false, false, true, false, true, false, false, false];
+
+    // <!-- style="border-bottom: dashed 0.5px;" -->
+
+    document.write("<table>");
+    document.write("<tr>");
+    document.write("<td colspan='3' rowspan='3' style='font-size: 40px; text-align: center;font-weight: bold;'>" + "emart" + "</td>");
+    document.write("<td colspan='2' align = left>이마트 묵천점 (031)888-1234</td>");
+
+    document.write("</tr>");
+    document.write("<tr>");
+    document.write("<td colspan='2' align = left>206-86-50913 강희석</td>");
+    document.write("</tr>");
+
+    document.write("<tr>");
+    document.write("<td colspan='2' align = left>용인 수지구 포은대로 552</td>");
+    document.write("</tr>");
+
+    document.write("<tr>");
+    document.write(" <td colspan='5'>영수증 미지참시 교환/환불 불가</td>");
+    document.write("</tr>");
+
+    document.write("<tr>");
+    document.write(" <td colspan='5'>정상상품에 한함, 30일 이내(신선7일)</td>");
+    document.write("</tr>");
+
+    document.write("<tr>");
+    document.write("<td colspan='5'>※일부 브랜드매장 제외(매장 고지물참조)</td>");
+    document.write("</tr>");
+
+    document.write("<tr>");
+    document.write("<td colspan='5'>교환/환불 구매점에서 가능(결제카드 지참)</td>");
+    document.write("</tr>");
+
+    document.write("<tr>");
+    document.write("<td></td>");
+    document.write("</tr>");
+
+    /* ======================================================= */
+    var today = new Date(); // 현재날짜 받아오기
+        let dateFormat1 = today.getFullYear() + '-' + (today.getMonth()+1) +'-' 
+	    + today.getDate() + '  ' + today.getHours() + ':' + today.getMinutes();
+        let dateFormat2 = today.getFullYear() + '-' + (today.getMonth()+1) +'-' 
+	    + today.getDate() + '  ' + (today.getHours() - 1) + ':' + today.getMinutes();  
+    // 현재시간을 2023.05.16. 15.18 이와 같은 dateFormat으로 만들기 위해서 다시 저장
+
+    document.write("<tr>");
+    document.write("<td colspan='4' class='bottom'>[구매]" + dateFormat1 + "</td>");
+    document.write("<td colspan='1' align = right class='bottom'>P0S:0011-9861</td>");
+    document.write("</tr>");
+
+    document.write("<tr>");
+    document.write("<td colspan='2' class='bottom' width='50px'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<strong>상품명</strong></td>");
+    document.write("<td class='bottom'>&nbsp&nbsp<strong>단가</strong></td>");
+    document.write("<td align=right class='bottom'><strong>수량</strong></td>");
+    document.write("<td align=right class='bottom'><strong>금액&nbsp&nbsp&nbsp</strong></td>");
+    document.write("</tr>");
+    /* =========================================== */
+    function getBytes(str) {
+        let character;
+        let charBytes = 0;
+        
+        for (let i = 0; i < str.length; i++) {
+            if (escape(str).length > 4) charBytes += 2;
+            else charBytes += 1;
+        }
+        return charBytes;
+    }
+//=========================
+    var arr = new Array();
+
+    for (var i = 0; i < itemName.length; i++) {
+        var counting = 0;
+        var item_name = itemName[i] + "                                   ";
+        for (var j = 0; j < item_name.length; j++) {
+            var item_char = item_name.charAt(j);
+            var getNum =  getBytes(item_char);
+            counting += getNum;
+
+            if (counting == 13) {
+                var checkText = item_name.charAt(j + 1);
+                var checking =  getBytes(checkText);
+                if (checking == 1) {
+                    arr.push(item_name.substr(0, (j + 2)));
+                    console.log("자르기1 : " + item_name.substr(0, (j + 2)));
+
+                } else {
+                    arr.push(item_name.substr(0, (j + 1)) + " ");
+                    console.log("자르기2 : " + item_name.substr(0, (j + 1)));
+                }
+                break;
+            } else if (counting == 14) {
+                arr.push(item_name.substr(0, (j + 1)));
+                console.log("자르기3 : " + item_name.substr(0, (j + 1)));
+            }
+        }
+    }
+
+    console.log("새로운 배열 크기 : " + arr.length);
+
+    for (var i = 0; i < arr.length; i++) {
+        console.log("잘린 아이템 : " + arr[i]);
+    }
+
+    /* ================================================================================= */
+    totalamount = 0;
+    totaltax_freeprice = 0;
+    totaltax_price = 0;
+    totaltax = 0;
+    totalprice = 0;
+    for (i = 0; i < 31; i++) {
+        if ((i + 1) % 5 == 0) {
+            document.write("<tr>");
+            if (taxFree[i] == true) {
+                if(i<9) document.write("<td class='bottom'>0" + (i + 1) + "*</td>");
+                else document.write("<td class='bottom'>" + (i + 1) + "*</td>");
+            } else {
+                if(i<9) document.write("<td class='bottom'>0" + (i + 1) + "</td>");
+                else document.write("<td class='bottom'>" + (i + 1) + "</td>");
+            }
+        
+            document.write("<td style='text-align: left' class='bottom'>&nbsp" + arr[i] + "</td>");
+            document.write("<td style='text-align: right' class='bottom'>" + itemPrice[i].toLocaleString()  + "</td>");
+        
+            document.write("<td style='text-align: right' class='bottom'>" + itemAmount[i].toLocaleString()  + "</td>");
+            totalamount += itemAmount[i];
+            document.write("<td style='text-align: right' class='bottom'>" + (itemPrice[i] * itemAmount[i]).toLocaleString() + "</td>");
+            if(taxFree[i]==true){
+                totaltax_freeprice += itemPrice[i] * itemAmount[i];
+                totalprice += itemPrice[i] * itemAmount[i];
+            } else{
+                totaltax_price +=itemPrice[i] * itemAmount[i];
+                totalprice += itemPrice[i] * itemAmount[i];
+            }
+            document.write("</tr>");
+        } else {
+            document.write("<tr>");
+        if (taxFree[i] == true) {
+            if(i<9) document.write("<td>0" + (i + 1) + "*</td>");
+            else document.write("<td>" + (i + 1) + "*</td>");
+        } else {
+            if(i<9) document.write("<td>0" + (i + 1) + "</td>");
+            else document.write("<td>" + (i + 1) + "</td>");
+        }
+        
+        document.write("<td style='text-align: left'>&nbsp" + arr[i] + "</td>");
+        document.write("<td style='text-align: right'>" + itemPrice[i].toLocaleString()  + "</td>");
+        
+        document.write("<td style='text-align: right'>" + itemAmount[i].toLocaleString()  + "</td>");
+        totalamount += itemAmount[i];
+        document.write("<td style='text-align: right'>" + (itemPrice[i] * itemAmount[i]).toLocaleString() + "</td>");
+        if(taxFree[i]==true){
+            totaltax_freeprice += itemPrice[i] * itemAmount[i];
+            totalprice += itemPrice[i] * itemAmount[i];
+        } else{
+            totaltax_price +=itemPrice[i] * itemAmount[i];
+            totalprice += itemPrice[i] * itemAmount[i];
+        }
+        document.write("</tr>");
+
+        }
+    }
+    totaltax_price_before = parseInt(totaltax_price / 11) * 10;
+    totaltax = totaltax_price - totaltax_price_before;
+    
+    /* ================================================================================= */
+
+    document.write("<tr><td></td>");
+    document.write("<td rowspan='5'");
+    document.write("</td>");
+    document.write("<td colspan='2'>&nbsp&nbsp&nbsp총 폼목 수 량</td>");
+    document.write("<td colspan='2' align=right>"+totalamount.toLocaleString() +"</td>");
+    document.write("</tr>");
+
+    document.write("<tr><td></td>");
+    document.write("</td>");
+    document.write("<td colspan='2'>(*)면  세  &nbsp 물  품</td>");
+    document.write("<td colspan='2' align=right>"+totaltax_freeprice.toLocaleString() +"</td>");
+    document.write("</tr>");
+
+    document.write("<tr><td></td>");
+    document.write("<td colspan='2'>&nbsp&nbsp&nbsp과  세 &nbsp  물  품</td>");
+    document.write("<td colspan='2' align=right>"+totaltax_price_before.toLocaleString() +"</td>");
+    document.write("</tr>");
+
+    document.write("<tr><td></td>");
+    document.write("<td colspan='2'>&nbsp&nbsp&nbsp부&nbsp&nbsp&nbsp&nbsp가&nbsp&nbsp&nbsp세</td>");
+    document.write("<td colspan='2' align=right>"+ totaltax.toLocaleString() +"</td>");
+    document.write("</tr>");
+
+    document.write("<tr><td></td>");
+    document.write("<td colspan='2'>&nbsp&nbsp&nbsp합  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp계</td>");
+    document.write("<td colspan='2' align=right>"+ totalprice.toLocaleString() +"</td>");
+    document.write("</tr>");
+
+    document.write("<tr>");
+    document.write("<td colspan='3' class='bottom'>결  제  대  상   금  액</td>");
+    document.write("<td colspan='2' align=right class='bottom'>"+ totalprice.toLocaleString() +"</td>");
+    document.write("</tr>");
+
+
+    document.write("<tr>");
+    document.write("<td colspan='2'>0012 KEB 하나</td>");
+    document.write("<td colspan='3' align=right>541707**0484/35860658</td>");
+    document.write("</tr>");
+
+    document.write("<tr>");
+    document.write("<td colspan='2' class='bottom'>카드 결제</td>");
+    document.write("<td colspan='3' align=right class='bottom'>일시불 / " + totalprice.toLocaleString() + "</td>");
+    document.write("</tr>");
+
+    document.write("<tr>");
+    document.write("<td colspan='5' style='text-align: center;'>[신세계포인트 적립]</td>");
+    document.write("</tr>");
+
+    document.write("<tr>");
+    document.write("<td colspan='5'>홍*두 고객님의 포인트 현황입니다.</td>");
+    document.write("</tr>");
+
+    document.write("<tr>");
+    document.write("<td colspan='2'>금회 발생포인트</td>");
+    document.write("<td colspan='2' align=center>9350*9995</td>");
+    document.write("<td colspan='1' align=right>164</td>");
+    document.write("</tr>");
+
+    document.write("<tr>");
+    document.write("<td colspan='2'>누계(가용)포인트</td>");
+    document.write("<td colspan='3' align=right>123123( 12312)</td>");
+    document.write("</tr>");
+
+    document.write("<tr>");
+    document.write("<td colspan='5' class='bottom'>*신세계포인트 유효기간은 2년입니다.</td>");
+    document.write("</tr>");
+
+    document.write("<tr>");
+    document.write("<td colspan='5' align=center>구매금액기준 무료주차시간 자동부여</td>");
+    document.write("</tr>");
+
+    document.write("<tr>");
+    document.write("<td colspan='2'>차량번호 :</td>");
+    document.write("<td colspan='3' align=right>34저****</td>");
+    document.write("</tr>");
+
+    document.write("<tr>");
+    document.write("<td colspan='2' class='bottom'>입차시간 :</td>");
+    document.write("<td colspan='3' align=right class='bottom'>"+ dateFormat2 +"</td>");
+    document.write("</tr>");
+
+
+    document.write("<tr>");
+    document.write("<td colspan='2'>캐셔:084599  양OO</td>");
+    document.write("<td colspan='3' align=right>1150</td>");
+    document.write("</tr>");
+
+    document.write("</table>");
+
+
+</script>
+
+<body>
+
+</body>
