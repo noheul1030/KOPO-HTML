@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Object</title>    
+    </head>
+    <body>
+        <script>
+            var d = new Date(2020, 11, 31); // 2020년 12월 31일
+            document.write(" 년도는 : "+ d.getFullYear()+
+            " 월은 : "+ (d.getMonth()+1)+
+            " 일은 : "+ d.getDate()+
+            " 요일은 : "+ d.getDay()+
+            " 시는 : "+ d.getHours()+
+            " 분은 : "+ d.getMinutes()+
+            " 초는 : "+ d.getSeconds()+
+            " 밀리초 : "+ d.getMilliseconds() + "<HR>");
+            d.setYear(2010); // 2010년으로 바꾼다.
+            document.write(d + "<HR>");
+            d.setMonth(7); // 8월로 바꾼다.
+            document.write(d + "<HR>");
+        </script>
+    </body>
+</html>

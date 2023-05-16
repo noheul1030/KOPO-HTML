@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>객체 window</title>
+        <script>
+            var name = "Hello";
+
+            function call1(){
+                window.location = "http://www.kopo.ac.kr";
+                // window.status -> 옛날 window 버전에서는 표기가 되었으나 현재 window에서는 표기되지 않음.
+                window.status = "Hello, 어디에 표시되나요"; 
+                window.open("http://www.kopo.ac.kr","newWindow","toolbar=yes, width=200");
+            }
+        </script>
+    </head>
+    <body>
+        <script>call1();</script><br>
+        Good....
+    </body>
+</html>

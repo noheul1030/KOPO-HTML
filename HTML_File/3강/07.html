@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>반복문</title>
+        <script>
+            function call1(){
+                // for(i=0;i < 10;i++){document.write(i);}
+                // for(var j in obj){answer += ""+i+":"+obj[i];}
+                    document.write("<h2> 구구단 </h2>");
+                    document.write("<TABLE border=0 width=100%>");
+                    for(var i=1;i < 10;i=i+3){
+                        for(var j=1;j < 10;j++){
+                            document.write("<TR>");
+                            document.write("<TD>"+i+" * "+j+" = "+i*j+"</TD>");
+                            document.write("<TD>"+(i+1)+" * "+j+" = "+(i+1)*j+"</TD>");
+                            document.write("<TD>"+(i+2)+" * "+j+" = "+(i+2)*j+"</TD>");
+                            document.write("</TR>");
+                            }
+                        document.write("<TR><TD colspan=3><HR></TD></TR>");
+                    }
+                document.write("</TABLE>");
+            }
+        </script>
+    </head>
+    <body>
+        <script>call1();</script>
+    </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>String</title>
+        <style>
+            @font-face {
+                font-family: "D2CodingLigature";
+                src: url(Font/D2Coding-Ver1.3.2-20180524.ttf) format("truetype");
+                font-weight: normal;
+            }
+            body{
+                font-family: 'D2CodingLigature',serif;
+            }
+        </style>
+        <script>
+            function call(){
+                MyString = "Hello World Welcome to my world";
+                document.write("Test1 : "+ MyString.charAt(10) + "<br>");
+                document.write("Test2 : "+ MyString.indexOf("to") + "<br>");
+                document.write("Test3 : "+ MyString.lastIndexOf("to") + "<br>");
+                document.write("Test4 : "+ MyString.substr(5,5) + "<br>");
+                document.write("Test5 : "+ MyString.toLowerCase("AaBbCc") + "<br>");
+                document.write("Test6 : "+ MyString.toUpperCase("AaBbCc") + "<br>");
+            }
+        </script>
+    </head>
+    <body>
+        <script>call();</script>
+        Good....
+    </body>
+</html>

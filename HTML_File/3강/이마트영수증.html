@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emart 영수증</title>
+    <style>
+         @font-face {
+                font-family: "D2CodingLigature";
+                src: url(Font/D2Coding-Ver1.3.2-20180524.ttf) format("truetype");
+                font-weight: normal;
+            }
+            body{
+                font-family: 'D2CodingLigature',serif;
+            }
+            /* TD{
+                max-width: 180px;
+                white-space: nowrap; 
+                overflow: hidden; 
+                text-overflow: ellipsis; 
+            } */
+    </style>
+    <script type="text/javascript">
+        var itemname = ["오뚜기 진비빔면 156g", "피코크 들깨미역국500","GAP 죽장사과 4-6입", "순 유기농 바나나(봉)","해피홈 SAFE365 핸드", "(G)LH원형유리화병 10", "상투과자E", "더블링 나일론 깡 롤", "해피홈 SAFE 핸드워시",
+                "농심 신라면120gx5", "(대)국내산삼겹살찌개",  "피코크 탄두리 닭가슴살",
+                "(달콤)순살닭강정(g)", "1+ 등급란 10개입 특", "동원양반볶음김치기획", "테일러 푸룬주스","DZ주니어양말3족C_BK", "DZ주니어양말3족C_WH", "프리미엄생연어초밥", "피코크 들깨미역국500", "남양 맛있는우유GT 저지방",
+                "녹차원흑당시럽10입", "푸르밀 미숫가루우유", "자일로스갈색설탕500g", "CJ 비비고칩 20G",
+                 "흑원당 말차 밀크티",  "울샴푸 퍼플라일락", "앤더슨프레첼708g" , "진라면소컵(매)65gx6", "케라시스 앰플 트리트먼트"];
+        var price = [1980, 3980, 4480, 3480, 7980,7500, 6900, 5980, 3300, 5500, 3380, 6610, 2750, 10800,
+                7130, 3980, 4480, 4980, 3210, 6950, 2980, 1990,  14980, 11780, 8980, 4980, 2480, 7920, 4980, 4980];
+        var num = [2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 3, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 2];                 
+        var boolean=[true, false, false, false, false, false, true, false, true, true, false, false,
+				false, false, false, false, true, false, false, true, false, false, true, false, false, true, false,
+				true, false, false];
+        
+        function Time(){
+            var d= new Date();
+            const year = d.getFullYear();
+            const month = d.getMonth()+1;
+            const day = d.getDate();
+            const hour = d.getHours();
+            const minute = d.getMinutes();
+            return document.write(year+'-'+month+'-'+day+" "+hour+":"+minute);
+        }
+        function Stringcut(itemname){
+            var strArray = itemname.split('');
+            var lengthcnt = 0;
+            var cutArray = "";
+            for(const element of strArray){
+                if(escape(element).length > 4){
+                    lengthcnt += 2;
+                    cutArray =cutArray+element;}
+                else {
+                    lengthcnt++;
+                    cutArray =cutArray+element;}
+
+                if(lengthcnt > 18) break;
+            }
+            return cutArray;
+        }
+           
+        var taxFree = 0;
+        var buytotal = 0;
+    
+
+        function List(){
+            var count = 0;
+            document.write("<TABLE align=center border=1 width=420px>");
+            for(i=0;i < itemname.length;i++){
+                document.write("<TR>");
+                if(count%5 == 0){
+                    document.write("<TD colspan=4>---------------------------------------------------</TD>");
+                    document.write("</TR>");}
+                
+                if(boolean[i]== true){
+                    document.write("<TD width=45% table-layout:fixed align=left >"+("*")+"  "+Stringcut(itemname[i])+"</TD>");
+                    document.write("<TD width=20% table-layout:fixed align=right >"+price[i]+"</TD>");
+                    document.write("<TD width=10% table-layout:fixed align=right >"+num[i]+"</TD>");
+                    document.write("<TD width=20% table-layout:fixed align=right >"+price[i]*num[i]+"&nbsp;"+"</TD>");
+                    document.write("</TR>");
+                    count++;
+                    taxFree += price[i]*num[i];
+                    buytotal += price[i]*num[i];
+                }else{
+                    document.write("<TD width=45% table-layout:fixed align=left >"+"&nbsp;&nbsp;"+Stringcut(itemname[i])+"</TD>");
+                    document.write("<TD width=20% table-layout:fixed align=right >"+price[i]+"</TD>");
+                    document.write("<TD width=10% table-layout:fixed align=right >"+num[i]+"</TD>");
+                    document.write("<TD width=21% table-layout:fixed align=right >"+price[i]*num[i]+"&nbsp;"+"</TD>");
+                    document.write("</TR>");
+                    count++;
+                    buytotal += price[i]*num[i];
+                }
+            }
+            document.write("</TABLE>");
+        }
+    
+    </script>
+</head>
+<body>
+    <div overflow:auto;>
+    <table align=center border="1" width = 420px >
+        <!-- <thead id="thead"></thead>
+        <tbody id="tbody"></tbody>
+        <tfoot id="tfoot"></tfoot> -->
+        <tr><td rowspan=4 align=center><img src="emart.png" hspace = 20px width = 150px height = 60px ></td></tr>
+        <tr><td colspan=3 align="left">이마트 죽전점(031)888-1234</td>
+        <tr><td colspan=3 align="left">206-86-50913 강희석</td>
+        <tr><td colspan=3 align="left">용인 수지구 포은대로 552</td>
+            
+        <tr><td colspan=4 align="left">영수증 미지참시 교환/환불 불가(30일내)</td></tr>
+        <tr><td colspan=4 align="left">교환/환불 구매점에서 가능(결제카드지참)</td></tr>
+        <tr><td colspan=4 align="left">체크카드/신용카드 청구취소 반영은</td></tr>
+        <tr><td colspan=4 align="left">최대 3~5일 소요 (주말,공휴일제외)</td></tr>
+        <tr><td><br></td></tr>
+        <tr><td colspan=2 align="left;">[구 매]<script>Time();</script></td>
+            <td colspan=2 align="right">POS:0009-2418&nbsp;</td>
+        <tr><td colspan=4 align="left">---------------------------------------------------</td></tr>
+        <tr>
+            <td width=25% align="center">상품명</td>
+            <td width=30% align="right">단 가</td>
+            <td width=15% align="right">수량</td>
+            <td width=40% align="right">금 액&nbsp;</td></tr>
+    </table>
+    <script>List();</script>
+    
+    <table align=center border="1" width = 420px>
+        <tr><td width=30%>&nbsp;</td>
+            <td width=30% align="right">총 품목 수량</td>
+            <td width=30% align="right"><script>document.write(itemname.length);</script>&nbsp;</td>
+        </tr>
+        <tr><td width=30%>&nbsp;</td>
+            <td width=30% align="right">(*)면 세&nbsp;&nbsp;물 품</td>
+            <td width=30% align="right"><script>document.write(taxFree);</script>&nbsp;</td>
+        </tr>
+        <tr><td width=30%>&nbsp;</td>
+            <td width=30% align="right">과 세&nbsp;&nbsp;물 품</td>
+            <td width=30% align="right"><script>document.write(Math.floor(((buytotal-taxFree)/11.0)*10));</script>&nbsp;</td>
+        </tr>
+        <tr><td width=30%>&nbsp;</td>
+            <td width=30% align="right">부&nbsp;&nbsp;&nbsp;가&nbsp;&nbsp;&nbsp;세</td>
+            <td width=30% align="right"><script>document.write((buytotal-taxFree)-Math.floor(((buytotal-taxFree)/11.0)*10));</script>&nbsp;</td>
+        </tr>
+        <tr><td width=30%>&nbsp;</td>
+            <td width=30% align="right">합&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계</td>
+            <td width=30% align="right"><script>document.write(buytotal);</script>&nbsp;</td>
+        </tr>
+        <tr><td colspan=2 width=0% align="left">결 제 대 상 금 액</td>
+            <td width=30% align="right"><script>document.write(buytotal);</script>&nbsp;</td>
+        </tr>
+        </table>
+    </div>
+    </body>
+</html> 

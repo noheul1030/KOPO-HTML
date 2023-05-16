@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>변수(지역,전역변수)</title>
+        <script>
+            var name ="Hello";
+            function call1(){
+                var name = "World";
+                document.write("지역: "+name);}
+            function call2(){
+                document.write("전역"+name);}
+        </script>
+    </head>
+    <body>
+        <script>call1();</script>
+        <script>call2();</script>
+        Good...
+    </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연산,조건식</title>
+    <script>        
+        function call1(hakjum){
+            if(90<= hakjum && hakjum <= 100){document.write("A");}
+            else if(80<=hakjum && hakjum < 90){document.write("B");}
+            else if(70<=hakjum && hakjum < 80){document.write("C");}
+            else if(60<=hakjum && hakjum < 70){document.write("D");}
+            else if(hakjum < 60){document.write("F");}
+        }
+
+        // 연산식
+        answer += 2 * 3 - 1;
+        answer++;
+        answer = (y>10) ? 1:(12%3);
+        // 조건식
+        if(condition1){
+            // 조건1이 참일 때, 수행되는 부분
+        }else if(condition2){
+            // 조건2가 참일 때, 수행되는 부분
+        }else if(condition3){
+            // 조건3이 참일 때, 수행되는 부분
+        }else{
+            // 앞의 모든 조건에 해당하지 않았을 때 수행되는 부분
+        }
+        // 조건식 2
+        switch(value){
+            case value1: // 1 Link
+            break;
+            case value2: // 2 Link
+            break;
+            default: // 3 Link1
+            break;
+        }
+    </script>
+</head>
+<body>
+    점수를 입력하세요: <input id='score' onkeyup = "printScore()"/>
+    <script>
+        function printScore(){
+            const score = document.getElementById('score').value;
+            document.getElementById('result').innerText = call1(score);
+        }
+    </script>
+    <div id='result'></div>
+</body>
+</html>
