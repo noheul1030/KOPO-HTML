@@ -8,10 +8,12 @@
     
     int from = 0;
     int cnt = 0;
+	int fromByTen = 0;
     
     if (fromParam != null && cntParam != null) {
         from = Integer.parseInt(fromParam);
         cnt = Integer.parseInt(cntParam);
+		fromByTen = floor(from-1/10) * 10;
     }
     List<String> wifi = new ArrayList<String>();
 
@@ -23,7 +25,6 @@
     </head>
         
     <body>
-       
 <% 
         File f = new File("/var/lib/tomcat9/webapps/전국무료와이파이표준데이터.txt");
         BufferedReader br = new BufferedReader(new FileReader(f));
@@ -95,18 +96,19 @@
         
         <table border="1" width = 60%; style="table-layout: fixed;">
             <tr align = center>
-                <td><<</td>
-                <td><a href="wifi.jsp?from=1&cnt=30">1</a></td>
-                <td><a href="wifi.jsp?from=2&cnt=30">2</a></td>
-                <td><a href="wifi.jsp?from=3&cnt=30">3</a></td>
-                <td><a href="wifi.jsp?from=4&cnt=30">4</a></td>
-                <td><a href="wifi.jsp?from=5&cnt=30">5</a></td>
-                <td><a href="wifi.jsp?from=6&cnt=30">6</a></td>
-                <td><a href="wifi.jsp?from=7&cnt=30">7</a></td>
-                <td><a href="wifi.jsp?from=8&cnt=30">8</a></td>
-                <td><a href="wifi.jsp?from=9&cnt=30">9</a></td>
-                <td><a href="wifi.jsp?from=10&cnt=30">10</a></td>
-                <td>>></td></tr>
+                <td><a href="wifi.jsp?from=<%=fromByTen+0%>&cnt=30"><<<</a></td>
+                <td><a href="wifi.jsp?from=<%=fromByTen+1%>&cnt=30"><%=fromByTen+1%></a></td>
+                <td><a href="wifi.jsp?from=<%=fromByTen+2%>&cnt=30"><%=fromByTen+2%></a></td>
+                <td><a href="wifi.jsp?from=<%=fromByTen+3%>&cnt=30"><%=fromByTen+3%></a></td>
+                <td><a href="wifi.jsp?from=<%=fromByTen+4%>&cnt=30"><%=fromByTen+4%></a></td>
+                <td><a href="wifi.jsp?from=<%=fromByTen+5%>&cnt=30"><%=fromByTen+5%></a></td>
+                <td><a href="wifi.jsp?from=<%=fromByTen+6%>&cnt=30"><%=fromByTen+6%></a></td>
+                <td><a href="wifi.jsp?from=<%=fromByTen+7%>&cnt=30"><%=fromByTen+7%></a></td>
+                <td><a href="wifi.jsp?from=<%=fromByTen+8%>&cnt=30"><%=fromByTen+8%></a></td>
+                <td><a href="wifi.jsp?from=<%=fromByTen+9%>&cnt=30"><%=fromByTen+9%></a></td>
+                <td><a href="wifi.jsp?from=<%=fromByTen+10%>&cnt=30"><%=fromByTen+10%></a></td>
+                <td><a href="wifi.jsp?from=<%=(fromByTen+11)%>&cnt=30">>>></a></td>
+			</tr>
         </table>
     </body>
 </html>
