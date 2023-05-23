@@ -7,15 +7,18 @@
     String cntParam = request.getParameter("cnt");
     
     int from = 0;
-    int cnt = 0;
+    int cnt = 10;
 	int fromByTen = 0;
+    int maxpage = 0;
     
     if (fromParam != null && cntParam != null) {
         from = Integer.parseInt(fromParam);
         cnt = Integer.parseInt(cntParam);
-		fromByTen = floor(from-1/10) * 10;
+		fromByTen = (int) (Math.floor((from - 1) / 10) * 10);
     }
     List<String> wifi = new ArrayList<String>();
+   
+
 
 %>
 
@@ -50,8 +53,9 @@
         }
         
         while(from != 0){
+             maxpage = (int) Math.floor(wifi.size() /cnt);
 %>
-            <table border ="1" width = 60%;  style="table-layout: auto;">
+            <table border ="1" align = center width = 60%;  style="table-layout: auto;">
             <tr align = center style = "font-weight : bold;"><td>번호</td><td>주소</td><td>위도</td><td>경도</td><td>거리</td></tr>
        
 <%
@@ -94,20 +98,29 @@
 %>
         </table>        
         
-        <table border="1" width = 60%; style="table-layout: fixed;">
+        <table border="1" align = center width = 60%; style="table-layout: fixed;">
             <tr align = center>
-                <td><a href="wifi.jsp?from=<%=fromByTen+0%>&cnt=30"><<<</a></td>
-                <td><a href="wifi.jsp?from=<%=fromByTen+1%>&cnt=30"><%=fromByTen+1%></a></td>
-                <td><a href="wifi.jsp?from=<%=fromByTen+2%>&cnt=30"><%=fromByTen+2%></a></td>
-                <td><a href="wifi.jsp?from=<%=fromByTen+3%>&cnt=30"><%=fromByTen+3%></a></td>
-                <td><a href="wifi.jsp?from=<%=fromByTen+4%>&cnt=30"><%=fromByTen+4%></a></td>
-                <td><a href="wifi.jsp?from=<%=fromByTen+5%>&cnt=30"><%=fromByTen+5%></a></td>
-                <td><a href="wifi.jsp?from=<%=fromByTen+6%>&cnt=30"><%=fromByTen+6%></a></td>
-                <td><a href="wifi.jsp?from=<%=fromByTen+7%>&cnt=30"><%=fromByTen+7%></a></td>
-                <td><a href="wifi.jsp?from=<%=fromByTen+8%>&cnt=30"><%=fromByTen+8%></a></td>
-                <td><a href="wifi.jsp?from=<%=fromByTen+9%>&cnt=30"><%=fromByTen+9%></a></td>
-                <td><a href="wifi.jsp?from=<%=fromByTen+10%>&cnt=30"><%=fromByTen+10%></a></td>
-                <td><a href="wifi.jsp?from=<%=(fromByTen+11)%>&cnt=30">>>></a></td>
+<%              if(from <= maxpage-(maxpage%10)) { %>
+                    <td><a href="wifi.jsp?from=1&cnt=<%=cnt%>"><<</a></td>
+                    <td><a href="wifi.jsp?from=<%=fromByTen+0%>&cnt=<%=cnt%>"><</a></td>
+
+<%                  for(int i = 1; i <= 10; i++){ %>
+                    <td><a href="wifi.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td>
+<%                  } %>
+
+                    <td><a href="wifi.jsp?from=<%=fromByTen+11%>&cnt=<%=cnt%>">></a></td>
+                    <td><a href="wifi.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>
+<%              }else { %>
+                    <td><a href="wifi.jsp?from=1&cnt=<%=cnt%>"><<</a></td>
+                    <td><a href="wifi.jsp?from=<%=fromByTen+0%>&cnt=<%=cnt%>"><</a></td>
+
+<%                  for(int i = 1; i <= maxpage%10; i++){ %>
+                    <td><a href="wifi.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td>
+<%                  } %>
+
+                    <td><a href="wifi.jsp?from=<%=fromByTen+11%>&cnt=<%=cnt%>">></a></td>
+                    <td><a href="wifi.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>
+<%              } %>
 			</tr>
         </table>
     </body>
