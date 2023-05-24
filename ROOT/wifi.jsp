@@ -12,6 +12,9 @@
 	int fromByTen = 0; // 변수 초기값 지정
     int maxpage = 0; // 변수 초기값 지정
     int LineCnt = 1; // 변수 초기값 지정
+    int currentPage = (from / cnt) + 1;   //번호시작점을  한페이지장 표시 계수로 나누고 1 더하면 현재 페이지 계산
+
+
     
     double lat = 37.3860521; // 현재 위치 위도 값 지정
     double lng = 127.1214038; // 현재 위치 경도 값 지정
@@ -33,11 +36,14 @@
     }
 %>
 
+
 <html>
     <head>
     <title>전국 무료 와이파이 표준 데이터</title> <!--타이틀 작성-->
     </head>
-    <style> a {text-decoration-line: none;} </style> <!--링크 밑줄 없앰 스타일 적용-->
+    <style>
+            a {text-decoration-line: none;}           
+    </style> <!--링크 밑줄 없앰 스타일 적용-->
     <body>
 <%      try { // 예외 처리
             if((readtxt = br.readLine())==null){        // 파일에서 한줄 읽은 값이 null이 아니면 true 조건
@@ -53,26 +59,31 @@
                 LineCnt++; // 1 추가 
             }
             
-            while(from != 0){ // from이 0이 아닐 떄 true 반복문
+            while(true){ // from이 0이 아닐 떄 true 반복문
                 // maxpage에 최대 페이지를 추출해 내는 삼항연산계산 값 저장
                 maxpage = ((double)wifi.size()/cnt == (double) Math.floor(wifi.size() /cnt)) ? 
                             (int) Math.floor(wifi.size() /cnt) : (int) Math.floor(wifi.size() /cnt)+1;
+                if(from > maxpage) {
+                    from = maxpage;
+                    fromByTen = (int) (Math.floor((from - 1) / 10) * 10);
+                }
 %>
                 <table border ="1" align = center width = 70%;  style="table-layout: auto;"> <!--테이블 지정-->
                     <tr align = center style = "font-weight : bold;"><td>번호</td><td>주소</td><td>위도</td><td>경도</td><td>거리</td></tr> <!--tr,td 지정--> 
-<%
-                if(from == 1){                                  // from이 1이면 true
+<%              if(from <=1){                                  
+                    from = 1;
+                    fromByTen = 0;    
                     for(int i = 0; i < cnt; i++){               // 0~ cnt까지 도는 반복문
                     String[] listcut = wifi.get(i).split("\t"); // wifi 리스트의 i값 가져와서 배열에 탭기준 구분 저장
-%>
-                    <tr>
+%>               
+                <tr>
                     <td align = center style = "font-weight : bold;"><%=listcut[0]%></td> <!--배열 0번째 값-->
                     <td><%=listcut[1] %></td>                                             <!--배열 1번째 값-->
                     <td><%=listcut[2] %></td>                                             <!--배열 2번째 값-->
                     <td><%=listcut[3] %></td>                                             <!--배열 3번째 값-->
                     <td><%=listcut[4]%></td>                                              <!--배열 4번째 값--> 
                     </tr>
-<%
+<%              
                     } break;                                                // 반복문이 다 돌고 난후 break;
                 }else if(from > 1){                                         // from이 1보다 크면 true 
                     for(int i = (from-1)*cnt; i < ((from-1)*cnt)+cnt; i++){ // cnt의 값에 따라 바뀌는 반복문
@@ -94,9 +105,9 @@
         } finally {
         br.close();             // BufferedReader 종료
         }
-%>
+%>      
         </table>    
-        <table bgcolor="#D9E5FF" border="1" border-collapse:collapse; align = center width = 70%; style="table-layout: fixed;"> <!--테이블-->
+        <table border="1" border-collapse:collapse; align = center width = 70%; style="table-layout: fixed;">                   <!--테이블-->
             <tr align = center>                                                                                                 <!--tr 설정-->
 <%              if(from <= maxpage-(maxpage%10)) { %>                                                                           <!--from 값이 maxpage 보다 작거나 같으면 true 조건-->
                     <td><a href="wifi.jsp?from=1&cnt=<%=cnt%>"><<</a></td>                                                      <!-- 테이블 링크 연결 -->
