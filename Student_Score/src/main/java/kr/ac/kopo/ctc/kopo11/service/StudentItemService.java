@@ -8,4 +8,5 @@ public interface StudentItemService {
 	void setStudentItemDao(StudentItemDao studentItemDao);
 	
 	Pagination getPagination(int page, int countPerPage);
+	
 }

@@ -21,4 +21,10 @@ public class StudentItemDaoImpl implements StudentItemDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public int totalcount() {
+		// TODO Auto-generated method stub
+		return 75;
+	}
 }

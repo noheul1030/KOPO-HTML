@@ -13,6 +13,8 @@ public interface StudentItemDao {
 		
 		List<StudentItem> selectAll(int page, int countPerPage);
 		
+		int totalcount();
+		
 //		update
 		
 //		delete

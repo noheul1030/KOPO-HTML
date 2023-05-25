@@ -23,4 +23,10 @@ public class StudentItemDaoMock implements StudentItemDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public int totalcount() {
+		// TODO Auto-generated method stub
+		return 75;
+	}
 }
