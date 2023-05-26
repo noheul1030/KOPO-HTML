@@ -1,0 +1,175 @@
+package kr.ac.kopo.ctc.kopo19.dao;
+
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.ArrayList;
+import kr.ac.kopo.ctc.kopo19.domain.StudentItem;
+import kr.ac.kopo.ctc.kopo19.dto.Pagination;
+import kr.ac.kopo.ctc.kopo19.service.StudentItemService;
+import kr.ac.kopo.ctc.kopo19.service.StudentItemServiceImpl;
+
+public class StudentItemDaoImpl implements StudentItemDao {
+
+   @Override
+   public boolean create()  {
+      try {
+      Class.forName("com.mysql.cj.jdbc.Driver");
+      Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopo19", "root", "kopo19");
+      Statement stmt = conn.createStatement();
+
+      stmt.execute("call insert_examtable(75)");
+
+      stmt.close();
+      conn.close();
+      
+      return true;
+      
+      } catch (ClassNotFoundException e) {
+         e.printStackTrace();
+         return false;   
+      } catch (SQLException e) {
+         e.printStackTrace();
+         return false;
+      }
+
+   }
+
+   @Override
+   public StudentItem selectOne(int id) {
+      StudentItem studentItem = new StudentItem();
+      try {
+         Class.forName("com.mysql.cj.jdbc.Driver");
+         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopo19", "root", "kopo19");
+         Statement stmt = conn.createStatement();
+         
+         ResultSet rset = stmt.executeQuery("select * from examtable where id = "+ id + ";");
+         
+         while(rset.next()) {
+            studentItem.setName(rset.getString(1));
+            studentItem.setId(rset.getInt(2));
+            studentItem.setKor(rset.getInt(3));
+            studentItem.setEng(rset.getInt(4));
+            studentItem.setMat(rset.getInt(5));
+         }
+         
+         rset.close();
+          stmt.close();
+          conn.close();
+      } catch (ClassNotFoundException e) {
+
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }
+       return studentItem;
+   }
+
+   @Override
+   public List<StudentItem> selectAll(int page, int countPerPage) {
+      List<StudentItem> studentItemList = new ArrayList<>();
+      
+      StudentItemService studentItemService = new StudentItemServiceImpl();
+      Pagination pagination = studentItemService.getPagination(page, countPerPage);
+      
+      int start = (pagination.getC() - 1) * countPerPage;
+      try {
+         Class.forName("com.mysql.cj.jdbc.Driver");
+         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopo19", "root", "kopo19");
+         Statement stmt = conn.createStatement();
+         
+         ResultSet rset = stmt.executeQuery("select * from examtable limit " + start + ", " + countPerPage + ";");
+         while(rset.next()) {
+            StudentItem studentItem = new StudentItem();
+            
+            studentItem.setName(rset.getString(1));
+            studentItem.setId(rset.getInt(2));
+            studentItem.setKor(rset.getInt(3));
+            studentItem.setEng(rset.getInt(4));
+            studentItem.setMat(rset.getInt(5));
+
+            studentItemList.add(studentItem);
+         }
+         
+         rset.close();
+          stmt.close();
+          conn.close();
+          
+      } catch (ClassNotFoundException e) {
+
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }
+      return studentItemList;
+   }
+
+   @Override
+   public int count() {
+      int cnt = 0;
+      try {
+         Class.forName("com.mysql.cj.jdbc.Driver");
+         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopo19", "root", "kopo19");
+         Statement stmt = conn.createStatement();
+         
+         ResultSet rset = stmt.executeQuery("select count(*) as total from examtable;");
+         if (rset.next()) {
+            cnt = rset.getInt("total");
+         }
+      
+         rset.close();
+         stmt.close();
+         conn.close();
+         } catch (ClassNotFoundException e) {
+            
+         } catch (SQLException e) {
+            e.printStackTrace();
+         }
+      return cnt;
+   }
+
+   @Override
+   public int createTable() {
+      try {
+      Class.forName("com.mysql.cj.jdbc.Driver");
+      Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopo19", "root", "kopo19");
+      Statement stmt = conn.createStatement();
+      
+      stmt.execute("create table examtable(" +
+               "name varchar(20)," + 
+               "id int not null primary key," +
+               "kor int," +
+               "eng int," +
+               "mat int) DEFAULT CHARSET=UTF8;");
+      stmt.close();
+      conn.close();
+      return 1;
+      } catch (ClassNotFoundException e) {
+         return 2;
+      } catch (SQLException e) {
+         e.printStackTrace();
+         return 2;
+      }
+   }
+
+   @Override
+   public int dropTable() {
+      try {
+      Class.forName("com.mysql.cj.jdbc.Driver");
+       Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopo19","root", "kopo19");
+       
+       Statement stmt = conn.createStatement();
+       stmt.execute("drop table;");
+       stmt.close();
+       conn.close();
+       return 1;
+      } catch (ClassNotFoundException e) {
+         return 2;
+      } catch (SQLException e) {
+         e.printStackTrace();
+         return 2;
+      }
+   }
+
+}
