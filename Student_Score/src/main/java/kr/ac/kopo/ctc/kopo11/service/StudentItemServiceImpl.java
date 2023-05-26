@@ -1,93 +1,86 @@
 package kr.ac.kopo.ctc.kopo11.service;
 
+import java.sql.SQLException;
+
 import kr.ac.kopo.ctc.kopo11.dao.StudentItemDao;
 import kr.ac.kopo.ctc.kopo11.dto.Pagination;
 
 public class StudentItemServiceImpl implements StudentItemService {
 
-	private StudentItemDao studentItemDao;
+	 private StudentItemDao studentItemDao;
 
-//	public StudentItemDao getStudentItemDao() {
-//		return studentItemDao;
-//	}
-//
-//	public void setStudentItemDao(StudentItemDao studentItemDao) {
-//		this.studentItemDao = studentItemDao;
-//	}
+//		public StudentItemDao getStudentItemDao() {
+//			return studentItemDao;
+//		}
+	//
+//		public void setStudentItemDao(StudentItemDao studentItemDao) {
+//			this.studentItemDao = studentItemDao;
+//		}
 
-	@Override
-	public Pagination getPagination(int page, int countPerPage) {
-		studentItemDao.selectAll(0, 0);
+	    @Override
+	    public Pagination getPagination(int page, int countPerPage) {
+//			studentItemDao.selectAll(0, 0);
+			
 
-		Pagination pagination = new Pagination();
+	        Pagination pagination = new Pagination();
 
-		// 총 데이터 수 
-		int totalcount = studentItemDao.totalcount();
-		// 현재 카운트 조정
-		int countCheck = (countPerPage > totalcount || countPerPage <=0) ? totalcount: countPerPage;
-		// 최대 페이지 수 
-		int maxpage = (totalcount % countCheck == 0) ? (totalcount / countCheck) : (totalcount / countCheck) + 1;
-		// 현재 페이지 조정
-		int pageCheck;
-		if (page<=0){ // 현재페이지가 0보다 작으면
-			pageCheck = 1;
-		}else if(page>maxpage){ // 현재 페이지가 최대페이지 보다 크면
-			pageCheck = maxpage;
-		}else { // 1 ~ 최대페이지 
-			pageCheck = page;
-		}
-		
-		// 현재 페이지의 처음
-		int startPage = (((int)((pageCheck-1)/10))*10)+1;
-		// 현재 페이지의 마지막
-		int endPage = (startPage+9>maxpage) ? maxpage:startPage+9;
-		// 첫페이지
-		int firstPage = 1;
-		int N = (endPage+9>maxpage)?maxpage:startPage+2 ;
+	        // 1. 총 데이터 수
+	        int totalcount = studentItemDao.count();
 
-		pagination.setC(pageCheck);
-		pagination.setS(startPage);
-		
-		if (pageCheck < maxpage) {
+	        // 2. 현재 카운트 조정
+	        int countCheck = (countPerPage > totalcount || countPerPage < 1) ? totalcount : countPerPage;
 
-			if (pageCheck <= 10) {
-				pagination.setPp(startPage-2);
-				pagination.setP(startPage-2);
-				pagination.setE(endPage);
-				pagination.setN(N);
-				pagination.setNn(startPage+10);
-			} else if (pageCheck > 10 && pageCheck < maxpage) {
-				pagination.setPp(firstPage);
-				pagination.setP(startPage-10);
-				pagination.setE(endPage);
-				pagination.setN(N);
-				pagination.setNn(-1);
-			}
-		} else if (page >= maxpage) {
-			pagination.setPp(firstPage);
-			pagination.setP(startPage-10);
-			pagination.setE(maxpage);
-			pagination.setN(N);
-			pagination.setNn(endPage);
-		}
-		if( firstPage == 1 && endPage == 1) {
-			pagination.setPp(startPage-2);
-			pagination.setP(startPage-2);
-			pagination.setN(startPage-2);
-			pagination.setNn(startPage-2);
-		}
+	        // 3. 최소 페이지 수
+	        int minPage = 1;
 
-		return pagination;
+	        // 4. 최대 페이지 수
+	        int maxPage = (totalcount % countCheck == 0) ? (totalcount / countCheck) : (totalcount / countCheck) + 1;
+
+	        // 5. C 현재 페이지 조정
+	        int pageCheck;
+	        /* 현재페이지가 0보다 작으면 */
+	        if (page <= minPage)
+	            pageCheck = minPage;
+	        /* 현재 페이지가 최대페이지 보다 크면 */
+	        else if (page > maxPage)
+	            pageCheck = maxPage;
+	        /* 1 ~ 최대페이지 */
+	        else
+	            pageCheck = page;
+
+	        // 6. S 현재 페이지의 처음
+	        int startPage = (((int) ((pageCheck - 1) / 10)) * 10) + 1;
+
+	        // 7. E 현재 페이지의 마지막
+	        int endPage = (startPage + 9 >= maxPage) ? maxPage : startPage + 9;
+
+	        // 8. <, <<
+	        int P = (startPage <= minPage) ? -1 : startPage - 10;
+	        int PP = (P == -1) ? -1 : minPage;
+
+	        // 9. >, >>
+	        int N = (endPage + 1 <= maxPage) ? endPage + 1 : -1;
+	        int NN = (N == -1) ? -1 : ((int) (maxPage / 10)) * 10 + 1;
+
+	        pagination.setC(pageCheck);
+	        pagination.setS(startPage);
+	        pagination.setE(endPage);
+	        pagination.setN(N);
+	        pagination.setNn(NN);
+	        pagination.setP(P);
+	        pagination.setPp(PP);
+
+	        return pagination;
+	    }
+
+	    @Override
+	    public StudentItemDao getStudentItemDao() {
+	        return studentItemDao;
+	    }
+
+	    @Override
+	    public void setStudentItemDao(StudentItemDao studentItemDao) {
+	        this.studentItemDao = studentItemDao;
+
+	    }
 	}
-
-	@Override
-	public StudentItemDao getStudentItemDao() {
-		return studentItemDao;
-	}
-
-	@Override
-	public void setStudentItemDao(StudentItemDao studentItemDao) {
-		this.studentItemDao = studentItemDao;
-
-	}
-}

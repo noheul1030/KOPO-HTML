@@ -1,5 +1,6 @@
 package kr.ac.kopo.ctc.kopo11.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import kr.ac.kopo.ctc.kopo11.dao.StudentItemDao;
@@ -25,8 +26,26 @@ public class StudentItemDaoMock implements StudentItemDao{
 	}
 
 	@Override
-	public int totalcount() {
+	public int count() {
 		// TODO Auto-generated method stub
 		return 75;
+	}
+
+	@Override
+	public void createTable() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dropTable(){
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean delete(){
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

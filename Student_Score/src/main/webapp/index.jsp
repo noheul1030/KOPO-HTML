@@ -13,23 +13,7 @@
 
 
 <body>
-
-<%
-	StudentItemDao studentItemDao = new StudentItemDaoMock();
-	
-	StudentItemService studentItemService = new StudentItemServiceImpl();
-	studentItemService.setStudentItemDao(studentItemDao);
-
-	Pagination pagination = studentItemService.getPagination(1, 50);
-%>
-
-
-
-
-
-kopo11
-<%=pagination.getC()%>
-
+<!-- 이부분에 태그 테이블 만들어라~ -->
 </body>
 
 

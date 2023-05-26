@@ -20,7 +20,7 @@
     double lng = 127.1214038; // 현재 위치 경도 값 지정
 
     //  파일 경로 변수에 저장 
-    File f = new File("WebProject/resource/전국무료와이파이표준데이터.txt");
+    File f = new File("C:\\Users\\노을\\Documents\\GitHub\\KOPO-HTML\\Student_Score\\resource\\전국무료와이파이표준데이터.txt");
     // BufferedReader로 파일 경로 값 읽기 
     BufferedReader br = new BufferedReader(new FileReader(f));
     String readtxt; // 변수 선언
@@ -106,35 +106,35 @@
         br.close();             // BufferedReader 종료
         }
 %>      
-        </table>    
+        </table>  
         <table border="1" border-collapse:collapse; align = center width = 70%; style="table-layout: fixed;">                   <!--테이블-->
             <tr align = center>                                                                                                 <!--tr 설정-->
 <%              if(from <= maxpage-(maxpage%10)) { %>                                                                           <!--from 값이 maxpage 보다 작거나 같으면 true 조건-->
-                    <td><a href="wifi.jsp?from=1&cnt=<%=cnt%>"><<</a></td>                                                      <!-- 테이블 링크 연결 -->
+                    <td><a href="helloworld.jsp?from=1&cnt=<%=cnt%>"><<</a></td>                                                      <!-- 테이블 링크 연결 -->
 <%                  if(from <= 10) { %>                                                                                         <!--from 값이 10보다 작거나 크면 true 조건-->
-                        <td><a href="wifi.jsp?from=1&cnt=<%=cnt%>"><</a></td>                                                   <!-- 테이블 링크 연결 -->
+                        <td><a href="helloworld.jsp?from=1&cnt=<%=cnt%>"><</a></td>                                                   <!-- 테이블 링크 연결 -->
 <%                  }else { %>
-                        <td><a href="wifi.jsp?from=<%=fromByTen+0%>&cnt=<%=cnt%>"><</a></td>                                    <!-- 테이블 링크 연결 -->
+                        <td><a href="helloworld.jsp?from=<%=fromByTen+0%>&cnt=<%=cnt%>"><</a></td>                                    <!-- 테이블 링크 연결 -->
 <%                  } %>
 <%                  for(int i = 1; i <= 10; i++){ %>                                                                            <!--1~10까지 도는 반복문-->
-                    <td><a href="wifi.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td>                         <!-- 테이블 링크 연결 -->
+                    <td><a href="helloworld.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td>                         <!-- 테이블 링크 연결 -->
 <%                  } %>
 
-                    <td><a href="wifi.jsp?from=<%=fromByTen+11%>&cnt=<%=cnt%>">></a></td>                                       <!-- 테이블 링크 연결 -->
-                    <td><a href="wifi.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                           <!-- 테이블 링크 연결 -->
+                    <td><a href="helloworld.jsp?from=<%=fromByTen+11%>&cnt=<%=cnt%>">></a></td>                                       <!-- 테이블 링크 연결 -->
+                    <td><a href="helloworld.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                           <!-- 테이블 링크 연결 -->
 <%              }else { %>
-                    <td><a href="wifi.jsp?from=1&cnt=<%=cnt%>"><<</a></td>                                                      <!-- 테이블 링크 연결 -->
-                    <td><a href="wifi.jsp?from=<%=fromByTen+0%>&cnt=<%=cnt%>"><</a></td>                                        <!-- 테이블 링크 연결 -->
+                    <td><a href="helloworld.jsp?from=1&cnt=<%=cnt%>"><<</a></td>                                                      <!-- 테이블 링크 연결 -->
+                    <td><a href="helloworld.jsp?from=<%=fromByTen+0%>&cnt=<%=cnt%>"><</a></td>                                        <!-- 테이블 링크 연결 -->
 
 <%                  for(int i = 1; i <= maxpage%10; i++){ %>                                                                    <!--1~나머지 값 만큼 도는 반복문 -->
-                    <td><a href="wifi.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td>                         <!-- 테이블 링크 연결 -->
+                    <td><a href="helloworld.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td>                         <!-- 테이블 링크 연결 -->
 <%                  } %>
 <%                  if(maxpage-(maxpage%10)< from){ %>                                                                          <!--ㅡmaxpage-나머지 값이 from보다 작으면 -->
-                        <td><a href="wifi.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">></a></td>                                        <!-- 테이블 링크 연결 -->
+                        <td><a href="helloworld.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">></a></td>                                        <!-- 테이블 링크 연결 -->
 <%                  }else { %>
-                        <td><a href="wifi.jsp?from=<%=fromByTen+11%>&cnt=<%=cnt%>">></a></td>                                   <!-- 테이블 링크 연결 -->
+                        <td><a href="helloworld.jsp?from=<%=fromByTen+11%>&cnt=<%=cnt%>">></a></td>                                   <!-- 테이블 링크 연결 -->
 <%                  } %>
-                    <td><a href="wifi.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                           <!-- 테이블 링크 연결 -->
+                    <td><a href="helloworld.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                           <!-- 테이블 링크 연결 -->
 <%              } %>
 			</tr>
         </table>
