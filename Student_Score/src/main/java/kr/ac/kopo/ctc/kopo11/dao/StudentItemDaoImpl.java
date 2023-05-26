@@ -9,7 +9,7 @@ import kr.ac.kopo.ctc.kopo11.service.StudentItemServiceImpl;
 
 public class StudentItemDaoImpl implements StudentItemDao{
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String connection = "jdbc:mysql://192.168.23.60:3307/kopo11";
+	String connection = "jdbc:mysql://localhost:3306/noheul";
 	String root = "root";
 	String password = "shdmf1030@";
 	
@@ -157,12 +157,13 @@ public class StudentItemDaoImpl implements StudentItemDao{
 	        Statement stmt = conn.createStatement();
 	        
 	        StudentItemService studentItemService = new StudentItemServiceImpl();
+	        studentItemService.setStudentItemDao(this);
 	        
-//	       Pagination pagination = studentItemService.getPagination(page,countPerPage); 
+	       Pagination pagination = studentItemService.getPagination(page,countPerPage); 
 	        
-//	        int a = (pagination.getC()-1)*countPerPage;
+	        int a = (pagination.getC()-1)*countPerPage;
 	        	        
-	        String Quary = String.format("select * from (select * from student_score limit %d,%d) as a;",(page-1)*countPerPage,countPerPage);
+	        String Quary = String.format("select * from (select * from student_score limit %d,%d) as a;",a,countPerPage);
 	        
 	        ResultSet rset = stmt.executeQuery(Quary);
 	        
@@ -181,7 +182,7 @@ public class StudentItemDaoImpl implements StudentItemDao{
 	        stmt.close(); 
 	        conn.close(); 
         }catch(Exception e) {
-        	System.out.println(e);
+        	e.printStackTrace();
         }
 		
 		return studentItemList;

@@ -19,8 +19,8 @@
     double lat = 37.3860521; // 현재 위치 위도 값 지정
     double lng = 127.1214038; // 현재 위치 경도 값 지정
 
-    //  파일 경로 변수에 저장 
-    File f = new File("C:\\Users\\노을\\Documents\\GitHub\\KOPO-HTML\\Student_Score\\resource\\전국무료와이파이표준데이터.txt");
+    //  파일 경로 변수에 저장
+    File f = new File(getServletContext().getRealPath("/resource/전국무료와이파이표준데이터.txt"));
     // BufferedReader로 파일 경로 값 읽기 
     BufferedReader br = new BufferedReader(new FileReader(f));
     String readtxt; // 변수 선언

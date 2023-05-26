@@ -39,17 +39,17 @@ class StudentItemDaoTest {
 		StudentItem studentItem = studentItemDao.selectOne(209905);
 		
 		assertEquals(studentItem.getName(),"지효");
-		assertEquals(studentItem.getKor(),37);
-		assertEquals(studentItem.getEng(),13);
-		assertEquals(studentItem.getMat(),11);
+		assertEquals(studentItem.getKor(),51);
+		assertEquals(studentItem.getEng(),74);
+		assertEquals(studentItem.getMat(),17);
 	}
 	@Test
 	void test_selectAll(){
 		StudentItemDao studentItemDao = new StudentItemDaoImpl();
 		List<StudentItem> studentItemList = studentItemDao.selectAll(3, 2);
-		StudentItem studentItem = studentItemList.get(0);
+		StudentItem studentItem = studentItemList.get(1);
 		
-		assertEquals(studentItem.getName(),"지효");
+		assertEquals(studentItem.getName(),"미나");
 	}
 	
 		 
