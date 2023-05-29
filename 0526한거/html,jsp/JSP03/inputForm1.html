@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+ h1 {
+    margin-bottom: -30px
+ }
+ input {
+    padding-bottom: 10px;
+ }
+ td {
+    text-align:center
+ }
+
+</style>
+<body>
+    <form method="post" action="insertDB.jsp">
+    <h1 style="height:50px"> 성적입력추가</h1><br><br>
+    <div style="width:500px; text-align:right">
+        <input type="submit" value="추가" style="width:100px; height: 25px;">
+    </div>
+    <table border=1 style="width:500px;">
+        <tr>
+            <td style="width:100px">이름</td>
+            <td style="width:400px"><input type="text" name="name" style="width:300px"></td>
+        </tr>
+        <tr>
+            <td style="width:100px">학번</td>
+            <td style="width:400px">자동부여</td>
+        </tr>
+        <tr>
+            <td style="width:100px">국어</td>
+            <td style="width:400px"><input type="number" name="kor" style="width:300px"></td>
+        </tr>
+        <tr>
+            <td style="width:100px">영어</td>
+            <td style="width:400px"><input type="number" name="eng" style="width:300px"></td>
+        </tr>
+        <tr>
+            <td style="width:100px">수학</td>
+            <td style="width:400px"><input type="number" name="mat" style="width:300px"></td>
+        </tr>
+    </form>
+</body>
+</html>

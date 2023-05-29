@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+ h1 {
+    margin-bottom: -30px
+ }
+ input {
+    padding-bottom: 10px;
+ }
+ td {
+    text-align:center
+ }
+
+</style>
+<body>
+    <form method="post" action="showREC.jsp">
+    <h1 style="height:50px"> 성적 조회후 정정 / 삭제</h1><br><br>
+   
+    조회할 학번
+    <input type="text" style="width:300px;" style="height: 20px;" name="studentid">
+    <input type="submit" value="조회" style="width:100px; height: 25px;">
+
+    </form>
+    <table border=1 style="width:500px;">
+        <tr>
+            <td style="width:100px">이름</td>
+            <td style="width:400px"><input readonly type="text" name="name" style="width:300px"></td>
+        </tr>
+        <tr>
+            <td style="width:100px">학번</td>
+            <td style="width:400px"></td>
+        </tr>
+        <tr>
+            <td style="width:100px">국어</td>
+            <td style="width:400px"><input readonly type="number" name="kor" style="width:300px"></td>
+        </tr>
+        <tr>
+            <td style="width:100px">영어</td>
+            <td style="width:400px"><input readonly type="number" name="eng" style="width:300px"></td>
+        </tr>
+        <tr>
+            <td style="width:100px">수학</td>
+            <td style="width:400px"><input readonly type="number" name="mat" style="width:300px"></td>
+        </tr>
+</body>
+</html>
