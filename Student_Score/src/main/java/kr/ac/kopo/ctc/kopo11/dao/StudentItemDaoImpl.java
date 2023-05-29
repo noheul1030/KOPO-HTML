@@ -13,7 +13,7 @@ public class StudentItemDaoImpl implements StudentItemDao{
 	String root = "root";
 	String password = "shdmf1030@";
 	
-	@Override
+	@Override // 1. table 생성
 	public void createTable() {
         try {
 	    	Class.forName(driver);
@@ -39,7 +39,7 @@ public class StudentItemDaoImpl implements StudentItemDao{
         }
 	}
 	
-	@Override
+	@Override // 2. table 완전삭제
 	public void dropTable(){
 
         try {
@@ -58,8 +58,8 @@ public class StudentItemDaoImpl implements StudentItemDao{
 	
 	
 	
-	// TBL 삭제 delete
-	@Override
+	
+	@Override // 3. 컬럼 삭제
 	public boolean delete(){
 		try {
 		Class.forName(driver);
@@ -75,8 +75,7 @@ public class StudentItemDaoImpl implements StudentItemDao{
 	}
 	
 
-	@Override
-	// C TBL 생성 insert
+	@Override // 4. 컬럼 값 insert
 	public StudentItem create() { 
 		StudentItem item = new StudentItem();
 		try {
@@ -119,8 +118,11 @@ public class StudentItemDaoImpl implements StudentItemDao{
 	}
 	
 	
-	@Override
-	// R TBL 하나 조회 select
+	// 5. 컬럼 값 수정 update
+	
+	// 6. 새로운 컬럼 값 insert(1건)
+	
+	@Override // 7. table 한건 조회
 	public StudentItem selectOne(int id) {
 		StudentItem item = new StudentItem();
 		try {
@@ -147,8 +149,8 @@ public class StudentItemDaoImpl implements StudentItemDao{
 		return item;
 	}
 
-	// R TBL 전체 조회 select *
-	@Override
+	
+	@Override // 8. table 전체 조회
 	   public List<StudentItem> selectAll(int page, int countPerPage) {
 	      List<StudentItem> studentItemList = new ArrayList<>();
 		try {
@@ -188,7 +190,7 @@ public class StudentItemDaoImpl implements StudentItemDao{
 		return studentItemList;
 	}
 
-	@Override
+	@Override // 9. 전체 table값 count
 	public int count() {
 	    int total = 0;
 	    try {
@@ -204,5 +206,10 @@ public class StudentItemDaoImpl implements StudentItemDao{
 	    }
 	    return total;
 	}
+	
+	
+	// 10. rank 지정
+	
+	// 11. 방문자수 조회
 
 }
