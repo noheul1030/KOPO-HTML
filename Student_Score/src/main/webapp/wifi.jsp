@@ -48,7 +48,10 @@
     <title>전국 무료 와이파이 표준 데이터</title> <!--타이틀 작성-->
     <style>
     	a {text-decoration-line: none;}   
-        .custom-size {font-size: 25px;}        
+        .custom-size {
+        	font-size: 25px;
+        	background-color: gold;
+        }        
     </style> <!--링크 밑줄 없앰 스타일 적용-->
     </head>
     <body>
@@ -91,10 +94,10 @@
         	startPage = (((int) ((pageCheck - 1) / 10)) * 10) + 1;
 
         	// 7. E 현재 페이지의 마지막
-        	endPage = (startPage + 9 >= maxPage) ? maxPage : startPage + 9;
+        	endPage = (startPage + (countCheck-1) >= maxPage) ? maxPage : startPage + (countCheck-1);
 
         	// 8. <, <<
-        	P = (startPage <= minPage) ? 1 : startPage - 10;
+        	P = (startPage <= minPage) ? 1 : startPage - countCheck;
         	PP = (P == 1) ? 1 : minPage;
 
         	// 9. >, >>
@@ -104,7 +107,7 @@
             while(true){ // true 반복문
 %>
                 <table border ="1" align = center width = 70%;  style="table-layout: auto;"> <!--테이블 지정-->
-                    <tr align = center style = "font-weight : bold;"><td>번호</td><td>주소</td><td>위도</td><td>경도</td><td>거리</td></tr> <!--tr,td 지정--> 
+                    <tr align = center style = "font-weight : bold;" ><td>번호</td><td>주소</td><td>위도</td><td>경도</td><td>거리</td></tr> <!--tr,td 지정--> 
                     
 <%              for(int i = startPage; i <= endPage; i++){ // cnt의 값에 따라 바뀌는 반복문
  				   String[] listcut = wifi.get(i-1).split("\t");         // wifi 리스트의 i값 가져와서 배열에 탭기준 구분 저장
@@ -129,21 +132,21 @@
         </table>  
         <table border="1" border-collapse:collapse; align = center width = 70%; style="table-layout: fixed;">                   <!--테이블-->
             <tr align = center>         <!--tr 설정-->
-            	<td><a href="helloworld.jsp?from=<%=PP%>&cnt=<%=countCheck%>"><<</a></td>
-            	<td><a href="helloworld.jsp?from=<%=P%>%>&cnt=<%=countCheck%>"><</a></td>
+            	<td><a href="wifi.jsp?from=<%=PP%>&cnt=<%=cnt%>"><<</a></td>
+            	<td><a href="wifi.jsp?from=<%=P%>%>&cnt=<%=cnt%>"><</a></td>
             	
 <%              int num = 0;
                 for(int i = startPage; i <= endPage; i++){ 
 					if(pageCheck == startPage+num){ %>                                                                            <!--1~10까지 도는 반복문-->
-                		<td class="custom-size"><a href="helloworld.jsp?from=<%=startPage+num%>&cnt=<%=countCheck%>"><%=startPage+num%></a></td>                         <!-- 테이블 링크 연결 -->
+                		<td class="custom-size"><a href="wifi.jsp?from=<%=startPage+num%>&cnt=<%=cnt%>"><%=startPage+num%></a></td>                         <!-- 테이블 링크 연결 -->
 <%              		num++;
 					}else { %>
-            			<td><a href="helloworld.jsp?from=<%=startPage+num%>&cnt=<%=countCheck%>"><%=startPage+num%></a></td>
+            			<td><a href="wifi.jsp?from=<%=startPage+num%>&cnt=<%=cnt%>"><%=startPage+num%></a></td>
 <%            			num++;
 					} %>
 <%            	} num = 0;%>
-            	<td><a href="helloworld.jsp?from=<%=N%>&cnt=<%=countCheck%>">></a></td>  
-            	<td><a href="helloworld.jsp?from=<%=NN%>&cnt=<%=countCheck%>">>></a></td>  
+            	<td><a href="wifi.jsp?from=<%=N%>&cnt=<%=cnt%>">></a></td>  
+            	<td><a href="wifi.jsp?from=<%=NN%>&cnt=<%=cnt%>">>></a></td>  
 			</tr>
         </table>
     </body>
