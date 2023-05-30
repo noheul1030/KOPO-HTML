@@ -48,4 +48,10 @@ public class StudentItemDaoMock implements StudentItemDao{
 		// TODO Auto-generated method stub
 		return true;
 	}
+
+	@Override
+	public StudentItem update(int kor, int eng, int mat, int studentid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
