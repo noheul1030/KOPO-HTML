@@ -6,7 +6,7 @@
     <head>
     </head>
     <body>
-<%      
+<%      try{
 		//DB연동
         Class.forName("com.mysql.jdbc.Driver");
         Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
@@ -51,6 +51,9 @@
             rset.close(); // resultSet 종료
             pstmt.close(); // PreparedStatement 종료
             conn.close(); // connection 종료
+		}catch(Exception e){
+			out.println(e);
+		}
 %>
         </table> 
     </body>

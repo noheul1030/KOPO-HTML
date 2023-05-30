@@ -8,7 +8,7 @@
     <body>
         <h1>테이블 삭제 OK</h1> <!--head text 크기 1-->
 
-<%      
+<%      try{
  		//DB연동 		
         Class.forName("com.mysql.jdbc.Driver");
         Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
@@ -19,6 +19,9 @@
 
         stmt.close();// statement 종료
         conn.close(); // connection 종료
+		}catch(Exception e){
+			out.println(e);
+		}
 %>
     </body>
 </html>
