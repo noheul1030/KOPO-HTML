@@ -53,7 +53,7 @@ try{
             pstmt.close(); // PreparedStatement 종료
             conn.close(); // connection 종료
             }catch(Exception e){
-
+                out.println(e);
 } 
 %>
         </table> 

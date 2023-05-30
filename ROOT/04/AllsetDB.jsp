@@ -29,8 +29,8 @@ try{
 
         stmt.close(); // statement 종료
         conn.close(); // connection 종료
-}catch(Exception e){
-
+        }catch(Exception e){
+            out.println(e);
 }
 %>
     </body>

@@ -12,6 +12,7 @@
         <h1>테이블만들기 OK</h1> <!--head text 크기 1-->
 
 <%     
+try{
 		// DB연동 
         Class.forName("com.mysql.jdbc.Driver");
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kopo11","root","shdmf1030@");
@@ -26,6 +27,10 @@
 
         stmt.close(); // statement 종료
         conn.close(); // connection 종료
+        }catch(Exception e){
+            out.println("테이블 생성 오류");
+            out.println(e);
+} 
     
 %>
     </body>
