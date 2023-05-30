@@ -9,7 +9,7 @@ import kr.ac.kopo.ctc.kopo11.service.StudentItemServiceImpl;
 
 public class StudentItemDaoImpl implements StudentItemDao{
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String connection = "jdbc:mysql://localhost:3306/noheul";
+	String connection = "jdbc:mysql://localhost:3307/kopo11";
 	String root = "root";
 	String password = "shdmf1030@";
 	
@@ -52,12 +52,6 @@ public class StudentItemDaoImpl implements StudentItemDao{
         	System.out.println(e);
         }
 	}
-	
-	
-	
-	
-	
-	
 	
 	@Override // 3. 컬럼 삭제
 	public boolean delete(){
@@ -118,7 +112,26 @@ public class StudentItemDaoImpl implements StudentItemDao{
 	}
 	
 	
-	// 5. 컬럼 값 수정 update
+	// 5. 컬럼 값 수정 update // oneviewDB의 key를 받아서 하는 방법을 참고하자
+	@Override
+	public StudentItem update(int kor,int eng,int mat, int studentid) {
+		StudentItem item = new StudentItem();
+		try {
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(connection, root, password);
+			Statement stmt = conn.createStatement();
+			String updateQuery = String.format("update student_score set kor = %d,eng = %d,mat = %d where studentid = %d",
+					kor,eng,mat,studentid);
+			stmt.execute(updateQuery);
+			
+			stmt.close(); 
+			conn.close(); 
+		}catch(ClassNotFoundException | SQLException e) {
+			System.out.println(e);
+		}
+		return item;
+	}
+	
 	
 	// 6. 새로운 컬럼 값 insert(1건)
 	
@@ -150,6 +163,7 @@ public class StudentItemDaoImpl implements StudentItemDao{
 	}
 
 	
+
 	@Override // 8. table 전체 조회
 	   public List<StudentItem> selectAll(int page, int countPerPage) {
 	      List<StudentItem> studentItemList = new ArrayList<>();
