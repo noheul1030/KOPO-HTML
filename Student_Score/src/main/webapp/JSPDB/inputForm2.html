@@ -4,6 +4,7 @@
 		<style>
 		  table {
 		    border-collapse: collapse;
+		    width : 75%
 		  }
 		  th, td {
 		    border-bottom: 1px solid #444444;
@@ -42,29 +43,34 @@
 	<form method = 'post' action = "showREC.jsp">
 		<table cellspacing="1" width="600"  align="center" >
 			<tr>
-				<td width = 200><p style = "font-weight: bold;">조회할 학번</p></td>
-				<td width = 200><p>
+				<td width = 25% style="table-layout: fixed;"><p style = "font-weight: bold;">조회할 학번</p></td>
+				<td width = 300><p>
 				<input type="text" pattern="^(?:100000000|[1-9][0-9]{0,8}?|0)$" name='searchID' 
 				value='' title="0~100000000까지의 정수를 입력하세요" required style="font-weight: bold;"></p></td>
-  				<td width = 100><input class="fourth" type="submit" value="조회" style="width: 70px;font-weight: bold;"></td>
+  				<td><input class="fourth" type="submit" value="조회" style="width: 70px;font-weight: bold;"></td>
 			</tr>
 		</table>
 		<table cellspacing="1" width = "600"  align = "center" >
 			<tr>
-				<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>이름</strong></p></td>
+				<td bgcolor="gold" width=25% style="border-right: 1px solid #444444;table-layout: fixed;"><p><strong>이름</strong></p></td>
 				<td width = 300 style="border-left: 1px solid #444444;"><p><input value=''></p></td>
+				<td></td>
 			</tr>
-				<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>학번</strong></p></td>
+				<td bgcolor="gold" width=25% style="border-right: 1px solid #444444;table-layout: fixed;"><p><strong>학번</strong></p></td>
 				<td width = 300 style="border-left: 1px solid #444444;"><p></p></td>
+				<td></td>
 			</tr>
-				<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>국어</strong></p></td>
+				<td bgcolor="gold" width=25% style="border-right: 1px solid #444444;table-layout: fixed;"><p><strong>국어</strong></p></td>
 				<td width = 300 style="border-left: 1px solid #444444;"><p><input value=''></p></td>
+				<td></td>
 			</tr>
-				<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>영어</strong></td>
+				<td bgcolor="gold" width=25% style="border-right: 1px solid #444444;table-layout: fixed;"><p><strong>영어</strong></td>
 				<td width = 300 style="border-left: 1px solid #444444;"><p><input value=''></p></td>
+				<td></td>
 			</tr>
-				<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>수학</strong></p></td>
+				<td bgcolor="gold" width=25% style="border-right: 1px solid #444444;table-layout: fixed;"><p><strong>수학</strong></p></td>
 				<td width = 300 style="border-left: 1px solid #444444;"><p><input value=''></p></td>
+				<td></td>
 			</tr>
 		</table>
 	</form>

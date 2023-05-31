@@ -9,6 +9,7 @@
     	<style>
 		  table {
 		    border-collapse: collapse;
+		    width : 75%
 		  }
 		  th, td {
 		    border-bottom: 1px solid #444444;
