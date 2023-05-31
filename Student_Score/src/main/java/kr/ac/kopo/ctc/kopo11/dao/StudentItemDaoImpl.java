@@ -131,10 +131,42 @@ public class StudentItemDaoImpl implements StudentItemDao{
 		}
 		return item;
 	}
+		
+	@Override // 6. 새로운 컬럼 값 insert(1건)
+	public StudentItem newinsert(String name) {
+		StudentItem item = new StudentItem();
+		try {
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(connection, root, password);
+			Statement stmt = conn.createStatement();
+			int count = count()-1;
+	        String selectQuery = String.format("select * from student_score limit %d,1 ;",count);
+	        ResultSet rset = stmt.executeQuery(selectQuery);
+	        
+        	item.setName(name);
+        	while(rset.next()) {
+        	item.setStudentid(rset.getInt(2)+1);
+        	}
+        	item.setKor((int) (Math.random()*101));
+			item.setEng((int) (Math.random()*101));
+			item.setMat((int) (Math.random()*101));    	
+	        	        
+			String newinsertQuery = String.format("insert into student_score ("
+					+ "name,studentid,kor,eng,mat)"
+					+ "values ('%s',%d,%d,%d,%d);",
+					item.getName(),item.getStudentid(),item.getKor(),item.getEng(),item.getMat());
+			
+			stmt.execute(newinsertQuery);
+						
+			stmt.close(); 
+			conn.close(); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		return item;
+	}
 	
-	
-	// 6. 새로운 컬럼 값 insert(1건)
-	
+
 	@Override // 7. table 한건 조회
 	public StudentItem selectOne(int id) {
 		StudentItem item = new StudentItem();
@@ -164,6 +196,7 @@ public class StudentItemDaoImpl implements StudentItemDao{
 
 	
 
+	
 	@Override // 8. table 전체 조회
 	   public List<StudentItem> selectAll(int page, int countPerPage) {
 	      List<StudentItem> studentItemList = new ArrayList<>();
@@ -221,8 +254,41 @@ public class StudentItemDaoImpl implements StudentItemDao{
 	    return total;
 	}
 	
-	
-	// 10. rank 지정
+	@Override // 10. rank 지정
+	public List<StudentItem> ranking() {
+		  List<StudentItem> studentItemList = new ArrayList<>();
+			try {
+				Class.forName(driver);
+		        Connection conn = DriverManager.getConnection(connection, root, password);
+		        Statement stmt = conn.createStatement();
+		        
+		        StudentItemService studentItemService = new StudentItemServiceImpl();
+		        studentItemService.setStudentItemDao(this);
+		        	        
+		        String Quary = String.format("select *, kor+eng+mat as sum, (kor+eng+mat)/3 as ave, row_number() over (order by kor+eng+mat desc) as ranking from student_score;");
+		        
+		        ResultSet rset = stmt.executeQuery(Quary);
+		        
+		        while(rset.next()) {
+		        	StudentItem item = new StudentItem();
+		        	
+		        	item.setName(rset.getString(1));
+		        	item.setStudentid(rset.getInt(2));
+		        	item.setKor(rset.getInt(3));
+		        	item.setEng(rset.getInt(4));
+		        	item.setMat(rset.getInt(5));     	
+		        	
+		        	studentItemList.add(item);
+		        }
+		               
+		        stmt.close(); 
+		        conn.close(); 
+	        }catch(Exception e) {
+	        	e.printStackTrace();
+	        }
+			
+			return studentItemList;
+	}	
 	
 	// 11. 방문자수 조회
 

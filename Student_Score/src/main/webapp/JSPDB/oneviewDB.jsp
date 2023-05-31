@@ -4,6 +4,21 @@
 <%@ page import="java.sql.*, javax.sql.*,java.io.*"%> <!--java import-->
 <html>
     <head>
+    	<style>
+		  table {
+		    width: 70%;
+		    border-top: 1px solid #444444;
+		    border-collapse: collapse;
+		  }
+		  th, td {
+		    border-bottom: 1px solid #444444;
+		    border-left: 1px solid #444444;
+		    padding: 10px;
+		  }
+		  th:first-child, td:first-child {
+		    border-left: none;
+		  }
+		</style>
     </head>
     <body>
 <%      try{
@@ -22,15 +37,15 @@
         // resultset에 쿼리문 전달
         ResultSet rset = pstmt.executeQuery();
 %>
-        <h1>[<%=key%>]조회</h1><!--해당 key값 head text 크기 1-->
+        <h1>[<%=key%>] 조회</h1><!--해당 key값 head text 크기 1-->
         <!--테이블 형태 지정-->
         <table cellspacing="1" width=600 border="1">
             <tr>
-                <td width="50"><p align=center>이름</p></td> <!--셀 형태 지정-->
-                <td width="50"><p align=center>학번</p></td> <!--셀 형태 지정-->
-                <td width="50"><p align=center>국어</p></td> <!--셀 형태 지정-->
-                <td width="50"><p align=center>영어</p></td> <!--셀 형태 지정-->
-                <td width="50"><p align=center>수학</p></td> <!--셀 형태 지정-->
+                <td bgcolor = gold width="50"><p align=center><strong>이름</strong></p></td> <!--셀 형태 지정-->
+                <td bgcolor = gold width="50"><p align=center><strong>학번</strong></p></td> <!--셀 형태 지정-->
+                <td bgcolor = gold width="50"><p align=center><strong>국어</strong></p></td> <!--셀 형태 지정-->
+                <td bgcolor = gold width="50"><p align=center><strong>영어</strong></p></td> <!--셀 형태 지정-->
+                <td bgcolor = gold width="50"><p align=center><strong>수학</strong></p></td> <!--셀 형태 지정-->
             </tr>
 <%
 			//반복문 
@@ -52,6 +67,7 @@
             pstmt.close(); // PreparedStatement 종료
             conn.close(); // connection 종료
 		}catch(Exception e){
+			out.println("조회 오류입니다.\n");
 			out.println(e);
 		}
 %>

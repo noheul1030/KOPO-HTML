@@ -17,7 +17,7 @@ public interface StudentItemDao {
 		// 5. 컬럼 값 수정 update
 		StudentItem update(int kor, int eng, int mat, int studentid);
 		// 6. 새로운 컬럼 값 insert(1건)
-		
+		StudentItem newinsert(String name);
 		// 7. table 한건 조회
 		StudentItem selectOne(int id);		
 		// 8. table 전체 조회
@@ -25,7 +25,7 @@ public interface StudentItemDao {
 		// 9. 전체 table값 count
 		int count();		
 		// 10. rank 지정
-		
+		List<StudentItem> ranking();
 		
 		// 11. 방문자수 조회
 

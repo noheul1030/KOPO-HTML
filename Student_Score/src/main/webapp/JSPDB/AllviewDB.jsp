@@ -4,6 +4,33 @@
 <%@ page import="java.sql.*, javax.sql.*,java.io.*"%> <!--java import-->
 <html>
     <head>
+    	<style>
+		  table {
+		    width: 80%;
+		    border-top: 1px solid #444444;
+		    border-collapse: collapse;
+		  }
+		  th, td {
+		    border-bottom: 1px solid #444444;
+		    border-left: 1px solid #444444;
+		    padding: 10px;
+		  }
+		  th:first-child, td:first-child {
+		    border-left: none;
+		  }
+		  a {text-decoration-line: none;}
+		  a:hover {
+			  background-color: gold;
+			  border-color: white;
+			  color: black;
+			  font-size : 15px;
+			  background-image: linear-gradient(45deg, white 50%, transparent 50%);
+			  background-position: 100%;
+		  	  background-size: 400%;
+			  transition: background 300ms ease-in-out;
+			}
+
+		</style>
     </head>
     <body>
 <%      try{
@@ -16,11 +43,11 @@
 			<!--테이블 형태 지정-->
 	        <table cellspacing="1" width=600 border="1">
 	            <tr>
-	                <td width="50"><p align=center>이름</p></td> <!--셀 형태 지정-->
-	                <td width="50"><p align=center>학번</p></td> <!--셀 형태 지정-->
-	                <td width="50"><p align=center>국어</p></td> <!--셀 형태 지정-->
-	                <td width="50"><p align=center>영어</p></td> <!--셀 형태 지정-->
-	                <td width="50"><p align=center>수학</p></td> <!--셀 형태 지정-->
+	                <td bgcolor = gold width="50"><p align=center><strong>이름</strong></p></td> <!--셀 형태 지정-->
+	                <td bgcolor = gold width="50"><p align=center><strong>학번</strong></p></td> <!--셀 형태 지정-->
+	                <td bgcolor = gold width="50"><p align=center><strong>국어</strong></p></td> <!--셀 형태 지정-->
+	                <td bgcolor = gold width="50"><p align=center><strong>영어</strong></p></td> <!--셀 형태 지정-->
+	                <td bgcolor = gold width="50"><p align=center><strong>수학</strong></p></td> <!--셀 형태 지정-->
 	            </tr>
 	<%
 				// 반복문 
@@ -42,6 +69,7 @@
 	            stmt.close(); // statement 종료
 	            conn.close(); // connection 종료
 		}catch(Exception e){
+			out.println("테이블 전체 값 조회 오류입니다.\n");
 			out.println(e);
 		}
 %>

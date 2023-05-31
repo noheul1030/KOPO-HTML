@@ -54,4 +54,17 @@ public class StudentItemDaoMock implements StudentItemDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public StudentItem newinsert(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<StudentItem> ranking() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

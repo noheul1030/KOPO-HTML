@@ -20,6 +20,7 @@
         stmt.close();// statement 종료
         conn.close(); // connection 종료
 		}catch(Exception e){
+			out.println("테이블 삭제 오류입니다.\n");
 			out.println(e);
 		}
 %>
