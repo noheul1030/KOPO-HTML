@@ -234,7 +234,7 @@
 	    String data;
 	    int cnt=0;
 	    try{
-	    FileReader f1 = new FileReader("/cnt.txt");
+	    FileReader f1 = new FileReader("cnt.txt");
 	    StringBuffer sb = new StringBuffer();
 	    int ch = 0;
 	    
@@ -249,10 +249,32 @@
 	    data = Integer.toString(cnt);
 	    out.println("<br><br>현재 홈페이지 방문자 조회수는 ["+data+"] 입니다. <br>");
 	    
-	    FileWriter f2 = new FileWriter("/cnt.txt",false);
+	    FileWriter f2 = new FileWriter("cnt.txt",false);
 	    f2.write(data);
 	    f2.close();
 		}catch(Exception e){
+		}
+	    
+	    try{
+			// DB연동 
+	        Class.forName("com.mysql.jdbc.Driver");
+	        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/noheul","root","shdmf1030@");
+	        Statement stmt = conn.createStatement();
+	        Statement stmt2 = conn.createStatement();
+			// 테이블 생성, 이름,학번,국어,영어,수학 점수 컬럼 생성
+	        stmt.execute("create table IF not exists jspDBcount (count int) default charset = utf8;"); // 타입 int utf8로 작성 디폴트
+	        stmt2.execute("insert into jspDBcount (count) values (0);");
+	        ResultSet rset = stmt.executeQuery("select * from jspDBcount");
+	        int count = rset.getInt(1)+1;
+	        
+	        out.println("<br><br>현재 홈페이지 방문자 조회수는 ["+count+"] 입니다. <br>");
+	
+	        rset.close();
+	        stmt.close(); // statement 종료
+	        conn.close(); // connection 종료
+		}catch(Exception e){
+			out.println("테이블 생성 오류입니다.\n");
+			out.println(e);
 		}
 %>
 	</body>

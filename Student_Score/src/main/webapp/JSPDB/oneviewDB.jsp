@@ -24,7 +24,7 @@
 <%      try{
 		//DB연동
         Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/noheul","root","shdmf1030@");
         // 뭐리문 작성
         String query = "SELECT * FROM jspDB WHERE name = ?";
         // 파라미터 전달 statement 뭐리 전달

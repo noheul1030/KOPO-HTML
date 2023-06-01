@@ -2,7 +2,6 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %> 
 <%@ page import="java.sql.*, javax.sql.*,java.io.*,java.util.*,java.net.*"%> <!--java import-->
-<%@ page import="kr.ac.kopo.ctc.kopo11.dao.*"%> <!--java import-->
 <%@ page session="true" %>
 
 <html>
@@ -73,7 +72,7 @@
  <%    	
 		//DB연동 
         Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
+ 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/noheul","root","shdmf1030@");
         Statement stmt = conn.createStatement();
         
         request.setCharacterEncoding("utf-8");
