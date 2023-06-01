@@ -9,6 +9,7 @@
 		
 	</head><!--head종료-->
 	<style>
+		table{width : 98%;}
 		/*지정 폰트 적용*/
             @font-face {
                     font-family: "D2CodingLigature";
@@ -16,10 +17,11 @@
                     font-weight: normal;
                 }
                 /*body 폰트 지정*/
-                body{
+                body{ 
                     font-family: 'D2CodingLigature',serif;
                 }
-		a {width : 100%vw; text-decoration-line: none; font-size: 25px; color: black;
+         li{color: #696969;}
+		a { width : 100%vw; text-decoration-line: none; font-size: 25px; color: #696969;
 			transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;}   
 		 a:hover {
 		 box-shadow: 0 0 40px 40px #ffd700 inset;
@@ -33,39 +35,152 @@
 		      font-size: 30px;
 		    }
 		  }
+		.btn {
+		  background: hsl(var(--hue), 98%, 80%);
+		  border: none;
+		  border-radius: 5px;
+		  cursor: pointer;
+		  color: #696969;
+		  font: 600 1.05rem/1 "Nunito", sans-serif;
+		  letter-spacing: .05em;
+		  overflow: hidden;
+		  padding: 0.2em 0.5em;
+		  min-height: 8vm;
+		  position: relative;
+		  text-transform: lowercase;
+		}
+		
+		.btn--yellow {
+		  --hue: 46;
+		}
+		
+		.btn--green {
+		  --hue: 163;
+		}
+		
+		.btn--purple {
+		  --hue: 244;
+		}
+		
+		.btn--red {
+		  --hue: 0;
+		}
+		
+		.btn--blue {
+		  --hue: 210;
+		}
+		
+		.btn:active, .btn:focus {
+		  outline: 3px solid hsl(calc(var(--hue) + var(--hueStep)), 98%, 80%);
+		}
+		
+		.btn + .btn {
+		  margin-top: 1em;
+		}
+		
+		.btn__txt {
+		  position: relative;
+		  z-index: 2;
+		}
+		
+		.btn__bg {
+		  border-radius: 50%;
+		  display: block;
+		  height: 0;
+		  left: 50%;
+		  margin: -50% 0 0 -50%;
+		  padding-top: 100%;
+		  position: absolute;
+		  top: 50%;
+		  width: 80%;
+		  transform: scale(0);
+		  transform-origin: 50% 50%;
+		  transition: transform 0.175s cubic-bezier(0.5, 1, 0.89, 1);
+		  z-index: 1;
+		}
+		
+		.btn__bg:nth-of-type(1) {
+		  --hueBg: calc(var(--hue) - 1 * var(--hueStep));
+		  transition-delay: calc(var(--delayStep) / 2 * (4 - 1));
+		}
+		
+		.btn__bg:nth-of-type(2) {
+		  --hueBg: calc(var(--hue) - 2 * var(--hueStep));
+		  transition-delay: calc(var(--delayStep) / 2 * (4 - 2));
+		}
+		
+		.btn__bg:nth-of-type(3) {
+		  --hueBg: calc(var(--hue) - 3 * var(--hueStep));
+		  transition-delay: calc(var(--delayStep) / 2 * (4 - 3));
+		}
+		
+		.btn__bg:nth-of-type(4) {
+		  --hueBg: calc(var(--hue) - 4 * var(--hueStep));
+		  transition-delay: calc(var(--delayStep) / 2 * (4 - 4));
+		}
+		
+		.btn:hover .btn__bg,
+		.btn:focus .btn__bg,
+		.btn:active .btn__bg {
+		  transform: scale(1.5);
+		  transition: transform 0.35s cubic-bezier(0.11, 0, 0.5, 0);
+		}
+		
+		.btn:hover .btn__bg:nth-of-type(1),
+		.btn:hover .btn__bg:nth-of-type(2),
+		.btn:hover .btn__bg:nth-of-type(3),
+		.btn:hover .btn__bg:nth-of-type(4) {
+		  transition-delay: calc(var(--delayStep) * 1);
+		}
+		
+		.btn:hover .btn__bg:nth-of-type(2),
+		.btn:hover .btn__bg{}
+       	  
 	</style>
 	<body><!--body시작-->
+		
 		<ul><!--ul 지정 style 적용-->
+		<table>
+			<tr><td>
 			<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다. text style red 적용,<u> text밑줄 적용-->
-			<a href="./index.html" target="content"></a><br><br><br>    
+			   
 			<li type="disc"><!--li 지정 style 적용 type="disc" 검은색 동그라미 적용-->
 				<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다. text style red 적용,<u> text밑줄 적용-->
-				<a id="myText" href="./createDB.jsp" target="content">* 테이블 생성</a></li><br>       
+				<a class="btn btn--yellow" id="myText" href="./createDB.jsp" target="content">테이블 생성</a></li><br><br>       
+			</td></tr>
+			<tr><td>
 			<li type="disc"><!--li 지정 style 적용 type="disc" 검은색 동그라미 적용-->
 				<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다.-->
-				<a id="myText" href="./dropDB.jsp" target="content">* 테이블 삭제</a></li><br>         
+				<a class="btn btn--yellow" id="myText" href="./dropDB.jsp" target="content">테이블 삭제</a></li><br><br>         
+			</td></tr>
+			<tr><td>
 			<li type="disc"><!--li 지정 style 적용 type="disc" 검은색 동그라미 적용-->
 				<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다.-->
-				<a id="myText" href="./deleteDB.jsp" target="content">* 컬럼 값 삭제</a></li><br>         
+				<a class="btn btn--yellow" id="myText" href="./AlldeleteDB.jsp" target="content">컬럼 전체삭제</a></li><br><br>         
+			</td></tr>
+			<tr><td>
 			<li type="disc"><!--li 지정 style 적용 type="disc" 검은색 동그라미 적용-->
 				<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다.-->
-				<a id="myText" href="./AllsetDB.jsp" target="content">* 테이블 값 넣기</a></li><br>         
+				<a class="btn btn--yellow" id="myText" href="./AllsetDB.jsp" target="content">테이블 값 넣기</a></li><br><br>         
+			</td></tr>
+			<tr><td>
 			<li type="disc"><!--li 지정 style 적용 type="disc" 검은색 동그라미 적용-->
 				<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다.-->
-				<a id="myText" href="./AllviewDB.jsp" target="content">* 테이블 전체조회</a></li><br><br><br><br><br><br>      
-
-
-
+				<a class="btn btn--yellow" id="myText" href="./AllviewDB.jsp" target="content">테이블 전체조회</a></li><br><br><br><br><br>     
+			
+			</td></tr>
+			<tr><td>
 			<li type="disc"><!--li 지정 style 적용 type="disc" 검은색 동그라미 적용-->
 				<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다.-->
-				<a id="myText" href="./inputForm1.html" target="content">* 추가입력</a></li><br>         
+				<a class="btn btn--purple" id="myText" href="./inputForm1.html" target="content">추가입력</a></li><br><br>        
+			</td></tr>
+			<tr><td>
 			<li type="disc"><!--li 지정 style 적용 type="disc" 검은색 동그라미 적용-->
 				<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다.-->
-				<a id="myText" href="./inputForm2.html" target="content">* 정정 / 삭제</a></li><br>         
-			<!--  <li type="disc"><!--li 지정 style 적용 type="disc" 검은색 동그라미 적용-->
-				<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다.-->
-				<!--  <a href="./AllviewDB.jsp" target="content">* 정정/삭제</a></li><br>       -->  
-			       
+				<a class="btn btn--red" id="myText" href="./inputForm2.html" target="content">정정 / 삭제</a></li><br>         
+			</td></tr>
+			
+		</table>	       
 		</ul><!--ul 지정 style 종료-->
 	</body><!--body 종료-->
 </html><!--html 종료-->

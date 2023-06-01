@@ -19,9 +19,9 @@ public class StudentItemDaoImpl implements StudentItemDao{
 	    	Class.forName(driver);
 	    	Connection conn = DriverManager.getConnection(connection, root,password);
 	    	Statement stmt = conn.createStatement();
-	        stmt.execute("drop table if exists student_score;");
+	        stmt.execute("drop table if exists jspDB;");
 	        
-	        String sql = "create table student_score(" 
+	        String sql = "create table jspDB(" 
 	                + "name varchar(20)," 
 	                + "studentid int not null primary key, " 
 	                + "kor int, " 
@@ -46,7 +46,7 @@ public class StudentItemDaoImpl implements StudentItemDao{
         	Class.forName(driver);
         	Connection conn = DriverManager.getConnection(connection, root, password); 
         	Statement stmt = conn.createStatement();
-        	stmt.execute("drop table if exists student_score;");
+        	stmt.execute("drop table if exists jspDB;");
         	
         }catch(ClassNotFoundException | SQLException e) {
         	System.out.println(e);
@@ -60,7 +60,7 @@ public class StudentItemDaoImpl implements StudentItemDao{
         Connection conn = DriverManager.getConnection(connection, root, password);
         Statement stmt = conn.createStatement();
         
-        stmt.execute("truncate student_score;");
+        stmt.execute("truncate jspDB;");
 		}catch(ClassNotFoundException | SQLException e) {
 			System.out.println(e);
 			return false;
@@ -93,7 +93,7 @@ public class StudentItemDaoImpl implements StudentItemDao{
 				item.setEng((int) (Math.random()*101));
 				item.setMat((int) (Math.random()*101));
 
-				String insertQuery = String.format("insert into student_score ("
+				String insertQuery = String.format("insert into jspDB ("
 						+ "name,studentid,kor,eng,mat)"
 						+ "values ('%s',%d,%d,%d,%d);",
 						item.getName(),item.getStudentid(),item.getKor(),item.getEng(),item.getMat());
@@ -120,7 +120,7 @@ public class StudentItemDaoImpl implements StudentItemDao{
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(connection, root, password);
 			Statement stmt = conn.createStatement();
-			String updateQuery = String.format("update student_score set kor = %d,eng = %d,mat = %d where studentid = %d",
+			String updateQuery = String.format("update jspDB set kor = %d,eng = %d,mat = %d where studentid = %d",
 					kor,eng,mat,studentid);
 			stmt.execute(updateQuery);
 			
@@ -140,7 +140,7 @@ public class StudentItemDaoImpl implements StudentItemDao{
 			Connection conn = DriverManager.getConnection(connection, root, password);
 			Statement stmt = conn.createStatement();
 			int count = count()-1;
-	        String selectQuery = String.format("select * from student_score limit %d,1 ;",count);
+	        String selectQuery = String.format("select * from jspDB limit %d,1 ;",count);
 	        ResultSet rset = stmt.executeQuery(selectQuery);
 	        
         	item.setName(name);
@@ -151,7 +151,7 @@ public class StudentItemDaoImpl implements StudentItemDao{
 			item.setEng((int) (Math.random()*101));
 			item.setMat((int) (Math.random()*101));    	
 	        	        
-			String newinsertQuery = String.format("insert into student_score ("
+			String newinsertQuery = String.format("insert into jspDB ("
 					+ "name,studentid,kor,eng,mat)"
 					+ "values ('%s',%d,%d,%d,%d);",
 					item.getName(),item.getStudentid(),item.getKor(),item.getEng(),item.getMat());
@@ -174,7 +174,7 @@ public class StudentItemDaoImpl implements StudentItemDao{
 			Class.forName(driver);
 	    	Connection conn = DriverManager.getConnection(connection, root,password);
 	    	Statement stmt = conn.createStatement();
-	        String selectQuery = String.format("select * from student_score where studentid = %d ;",id);
+	        String selectQuery = String.format("select * from jspDB where studentid = %d ;",id);
 	        ResultSet rset = stmt.executeQuery(selectQuery);
 	        
 	        while(rset.next()) {
@@ -212,7 +212,7 @@ public class StudentItemDaoImpl implements StudentItemDao{
 	        
 	        int a = (pagination.getC()-1)*countPerPage;
 	        	        
-	        String Quary = String.format("select * from (select * from student_score limit %d,%d) as a;",a,countPerPage);
+	        String Quary = String.format("select * from (select * from jspDB limit %d,%d) as a;",a,countPerPage);
 	        
 	        ResultSet rset = stmt.executeQuery(Quary);
 	        
@@ -244,7 +244,7 @@ public class StudentItemDaoImpl implements StudentItemDao{
 	        Class.forName(driver);
 	        Connection conn = DriverManager.getConnection(connection, root, password);
 	        Statement stmt = conn.createStatement();
-	        ResultSet settotal = stmt.executeQuery("SELECT COUNT(*) FROM student_score;");
+	        ResultSet settotal = stmt.executeQuery("SELECT COUNT(*) FROM jspDB;");
 	        if (settotal.next()) {
 	            total = settotal.getInt(1);
 	        }
@@ -265,7 +265,7 @@ public class StudentItemDaoImpl implements StudentItemDao{
 		        StudentItemService studentItemService = new StudentItemServiceImpl();
 		        studentItemService.setStudentItemDao(this);
 		        	        
-		        String Quary = String.format("select *, kor+eng+mat as sum, (kor+eng+mat)/3 as ave, row_number() over (order by kor+eng+mat desc) as ranking from student_score;");
+		        String Quary = String.format("select *, kor+eng+mat as sum, (kor+eng+mat)/3 as ave, row_number() over (order by kor+eng+mat desc) as ranking from jspDB;");
 		        
 		        ResultSet rset = stmt.executeQuery(Quary);
 		        

@@ -7,7 +7,7 @@
     <head>
     </head>
     <body>
-        <h1>실습데이터 입력</h1> <!--head text 크기 1-->
+        <h1>실습데이터 입력 OK</h1> <!--head text 크기 1-->
 
 <%      try{
 			//DB연동 
@@ -21,7 +21,7 @@
    			
    			int namenum = 0;
    			int i = 0;
-   			while(i < 50) {
+   			while(i < 356) {
    				if(namenum % 8 == 0) {
    					namenum = 0;
    				}

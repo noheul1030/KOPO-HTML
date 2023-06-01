@@ -7,6 +7,15 @@
     <head>
     	<meta charset="UTF-8"> <!--인코딩 설정 UTF-8-->
     	<style>
+    		@font-face {
+                font-family: "D2CodingLigature";
+                src: url(./D2CodingLigature/D2CodingBold-Ver1.3.2-20180524-ligature.ttf) format("truetype");
+                font-weight: normal;
+            }
+            /*body 폰트 지정*/
+            body{
+                font-family: 'D2CodingLigature',serif;
+            }
 		  table {
 		    border-collapse: collapse;
 		    width : 75%
@@ -43,7 +52,7 @@
         Statement stmt = conn.createStatement();
         
         int maxID = 0;
-        ResultSet settotal = stmt.executeQuery("select max(studentid) from jspDB");
+        ResultSet settotal = stmt.executeQuery("select min(studentid) as minNum from jspDB where (studentid+1) not in (select studentid from jspDB);");
         while (settotal.next()) {
             maxID = settotal.getInt(1)+1;
         }

@@ -6,6 +6,15 @@
     <head>
     	<meta charset="UTF-8"> <!--인코딩 설정 UTF-8-->
     	<style>
+    		@font-face {
+                    font-family: "D2CodingLigature";
+                    src: url(./D2CodingLigature/D2CodingBold-Ver1.3.2-20180524-ligature.ttf) format("truetype");
+                    font-weight: normal;
+                }
+                /*body 폰트 지정*/
+                body{
+                    font-family: 'D2CodingLigature',serif;
+                }
 		  table {
 		    border-collapse: collapse;
 		    width : 75%;
@@ -85,42 +94,35 @@
 					</tr>
 			</form>
 				</table>
+	       	<form method = 'post'>
        			<table cellspacing="1" width="400" align="center" >
-       				<tr>
-       					<td bgcolor="gold" width=25% style="border-right: 1px solid #444444;table-layout: fixed;"><p><strong>이름</strong></p></td>
-       					<td width = 300 style="border-left: 1px solid #444444;"><p><input value='<%=name%>'></p></td>
-       					<td></td>
-       				</tr>
-       					<td bgcolor="gold" width=25% style="border-right: 1px solid #444444;table-layout: fixed;"><p><strong>학번</strong></p></td>
-       					<td width = 300 style="border-left: 1px solid #444444;"><p><input value='<%=studentID%>'></p></td>
-       					<td></td>
-       				</tr>
-       					<td bgcolor="gold" width=25% style="border-right: 1px solid #444444;table-layout: fixed;"><p><strong>국어</strong></p></td>
-       					<td width = 300 style="border-left: 1px solid #444444;"><p><input value='<%=kor%>'></p></td>
-       					<td></td>
-       				</tr>
-       					<td bgcolor="gold" width=25% style="border-right: 1px solid #444444;table-layout: fixed;"><p><strong>영어</strong></td>
-       					<td width = 300 style="border-left: 1px solid #444444;"><p><input value='<%=eng%>'></p></td>
-       					<td></td>
-       				</tr>
-       					<td bgcolor="gold" width=25% style="border-right: 1px solid #444444;table-layout: fixed;"><p><strong>수학</strong></p></td>
-       					<td width = 300 style="border-left: 1px solid #444444;"><p><input value='<%=mat%>'></p></td>
-       					<td></td>
-       				</tr>
-       			</table>
+					<tr>
+						<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>이름</strong></p></td>
+						<td width = 300 style="border-left: 1px solid #444444;"><p><input type='text' name="name" value='<%=name%>' readonly></p></td>
+					</tr>
+						<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>학번</strong></p></td>
+						<td width = 300 style="border-left: 1px solid #444444;"><p><input type='text' name="searchID" value='<%=searchID%>' readonly></p></td>
+					</tr>
+						<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>국어</strong></p></td>
+						<td width = 300 style="border-left: 1px solid #444444;"><p><input type='text' pattern="^(?:100|[1-9][0-9]?|0)$" name="korean" value='<%=kor%>' title="0에서 100사이 숫자를 입력하세요." required></p></td>
+					</tr>
+						<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>영어</strong></td>
+						<td width = 300 style="border-left: 1px solid #444444;"><p><input type='text' pattern="^(?:100|[1-9][0-9]?|0)$" name="english" value='<%=eng%>' title="0에서 100사이 숫자를 입력하세요." required></p></td>
+					</tr>
+						<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>수학</strong></p></td>
+						<td width = 300 style="border-left: 1px solid #444444;"><p><input type='text' pattern="^(?:100|[1-9][0-9]?|0)$" name="mathmatic" value='<%=mat%>' title="0에서 100사이 숫자를 입력하세요." required></p></td>
+					</tr>
+				</table>
        			
        			<table cellspacing="1" width="600" border="0" align="center" style="border-collapse: collapse;">
        				<tr>
-       				<form method = 'post' action = 'updateDB.jsp'>
        					<td align="center">
-       	  				<input class="fourth" type="submit" value="수정" style="width: 70px; height: 40px; padding: 0px;font-weight: bold;"></td>
-       				</form>
-       				<form method = 'post' action = 'delete DB.jsp'>
+       	  				<input class="fourth" type="submit" value="수정" style="width: 70px; height: 40px; padding: 0px;font-weight: bold;" formaction = 'updateDB.jsp'></td>
        					<td align="center">
-       	  				<input class="fourth" type="submit" value="삭제" style="width: 70px; height: 40px; padding: 0px;font-weight: bold;"></td>
-       				</form>
+       	  				<input class="fourth" type="submit" value="삭제" style="width: 70px; height: 40px; padding: 0px;font-weight: bold;" formaction = 'deleteDB.jsp'></td>
        				</tr>
        			</table>	
+    			</form>
 <%        	}else if(resultSet.getInt(1) == 0){ %>
 			<form method = 'post' action = 'showREC.jsp'>
 				<table cellspacing="1" width="600"  align="center" >
