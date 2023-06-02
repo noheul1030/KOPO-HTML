@@ -1,0 +1,67 @@
+<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8" />
+<html>
+	<head>
+		<style>
+		  table {
+		    border-collapse: collapse;
+		    width : 75%
+		  }
+		  th, td {
+		    border-bottom: 1px solid #444444;
+		    padding: 10px;
+		  }
+		  th:first-child, td:first-child {
+		    border-left: none;
+		  }
+		
+		.fourth {
+		  background: gold;
+		  border-color: white;
+		  color: black;
+		  background-image: linear-gradient(45deg, yellow 50%, transparent 50%);
+		  background-position: 100%;
+		  background-size: 400%;
+		  transition: background 300ms ease-in-out;
+		}
+		
+		.fourth:hover {
+		  background-position: 0;
+		}
+		
+		input{
+			width: 200px; 
+			height: 40px; 
+			padding: 0px;
+		}
+		p{
+		text-align: center;}
+		</style>
+		
+	</head>
+	<body>
+	
+	<h1 align = center>후보 조회</h1>
+	<form method = 'post' action = "showREC.jsp">
+		<table cellspacing="1" width="600"  align="center" >
+			<tr>
+				<td width = 25% style="table-layout: fixed;"><p style = "font-weight: bold;">기호 입력 :</p></td>
+				<td width = 300><p>
+				<input type="text" pattern="^(?:100000000|[1-9][0-9]{0,8}?|0)$" name='tupyoID' 
+				value='' title="0~100000000까지의 정수를 입력하세요" required style="font-weight: bold;"></p></td>
+  				<td><input class="fourth" type="submit" value="조회" style="width: 70px;font-weight: bold;"></td>
+			</tr>
+		</table>
+		<table cellspacing="1" width = "600"  align = "center" >
+			<tr>
+				<td bgcolor="gold" width=25% style="border-right: 1px solid #444444;table-layout: fixed;"><p><strong>후보이름</strong></p></td>
+				<td width = 300 style="border-left: 1px solid #444444;"><p><input value=''></p></td>
+				<td></td>
+			</tr>
+				<td bgcolor="gold" width=25% style="border-right: 1px solid #444444;table-layout: fixed;"><p><strong>기호</strong></p></td>
+				<td width = 300 style="border-left: 1px solid #444444;"><p></p></td>
+				<td></td>
+			</tr>
+		</table>
+	</form>
+	</body>
+</html>
