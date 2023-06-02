@@ -205,7 +205,7 @@
 	</head>
 	<body>
 		
-		<h1 align = center>JSP Database 실습 1</h1>
+		<h1 align = center>성적표 테이블</h1>
 		<br><br>
 		<table width=150px align=center>
 	        <tr>

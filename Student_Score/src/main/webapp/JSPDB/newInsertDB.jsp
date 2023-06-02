@@ -2,7 +2,6 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %> 
 <%@ page import="java.sql.*, javax.sql.*,java.io.*,java.util.*,java.net.*"%> <!--java import-->
-<%@ page import="kr.ac.kopo.ctc.kopo11.domain.*" %>
 <html>
     <head>
     	<meta charset="UTF-8"> <!--인코딩 설정 UTF-8-->
