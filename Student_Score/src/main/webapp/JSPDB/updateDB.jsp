@@ -92,19 +92,18 @@
 	        english = Integer.parseInt(request.getParameter("english"));
 	        mathmatic = Integer.parseInt(request.getParameter("mathmatic"));
         
-        // 세션에 값저장
-        session.setAttribute("name", name);
-        session.setAttribute("searchID", searchID);
-        session.setAttribute("korean", korean);
-        session.setAttribute("english", english);
-        session.setAttribute("mathmatic", mathmatic);
+	        // 세션에 값저장
+	        session.setAttribute("name", name);
+	        session.setAttribute("searchID", searchID);
+	        session.setAttribute("korean", korean);
+	        session.setAttribute("english", english);
+	        session.setAttribute("mathmatic", mathmatic);
         }else{
-        
-        name = (String) session.getAttribute("name");
-        searchID = (int) session.getAttribute("searchID");
-        korean = (int) session.getAttribute("korean");
-        english = (int) session.getAttribute("english");
-        mathmatic = (int) session.getAttribute("mathmatic");
+	        name = (String) session.getAttribute("name");
+	        searchID = (int) session.getAttribute("searchID");
+	        korean = (int) session.getAttribute("korean");
+	        english = (int) session.getAttribute("english");
+	        mathmatic = (int) session.getAttribute("mathmatic");
         }
         
 	
