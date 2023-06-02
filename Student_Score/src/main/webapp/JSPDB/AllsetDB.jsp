@@ -2,7 +2,7 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %> 
 <%@ page import="java.sql.*, javax.sql.*,java.io.*,java.util.*"%> <!--java import-->
-<%@ page import="kr.ac.kopo.ctc.kopo11.domain.*" %>
+
 <html>
     <head>
     </head>
@@ -12,30 +12,30 @@
 <%      try{
 			//DB연동 
 	        Class.forName("com.mysql.jdbc.Driver");
-	        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/noheul","root","shdmf1030@");
+	        Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
 	        Statement stmt = conn.createStatement();
-	        StudentItem item = new StudentItem();
+	     
 	       
    			int id = 209901;
    			List<String> student = new ArrayList<String>(List.of("나연","정연","모모","사나","지효","미나","다현","채영","쯔위"));
    			
    			int namenum = 0;
    			int i = 0;
-   			while(i < 356) {
-   				if(namenum % 8 == 0) {
+   			while(i < 365) {
+   				if(namenum % 9 == 0) {
    					namenum = 0;
    				}
 
-   				item.setName(student.get(namenum));
-   				item.setStudentid(id+i);
-   				item.setKor((int) (Math.random()*101));
-   				item.setEng((int) (Math.random()*101));
-   				item.setMat((int) (Math.random()*101));
+   				String name = student.get(namenum);
+   				int studentid = id+i;
+   				int Kor = ((int) (Math.random()*101));
+   				int Eng = ((int) (Math.random()*101));
+   				int Mat = ((int) (Math.random()*101));
 
    				String insertQuery = String.format("insert into jspDB ("
    						+ "name,studentid,kor,eng,mat)"
    						+ "values ('%s',%d,%d,%d,%d);",
-   						item.getName(),item.getStudentid(),item.getKor(),item.getEng(),item.getMat());
+   						name,studentid,Kor,Eng,Mat);
    				
    				stmt.execute(insertQuery);
    				i++;

@@ -230,6 +230,7 @@
 	            <td colspan=2 class="rainbow-text">***************************</td>
 	        </tr>
 	    </table>
+	    <p align = center class="rainbow-text" style="font-size: 25px;">
 <%	    
 	    String data;
 	    int cnt=0;
@@ -258,14 +259,20 @@
 	    try{
 			// DB연동 
 	        Class.forName("com.mysql.jdbc.Driver");
-	        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/noheul","root","shdmf1030@");
+	        Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
 	        Statement stmt = conn.createStatement();
 	        Statement stmt2 = conn.createStatement();
-			// 테이블 생성, 이름,학번,국어,영어,수학 점수 컬럼 생성
-	        stmt.execute("create table IF not exists jspDBcount (count int) default charset = utf8;"); // 타입 int utf8로 작성 디폴트
-	        stmt2.execute("insert into jspDBcount (count) values (0);");
-	        ResultSet rset = stmt.executeQuery("select * from jspDBcount");
-	        int count = rset.getInt(1)+1;
+			
+	        stmt.execute("create table IF not exists jspDBcount(visitcount int);");
+	        // 테이블 생성, 이름,학번,국어,영어,수학 점수 컬럼 생성
+	        //stmt.execute("create table IF not exists jspDBcount(visitcount int not null);"); // 타입 int utf8로 작성 디폴트
+	        ResultSet rset = stmt.executeQuery("select max(visitcount) from jspDBcount;");
+	        
+	        int count = 0;
+	        if (rset.next()) {
+	        	count = rset.getInt(1) + 1;
+            }
+	        stmt2.execute("insert into jspDBcount (visitcount) values (" + count + ");");
 	        
 	        out.println("<br><br>현재 홈페이지 방문자 조회수는 ["+count+"] 입니다. <br>");
 	
@@ -277,5 +284,6 @@
 			out.println(e);
 		}
 %>
+		</p>
 	</body>
 </html>

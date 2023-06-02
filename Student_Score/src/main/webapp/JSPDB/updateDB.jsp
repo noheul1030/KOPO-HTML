@@ -72,7 +72,7 @@
  <%    	
 		//DB연동 
         Class.forName("com.mysql.jdbc.Driver");
- 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/noheul","root","shdmf1030@");
+ 		Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
         Statement stmt = conn.createStatement();
         
         request.setCharacterEncoding("utf-8");
@@ -126,7 +126,7 @@
 		   mat = resultSet.getInt(5);
 	    }
 %>		
-
+		<br>
 		<h1 align = center>데이터 수정 완료</h1>
 		<form method = 'post' action = 'inputForm2.html'>	
 			<table cellspacing="1" width="400" border="0" align="center" style="border-collapse: collapse;">
@@ -296,7 +296,7 @@
 <%                  if(from <= 10) { %>                                                                                         <!--from 값이 10보다 작거나 크면 true 조건-->
 		                <td><a href="updateDB.jsp?from=1&cnt=<%=cnt%>"><</a></td>                                                   <!-- 테이블 링크 연결 -->
 <%                  }else { %>
-		                <td><a href="updateDB.jsp?from=<%=fromByTen+0%>&cnt=<%=cnt%>"><</a></td>                                    <!-- 테이블 링크 연결 -->
+		                <td><a href="updateDB.jsp?from=<%=pageCheck-10%>&cnt=<%=cnt%>"><</a></td>                                    <!-- 테이블 링크 연결 -->
 <%                  } %>
 <%                  for(int i = 1; i <= 10; i++){ 
 						if(pageCheck == fromByTen+i){%>                                                                            <!--1~10까지 도는 반복문-->
@@ -305,11 +305,11 @@
 							<td><a href="updateDB.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td> 
 <%						} %>
 <%					} %>
-		            <td><a href="updateDB.jsp?from=<%=fromByTen+11%>&cnt=<%=cnt%>">></a></td>                                       <!-- 테이블 링크 연결 -->
+		            <td><a href="updateDB.jsp?from=<%=pageCheck+10%>&cnt=<%=cnt%>">></a></td>                                       <!-- 테이블 링크 연결 -->
 		            <td><a href="updateDB.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                           <!-- 테이블 링크 연결 -->
 <%              }else { %>
 		            <td><a href="updateDB.jsp?from=1&cnt=<%=cnt%>"><<</a></td>                                                      <!-- 테이블 링크 연결 -->
-		            <td><a href="updateDB.jsp?from=<%=fromByTen+0%>&cnt=<%=cnt%>"><</a></td>                                        <!-- 테이블 링크 연결 -->
+		            <td><a href="updateDB.jsp?from=<%=pageCheck-10%>&cnt=<%=cnt%>"><</a></td>                                        <!-- 테이블 링크 연결 -->
 		
 <%                  for(int i = 1; i <= maxpage%10; i++){ 
 						if(pageCheck == fromByTen+i){%>                                                                    <!--1~나머지 값 만큼 도는 반복문 -->
@@ -321,7 +321,7 @@
 <%                  if(maxpage-(maxpage%10)< from){ %>                                                                          <!--ㅡmaxpage-나머지 값이 from보다 작으면 -->
 		                <td><a href="updateDB.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">></a></td>                                        <!-- 테이블 링크 연결 -->
 <%                  }else { %>
-		                <td><a href="updateDB.jsp?from=<%=fromByTen+11%>&cnt=<%=cnt%>">></a></td>                                   <!-- 테이블 링크 연결 -->
+		                <td><a href="updateDB.jsp?from=<%=pageCheck+10%>&cnt=<%=cnt%>">></a></td>                                   <!-- 테이블 링크 연결 -->
 <%                  } %>
 		            <td><a href="updateDB.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                           <!-- 테이블 링크 연결 -->
 <%              } %>

@@ -2,12 +2,12 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %> 
 <%@ page import="java.sql.*, javax.sql.*,java.io.*,java.util.*,java.net.*"%> <!--java import-->
-<%@ page import="kr.ac.kopo.ctc.kopo11.dao.*"%> <!--java import-->
+
 <html>
     <head>
     	<meta charset="UTF-8"> <!--인코딩 설정 UTF-8-->
     	<style>
-    		@font-face {
+    	@font-face {
                     font-family: "D2CodingLigature";
                     src: url(./D2CodingLigature/D2CodingBold-Ver1.3.2-20180524-ligature.ttf) format("truetype");
                     font-weight: normal;
@@ -17,19 +17,18 @@
                     font-family: 'D2CodingLigature',serif;
                 }
 		  table {
-		    width: 80%;
-		    border-top: 1px solid #444444;
 		    border-collapse: collapse;
+		    width : 75%;
 		  }
 		  th, td {
 		    border-bottom: 1px solid #444444;
-		    border-left: 1px solid #444444;
 		    padding: 10px;
 		  }
 		  th:first-child, td:first-child {
 		    border-left: none;
 		  }
-		  .fourth {
+		
+		.fourth {
 		  background: gold;
 		  border-color: white;
 		  color: black;
@@ -42,31 +41,48 @@
 		.fourth:hover {
 		  background-position: 0;
 		}
+		input{
+			width: 200px; 
+			height: 40px; 
+			padding: 0px;
+		}
+		p{
+		text-align: center;}
+		
+		
 		  a {text-decoration-line: none; color: #696969;}
-		  
 		  a:hover {
 			  background-color: gold;
 			  border-color: white;
-			  color: #696969;
+			  color: black;
 			  font-size : 15px;
 			  background-image: linear-gradient(45deg, white 50%, transparent 50%);
 			  background-position: 100%;
 		  	  background-size: 400%;
 			  transition: background 300ms ease-in-out;
-			}
-			.custom-size {
+		}
+		.custom-size {
         	font-size: 15px;
         	background-color: gold;
         } 
 		</style>
     </head>
     <body>
-    
+    	<br>
     	<h1 align = center>데이터 삭제 완료</h1>
+    	<form method = 'post' action = 'inputForm2.html'>	
+			<table cellspacing="1" width="400" border="0" align="center" style="border-collapse: collapse;">
+				<tr>
+					<td width = 300></td>
+					<td align="right">
+	  				<input class="fourth" type="submit" value="뒤로 가기" style="width: 70px; height: 40px; padding: 0px;font-weight: bold;"></td>
+				</tr>
+		</form>	
+			</table>
  <%      
 		//DB연동 
         Class.forName("com.mysql.jdbc.Driver");
- 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/noheul","root","shdmf1030@");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
         Statement stmt = conn.createStatement();
         
         // searchID를 받아서 해당 값을 삭제 
@@ -191,7 +207,7 @@
 <%                  if(from <= 10) { %>                                                                                         <!--from 값이 10보다 작거나 크면 true 조건-->
                         <td><a href="deleteDB.jsp?from=1&cnt=<%=cnt%>"><</a></td>                                                   <!-- 테이블 링크 연결 -->
 <%                  }else { %>
-                        <td><a href="deleteDB.jsp?from=<%=fromByTen+0%>&cnt=<%=cnt%>"><</a></td>                                    <!-- 테이블 링크 연결 -->
+                        <td><a href="deleteDB.jsp?from=<%=pageCheck-10%>&cnt=<%=cnt%>"><</a></td>                                    <!-- 테이블 링크 연결 -->
 <%                  } %>
 <%                  for(int i = 1; i <= 10; i++){ 
 						if(pageCheck == fromByTen+i){%>                                                                            <!--1~10까지 도는 반복문-->
@@ -200,11 +216,11 @@
 							<td><a href="deleteDB.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td> 
 <%						} %>
 <%					} %>
-                    <td><a href="deleteDB.jsp?from=<%=fromByTen+11%>&cnt=<%=cnt%>">></a></td>                                       <!-- 테이블 링크 연결 -->
+                    <td><a href="deleteDB.jsp?from=<%=pageCheck+10%>&cnt=<%=cnt%>">></a></td>                                       <!-- 테이블 링크 연결 -->
                     <td><a href="deleteDB.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                           <!-- 테이블 링크 연결 -->
 <%              }else { %>
                     <td><a href="deleteDB.jsp?from=1&cnt=<%=cnt%>"><<</a></td>                                                      <!-- 테이블 링크 연결 -->
-                    <td><a href="deleteDB.jsp?from=<%=fromByTen+0%>&cnt=<%=cnt%>"><</a></td>                                        <!-- 테이블 링크 연결 -->
+                    <td><a href="deleteDB.jsp?from=<%=pageCheck-10%>&cnt=<%=cnt%>"><</a></td>                                        <!-- 테이블 링크 연결 -->
 
 <%                  for(int i = 1; i <= maxpage%10; i++){ 
 						if(pageCheck == fromByTen+i){%>                                                                    <!--1~나머지 값 만큼 도는 반복문 -->
@@ -216,7 +232,7 @@
 <%                  if(maxpage-(maxpage%10)< from){ %>                                                                          <!--ㅡmaxpage-나머지 값이 from보다 작으면 -->
                         <td><a href="deleteDB.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">></a></td>                                        <!-- 테이블 링크 연결 -->
 <%                  }else { %>
-                        <td><a href="deleteDB.jsp?from=<%=fromByTen+11%>&cnt=<%=cnt%>">></a></td>                                   <!-- 테이블 링크 연결 -->
+                        <td><a href="deleteDB.jsp?from=<%=pageCheck+10%>&cnt=<%=cnt%>">></a></td>                                   <!-- 테이블 링크 연결 -->
 <%                  } %>
                     <td><a href="deleteDB.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                           <!-- 테이블 링크 연결 -->
 <%              } %>

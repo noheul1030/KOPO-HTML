@@ -61,12 +61,12 @@
 		</style>
     </head>
     <body>
-    	<br><br>
+    	<br>
     	<h1 align= center>테이블 전체 조회</h1>
 <%      
 		//DB연동 
         Class.forName("com.mysql.jdbc.Driver");
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/noheul","root","shdmf1030@");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
         Statement stmt = conn.createStatement();
         ResultSet rset1 = stmt.executeQuery("select *, kor+eng+mat as sum, (kor+eng+mat)/3 as ave, row_number() over (order by kor+eng+mat desc) as ranking from jspDB order by studentid asc;");
         
@@ -182,7 +182,7 @@
 <%                  if(from <= 10) { %>                                                                                         <!--from 값이 10보다 작거나 크면 true 조건-->
                         <td><a href="AllviewDB.jsp?from=1&cnt=<%=cnt%>"><</a></td>                                                   <!-- 테이블 링크 연결 -->
 <%                  }else { %>
-                        <td><a href="AllviewDB.jsp?from=<%=fromByTen+0%>&cnt=<%=cnt%>"><</a></td>                                    <!-- 테이블 링크 연결 -->
+                        <td><a href="AllviewDB.jsp?from=<%=pageCheck-10%>&cnt=<%=cnt%>"><</a></td>                                    <!-- 테이블 링크 연결 -->
 <%                  } %>
 <%                  for(int i = 1; i <= 10; i++){ 
 						if(pageCheck == fromByTen+i){%>                                                                            <!--1~10까지 도는 반복문-->
@@ -191,11 +191,11 @@
 							<td><a href="AllviewDB.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td> 
 <%						} %>
 <%					} %>
-                    <td><a href="AllviewDB.jsp?from=<%=fromByTen+11%>&cnt=<%=cnt%>">></a></td>                                       <!-- 테이블 링크 연결 -->
+                    <td><a href="AllviewDB.jsp?from=<%=pageCheck+10%>&cnt=<%=cnt%>">></a></td>                                       <!-- 테이블 링크 연결 -->
                     <td><a href="AllviewDB.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                           <!-- 테이블 링크 연결 -->
 <%              }else { %>
                     <td><a href="AllviewDB.jsp?from=1&cnt=<%=cnt%>"><<</a></td>                                                      <!-- 테이블 링크 연결 -->
-                    <td><a href="AllviewDB.jsp?from=<%=fromByTen+0%>&cnt=<%=cnt%>"><</a></td>                                        <!-- 테이블 링크 연결 -->
+                    <td><a href="AllviewDB.jsp?from=<%=pageCheck-10%>&cnt=<%=cnt%>"><</a></td>                                        <!-- 테이블 링크 연결 -->
 
 <%                  for(int i = 1; i <= maxpage%10; i++){ 
 						if(pageCheck == fromByTen+i){%>                                                                    <!--1~나머지 값 만큼 도는 반복문 -->
@@ -207,7 +207,7 @@
 <%                  if(maxpage-(maxpage%10)< from){ %>                                                                          <!--ㅡmaxpage-나머지 값이 from보다 작으면 -->
                         <td><a href="AllviewDB.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">></a></td>                                        <!-- 테이블 링크 연결 -->
 <%                  }else { %>
-                        <td><a href="AllviewDB.jsp?from=<%=fromByTen+11%>&cnt=<%=cnt%>">></a></td>                                   <!-- 테이블 링크 연결 -->
+                        <td><a href="AllviewDB.jsp?from=<%=pageCheck+10%>&cnt=<%=cnt%>">></a></td>                                   <!-- 테이블 링크 연결 -->
 <%                  } %>
                     <td><a href="AllviewDB.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                           <!-- 테이블 링크 연결 -->
 <%              } %>
