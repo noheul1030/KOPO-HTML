@@ -24,20 +24,29 @@
 			}
     	</style>
 	</head>
+	<script>
+	  function btnDeleteClick(deleteID) {
+        document.form1.deleteID.value=deleteID;
+        document.form1.action="A_02_H.jsp";
+        document.form1.submit();
+	  } 
+	</script>
 	<body>
 		<h1>후보 삭제 완료</h1>
 <%
 		//DB연동 
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
+		//Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/noheul","root","shdmf1030@");
 		Statement stmt = conn.createStatement();
 		
-		String id = request.getParameter("ID");
+		String id = request.getParameter("deleteID");
 		String query = String.format("delete from TupyoDB where id = %s",id);
 		stmt.execute(query);
 
 %>
-		<form method = 'post'>
+		<form name="form1" method = 'post'>
+		<input type='hidden' name='deleteID'> 
 		<table cellspacing="1" width="600" border="1" align="" style="border-collapse: collapse;" >
     		<tr>
     			<td width = 25%><a align = center id="update" href="A_01.jsp" target="content"><h2>후보등록</h2></a></td>
@@ -76,14 +85,14 @@
 	     			<td align = left width = 20% ><input type='text'  name="name" value='<%=rset.getString(1)%>' readonly style="width: 100px; height: 30px; padding: 0px;"></td>
 					
 					<td align = right width = 20%>
-					<input class="fourth" type="submit" value="삭제" style="width: 70px; height: 30px; padding: 0px;font-weight: bold;" formaction = 'A_02_H.jsp'></td>
+					<input class="fourth" type="button" value="삭제" style="width: 70px; height: 30px; padding: 0px;font-weight: bold;" onclick="btnDeleteClick('<%=rset.getInt(2)%>')"></td>
 				</tr>
-		</form>
 <%	      			
 			}
 		}
 %>
 		</table>
+		</form>
 	</body>
 </html>
 		

@@ -30,7 +30,8 @@
 <%
    	// DB연동 
         Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
+		//Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/noheul","root","shdmf1030@");
         Statement stmt = conn.createStatement();
 		// 테이블 생성, 이름,학번,국어,영어,수학 점수 컬럼 생성
         stmt.execute("create table IF not exists TupyoDB(" 
@@ -81,46 +82,18 @@
 		<br>
     	
 		<form method = 'post'>
-		<table cellspacing="1" width="600" border="1" align="" style="border-collapse: collapse; ">
-			
-<%	
-	                               
-		if(totalcnt >= 1){                                  
-		ResultSet rset = stmt.executeQuery("select * from TupyoDB order by id asc;");
-	        
-     	while (rset.next()){ %>
-     		<tr>
-     			<td width =15%><strong>기호번호 :</strong></td>
-     			
-     			<td align = left width = 20% ><input type='text' name='ID' value='<%=rset.getInt(2)%>'readonly style="width: 100px; height: 30px; padding: 0px;"></td>
-				
-				<td width= 15% ><strong>후보명 :</strong></td>
-     			
-     			<td align = left width = 20% ><input type='text'  name="name" value='<%=rset.getString(1)%>' readonly style="width: 100px; height: 30px; padding: 0px;"></td>
-				
-				<td align = right width = 20%>
-				<input class="fourth" type="submit" value="삭제" style="width: 70px; height: 30px; padding: 0px;font-weight: bold;" formaction = 'A_02_H.jsp'></td>
-			</tr>
-		</form>
-<%		
-			}
-		}
-		
-%>
-		</table>
-		<form method = 'post'>
 		<table cellspacing="1" width="600" border="1" align="" style="border-collapse: collapse;" >
 			<tr>
-				<td bgcolor=#B5B2FF width= 15% ><strong>기호번호 :</strong></td>
+				<td bgcolor=#B5B2FF width=15% ><strong>기호번호 :</strong></td>
 				
-				<td bgcolor=#B5B2FF align = left width = 20% ><input type='text' name='TupyoID' value='<%=minID%>'readonly style="width: 100px; height: 30px; padding: 0px;"></td>
+				<td bgcolor=#B5B2FF align=left width=20% ><input type='text' name='TupyoID' value='<%=minID%>'readonly style="width: 100px; height: 30px; padding: 0px;"></td>
 				
-				<td bgcolor=#B5B2FF width= 15% ><strong>후보명 :</strong></td>
+				<td bgcolor=#B5B2FF width=15% ><strong>후보명 :</strong></td>
 				
-				<td bgcolor=#B5B2FF align = left width = 20% ><input type='text' pattern="^[가-힣]+$" name="name" value='' title="한글만 입력하세요." required style="width: 100px; height: 30px; padding: 0px;"></td>
+				<td bgcolor=#B5B2FF align=left width=20% ><input type='text' pattern="^[가-힣]+$" name="name" value='' title="한글만 입력하세요." required style="width: 100px; height: 30px; padding: 0px;"></td>
 								
-				<td bgcolor=#B5B2FF align = right width = 20%>
-  				<input class="fourth" type="submit" value="추가" align = right style="width: 70px; height: 30px; padding: 0px;font-weight: bold;" formaction = 'A_03_H.jsp'></td>
+				<td bgcolor=#B5B2FF align=right width = 20%>
+  				<input class="fourth" type="submit" value="추가" align=right style="width: 70px; height: 30px; padding: 0px;font-weight: bold;" formaction = 'A_03_H.jsp'></td>
 			</tr>
 		</table>
 		</form>

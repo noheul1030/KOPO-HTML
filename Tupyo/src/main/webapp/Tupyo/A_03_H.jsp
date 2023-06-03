@@ -24,11 +24,19 @@
 			}
     	</style>
 	</head>
+	<script>
+	  function btnDeleteClick(deleteID) {
+        document.form1.deleteID.value = deleteID;
+        document.form1.action = "A_02_H.jsp";
+        document.form1.submit();
+	  } 
+	</script>
 	<body>
 		<h1>후보 등록 완료</h1>
 <%		// DB연동 
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
+		//Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/noheul","root","shdmf1030@");
 		Statement stmt = conn.createStatement();
 		
 		request.setCharacterEncoding("utf-8");
@@ -37,8 +45,42 @@
 				
 		stmt.execute("insert into TupyoDB (name,id) values ('" +
 			 name + "'," + id +");");
+		
+		
+		// ID칼럼의 전체 count 조회
+				ResultSet total = stmt.executeQuery("select count(*) from TupyoDB where id;");
+				int totalcnt = 0;
+				while(total.next()){
+					totalcnt = total.getInt(1);
+				}
+				
+				// ID 최소값은 1
+				int minID = 1;
+				
+				// ID칼럼의 count가 0일때(아직 아무 값도 안들어왔다는 뜻)
+				if(totalcnt == 0){
+					ResultSet idcount = stmt.executeQuery("select min(id) as minNum from TupyoDB where (id+1) not in (select id from TupyoDB);");
+					
+					while(idcount.next()){
+						minID = idcount.getInt(1)+1;
+					}
+				}else{	// ID칼럼의 count가 0이 아닐때(값이 들어있다는 뜻)
+					// ID칼럼의 전체 값 조회
+					ResultSet idcount2 = stmt.executeQuery("select id from TupyoDB");
+
+					while (idcount2.next()) {
+					    int currentID = idcount2.getInt("id"); // 현재 가져온 id 값
+						// ID최소값과 currentID의 값이 일치하면 순서대로 있는 ID값 이므로 통과
+					    if (minID == currentID) {
+					    	minID++; // 다음 기대하는 id 값으로 업데이트
+					    } else { // 칼럼 순회 중간에 빠진 값을 찾았으므로 break;
+					        break;
+					    }
+					}
+				}
 %>
-		<form method = 'post'>
+		<form name="form1" method = 'post'>
+		<input type='hidden' name='deleteID'> 
 		<table cellspacing="1" width="600" border="1" align="" style="border-collapse: collapse;" >
     		<tr>
     			<td width = 25%><a align = center id="update" href="A_01.jsp" target="content"><h2>후보등록</h2></a></td>
@@ -56,16 +98,11 @@
 
 		<table cellspacing="1" width="600" border="1" align="" style="border-collapse: collapse;" >
 <%		
-		ResultSet total = stmt.executeQuery("select count(*) from TupyoDB;");
-		int totalcnt = 0;
-		while(total.next()){
-			totalcnt = total.getInt(1);
-		}
-		
 		if(totalcnt >= 1){                                  
 		ResultSet rset = stmt.executeQuery("select * from TupyoDB order by id asc;");
 	        
-	     	while (rset.next()){ %>
+	     	while (rset.next()){ 
+%>
 	     		<tr>
 	     			<td width =15%><strong>기호번호 :</strong></td>
 	     			
@@ -73,16 +110,32 @@
 					
 					<td width= 15% ><strong>후보명 :</strong></td>
 	     			
-	     			<td align = left width = 20% ><input type='text'  name="name" value='<%=rset.getString(1)%>' readonly style="width: 100px; height: 30px; padding: 0px;"></td>
+	     			<td align = left width = 20% ><input type='text' name="name" value='<%=rset.getString(1)%>' readonly style="width: 100px; height: 30px; padding: 0px;"></td>
 					
 					<td align = right width = 20%>
-					<input class="fourth" type="submit" value="삭제" style="width: 70px; height: 30px; padding: 0px;font-weight: bold;" formaction = 'A_02_H.jsp'></td>
+					  <input class="fourth" type="button" value="삭제" style="width: 70px; height: 30px; padding: 0px;font-weight: bold;" onclick="btnDeleteClick('<%=rset.getInt(2)%>')">
+					</td>
 				</tr>
-		</form>
 <%	      			
 			}
 		}
 %>
+		</table>
+		</form>
+		<form method = 'post'>
+		<table cellspacing="1" width="600" border="1" align="" style="border-collapse: collapse;" >
+			<tr>
+				<td bgcolor=#B5B2FF width= 15% ><strong>기호번호 :</strong></td>
+				
+				<td bgcolor=#B5B2FF align = left width = 20% ><input type='text' name='TupyoID' value='<%=minID%>'readonly style="width: 100px; height: 30px; padding: 0px;"></td>
+				
+				<td bgcolor=#B5B2FF width= 15% ><strong>후보명 :</strong></td>
+				
+				<td bgcolor=#B5B2FF align = left width = 20% ><input type='text' pattern="^[가-힣]+$" name="name" value='' title="한글만 입력하세요." required style="width: 100px; height: 30px; padding: 0px;"></td>
+								
+				<td bgcolor=#B5B2FF align = right width = 20%>
+  				<input class="fourth" type="submit" value="추가" align = right style="width: 70px; height: 30px; padding: 0px;font-weight: bold;" formaction = 'A_03_H.jsp'></td>
+			</tr>
 		</table>
 	</body>
 </html>
