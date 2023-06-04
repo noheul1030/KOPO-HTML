@@ -205,57 +205,34 @@
 	</head>
 	<body>
 		
-		<h1 align = center>성적표 테이블</h1>
-		<br><br>
-		<table width=150px align=center>
-	        <tr>
+		<h1 align = center>성적표 테이블</h1> <!-- head Font 사이즈 h1 -->
+		<br><br> <!-- 줄 띄우기 -->
+		<table width=150px align=center> <!-- 테이블 설정 -->
+	        <tr><!-- 셀 스타일 적용 -->
 	            <td width=50% align=center class="neon">과제</td>
 	            <td width=50% align=center class="flux">검사</td>
 	        </tr>
-	        <tr>
+	        <tr><!-- 셀 스타일 적용 -->
 	            <td colspan=2 class="rainbow-text">***************************</td>
 	        </tr>
-	        <tr>
+	        <tr><!-- 셀 스타일 적용 -->
 	            <td colspan=2 align=center class="rainbow-text">과!제!검!사!</td>
 	        </tr>
-	        <tr>
+	        <tr><!-- 셀 스타일 적용, 이미지 url 활용 -->
 	            <td colspan=2 align=center><img 
 	                    src="https://media.tenor.com/PK95lqgvj4kAAAAC/%EC%8B%A0%EB%82%98%EB%8A%94%EB%86%8D%EB%8B%B4%EA%B3%B0-%EC%A0%95%EC%8B%A0%EC%82%AC%EB%82%98%EC%9A%B4%EB%86%8D%EB%8B%B4%EA%B3%B0.gif"
 	                    width=180px; height=150px;></td>
 	        </tr>
-	        <tr>
+	        <tr><!-- 셀 스타일 적용 -->
 	            <td colspan=2 align=center class="rainbow-text">예이~</td>
 	        </tr>
-	        <tr>
+	        <tr><!-- 셀 스타일 적용 -->
 	            <td colspan=2 class="rainbow-text">***************************</td>
 	        </tr>
 	    </table>
+	    <!-- p태그 무지개 스타일 적용 -->
 	    <p align = center class="rainbow-text" style="font-size: 25px;">
 <%	    
-	    String data;
-	    int cnt=0;
-	    try{
-	    FileReader f1 = new FileReader("cnt.txt");
-	    StringBuffer sb = new StringBuffer();
-	    int ch = 0;
-	    
-	    while((ch = f1.read()) != -1){
-	    	sb.append((char)ch);
-	    }
-	    data = sb.toString().trim().replace("\n","");
-	    f1.close();
-	    
-	    cnt = Integer.parseInt(data);
-	    cnt++;
-	    data = Integer.toString(cnt);
-	    out.println("<br><br>현재 홈페이지 방문자 조회수는 ["+data+"] 입니다. <br>");
-	    
-	    FileWriter f2 = new FileWriter("cnt.txt",false);
-	    f2.write(data);
-	    f2.close();
-		}catch(Exception e){
-		}
-	    
 	    try{
 			// DB연동 
 	        Class.forName("com.mysql.jdbc.Driver");
@@ -264,24 +241,24 @@
 	        Statement stmt = conn.createStatement();
 	        Statement stmt2 = conn.createStatement();
 			
+	        // 테이블 jspDBcount 생성
 	        stmt.execute("create table IF not exists jspDBcount(visitcount int);");
-	        // 테이블 생성, 이름,학번,국어,영어,수학 점수 컬럼 생성
-	        //stmt.execute("create table IF not exists jspDBcount(visitcount int not null);"); // 타입 int utf8로 작성 디폴트
 	        ResultSet rset = stmt.executeQuery("select max(visitcount) from jspDBcount;");
 	        
-	        int count = 0;
-	        if (rset.next()) {
-	        	count = rset.getInt(1) + 1;
+	        int count = 0; // 변수 초기값 지정
+	        if (rset.next()) { // 조건이 true일 떄
+	        	count = rset.getInt(1) + 1; // count 1추가 
             }
+	        // 추가한 방문자수 쿼리 저장
 	        stmt2.execute("insert into jspDBcount (visitcount) values (" + count + ");");
-	        
+	        // 프린트 
 	        out.println("<br><br>현재 홈페이지 방문자 조회수는 ["+count+"] 입니다. <br>");
 	
 	        rset.close();
 	        stmt.close(); // statement 종료
 	        conn.close(); // connection 종료
 		}catch(Exception e){
-			out.println("테이블 생성 오류입니다.\n");
+			out.println("테이블 생성 오류입니다.\n"); // 오류 프린트 
 			out.println(e);
 		}
 %>

@@ -73,13 +73,13 @@
         
      	List<String> score = new ArrayList<String>(); // new 리스트 선언
      	
-        while (rset1.next()){
+        while (rset1.next()){ // 쿼리 결과 반복 출력 
  			score.add(rset1.getString(1)+"\t"+Integer.toString(rset1.getInt(2))+"\t"+Integer.toString(rset1.getInt(3))+
  					"\t"+Integer.toString(rset1.getInt(4))+"\t"+Integer.toString(rset1.getInt(5))+"\t"+Integer.toString(rset1.getInt(6))
  					+"\t"+Integer.toString(rset1.getInt(7))+"\t"+Integer.toString(rset1.getInt(8)));
  		}
 
-        int total = score.size();
+        int total = score.size(); // 변수 값 리스트 크기 지정
         
         String fromParam = request.getParameter("from"); // input받은 from 값 변수에 저장
 		String cntParam = request.getParameter("cnt"); // input받은 cnt 값 변수에 저장
@@ -102,7 +102,7 @@
 			fromByTen = (int) (Math.floor((from - 1) / 10) * 10);
 	    }
 		
-	    if(from > maxpage) {
+		if(from > maxpage) {
             from = maxpage;
             fromByTen = (int) (Math.floor((from - 1) / 10) * 10);
         }
@@ -115,9 +115,9 @@
     	/* 1 ~ 최대페이지 */
     	else{pageCheck = from;}
     	
-        stmt.close();
+        stmt.close();	// Statement 
      	rset1.close();
-     	conn.close();
+     	conn.close();	// Connection 객체 닫기
 %>
 		<!--테이블 형태 지정-->
 <%		try{

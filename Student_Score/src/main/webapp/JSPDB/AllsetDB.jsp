@@ -17,36 +17,38 @@
 	        Statement stmt = conn.createStatement();
 	     
 	       
-   			int id = 209901;
+   			int id = 209901; // 학번 초기값 
+   			// 다량건수 입력할 리스트 
    			List<String> student = new ArrayList<String>(List.of("나연","정연","모모","사나","지효","미나","다현","채영","쯔위"));
    			
-   			int namenum = 0;
-   			int i = 0;
-   			while(i < 365) {
-   				if(namenum % 9 == 0) {
-   					namenum = 0;
+   			int namenum = 0; // 변수 초기값 지정
+   			int i = 0;       // 변수 초기값 지정
+   			while(i < 365) { // 365번 도는 반복문
+   				if(namenum % 9 == 0) { // 9와 나눈 나머지가 0이면 true 
+   					namenum = 0; // 변수 값 대입
    				}
 
-   				String name = student.get(namenum);
-   				int studentid = id+i;
-   				int Kor = ((int) (Math.random()*101));
-   				int Eng = ((int) (Math.random()*101));
-   				int Mat = ((int) (Math.random()*101));
+   				String name = student.get(namenum); 	// 이름
+   				int studentid = id+i;					// 학번 
+   				int Kor = ((int) (Math.random()*101));	// 국어
+   				int Eng = ((int) (Math.random()*101));	// 영어
+   				int Mat = ((int) (Math.random()*101));	// 수학
 
+   				// 쿼리문 작성
    				String insertQuery = String.format("insert into jspDB ("
    						+ "name,studentid,kor,eng,mat)"
    						+ "values ('%s',%d,%d,%d,%d);",
    						name,studentid,Kor,Eng,Mat);
-   				
+   				// 쿼리문 실행
    				stmt.execute(insertQuery);
-   				i++;
-   				namenum++;
+   				i++;	// 1 추가
+   				namenum++;	// 1추가
    			}
 	    			
-   			stmt.close(); 
-   			conn.close(); 
+   			stmt.close(); // Statement 
+   			conn.close(); // Connection 객체 닫기
    		}catch(Exception e) {
-   			out.println("insert 오류입니다.\n");
+   			out.println("insert 오류입니다.\n"); // 오류 프린트
    			out.println(e);
    		}
 %>

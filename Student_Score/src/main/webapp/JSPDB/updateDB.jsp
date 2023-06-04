@@ -76,30 +76,30 @@
 		//Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
         Statement stmt = conn.createStatement();
         
-        request.setCharacterEncoding("utf-8");
+        request.setCharacterEncoding("utf-8"); // 인코딩 설정
         // null값 체크
         int Nullcheck = request.getParameter("searchID") != null ? 1 : 0;
         
-        String name = "";
-        int searchID = 0;
-        int korean = 0;
-        int english = 0;
-        int mathmatic = 0;
+        String name = ""; // 이름 변수 선언
+        int searchID = 0; // 학번 변수 선언
+        int korean = 0; // 국어 변수 선언
+        int english = 0; // 영어 변수 선언
+        int mathmatic = 0; // 수학 변수 선언
         
-        if(Nullcheck != 0){
-	        name = request.getParameter("name");
-	        searchID = Integer.parseInt(request.getParameter("searchID"));
-	        korean = Integer.parseInt(request.getParameter("korean"));
-	        english = Integer.parseInt(request.getParameter("english"));
-	        mathmatic = Integer.parseInt(request.getParameter("mathmatic"));
+        if(Nullcheck != 0){ // 변수의 값이 0이 아니면
+	        name = request.getParameter("name"); // 이름 전달 값 변수 저장
+	        searchID = Integer.parseInt(request.getParameter("searchID")); // 학번 전달 값 변수 저장
+	        korean = Integer.parseInt(request.getParameter("korean")); // 국어 전달 값 변수 저장
+	        english = Integer.parseInt(request.getParameter("english")); // 영어 전달 값 변수 저장
+	        mathmatic = Integer.parseInt(request.getParameter("mathmatic")); // 수학 전달 값 변수 저장
         
-	        // 세션에 값저장
+	        // 세션에 이름,학번,국어,영어,수학 값저장
 	        session.setAttribute("name", name);
 	        session.setAttribute("searchID", searchID);
 	        session.setAttribute("korean", korean);
 	        session.setAttribute("english", english);
 	        session.setAttribute("mathmatic", mathmatic);
-        }else{
+        }else{ // Nullcheck 변수의 값이 0이면 값이 아무것도 안들어왔기 때문에 세션에 저장된 값을 사용
 	        name = (String) session.getAttribute("name");
 	        searchID = (int) session.getAttribute("searchID");
 	        korean = (int) session.getAttribute("korean");
@@ -107,67 +107,69 @@
 	        mathmatic = (int) session.getAttribute("mathmatic");
         }
         
-	
+		// 쿼리문 작성 해당 테이블의 국어,영어,수학 의 점수를 조정한다.
         String query = String.format("update jspDB set kor = %d,eng = %d,mat = %d where studentid = %d",
         		korean,english,mathmatic,searchID);
-        				
+        // 뭐리 실행				
         stmt.execute(query);
-        
+        // 뭐리문 작성 학번을 기준으로 해당 테이블의 모든 정보를 조회
         String query2 = String.format("select * from jspDB where studentid = %d",searchID);
+        // 쿼리 실행 결과 값 저장
         ResultSet resultSet = stmt.executeQuery(query2);        
         
-	    int kor = 0;
-	    int eng = 0;
-	    int mat = 0;
+	    int kor = 0; // 변수 초기값 지정
+	    int eng = 0; // 변수 초기값 지정
+	    int mat = 0; // 벼수 초기값 지정
 	 	   
-	    while(resultSet.next()){
-		   kor = resultSet.getInt(3);
-		   eng = resultSet.getInt(4);
-		   mat = resultSet.getInt(5);
+	    while(resultSet.next()){ // 해당 조건이 true 이면
+		   kor = resultSet.getInt(3); // 국어는 쿼리 결과값의 3번쨰값 저장
+		   eng = resultSet.getInt(4); // 영어는 쿼리 결과값의 4번쨰값 저장
+		   mat = resultSet.getInt(5); // 수학은 쿼리 결과값의 5번쨰값 저장
 	    }
 %>		
-		<br>
-		<h1 align = center>데이터 수정 완료</h1>
-		<form method = 'post' action = 'inputForm2.html'>	
-			<table cellspacing="1" width="400" border="0" align="center" style="border-collapse: collapse;">
+		<br> <!-- 한줄 띄기 -->
+		<h1 align = center>데이터 수정 완료</h1> <!--해당 key값 head text 크기 1-->
+		<form method = 'post' action = 'inputForm2.html'> <!-- form 작동시 showREC.jsp로 링크 이동 -->
+			<table cellspacing="1" width="400" border="0" align="center" style="border-collapse: collapse;"> <!-- 테이블 설정 -->
 				<tr>
-					<td width = 300></td>
-					<td align="right">
+					<td width = 300></td> <!-- 가로 넓이 300 -->
+					<td align="right"> <!-- 우측 정렬 -->
+					<!-- css 클래스 적용, 버튼 누를시 Form action 링크작동 -->
 	  				<input class="fourth" type="submit" value="뒤로 가기" style="width: 70px; height: 40px; padding: 0px;font-weight: bold;"></td>
 				</tr>
 		</form>	
 			</table>
-			<table cellspacing="1" width="400" align="center" >
-				<tr>
+			<table cellspacing="1" width="400" align="center" > <!-- 테이블 설정 -->
+				<tr> <!-- 입력받은 이름 값을 보여주는 셀 설정 -->
 					<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>이름</strong></p></td>
 					<td width = 300 style="border-left: 1px solid #444444;"><p><input value='<%=name%>' readonly></p></td>
-				</tr>
+				</tr> <!-- 입력받은 학번 값을 보여주는 셀 설정 -->
 					<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>학번</strong></p></td>
 					<td width = 300 style="border-left: 1px solid #444444;"><p><input value='<%=searchID%>' readonly></p></td>
-				</tr>
+				</tr> <!-- 입력받은 국어 값을 보여주는 셀 설정 -->
 					<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>국어</strong></p></td>
 					<td width = 300 style="border-left: 1px solid #444444;"><p><input type='text' value='<%=kor%>' readonly></p></td>
-				</tr>
+				</tr> <!-- 입력받은 영어 값을 보여주는 셀 설정 -->
 					<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>영어</strong></td>
 					<td width = 300 style="border-left: 1px solid #444444;"><p><input type='text' value='<%=eng%>' readonly></p></td>
-				</tr>
+				</tr> <!-- 입력받은 수학 값을 보여주는 셀 설정 -->
 					<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>수학</strong></p></td>
 					<td width = 300 style="border-left: 1px solid #444444;"><p><input type='text' value='<%=mat%>' readonly></p></td>
 				</tr>
 			</table>
 			<br>
-<%					
+<%		// 쿼리 결과값 저장 이름,학번,국어,영어,수학,합계,평균값을 구하고 합계를 기준으로 Rank 지정
 		ResultSet rset1 = stmt.executeQuery("select *, kor+eng+mat as sum, (kor+eng+mat)/3 as ave, row_number() over (order by kor+eng+mat desc) as ranking from jspDB order by studentid asc;");
 		
 		List<String> score = new ArrayList<String>(); // new 리스트 선언
 			
-		while (rset1.next()){
+		while (rset1.next()){ // 해당 값이 true일 때 리스트에 결과값 저장
 				score.add(rset1.getString(1)+"\t"+Integer.toString(rset1.getInt(2))+"\t"+Integer.toString(rset1.getInt(3))+
 						"\t"+Integer.toString(rset1.getInt(4))+"\t"+Integer.toString(rset1.getInt(5))+"\t"+Integer.toString(rset1.getInt(6))
 						+"\t"+Integer.toString(rset1.getInt(7))+"\t"+Integer.toString(rset1.getInt(8)));
 			}
 		
-		int total = score.size();
+		int total = score.size(); // 리스트의 크기를 변수값으로 대입
 		
 		String fromParam = request.getParameter("from"); // input받은 from 값 변수에 저장
 		String cntParam = request.getParameter("cnt"); // input받은 cnt 값 변수에 저장

@@ -78,9 +78,9 @@
         String query = "select * from (select *, kor+eng+mat as sum, (kor+eng+mat)/3 as ave, row_number() over (order by kor+eng+mat desc) as ranking from jspDB order by studentid asc) as a where name=?";		
         
         PreparedStatement pstmt = conn.prepareStatement(query);
-      	pstmt.setString(1, key);
-      	
-        ResultSet rset1 = pstmt.executeQuery();
+      	pstmt.setString(1, key); // key값 set
+    	// 쿼리 결과 값 저장
+        ResultSet rset1 = pstmt.executeQuery(); 
 %>
         <h1 align = center>[<%=key%>] 조회</h1><!--해당 key값 head text 크기 1-->
         <!--테이블 형태 지정-->
@@ -122,7 +122,7 @@
             rset1.close(); // resultSet 종료
             conn.close(); // connection 종료
 		}catch(Exception e){
-			out.println("조회 오류입니다.\n");
+			out.println("조회 오류입니다.\n"); // 오류 프린트
 			out.println(e);
 		}
 %>

@@ -98,13 +98,13 @@
         
      	List<String> score = new ArrayList<String>(); // new 리스트 선언
      	
-        while (rset1.next()){
+        while (rset1.next()){ // 쿼리 결과 반복 출력 
  			score.add(rset1.getString(1)+"\t"+Integer.toString(rset1.getInt(2))+"\t"+Integer.toString(rset1.getInt(3))+
  					"\t"+Integer.toString(rset1.getInt(4))+"\t"+Integer.toString(rset1.getInt(5))+"\t"+Integer.toString(rset1.getInt(6))
  					+"\t"+Integer.toString(rset1.getInt(7))+"\t"+Integer.toString(rset1.getInt(8)));
  		}
 
-        int total = score.size();
+        int total = score.size(); // 변수 값 리스트 크기 지정
         
         String fromParam = request.getParameter("from"); // input받은 from 값 변수에 저장
 		String cntParam = request.getParameter("cnt"); // input받은 cnt 값 변수에 저장
