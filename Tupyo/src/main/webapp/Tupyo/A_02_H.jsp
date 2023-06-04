@@ -7,8 +7,28 @@
 	<head>
 		<title>후보등록 A_02_H.jsp</title>
 		<style>
+    		table {
+    			text-align: center; 
+   				border: 0; 
+   				solid black; 
+   				width: 600px; 
+   				border-collapse: collapse;
+   				cellspacing="1"}
+    		th, td {
+		    border-bottom: 1px solid #444444;
+		    padding: 10px;
+			}
+			th:first-child, td:first-child {
+			  border-left: none;
+			}
     		a {text-decoration-line: none;  color: #696969;}
-    		h2 {margin-top: 15px;text-align: center;}
+			h2:hover {
+			 box-shadow: 0 0 40px 40px #ffd700 inset;
+			}
+			.tr:hover {
+				box-shadow: 0 0 40px 40px #f5f5f5 inset;
+			}
+    		h2,h4 {margin-top: 15px; text-align: center;}
     		.fourth {
 			  background: gold;
 			  border-color: white;
@@ -17,10 +37,14 @@
 			  background-position: 100%;
 			  background-size: 400%;
 			  transition: background 300ms ease-in-out;
+			  border-radius: 5px;
 			}
 			
 			.fourth:hover {
 			  background-position: 0;
+			}
+			.check{
+				box-shadow: 0 0 40px 40px #ffd700 inset;
 			}
     	</style>
 	</head>
@@ -32,7 +56,6 @@
 	  } 
 	</script>
 	<body>
-		<h1>후보 삭제 완료</h1>
 <%
 		//DB연동 
 		Class.forName("com.mysql.jdbc.Driver");
@@ -41,48 +64,64 @@
 		Statement stmt = conn.createStatement();
 		
 		String id = request.getParameter("deleteID");
-		String query = String.format("delete from TupyoDB where id = %s",id);
-		stmt.execute(query);
-
+		String name = "";
+		
+		String nameSetQuery = String.format("select * from HuboDB where id = %s",id);
+		ResultSet nameSet = stmt.executeQuery(nameSetQuery);
+		while(nameSet.next()){
+			name = nameSet.getString(1);
+		}
+		
+		String HuboDBdeleteQuery = String.format("delete from HuboDB where id = %s",id);
+		stmt.execute(HuboDBdeleteQuery);
+		
+		String key = id+"번"+name;
+		String TupyoDBdeleteQuery = "delete from TupyoDB where hubo =?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(TupyoDBdeleteQuery);
+		pstmt.setString(1, key);	
+		pstmt.executeUpdate();
 %>
 		<form name="form1" method = 'post'>
 		<input type='hidden' name='deleteID'> 
-		<table cellspacing="1" width="600" border="1" align="" style="border-collapse: collapse;" >
+		<table>
     		<tr>
-    			<td width = 25%><a align = center id="update" href="A_01.jsp" target="content"><h2>후보등록</h2></a></td>
+    			<td width = 25%><a align = center id="update" href="A_01_H.jsp" target="content"><h2  class="check">후보등록</h2></a></td>
     			<td width = 25%><a align = center id="vote" href="B_01_H.jsp" target="content"><h2>투표</h2></a></td>
     			<td width = 25%><a align = center id="result" href="C_01_H.jsp" target="content"><h2>개표결과</h2></a></td>
-    			<td width = 25%></td>
+    			<td width = 25%><a align = center id="result" href="D_01_H.jsp" target="content"><h2>초기화</h2></a></td>
     		</tr>
 		</table>
-		<table cellspacing="1" width="600" border="1" align="" style="border-collapse: collapse;" >
+		
+		<table>
 			<tr>
-				<td align = right width = 20%>
-				<input class="fourth" type="submit" value="뒤로 가기" style="width: 70px; height: 30px; padding: 0px;font-weight: bold;" formaction = 'A_01.jsp'></td>
+				<td colspan="4"><h4>후보등록 결과 : 후보 삭제 완료</h4></td>
+				<td align = right width = 22%>
+				<input class="fourth" type="submit" value="뒤로 가기" style="width: 70px; height: 30px; padding: 0px;font-weight: bold;" formaction = 'A_03_H.jsp'></td>
 			</tr>
 		</table>
 
-		<table cellspacing="1" width="600" border="1" align="" style="border-collapse: collapse;" >
+		<table>
 <%		
-		ResultSet total = stmt.executeQuery("select count(*) from TupyoDB;");
+		ResultSet total = stmt.executeQuery("select count(*) from HuboDB;");
 		int totalcnt = 0;
 		while(total.next()){
 			totalcnt = total.getInt(1);
 		}
 		
 		if(totalcnt >= 1){                                  
-		ResultSet rset = stmt.executeQuery("select * from TupyoDB order by id asc;");
+		ResultSet rset = stmt.executeQuery("select * from HuboDB order by id asc;");
 	        
 	     	while (rset.next()){
 %>
-	     		<tr>
+	     		<tr class="tr">
 	     			<td width =15%><strong>기호번호 :</strong></td>
 	     			
-	     			<td align = left width = 20% ><input type='text' name='ID' value='<%=rset.getInt(2)%>'readonly style="width: 100px; height: 30px; padding: 0px;"></td>
+	     			<td align = left width = 20% ><%=rset.getInt(2)%></td>
 					
 					<td width= 15% ><strong>후보명 :</strong></td>
 	     			
-	     			<td align = left width = 20% ><input type='text'  name="name" value='<%=rset.getString(1)%>' readonly style="width: 100px; height: 30px; padding: 0px;"></td>
+	     			<td align = left width = 20% ><%=rset.getString(1)%></td>
 					
 					<td align = right width = 20%>
 					<input class="fourth" type="button" value="삭제" style="width: 70px; height: 30px; padding: 0px;font-weight: bold;" onclick="btnDeleteClick('<%=rset.getInt(2)%>')"></td>

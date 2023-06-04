@@ -7,8 +7,28 @@
 	<head>
 		<title>후보등록 A_03_H.jsp</title>
 		<style>
+    		table {
+    			text-align: center; 
+   				border: 0; 
+   				solid black; 
+   				width: 600px; 
+   				border-collapse: collapse;
+   				cellspacing="1"}s
+    		th, td {
+		    border-bottom: 1px solid #444444;
+		    padding: 10px;
+			}
+			th:first-child, td:first-child {
+			  border-left: none;
+			}
     		a {text-decoration-line: none;  color: #696969;}
-    		h2 {margin-top: 15px;text-align: center;}
+			h2:hover {
+			 box-shadow: 0 0 40px 40px #ffd700 inset;
+			}
+			.tr:hover {
+				box-shadow: 0 0 40px 40px #f5f5f5 inset;
+			}
+    		h2,h4 {margin-top: 15px; text-align: center;}
     		.fourth {
 			  background: gold;
 			  border-color: white;
@@ -17,10 +37,14 @@
 			  background-position: 100%;
 			  background-size: 400%;
 			  transition: background 300ms ease-in-out;
+			  border-radius: 5px;
 			}
 			
 			.fourth:hover {
 			  background-position: 0;
+			}
+			.check{
+				box-shadow: 0 0 40px 40px #ffd700 inset;
 			}
     	</style>
 	</head>
@@ -30,25 +54,42 @@
         document.form1.action = "A_02_H.jsp";
         document.form1.submit();
 	  } 
+	  function HangleCheck(input) {
+	        var inputValue = input; // 입력 받는 변수 혹은 데이터베이스에서 가져온 값 등
+
+	        if (inputValue.match("^[가-힣]{1,10}$")) {
+	            return inputValue;
+	        } else {
+	            alert("한글 입력 오류");
+	            return false; // 오류 발생 시 false를 반환하여 처리
+	        }
+	    }
 	</script>
 	<body>
-		<h1>후보 등록 완료</h1>
-<%		// DB연동 
+<%		
+	try{
+		// DB연동 
 		Class.forName("com.mysql.jdbc.Driver");
 		//Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/noheul","root","shdmf1030@");
 		Statement stmt = conn.createStatement();
 		
 		request.setCharacterEncoding("utf-8");
-		String name = request.getParameter("name");
-		String id = request.getParameter("TupyoID");
-				
-		stmt.execute("insert into TupyoDB (name,id) values ('" +
-			 name + "'," + id +");");
+		// null값 체크
+        int Nullcheck = request.getParameter("HuboID") != null ? 1 : 0;
 		
+		String name = "";
+		String id = "";
+		
+		if (Nullcheck == 1) {
+			name = request.getParameter("name");
+			id = request.getParameter("HuboID");
+			stmt.execute("insert into HuboDB (name,id) values ('" + name + "'," + id +");");
+			stmt.execute("insert into TupyoDB (hubo) values ('" +id+ "번" +name+ "')");
+        }
 		
 		// ID칼럼의 전체 count 조회
-				ResultSet total = stmt.executeQuery("select count(*) from TupyoDB where id;");
+				ResultSet total = stmt.executeQuery("select count(*) from HuboDB where id;");
 				int totalcnt = 0;
 				while(total.next()){
 					totalcnt = total.getInt(1);
@@ -59,14 +100,14 @@
 				
 				// ID칼럼의 count가 0일때(아직 아무 값도 안들어왔다는 뜻)
 				if(totalcnt == 0){
-					ResultSet idcount = stmt.executeQuery("select min(id) as minNum from TupyoDB where (id+1) not in (select id from TupyoDB);");
+					ResultSet idcount = stmt.executeQuery("select min(id) as minNum from HuboDB where (id+1) not in (select id from HuboDB);");
 					
 					while(idcount.next()){
 						minID = idcount.getInt(1)+1;
 					}
 				}else{	// ID칼럼의 count가 0이 아닐때(값이 들어있다는 뜻)
 					// ID칼럼의 전체 값 조회
-					ResultSet idcount2 = stmt.executeQuery("select id from TupyoDB");
+					ResultSet idcount2 = stmt.executeQuery("select id from HuboDB");
 
 					while (idcount2.next()) {
 					    int currentID = idcount2.getInt("id"); // 현재 가져온 id 값
@@ -81,62 +122,67 @@
 %>
 		<form name="form1" method = 'post'>
 		<input type='hidden' name='deleteID'> 
-		<table cellspacing="1" width="600" border="1" align="" style="border-collapse: collapse;" >
+		<table>
     		<tr>
-    			<td width = 25%><a align = center id="update" href="A_01.jsp" target="content"><h2>후보등록</h2></a></td>
+    			<td width = 25%><a align = center id="update" href="A_01_H.jsp" target="content"><h2  class="check">후보등록</h2></a></td>
     			<td width = 25%><a align = center id="vote" href="B_01_H.jsp" target="content"><h2>투표</h2></a></td>
     			<td width = 25%><a align = center id="result" href="C_01_H.jsp" target="content"><h2>개표결과</h2></a></td>
-    			<td width = 25%></td>
+    			<td width = 25%><a align = center id="result" href="D_01_H.jsp" target="content"><h2>초기화</h2></a></td>
     		</tr>
 		</table>
-		<table cellspacing="1" width="600" border="1" align="" style="border-collapse: collapse;" >
+		<table>
 			<tr>
-				<td align = right width = 20%>
-				<input class="fourth" type="submit" value="뒤로 가기" style="width: 70px; height: 30px; padding: 0px;font-weight: bold;" formaction = 'A_01.jsp'></td>
+<%			if(Nullcheck == 1){ %>
+				<td colspan="4"><h4>후보등록 결과 : 후보 추가 완료</h4></td>
+<%			} %>
+				<td align = right width = 22%>
+				<input class="fourth" type="submit" value="뒤로 가기" style="width: 70px; height: 30px; padding: 0px;font-weight: bold;" formaction = 'A_01_H.jsp'></td>
 			</tr>
 		</table>
 
-		<table cellspacing="1" width="600" border="1" align="" style="border-collapse: collapse;" >
+		<table>
 <%		
 		if(totalcnt >= 1){                                  
-		ResultSet rset = stmt.executeQuery("select * from TupyoDB order by id asc;");
+		ResultSet rset = stmt.executeQuery("select * from HuboDB order by id asc;");
 	        
 	     	while (rset.next()){ 
 %>
-	     		<tr>
+	     		<tr class="tr">
 	     			<td width =15%><strong>기호번호 :</strong></td>
 	     			
-	     			<td align = left width = 20% ><input type='text' name='ID' value='<%=rset.getInt(2)%>'readonly style="width: 100px; height: 30px; padding: 0px;"></td>
+	     			<td align = left width = 20% ><%=rset.getInt(2)%></td>
 					
 					<td width= 15% ><strong>후보명 :</strong></td>
 	     			
-	     			<td align = left width = 20% ><input type='text' name="name" value='<%=rset.getString(1)%>' readonly style="width: 100px; height: 30px; padding: 0px;"></td>
+	     			<td align = left width = 20% ><%=rset.getString(1)%></td>
 					
 					<td align = right width = 20%>
 					  <input class="fourth" type="button" value="삭제" style="width: 70px; height: 30px; padding: 0px;font-weight: bold;" onclick="btnDeleteClick('<%=rset.getInt(2)%>')">
 					</td>
 				</tr>
+		</form>		
 <%	      			
 			}
 		}
 %>
-		</table>
-		</form>
 		<form method = 'post'>
-		<table cellspacing="1" width="600" border="1" align="" style="border-collapse: collapse;" >
-			<tr>
-				<td bgcolor=#B5B2FF width= 15% ><strong>기호번호 :</strong></td>
+			<tr class="tr">
+				<td bgcolor=#f5f5f5 width= 15% ><strong>기호번호 :</strong></td>
 				
-				<td bgcolor=#B5B2FF align = left width = 20% ><input type='text' name='TupyoID' value='<%=minID%>'readonly style="width: 100px; height: 30px; padding: 0px;"></td>
+				<td bgcolor=#f5f5f5 align = left width = 20% ><input type='text' name='HuboID' value='<%=minID%>'readonly style="width: 100px; height: 30px; padding: 0px;"></td>
 				
-				<td bgcolor=#B5B2FF width= 15% ><strong>후보명 :</strong></td>
+				<td bgcolor=#f5f5f5 width= 15% ><strong>후보명 :</strong></td>
 				
-				<td bgcolor=#B5B2FF align = left width = 20% ><input type='text' pattern="^[가-힣]+$" name="name" value='' title="한글만 입력하세요." required style="width: 100px; height: 30px; padding: 0px;"></td>
+				<td bgcolor=#f5f5f5 align = left width = 20% ><input type='text' pattern="^[가-힣]+$" name="name" value='' required title="한글만 입력하세요." 
+				style="width: 100px; height: 30px; padding: 0px;"onblur="HangleCheck(this.value);"></td>
 								
-				<td bgcolor=#B5B2FF align = right width = 20%>
+				<td bgcolor=#f5f5f5 align = right width = 20%>
   				<input class="fourth" type="submit" value="추가" align = right style="width: 70px; height: 30px; padding: 0px;font-weight: bold;" formaction = 'A_03_H.jsp'></td>
 			</tr>
 		</table>
+		</form>
+<%	}catch(Exception e){
+	} %>
 	</body>
 </html>
 		
