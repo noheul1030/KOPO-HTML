@@ -55,8 +55,8 @@
  	try{
 		//DB연동 
         Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/noheul","root","shdmf1030@");
-        //Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
+      	//Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/noheul","root","shdmf1030@");
+     	Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.60:3307/kopo11","root","shdmf1030@");
         Statement stmt = conn.createStatement();
         
         request.setCharacterEncoding("utf-8"); // 인코딩 설정
@@ -110,13 +110,16 @@
 						<td width = 300 style="border-left: 1px solid #444444;"><p><input type='text' name="searchID" value='<%=searchID%>' readonly></p></td>
 					</tr> <!-- 국어에 대한 정보 셀, 셀 스타일 지정 -->
 						<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>국어</strong></p></td>
-						<td width = 300 style="border-left: 1px solid #444444;"><p><input type='text' pattern="^(?:100|[1-9][0-9]?|0)$" name="korean" value='<%=kor%>' title="0에서 100사이 숫자를 입력하세요." required></p></td>
+						<td width = 300 style="border-left: 1px solid #444444;"><p><input type='text' pattern="^(?:100|[1-9][0-9]?|0)$" name="korean" 
+						value='<%=kor%>' title="0에서 100사이 숫자를 입력하세요." required></p></td>
 					</tr> <!-- 영어에 대한 정보 셀, 셀 스타일 지정 -->
 						<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>영어</strong></td>
-						<td width = 300 style="border-left: 1px solid #444444;"><p><input type='text' pattern="^(?:100|[1-9][0-9]?|0)$" name="english" value='<%=eng%>' title="0에서 100사이 숫자를 입력하세요." required></p></td>
+						<td width = 300 style="border-left: 1px solid #444444;"><p><input type='text' pattern="^(?:100|[1-9][0-9]?|0)$" name="english" 
+						value='<%=eng%>' title="0에서 100사이 숫자를 입력하세요." required></p></td>
 					</tr> <!-- 수학에 대한 정보 셀, 셀 스타일 지정 -->
 						<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p><strong>수학</strong></p></td>
-						<td width = 300 style="border-left: 1px solid #444444;"><p><input type='text' pattern="^(?:100|[1-9][0-9]?|0)$" name="mathmatic" value='<%=mat%>' title="0에서 100사이 숫자를 입력하세요." required></p></td>
+						<td width = 300 style="border-left: 1px solid #444444;"><p><input type='text' pattern="^(?:100|[1-9][0-9]?|0)$" name="mathmatic" 
+						value='<%=mat%>' title="0에서 100사이 숫자를 입력하세요." required></p></td>
 					</tr>
 				</table>
        			
@@ -129,7 +132,7 @@
        				</tr>
        			</table>	
     			</form>
-<%        	}else if(resultSet.getInt(1) == 0){ %> // 첫번째 값이 0과 같으면
+<%        	}else if(resultSet.getInt(1) == 0){ %> <!--  첫번째 값이 0과 같으면 -->
 			<form method = 'post' action = 'showREC.jsp'> <!-- form 작동시 showREC.jsp로 링크 이동 -->
 				<table cellspacing="1" width="600"  align="center" > <!-- 테이블 설정 -->
 					<tr> <!-- 학번 입력받는 input, 숫자제한 있음 -->
