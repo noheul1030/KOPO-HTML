@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?> <!-- 인코딩 utf-8 -->
+<?xml version="1.0" encoding="UTF-8"?>
 <%@ page contentType="text/xml; charset=utf-8" %>
 <%@ page import="java.io.File, java.net.URL" %>
 <%@ page import="org.w3c.dom.*,javax.xml.parsers.*" %>
-<%@ page import="java.sql.*, javax.sql.*, java.io.*, java.net.*" %> <!-- java import -->
+<%@ page import="java.sql.*, javax.sql.*, java.io.*, java.net.*" %>
 
 <html>
 	<head>
@@ -10,8 +10,8 @@
 	<body>
 <%
 	DocumentBuilder  docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-//	Document doc = docBuilder.parse(new File("/var/lib/tomcat9/webapps/ROOT/xml/testdata.xml"));		// local path
-	Document doc = docBuilder.parse("http://192.168.56.1:8080/JSP6/JSP/01.jsp");		// URL
+//	Document doc = docBuilder.parse(new File("/var/lib/tomcat9/webapps/ROOT/JSP6/JSP/xmlmake.xml"));		// local path
+	Document doc = docBuilder.parse("http://localhost:8080/JSP6/JSP/xmlmake.xml");		// URL
 	
 	Element root = doc.getDocumentElement();
 	NodeList tag_name = doc.getElementsByTagName("name");		// xml name tag
