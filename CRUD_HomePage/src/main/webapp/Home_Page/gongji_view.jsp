@@ -12,9 +12,18 @@
 			  	text-align: center; 
  				width: 600px; 
  				border-collapse: collapse;
+ 				border-width: 2px;
  				cellspacing="1"
    			}
-   			
+   			tr,td{border-width: 2px;}
+   			textarea,input{
+   				width: 500px;
+   				margin-top : 4px;
+   				margin-bottom : 4px;
+   				margin-left : 4px;
+   				margin-right : 4px;
+   				
+   			}
     		.fourth{
 			  background: gold;
 			  border-color: white;
