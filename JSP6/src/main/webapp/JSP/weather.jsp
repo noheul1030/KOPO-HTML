@@ -41,28 +41,27 @@
 		
 	    out.println("<tr>");
 	    
-	    seq = tag_001.item(i).getAttributes().getNamedItem("seq").getNodeValue();
-	    hour = elmt.getElementsByTagName("hour").item(0).getFirstChild().getNodeValue();
-	    day = elmt.getElementsByTagName("day").item(0).getFirstChild().getNodeValue();
-	    temp = elmt.getElementsByTagName("temp").item(0).getFirstChild().getNodeValue();
-	    tmx = elmt.getElementsByTagName("tmx").item(0).getFirstChild().getNodeValue();
-	    tmn = elmt.getElementsByTagName("tmn").item(0).getFirstChild().getNodeValue();
-	    sky = elmt.getElementsByTagName("sky").item(0).getFirstChild().getNodeValue();
-	    pty = elmt.getElementsByTagName("pty").item(0).getFirstChild().getNodeValue();
-	    wfKor = elmt.getElementsByTagName("wfKor").item(0).getFirstChild().getNodeValue();
-	    wfEn = elmt.getElementsByTagName("wfEn").item(0).getFirstChild().getNodeValue();
-	    pop = elmt.getElementsByTagName("pop").item(0).getFirstChild().getNodeValue();
-	    r12 = elmt.getElementsByTagName("r12").item(0).getFirstChild().getNodeValue();
-	    s12 = elmt.getElementsByTagName("s12").item(0).getFirstChild().getNodeValue();
-	    ws = elmt.getElementsByTagName("ws").item(0).getFirstChild().getNodeValue();
-	    wd = elmt.getElementsByTagName("wd").item(0).getFirstChild().getNodeValue();
-	    wdKor = elmt.getElementsByTagName("wdKor").item(0).getFirstChild().getNodeValue();
-	    wdEn = elmt.getElementsByTagName("wdEn").item(0).getFirstChild().getNodeValue();
-	    reh = elmt.getElementsByTagName("reh").item(0).getFirstChild().getNodeValue();
-	    r06 = elmt.getElementsByTagName("r06").item(0).getFirstChild().getNodeValue();
-	    s06 = elmt.getElementsByTagName("s06").item(0).getFirstChild().getNodeValue();
+	    seq = tag_001.item(i).getAttributes().getNamedItem("seq").getNodeValue();           // 순번 저장
+	    hour = elmt.getElementsByTagName("hour").item(0).getFirstChild().getNodeValue();	// 시간 저장
+	    day = elmt.getElementsByTagName("day").item(0).getFirstChild().getNodeValue();		// 날짜 저장
+	    temp = elmt.getElementsByTagName("temp").item(0).getFirstChild().getNodeValue();	// 현재온도 저장
+	    tmx = elmt.getElementsByTagName("tmx").item(0).getFirstChild().getNodeValue();		// 최고기온 저장
+	    tmn = elmt.getElementsByTagName("tmn").item(0).getFirstChild().getNodeValue();		// 최저기온 저장
+	    sky = elmt.getElementsByTagName("sky").item(0).getFirstChild().getNodeValue();		// 현재날씨 저장
+	    pty = elmt.getElementsByTagName("pty").item(0).getFirstChild().getNodeValue();		// 강수상태 저장
+	    wfKor = elmt.getElementsByTagName("wfKor").item(0).getFirstChild().getNodeValue();	// 날씨 저장
+	    wfEn = elmt.getElementsByTagName("wfEn").item(0).getFirstChild().getNodeValue();	// Weather 저장
+	    pop = elmt.getElementsByTagName("pop").item(0).getFirstChild().getNodeValue();		// 강수확률 저장
+	    r12 = elmt.getElementsByTagName("r12").item(0).getFirstChild().getNodeValue();		// 예상강수량 저장
+	    s12 = elmt.getElementsByTagName("s12").item(0).getFirstChild().getNodeValue();		// 예상적설량 저장
+	    ws = elmt.getElementsByTagName("ws").item(0).getFirstChild().getNodeValue();		// 풍속 저장
+	    wd = elmt.getElementsByTagName("wd").item(0).getFirstChild().getNodeValue();		// 풍향 저장
+	    wdKor = elmt.getElementsByTagName("wdKor").item(0).getFirstChild().getNodeValue();	// 풍향 저장
+	    wdEn = elmt.getElementsByTagName("wdEn").item(0).getFirstChild().getNodeValue();	// Wind direction 저장
+	    reh = elmt.getElementsByTagName("reh").item(0).getFirstChild().getNodeValue();		// 습도 저장
+	    r06 = elmt.getElementsByTagName("r06").item(0).getFirstChild().getNodeValue();		// 6시간 예상강수량 저장
+	    s06 = elmt.getElementsByTagName("s06").item(0).getFirstChild().getNodeValue();		// 6시간 예상적설량 저장
 	    
-	    // 추가적인 처리나 출력 로직을 여기에 작성합니다.
 	}
 	
 	out.println("<h2>날씨 조회</h2>"); // h2크기 text 작성
@@ -78,29 +77,29 @@
 	for(int i = 0; i < tag_001.getLength(); i++) { // tag_001의 길이만큼 도는 반복문
 	    Element elmt = (Element) tag_001.item(i);
 		
+		// 저장된 값들을 하나씩 셀에 프린트 하여 테이블을 완성한다.
 	    out.println("<tr>");
-	    out.println("<td>"+tag_001.item(i).getAttributes().getNamedItem("seq").getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("hour").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("day").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("temp").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("tmx").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("tmn").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("sky").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("pty").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("wfKor").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("wfEn").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("pop").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("r12").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("s12").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("ws").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("wd").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("wdKor").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("wdEn").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("reh").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("r06").item(0).getFirstChild().getNodeValue()+"</td>");
-	    out.println("<td>"+elmt.getElementsByTagName("s06").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+tag_001.item(i).getAttributes().getNamedItem("seq").getNodeValue()+"</td>");		 	// 순번 출력
+	    out.println("<td>"+elmt.getElementsByTagName("hour").item(0).getFirstChild().getNodeValue()+"</td>");	// 시간 출력
+	    out.println("<td>"+elmt.getElementsByTagName("day").item(0).getFirstChild().getNodeValue()+"</td>"); 	// 날짜 출력
+	    out.println("<td>"+elmt.getElementsByTagName("temp").item(0).getFirstChild().getNodeValue()+"</td>");	// 현재온도 출력
+	    out.println("<td>"+elmt.getElementsByTagName("tmx").item(0).getFirstChild().getNodeValue()+"</td>"); 	// 최고기온 출력
+	    out.println("<td>"+elmt.getElementsByTagName("tmn").item(0).getFirstChild().getNodeValue()+"</td>"); 	// 최저기온 출력
+	    out.println("<td>"+elmt.getElementsByTagName("sky").item(0).getFirstChild().getNodeValue()+"</td>"); 	// 현재날씨 출력
+	    out.println("<td>"+elmt.getElementsByTagName("pty").item(0).getFirstChild().getNodeValue()+"</td>"); 	// 강수상태 출력
+	    out.println("<td>"+elmt.getElementsByTagName("wfKor").item(0).getFirstChild().getNodeValue()+"</td>");	// 날씨 출력
+	    out.println("<td>"+elmt.getElementsByTagName("wfEn").item(0).getFirstChild().getNodeValue()+"</td>");	// Weather 출력
+	    out.println("<td>"+elmt.getElementsByTagName("pop").item(0).getFirstChild().getNodeValue()+"</td>");	// 강수확률 출력
+	    out.println("<td>"+elmt.getElementsByTagName("r12").item(0).getFirstChild().getNodeValue()+"</td>");	// 예상강수량 출력
+	    out.println("<td>"+elmt.getElementsByTagName("s12").item(0).getFirstChild().getNodeValue()+"</td>");	// 예상적설량 출력
+	    out.println("<td>"+elmt.getElementsByTagName("ws").item(0).getFirstChild().getNodeValue()+"</td>");		// 풍속 출력
+	    out.println("<td>"+elmt.getElementsByTagName("wd").item(0).getFirstChild().getNodeValue()+"</td>");		// 풍향 출력
+	    out.println("<td>"+elmt.getElementsByTagName("wdKor").item(0).getFirstChild().getNodeValue()+"</td>");	// 풍향 출력
+	    out.println("<td>"+elmt.getElementsByTagName("wdEn").item(0).getFirstChild().getNodeValue()+"</td>");	// Wind direction 출력
+	    out.println("<td>"+elmt.getElementsByTagName("reh").item(0).getFirstChild().getNodeValue()+"</td>");	// 습도 출력
+	    out.println("<td>"+elmt.getElementsByTagName("r06").item(0).getFirstChild().getNodeValue()+"</td>");	// 6시간 예상강수량 출력
+	    out.println("<td>"+elmt.getElementsByTagName("s06").item(0).getFirstChild().getNodeValue()+"</td>");	// 6시간 예상적설량 출력
 	    
-	    // 추가적인 처리나 출력 로직을 여기에 작성합니다.
 	}
 %>
 	</body>
