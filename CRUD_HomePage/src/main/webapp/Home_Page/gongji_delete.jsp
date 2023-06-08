@@ -12,8 +12,9 @@
 			  	text-align: center; 
  				width: 600px; 
  				border-collapse: collapse;
- 				cellspacing:1;
+ 				cellspacing="1"
    			}
+   			
     		.fourth{
 			  background: gold;
 			  border-color: white;
@@ -27,44 +28,29 @@
 			
 			.fourth:hover {
 			  background-position: 0;
-			}    			
+			}   			
+   			
 		</style>
 	</head>
 	<body>
-<% 
+<%
 	Home_PageDao dao = new Home_PageDaoImpl();
-	dao.createTable();
-	
-%>	
-	<table border = '1'>
-		<tr>
-			<td width = '10%'><b>번호</b></td>
-			<td width = '65%'><b>제목</b></td>
-			<td width = '25%'><b>등록일</b></td>
-		</tr>
-<%	
-	
-		 ResultSet rset = dao.stmt().executeQuery("select * from gongji order by number desc;");
-		 while(rset.next()){
-%>
-		<tr>			
-			<td><%=rset.getInt(1)%></td>
-			<td align = left><a href =gongji_view.jsp?key=<%=rset.getString(2)%>><%=rset.getString(2)%></a></td>
-			<td><%=rset.getString(3)%></td>
-		</tr>
-<%  
-	
-	}
-	dao.stmt().close();
-%>	
-	</table>
+	request.setCharacterEncoding("utf-8");
 
-	<form method = 'post'>
+	Integer number = Integer.parseInt(request.getParameter("number"));
+	
+	dao.delete(number);
+%>	
+	<br><br><br><br>
+	<form method='post'>
 	<table>
 		<tr>
-			<td align = 'right'>
-			<input class='fourth' type='submit' value='신규' formaction = 'gongji_insert.jsp'
-				style="width: 60px; height: 30px; padding: 0px;font-weight: bold;"> </td>
+			<td><h3>게시글이 삭제 되었습니다.</h3></td>
+		</tr>
+		<tr>
+			<td align = 'center'>
+			<input class='fourth' type='submit' value='게시글 확인하기' formaction = 'gongji_list.jsp'
+				style="width: 130px; height: 30px; padding: 0px;font-weight: bold;"> </td>
 		</tr>
 	</table>
 	</form>

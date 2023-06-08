@@ -41,17 +41,23 @@
    			
 		</style>		
 	</head>
+	
+	<script>
+		function trimSpace(input) {
+		  return input.replace(/^\s+/, '');
+		}
+	</script>
+	
 	<body>
-<% 
+<%
 	Home_PageDao dao = new Home_PageDaoImpl();
 	
 	int count = dao.lastNumber();
 	
-	String title = "공지사항"+count;
+	String title = "공지사항";
 	String date = dao.date();
 	
 	dao.stmt().close();
-	
 %>	<form method='post'>
 	<table border='1'>
 		<tr>
@@ -64,7 +70,7 @@
 		</tr>
 		<tr>
 			<td width= 10%>제목</td>
-			<td align= 'left' width= 85%><input type='text' pattern="^(?!\s*$)(?!^\s*$).{1,20}$" name= 'title' value='<%=title%>' required title="공백 X, 20글자 이상 X"></td>
+			<td align= 'left' width= 85%><input type='text' pattern="^(?!\s*$)(?!^\s*$).{1,20}$" name= 'title' value='<%=title%>' onblur="this.value = trimSpace(this.value);" required title="공백 X, 20글자 이상 X"></td>
 		</tr>
 		<tr>
 			<td width= 10%>일자</td>
@@ -73,7 +79,7 @@
 		<tr>
 			<td width= 10%>내용</td>
 			<td align= 'left' width= 85%>
-			<textarea name="content"style="width: 500px; height: 200px; max-width: 500px; max-height: 150px; overflow-x: auto; overflow-y: scroll;"></textarea>
+			<textarea name="content"style="width: 500px; height: 200px; max-width: 500px; max-height: 150px; overflow-x: auto; overflow-y: scroll;resize: none;"></textarea>
 			</td>
 		</tr>
 	</table>

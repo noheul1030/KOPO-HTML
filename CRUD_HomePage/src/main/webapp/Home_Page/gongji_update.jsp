@@ -41,26 +41,72 @@
    			
 		</style>
 	</head>
+	
+	<script>
+		function trimSpace(input) {
+		  return input.replace(/^\s+/, '');
+		}
+	</script>
 	<body>
 <%
 	Home_PageDao dao = new Home_PageDaoImpl();
-
 	
-	Integer number = null;
+	request.setCharacterEncoding("utf-8");
+
+	int number = Integer.parseInt(request.getParameter("number"));
 	String title = null;
 	String date = null;
-	String content = "";
-
-	request.setCharacterEncoding("utf-8");
-	ResultSet rset = dao.selectOne(request.getParameter("key"));
+	String content = null;
+	
+	String query = String.format("select * from gongji where number = %d",number);
+	ResultSet rset = dao.stmt().executeQuery(query);
+	
 	while(rset.next()){
-		
-		number = rset.getInt(1);
 		title = rset.getString(2);
-		date = rset.getString(3);
+		date = dao.date();
 		if(rset.getString(4) != null){
-			content = rset.getString(4);
+	content = rset.getString(4);
 		}
 	}
-	
 %>	
+	<form method='post'>
+	<table border='1'>
+		<tr>
+			<td width= 10%>번호</td>
+			<td align='left' width= 85%><input type='text' name='number' value='<%=number%>' readonly style="all: unset;"></td>
+
+		</tr>
+		<tr>
+			<td width= 10%>제목</td>
+			<td align= 'left' width= 85%><input type='text' pattern="^(?!\s*$)(?!^\s*$).{1,20}$" name= 'title' value='<%=title%>' onblur="this.value = trimSpace(this.value);" required title="공백 X, 20글자 이상 X"></td>
+		</tr>
+		<tr>
+			<td width= 10%>일자</td>
+			<td align='left' width = 85%><input type='text' name='date' value='<%=date%>' readonly style="all: unset;"></td>
+		</tr>
+		<tr>
+			<td width= 10%>내용</td>
+			<td align= 'left' width= 85%>
+			<textarea name="content"style="width: 500px; height: 200px; max-width: 500px; max-height: 150px; overflow-x: auto; overflow-y: scroll;resize: none;"><%=content%></textarea>
+			</td>
+		</tr>
+	</table>
+	
+	<table>
+		<tr>
+			<td colspan='2' align='right'>
+				<input class='fourth' type='submit' value='취소' formaction = 'gongji_list.jsp' 
+					style="width: 60px; height: 30px; padding: 0px;font-weight: bold;">
+					
+				<input class='fourth' type='submit' value='쓰기' formaction = 'gongji_write.jsp' 
+					style="width: 60px; height: 30px; padding: 0px;font-weight: bold;">
+					
+				<input class='fourth' type='submit' value='삭제' formaction = 'gongji_delete.jsp' 
+					style="width: 60px; height: 30px; padding: 0px;font-weight: bold;">
+			</td>
+		</tr>
+	</table>
+	</form>
+	
+	</body>
+</html>

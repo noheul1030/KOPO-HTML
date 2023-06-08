@@ -35,29 +35,59 @@
 	<body>
 <%
 	Home_PageDao dao = new Home_PageDaoImpl();
-
 	request.setCharacterEncoding("utf-8");
+
+	Integer number = null;
 	String title = null;
 	String date = null;
 	String content = null;
 	
-		if(request.getParameter("number").equals("신규(insert)")){
-			title = request.getParameter("title");
-			date = request.getParameter("date");
-			content = request.getParameter("content");
-		}else{
-			title = request.getParameter("title");
-			date = request.getParameter("date");
-			content = request.getParameter("content");
-		}
+	if(request.getParameter("number").equals("신규(insert)")){
+		title = request.getParameter("title");
+		date = request.getParameter("date");
+		content = request.getParameter("content");
+	}else{
+		title = request.getParameter("title");
+		date = request.getParameter("date");
+		content = request.getParameter("content");
+		number = Integer.parseInt(request.getParameter("number"));
+	}
 	
-	dao.newinsert(title, date, content);
+	int result = 0;
+	if(dao.count()!=0){
+	// number의 값이 존재하는지 여부 확인
+		String query = String.format("SELECT CASE WHEN EXISTS (SELECT * FROM gongji WHERE number = %s) THEN 1 ELSE 0 END AS result;",request.getParameter("number"));
+		ResultSet rset = dao.stmt().executeQuery(query);
+		while (rset.next()){
+			result = rset.getInt(1);
+		}
+	}
+	
+	if(result == 0){
+		dao.newinsert(title, date, content);
+%>	
+		<br><br><br><br>
+		<form method='post'>
+		<table>
+			<tr>
+				<td><h3>게시글이 작성 되었습니다.</h3></td>
+			</tr>
+			<tr>
+				<td align = 'center'>
+				<input class='fourth' type='submit' value='게시글 확인하기' formaction = 'gongji_list.jsp'
+					style="width: 130px; height: 30px; padding: 0px;font-weight: bold;"> </td>
+			</tr>
+		</table>
+		</form>
+<%
+	}else if(result == 1){
+		dao.update(number, title, content);
 %>	
 	<br><br><br><br>
 	<form method='post'>
 	<table>
 		<tr>
-			<td><h3>게시글이 작성되었습니다.</h3></td>
+			<td><h3>게시글이 수정 되었습니다.</h3></td>
 		</tr>
 		<tr>
 			<td align = 'center'>
@@ -66,6 +96,8 @@
 		</tr>
 	</table>
 	</form>
-	
+<%	
+	}
+%>
 	</body>
 </html>

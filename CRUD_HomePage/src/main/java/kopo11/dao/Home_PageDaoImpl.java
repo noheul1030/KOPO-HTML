@@ -2,8 +2,6 @@ package kopo11.dao;
 
 import java.sql.*;
 
-import kopo11.domain.Item;
-
 public class Home_PageDaoImpl implements Home_PageDao{
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String connection = "jdbc:mysql://localhost:3307/kopo11";
@@ -59,7 +57,7 @@ public class Home_PageDaoImpl implements Home_PageDao{
 		return lastNumber;
 	}
 
-	@Override // 테이블 생성
+	@Override // 1. table 생성
 	public void createTable() {
         try {
 	        String sql = "create table if not exists gongji(" 
@@ -77,7 +75,7 @@ public class Home_PageDaoImpl implements Home_PageDao{
 	}
 
 	
-	@Override // 테이블의 전체 카운트 갯수
+	@Override // 2. 전체 table값 count
 	public int count() {
 		Integer count = null;
 		try {
@@ -94,9 +92,8 @@ public class Home_PageDaoImpl implements Home_PageDao{
 		return count;
 	}
 
-	@Override // 공지번호,제목,날짜,내용 값 저장
+	@Override // 3. 공지번호,제목,날짜,내용 값 저장
 	public void newinsert(String title, String date, String content) {
-		Item item = new Item();
 		try {			
 			String sql = String.format
 					("insert into gongji (title,date,content) values ('%s','%s','%s');",title,date,content);
@@ -107,12 +104,21 @@ public class Home_PageDaoImpl implements Home_PageDao{
 		}
 	}
 	
-
-	@Override
-	public void update(String key,String title, String content) {
+	@Override // 4. 컬럼 삭제
+	public void delete(int number) {
 		try {
-			String Query = String.format("update gongji set title = '%s',date = '%s',content = '%s' where number = %d"
-					+ title,date(),content,key);
+			String Query = String.format("delete from gongji where number = %d;",number);
+			stmt().execute(Query);
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	@Override // 5. 컬럼 값 수정 update
+	public void update(int number,String title, String content) {
+		try {
+			String Query = String.format("update gongji set title = '%s',date = '%s',content = '%s' where number = %d;",
+					title,date(),content,number);
 			stmt().execute(Query);
 		}catch(Exception e) {
 			System.out.println(e);
@@ -121,7 +127,7 @@ public class Home_PageDaoImpl implements Home_PageDao{
 	}
 
 
-	@Override
+	@Override // 6. table 한건 조회
 	public ResultSet selectOne(String key) {
 		ResultSet rset= null;
 		try {
@@ -133,18 +139,6 @@ public class Home_PageDaoImpl implements Home_PageDao{
 		return rset;
 	}
 
-
 	
-	@Override
-	public void dropTable() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public boolean delete() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 }
