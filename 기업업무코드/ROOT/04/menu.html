@@ -1,0 +1,32 @@
+<!--태그표 홈페이지 만들기(list)-->
+<!DOCTYPE html><!--시작을 html 형식으로 지정-->
+<html lang="en"><!--언어 english-->
+	<head><!--head 시작-->
+		<meta charset="UTF-8"><!--작성 형태는 UTF-8로 한다.-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>4강 JSP_DB연동 실습 리스트</title><!--title시작 문구 작성 title종료-->
+		
+	</head><!--head종료-->
+	<body><!--body시작-->
+		<a><!--a 지정 style 적용-->
+		<ul><!--ul 지정 style 적용-->
+			<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다. text style red 적용,<u> text밑줄 적용-->
+			<a href="./index.html" target="content"></a>      
+			<li type="disc"><!--li 지정 style 적용 type="disc" 검은색 동그라미 적용-->
+				<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다. text style red 적용,<u> text밑줄 적용-->
+				<a href="./createDB.jsp" target="content">* TBL 생성</a></li>       
+			<li type="disc"><!--li 지정 style 적용 type="disc" 검은색 동그라미 적용-->
+				<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다.-->
+				<a href="./dropDB.jsp" target="content">* TBL 삭제</a></li>        
+			<li type="disc"><!--li 지정 style 적용 type="disc" 검은색 동그라미 적용-->
+				<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다.-->
+				<a href="./AllsetDB.jsp" target="content">* TBL 값넣기</a></li>        
+			<li type="disc"><!--li 지정 style 적용 type="disc" 검은색 동그라미 적용-->
+				<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다.-->
+				<a href="./AllviewDB.jsp" target="content">* TBL 전체조회</a></li>        
+			       
+		</ul><!--ul 지정 style 종료-->
+		</a><!--a 지정 style 종료-->
+	</body><!--body 종료-->
+</html><!--html 종료-->

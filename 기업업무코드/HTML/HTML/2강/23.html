@@ -1,0 +1,41 @@
+<!DOCTYPE html><!--시작을 html 형식으로 지정-->
+<html lang="en"><!--언어 english-->
+	<head><!--head 시작-->
+		<meta charset="UTF-8"><!--작성 형태는 UTF-8로 한다.-->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>리스트로 메뉴 만들기</title><!--title시작 문구 작성 title종료-->
+        <style>
+            #menubar{background: olive;}
+            /* menubar 스타일 지정 */
+            #menubar ul {/* 여백과 패딩 모두 0 */
+                margin: 0;
+                padding: 0;
+                width: 567px; /* 모든 아이템(<li>)을 한 줄에 품을 수 있는 폭 */}
+            #menubar ul li{
+                display: inline; /* 새 줄로 넘어가지 않게 */
+                list-style-type: none; /* 마커 삭제 */
+                padding: 0px 15px; /* top= bottom=0, left=right=15px */
+            }
+            #menubar ul li a{
+                color: white;
+                text-decoration: none; /* 링크 보이지 않게 */
+            }
+            #menubar ul li a:hover{
+                color: violet; /* 마우스 올라 갈 때 색 */
+            }
+        </style>
+    </head><!--head종료-->
+    <body><!--body 시작-->
+		<!-- 네비게이션 링크블록 사용, 메뉴 항목 포함-->
+        <nav id="menubar">
+            <ul><!-- 순서 없는 리스트-->
+                <li><a href="#">Home</a></li><!-- 리스트 요소, text 선택시 해당 링크로 이동-->
+                <li><a href="#">Espresso</a></li><!-- 리스트 요소, text 선택시 해당 링크로 이동-->
+                <li><a href="#">Cappuccino</a></li><!-- 리스트 요소, text 선택시 해당 링크로 이동-->
+                <li><a href="#">Cafe Latte</a></li><!-- 리스트 요소, text 선택시 해당 링크로 이동-->
+                <li><a href="#">F.A.Q</a></li><!-- 리스트 요소, text 선택시 해당 링크로 이동-->
+            </ul><!--ul 종료-->
+        </nav><!--nab 종료-->
+    </body><!--body 종료-->
+</html><!--html 종료-->

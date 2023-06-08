@@ -1,0 +1,119 @@
+<!DOCTYPE html><!--시작을 html 형식으로 지정-->
+<html lang="en"><!--언어 english-->
+	<head><!--head 시작-->
+		<meta charset="UTF-8"><!--작성 형태는 UTF-8로 한다.-->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>성적집계표</title> <!--title시작 문구 작성 title종료-->
+        <style>
+            /*지정 폰트 적용*/
+            @font-face {
+                font-family: "D2CodingLigature";
+                src: url(Font/D2Coding-Ver1.3.2-20180524.ttf) format("truetype");
+                font-weight: normal;
+            }
+            /*body 폰트 지정*/
+            body{
+                font-family: 'D2CodingLigature',serif;
+            }
+    </style>
+    <script> // 스크립트 시작
+            var d= new Date(); // 시간 객체 생성
+            function Time(){ // function 함수 Time 
+                const year = d.getFullYear(); // 년도 
+                const month = d.getMonth()+1; // 월
+                const day = d.getDate().toString().padStart(2,'0'); // 일수 string 포맷
+                const hour = d.getHours().toString().padStart(2,'0'); // 시 string 포맷
+                const minute = d.getMinutes().toString().padStart(2,'0'); // 분 string 포맷
+                const seconds = d.getSeconds().toString().padStart(2,'0'); // 초 string 포맷
+                // 포맷팅 출력
+                return document.write('출력 일자 : '+year+'.'+month+'.'+day+" "+hour+":"+minute+":"+seconds);
+            }
+
+            function Random(){ // function 함수 Random 
+                return Math.floor(Math.random()*101); // 0~100 랜덤
+            }
+
+            var studentCNT = 30;  // 변수 값 지정
+            var korsum = 0;       // 변수 값 지정
+            var engsum = 0;       // 변수 값 지정
+            var matsum = 0;       // 변수 값 지정
+            var avgsum = 0;       // 변수 값 지정
+
+            function Score(){ // function 함수 Score 
+                var name = "홍길동"; // 변수 값 지정
+                document.write("<TR>"); // script 실행문
+                document.write("<TD colspan=7>========================================================</TD></TR>");  // script 실행문              
+                for(i=1;i <= studentCNT;i++){ // 1~ studentCNT 값 만큼 도는 반복문 
+                    var kor = Random(); // 랜덤 변수 값 지정
+                    var eng = Random(); // 랜덤 변수 값 지정
+                    var mat = Random(); // 랜덤 변수 값 지정
+                    if(i < 10){ // i값이 10 미만 일 때
+                        document.write("<TD table-layout:fixed align=left >"+"00"+i+"</TD>");               // 학번
+                        document.write("<TD table-layout:fixed align=left >"+name+"0"+i+"</TD>");           // 이름
+                        document.write("<TD table-layout:fixed align=center >"+kor+"</TD>");                // 국어점수
+                        document.write("<TD table-layout:fixed align=center >"+eng+"</TD>");                // 영어점수
+                        document.write("<TD table-layout:fixed align=center >"+mat+"</TD>");                // 수학점수
+                        document.write("<TD table-layout:fixed align=center >"+(kor+eng+mat)+"</TD>");      // 전과목 합계
+                        document.write("<TD table-layout:fixed align=center >"+Math.floor((kor+eng+mat)/3)+"</TD>"); // 개인 평균
+                        document.write("</TR>"); // script 실행문
+                        korsum += kor; // 누적 더하기
+                        engsum += eng; // 누적 더하기
+                        matsum += mat; // 누적 더하기
+                        avgsum += Math.floor((kor+eng+mat)/3); // 누적 더하기
+                    }else{ // i값이 10 이상 일 때
+                        document.write("<TD table-layout:fixed align=left >"+"0"+i+"</TD>");                // 학번
+                        document.write("<TD table-layout:fixed align=left >"+name+"0"+i+"</TD>");           // 이름
+                        document.write("<TD table-layout:fixed align=center >"+kor+"</TD>");                // 국어점수
+                        document.write("<TD table-layout:fixed align=center >"+eng+"</TD>");                // 영어점수
+                        document.write("<TD table-layout:fixed align=center >"+mat+"</TD>");                // 수학점수
+                        document.write("<TD table-layout:fixed align=center >"+(kor+eng+mat)+"</TD>");      // 전과목 합계
+                        document.write("<TD table-layout:fixed align=center >"+Math.floor((kor+eng+mat)/3)+"</TD>"); // 개인 평균
+                        document.write("</TR>");
+                        korsum += kor; // 누적 더하기
+                        engsum += eng; // 누적 더하기
+                        matsum += mat; // 누적 더하기
+                        avgsum += Math.floor((kor+eng+mat)/3); // 누적 더하기
+                    }
+                }
+            }
+            function Total(){ // function 함수 Total 
+                document.write("<TR>"); // script 실행문
+                document.write("<TD colspan=7>========================================================</TD></TR>"); // script 실행문
+                document.write("<TD colspan=2 table-layout:fixed align=left >"+"합계"+"</TD>"); // script 실행문
+                document.write("<TD table-layout:fixed align=center >"+korsum+"</TD>");                 // 국어 합계
+                document.write("<TD table-layout:fixed align=center >"+engsum+"</TD>");                 // 영어 합계
+                document.write("<TD table-layout:fixed align=center >"+matsum+"</TD>");                 // 수학 합계
+                document.write("<TD table-layout:fixed align=center >"+(korsum+engsum+matsum)+"</TD>"); // 전체 합계
+                document.write("<TD table-layout:fixed align=center >"+avgsum+"</TD>");                 // 전체 평균 합계
+                document.write("</TR>"); // script 실행문          
+
+                document.write("<TR>"); // script 실행문
+                document.write("<TD colspan=2 table-layout:fixed align=left >"+"평균"+"</TD>"); // script 실행문
+                document.write("<TD table-layout:fixed align=center >"+Math.floor(korsum/studentCNT)+"</TD>"); // 국어 총 합계 평균
+                document.write("<TD table-layout:fixed align=center >"+Math.floor(engsum/studentCNT)+"</TD>"); // 영어 총 합계 평균
+                document.write("<TD table-layout:fixed align=center >"+Math.floor(matsum/studentCNT)+"</TD>"); // 수학 총 합계 평균
+                document.write("<TD table-layout:fixed align=center >"+Math.floor((korsum+engsum+matsum)/studentCNT)+"</TD>"); // 전체 총 평균 합계 평균
+                document.write("<TD table-layout:fixed align=center >"+Math.floor(avgsum/studentCNT)+"</TD>"); // script 실행문
+                document.write("</TR>"); // script 실행문               
+            }
+    </script> <!--스크립트 종료-->
+    </head><!--head종료-->
+	<body><!--body 시작-->
+        <div overflow:auto;> <!--div 화면 오버 auto설정-->
+            <table align=center border="0"> <!--table 정렬, 테두리 설정-->
+                <tr><td colspan=7 align="center">성적 집계표</td> <!--td 셀 설정 작성-->
+                <tr><td colspan=7 align="right"><script>Time();</script></td> <!--td 셀 설정 작성 Time 스크립트 실행-->
+                <tr><td colspan=7 align="center">========================================================</td> <!--td 셀 설정 작성-->
+                <tr><td align="left">번호</td>      <!--td 셀 설정 작성-->
+                    <td align="left">이름</td>      <!--td 셀 설정 작성-->
+                    <td align="center">국어</td>    <!--td 셀 설정 작성-->
+                    <td align="center">영어</td>    <!--td 셀 설정 작성-->
+                    <td align="center">수학</td>    <!--td 셀 설정 작성-->
+                    <td align="center">총점</td>    <!--td 셀 설정 작성-->
+                    <td align="center">평균</td>    <!--td 셀 설정 작성-->
+                    <script>Score();Total();</script> <!--Score, Total스크립트 실행-->
+            </table><!--table 종료-->
+    </body><!--body 종료-->
+</html><!--html 종료-->
+    

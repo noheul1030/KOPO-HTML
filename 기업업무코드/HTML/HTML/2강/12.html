@@ -1,0 +1,30 @@
+<!DOCTYPE html><!--시작을 html 형식으로 지정-->
+<html lang="en"><!--언어 english-->
+	<head><!--head 시작-->
+		<meta charset="UTF-8"><!--작성 형태는 UTF-8로 한다.-->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>&lt;div&gt;의 박스 모델</title><!--title시작 문구 작성 title종료-->
+        <style>
+            /* body 배경색 지정 */
+            body{background: ghostwhite;}
+            /* span 배경색 지정 */
+            span{background: deepskyblue;}
+            /* div.box 스타일 지정 */
+            div.box{
+                background: yellow;
+                border-style: solid;
+                border-color: peru;
+
+                margin: 40px;
+                border-width: 30px;
+                padding: 20px;
+            }
+        </style>
+    </head><!--head종료-->
+	<body><!--body 시작-->
+        <div class="box"><!-- div 블록 스타일 box클래스 적용-->
+            <span>DIVDIVDIV</span> <!--span 블록 text 작성-->
+        </div><!--div 블록 종료-->
+    </body><!--body 종료-->
+</html><!--html 종료-->

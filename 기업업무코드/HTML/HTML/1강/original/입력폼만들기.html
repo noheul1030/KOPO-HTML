@@ -1,0 +1,48 @@
+<!DOCTYPE html><!--시작을 html 형식으로 지정-->
+<html lang="en"><!--언어 english-->
+	<head><!--head 시작-->
+		<meta charset="UTF-8"><!--작성 형태는 UTF-8로 한다.-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>입력 폼 만들기</title><!--title시작 문구 작성 title종료-->
+	</head><!--head종료-->
+    <body><!--body 시작-->
+		<!--form 양식 지정, 내 홈페이지 이름 fm-->
+		<form method=POST name='fm'>
+			<!--table width넓이,border 테두리,cell사이간격,cell내부 여백 지정-->
+			<table width=650 border=1 cellspacing=0 cellpadding=5>
+				<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+					<td><b>번호</b></td><!--셀 내용작성 text 굵은글씨 적용,td셀 작성종료-->
+					<!--input text 필드 name,입력필드 너비,최대길이 70지정, value 기본값 1,readonly 읽기전용-->
+					<td><input type=text name=id size=70 maxlength=70 value=1 readonly></td>
+				</tr><!--tr 종료-->
+				<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+					<td><b>성별</b></td><!--셀 내용작성 text 굵은글씨 적용,td셀 작성종료-->
+					<td><!--td 셀 작성 시작-->
+						<select name=sex><!--선택상자 만들어줌-->
+							<!--value M,기본 선택값 남자-->
+							<option value='M' selected>남자</option>
+							<!--value W,기본 선택값 남자-->
+							<option value='W'>여자</option>                        
+						</select><!--select 종료-->
+					</td><!--td 섹 작성 종료-->
+				</tr><!--tr 종료-->
+				<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+					<td><b>성명</b></td><!--셀 내용작성 text 굵은글씨 적용,td셀 작성종료-->
+					<!--input text 필드 name,입력필드 너비,최대길이 70지정, value 기,readonly 읽기전용-->
+					<td><input type=text name=name size=70 maxlength=70 value='레이나'></td>
+				</tr><!--tr 종료-->
+				<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+					<td><b>주소</b></td><!--셀 내용작성 text 굵은글씨 적용,td셀 작성종료-->
+					<!--input text 필드 name,입력필드 너비,최대길이 70지정, value 기본값,readonly 읽기전용-->
+					<td><input type=text name=addr size=70 maxlength=70 value='서울시 어딘가 살고 있습니다.'></td>
+				</tr><!--tr 종료-->
+				<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+					<td><b>전화번호</b></td><!--셀 내용작성 text 굵은글씨 적용,td셀 작성종료-->
+					<!--input text 필드 name,입력필드 너비,최대길이 70지정, value 기본값,readonly 읽기전용-->
+					<td><input type=text name=tel size=70 maxlength=70 value=''></td>
+				</tr><!--tr 종료-->
+			</table><!--table 종료-->
+		</form><!--form 종료-->
+	</body><!--body 종료-->
+</html><!--html 종료-->

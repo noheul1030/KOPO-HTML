@@ -1,0 +1,9 @@
+/var/lib/tomcat9/lib/mysql-connector-j-8.0.33.jar
+
+/var/lib/tomcat9/lib/ 경로의 lib에 mysql의 jar파일을 추가해 넣어주어야 
+vscode에서 mysql을 사용할 수 있다.
+!!!!!!!!!!중요!!!!!!!!!!!
+
+
+
+http://192.168.23.60:8081/ 과제 검사 URL

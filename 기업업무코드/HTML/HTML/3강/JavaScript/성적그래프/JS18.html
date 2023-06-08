@@ -1,0 +1,99 @@
+<!doctype html>
+
+
+
+
+<SCRIPT src='https://rawgit.com/FVANCOP/ChartNew.js/master/ChartNew.js'></script>
+
+
+
+<SCRIPT>
+
+defCanvasWidth=1200;
+defCanvasHeight=600;
+student_name = new Array();
+student_grade = new Array();
+for(i = 1; i <= 20; i++){
+        if(i < 10) a = "홍길동0"+i;
+        else a = "홍길동" + i;
+        student_name.push(a);
+        student_grade.push(Math.floor(Math.random()*101));
+    }
+var mydata1 = {
+    
+	labels : student_name,
+	datasets : [
+		{
+			fillColor : "red",
+			strokeColor : "rgba(220,220,220,1)",
+			pointColor : "rgba(220,220,220,1)",
+			pointStrokeColor : "#fff",
+			data : student_grade,
+      			title : "previous Month"
+		}
+	
+	]
+}
+
+
+
+
+var newopts = {
+	animation : false,
+	datasetFill : false,
+	
+	canvasBorders : true,
+	canvasBordersWidth : 3,
+	canvasBordersColor : "black",
+	graphTitle : "Graph Title",
+	graphTitleFontFamily : "'Arial'",
+	graphTitleFontSize : 24,
+	graphTitleFontStyle : "bold",
+	graphTitleFontColor : "#666",
+	legend : true,
+	legendBlockSize : 30,
+	bezierCurveTension : 0.2 ,
+	legendPosX : 2,
+	legendPosY : 0,
+	graphMax : 100,
+	yAxisMinimumInterval : 100,
+	scaleXGridLinesStep : 100
+}
+
+
+                     
+
+
+</SCRIPT>
+
+
+<html>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<head>
+		<title>Demo ChartNew.js</title>
+	</head>
+	<body>
+  
+  <!div id="divCursor" style="position:absolute"> <!/div>
+   
+  <center>
+    <FONT SIZE=6><B>Demo of ChartNew.js !</B></FONT>    <BR>
+
+    <script>
+    
+
+      document.write("<canvas id=\"canvas_stackedbar\" height=\""+defCanvasHeight+"\" width=\""+defCanvasWidth+"\"></canvas>");
+    
+
+window.onload = function() {
+
+
+    if(1==1) {
+    var myLine = new Chart(document.getElementById("canvas_stackedbar").getContext("2d")).StackedBar(mydata1,newopts);
+    }
+
+}
+
+    </script>
+  </body>
+</html>

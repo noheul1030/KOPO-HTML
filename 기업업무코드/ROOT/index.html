@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    ul {
+        list-style-type: disc;
+    }
+
+    li {
+        margin: 30px;
+    }
+
+    a {
+        text-decoration-line: none;
+
+        /*   text-decoration-line: underline; */
+        /*   text-decoration-line: overline; */
+        /*   text-decoration-line: line-through; */
+        /*   text-decoration-line: underline line-through overline; */
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    a:visited {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    a:focus {
+        text-decoration: none;
+    }
+
+    a:hover,
+    a:active {
+        text-decoration: none;
+    }
+
+    .blinking-text {
+        animation: blink 0.1s linear infinite;
+    }
+
+    @keyframes blink {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .rainbow-text {
+        animation: rainbow-blink 0.3s linear infinite;
+    }
+
+    @keyframes rainbow-blink {
+        0% {
+            color: red;
+        }
+
+        16.7% {
+            color: orange;
+        }
+
+        33.3% {
+            color: yellow;
+        }
+
+        50% {
+            color: green;
+        }
+
+        66.7% {
+            color: blue;
+        }
+
+        83.3% {
+            color: indigo;
+        }
+
+        100% {
+            color: violet;
+        }
+    }
+
+    @keyframes blink {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: table;
+            background-color: black;
+        }
+    }
+
+    @font-face {
+        font-family: neon;
+        src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
+    }
+
+    .container {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .neon {
+        font-family: neon;
+        color: #FB4264;
+        font-size: 3vw;
+        line-height: 3vw;
+        text-shadow: 0 0 1vw #F40A35;
+    }
+
+    .flux {
+        font-family: neon;
+        color: #426DFB;
+        font-size: 3vw;
+        line-height: 3vw;
+        text-shadow: 0 0 1vw #2356FF;
+    }
+
+    .neon {
+        animation: neon 1s ease infinite;
+        -moz-animation: neon 1s ease infinite;
+        -webkit-animation: neon 1s ease infinite;
+    }
+
+    @keyframes neon {
+
+        0%,
+        100% {
+            text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
+            color: #FED128;
+        }
+
+        50% {
+            text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
+            color: #806914;
+        }
+    }
+
+    .flux {
+        animation: flux 2s linear infinite;
+        -moz-animation: flux 2s linear infinite;
+        -webkit-animation: flux 2s linear infinite;
+        -o-animation: flux 2s linear infinite;
+    }
+
+    @keyframes flux {
+
+        0%,
+        100% {
+            text-shadow: 0 0 1vw #1041FF, 0 0 3vw #1041FF, 0 0 10vw #1041FF, 0 0 10vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
+            color: #28D7FE;
+        }
+
+        50% {
+            text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
+            color: #146C80;
+        }
+    }
+    #fixed {
+            position: fixed;
+            bottom: -10px;
+            right: 0px;
+            width: 0px;
+            padding: 0px;
+            
+        }
+        
+</style>
+<script>
+    function party() {
+        document.write("<TR>"); // script 실행문
+        document.write("<TD colspan=2 class='rainbow-text'>***************************</TD></TR>");  // script 실행문   
+        document.write("<TD colspan=2 align = center class='rainbow-text'>과 제 검 사</TD></TR>");  // script 실행문   
+        document.write("<TD colspan=2><img src=https://media.tenor.com/PK95lqgvj4kAAAAC/%EC%8B%A0%EB%82%98%EB%8A%94%EB%86%8D%EB%8B%B4%EA%B3%B0-%EC%A0%95%EC%8B%A0%EC%82%AC%EB%82%98%EC%9A%B4%EB%86%8D%EB%8B%B4%EA%B3%B0.gif"
+            + " width=180px; height=150px;" + "></TD></TR>");
+        document.write("<TD colspan=2 align = center class='rainbow-text'>예이~</TD></TR>");  // script 실행문   
+        document.write("<TD colspan=2 class='rainbow-text'>***************************</TD></TR>");  // script 실행문   
+    }
+
+</script>
+
+<body>
+    <h1>학번 : kopo11/ 2325341011</h1>
+    <h2>이름 : 노을</h2>
+    <hr>
+    <a href="./03/main.html"><h3>03 JSP</h3></a>
+    <a href="./04/index.html"><h3>04 JSP DB</h3></a>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <table width=150px id="fixed">
+        <tr>
+            <td width=50% align=center class="neon">과제</td>
+            <td width=50% align=center class="flux">검사</td>
+        </tr>
+        <tr>
+            <td colspan=2 class="rainbow-text">***************************</td>
+        </tr>
+        <tr>
+            <td colspan=2 align=center class="rainbow-text">과 제 검 사</td>
+        </tr>
+        <tr>
+            <td colspan=2><img
+                    src="https://media.tenor.com/PK95lqgvj4kAAAAC/%EC%8B%A0%EB%82%98%EB%8A%94%EB%86%8D%EB%8B%B4%EA%B3%B0-%EC%A0%95%EC%8B%A0%EC%82%AC%EB%82%98%EC%9A%B4%EB%86%8D%EB%8B%B4%EA%B3%B0.gif"
+                    width=180px; height=150px;></td>
+        </tr>
+        <tr>
+            <td colspan=2 align=center class="rainbow-text">예이~</td>
+        </tr>
+        <tr>
+            <td colspan=2 class="rainbow-text">***************************</td>
+        </tr>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./student.js"></script>
+    <style>
+        .top_bottom{
+            border-top : 2px dashed;
+            border-bottom : 2px dashed;
+        }
+        .top {
+            border-top : 2px dashed;
+        }
+        .bottom{
+            border-bottom : 2px dashed;
+        }
+        /*---점선을 2줄씩 만들기 위해 클래스 3개를 선언하였습니다.*/
+    </style>
+</head>
+<body>
+    <script>
+        const arr = [];
+        for(i = 1; i <= 30; i++){
+            if(i<10){
+                arr.push(new student(i,"홍길동0"+i, Math.floor(Math.random()*101),Math.floor(Math.random()*101),Math.floor(Math.random()*101)))
+            } else{
+                arr.push(new student(i,"홍길동"+i, Math.floor(Math.random()*101),Math.floor(Math.random()*101),Math.floor(Math.random()*101)))
+            }
+        } // 랜덤한 30개의 점수객체 만들기
+
+        var today = new Date(); // 현재날짜 받아오기
+        let dateFormat1 = today.getFullYear() + '.' + (today.getMonth()+1) + '.'
+	    + today.getDate() + '. ' + today.getHours() + ':' + today.getMinutes() + ':'
+	    + today.getSeconds(); // 현재시간을 2023.05.16. 15.18.23 이와 같은 dateFormat으로 만들기 위해서 다시 저장
+        kortotal = 0;
+        engtotal = 0;
+        mattotal = 0;
+        sumtotal = 0;
+        avgtotal = 0; // 총점과 총평균을 구하기위한 변수 선언
+        document.write("<center><strong>성적 집계표</strong></center>");  // 제목 중앙정렬
+        document.write("<table>") // 테이블선언
+        document.write("<thead>")
+        document.write("<tr><th class='bottom'></th>")
+        document.write("<th class='bottom'></th>")
+        document.write("<th class='bottom'></th>")
+        document.write("<th class='bottom'></th>")
+        document.write("<th colspan='3' align = right class='bottom'>출력일자 : "+ dateFormat1 + "</th></tr>")
+        // 점선을 2개찍기위해서 출력일자에는 아래점선줄찍는 bottom클래스 번호,이름 쪽에는 위랑 아래 둘다찍는 top_bottom클래스 부여
+        document.write("<tr><th width='200px' align=left class='top_bottom'>번호</th>")
+        document.write("<th width='400px' align=left class='top_bottom'>이름</th>")
+        document.write("<th width='350px' align=left class='top_bottom'>국어</th>")
+        document.write("<th width='350px' align=left class='top_bottom'>영어</th>")
+        document.write("<th width='350px' align=left class='top_bottom'>수학</th>")
+        document.write("<th width='350px' align=left class='top_bottom'>총점</th>")
+        document.write("<th width='350px' align=left class='top_bottom'>평균</th></tr>")
+        document.write("</thead>")
+        // thead부분 점선을 2개하기위해 시간까지 thead에 포함시킴 
+
+        document.write("<tbody>")
+        for(let student of arr){
+            kortotal += student.kor;
+            engtotal += student.eng;
+            mattotal += student.mat;
+            sumtotal += student.sum;
+            avgtotal += student.avg; // 총점을 계속더해주는중
+            if(student.id==1){ // 번호,이름,국어 이런거 밑에 점선2줄하기 위해서 body부분에서 제일 위에꺼에 top클래스를 줘서 찍음
+                document.write("<tr><td width='200px' align=left class='top'>"+student.id+"</td>")
+                document.write("<td width='400px' align=left class='top'>"+student.name+"</td>")
+                document.write("<td width='350px' align=left class='top'>"+student.kor+"</td>")
+                document.write("<td width='350px' align=left class='top'>"+student.eng+"</td>")
+                document.write("<td width='350px' align=left class='top'>"+student.mat+"</td>")
+                document.write("<td width='350px' align=left class='top'>"+student.sum+"</td>")
+                document.write("<td width='350px' align=left class='top'>"+student.avg+"</td></tr>")
+            } else if(student.id==30){ //밑에 점선 2줄을 하기위해서 body부분 마지막에 bottom클래스를 줘서 찍음
+                document.write("<tr><td width='200px' align=left class='bottom'>"+student.id+"</td>")
+                document.write("<td width='400px' align=left class='bottom'>"+student.name+"</td>")
+                document.write("<td width='350px' align=left class='bottom'>"+student.kor+"</td>")
+                document.write("<td width='350px' align=left class='bottom'>"+student.eng+"</td>")
+                document.write("<td width='350px' align=left class='bottom'>"+student.mat+"</td>")
+                document.write("<td width='350px' align=left class='bottom'>"+student.sum+"</td>")
+                document.write("<td width='350px' align=left class='bottom'>"+student.avg+"</td></tr>")
+            } else{ // tbody부분
+                document.write("<tr><td width='200px' align=left>"+student.id+"</td>")
+                document.write("<td width='400px' align=left>"+student.name+"</td>")
+                document.write("<td width='350px' align=left>"+student.kor+"</td>")
+                document.write("<td width='350px' align=left>"+student.eng+"</td>")
+                document.write("<td width='350px' align=left>"+student.mat+"</td>")
+                document.write("<td width='350px' align=left>"+student.sum+"</td>")
+                document.write("<td width='350px' align=left>"+student.avg+"</td></tr>")
+            }
+            
+        }
+        document.write("</tbody>")
+        document.write("<tfoot>")
+        document.write("<tr><th width='200px' align=left class='top'>합계</th>")
+        document.write("<th width='400px' align=left class='top'></th>")
+        document.write("<th width='350px' align=left class='top'>"+kortotal+"</th>")
+        document.write("<th width='350px' align=left class='top'>"+engtotal+"</th>")
+        document.write("<th width='350px' align=left class='top'>"+mattotal+"</th>")
+        document.write("<th width='350px' align=left class='top'>"+sumtotal+"</th>")
+        document.write("<th width='350px' align=left class='top'>"+avgtotal+"</th></tr>")
+        document.write("<tr><th width='200px' align=left id='avg'>평균</td>")
+        document.write("<th width='400px' align=left></td>")
+        document.write("<th width='350px' align=left>"+Math.floor(kortotal/30)+"</th>")
+        document.write("<th width='350px' align=left>"+Math.floor(engtotal/30)+"</th>")
+        document.write("<th width='350px' align=left>"+Math.floor(mattotal/30)+"</th>")
+        document.write("<th width='350px' align=left>"+Math.floor(sumtotal/30)+"</th>")
+        document.write("<th width='350px' align=left>"+Math.floor(avgtotal/30)+"</th></tr>")    
+        document.write("</tfoot>")
+        //tfoot부분 마지막 합계 평균을 구하고 출력하는 tfoot부분
+        //마지막에 점선 2줄 찍기위해서 합계 쪽에 top 클래스를 부여해서 점선을 찍게함
+        
+    </script>
+    
+</body>
+</html>
+<!--우선 성적을 랜덤클래스를 만들어서 랜덤한 점수를 뽑아냈고,
+student라는 객체에서 student.id,  student.name이런식으로 값들을 각각 가져오고
+그값들을 table을 만들어 출력하는 코드입니다
+thead, tbody, tfoot으로 나눴고
+점선을 1줄만 하면 간단히 만들수있지만
+점선을 2줄을 해야하기 때문에 점선2줄함수는 없어서
+.top 클래스 .bottom클래스  .top_bottom클래스 3개를 만들어서
+각각 필요한곳에 클래스를 사용하였습니다.-->

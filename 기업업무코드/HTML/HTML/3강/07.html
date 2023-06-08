@@ -1,0 +1,31 @@
+<!DOCTYPE html><!--시작을 html 형식으로 지정-->
+<html lang="en"><!--언어 english-->
+	<head><!--head 시작-->
+		<meta charset="UTF-8"><!--작성 형태는 UTF-8로 한다.-->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>반복문</title><!--title시작 문구 작성 title종료-->
+        <script> // 스크립트 시작
+            function call1(){ // function 함수 call 
+                // for(i=0;i < 10;i++){document.write(i);}
+                // for(var j in obj){answer += ""+i+":"+obj[i];}
+                    document.write("<h2> 구구단 </h2>"); // 스크립트 작성실행 head text 크기 2
+                    document.write("<TABLE border=0 width=100%>"); // 스크립트 작성실행 테이블 작성
+                    for(var i=1;i < 10;i=i+3){ // 1~9까지 3증가로 도는 반복문
+                        for(var j=1;j < 10;j++){ // 1~9까지 도는 반복문
+                            document.write("<TR>"); // 스크립트 작성실행 table row
+                            document.write("<TD>"+i+" * "+j+" = "+i*j+"</TD>"); // 스크립트 작성실행 셀 작성
+                            document.write("<TD>"+(i+1)+" * "+j+" = "+(i+1)*j+"</TD>"); // 스크립트 작성실행 
+                            document.write("<TD>"+(i+2)+" * "+j+" = "+(i+2)*j+"</TD>"); // 스크립트 작성실행 
+                            document.write("</TR>"); // 스크립트 작성실행 tr종료
+                            }
+                        document.write("<TR><TD colspan=3><HR></TD></TR>"); // 스크립트 작성실행 
+                    }
+                document.write("</TABLE>"); // 스크립트 작성실행 테이블 종료
+            }
+        </script><!--스크립트 종료-->
+    </head><!--head종료-->
+	<body><!--body 시작-->
+        <script>call1();</script> <!--스크립트 함수 call실행-->
+    </body><!--body 종료-->
+</html><!--html 종료-->

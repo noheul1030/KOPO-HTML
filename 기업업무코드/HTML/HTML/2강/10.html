@@ -1,0 +1,29 @@
+<!DOCTYPE html><!--시작을 html 형식으로 지정-->
+<html lang="en"><!--언어 english-->
+	<head><!--head 시작-->
+		<meta charset="UTF-8"><!--작성 형태는 UTF-8로 한다.-->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>텍스트 꾸미기</title><!--title시작 문구 작성 title종료-->
+        <style>
+            h3{text-align: right;/* 오른쪽 정렬 */}
+            span{text-decoration: line-through;/* 중간 줄 */}
+            strong{text-decoration: overline;/* 윗줄 */}
+            .p1{text-indent: 3em;/* 3 글자 들여쓰기 */
+                text-align: justify;/* 양쪽 정렬 */}
+            .p2{text-indent: 1em;/* 1 글자 들여쓰기 */
+                text-align: center;/* 중앙 정렬 */}
+            a{text-decoration-line: none;/*텍스트 밑줄 line 없애기*/}
+        </style>
+    </head><!--head종료-->
+	<body><!--body 시작-->
+        <h3>텍스트 꾸미기</h3><!--head text 크기 숫자 3지정-->
+        <hr><!--horizontal rule-->
+		<!--p 단락 블록 text 작성, style class 적용-->
+        <p class="p1">HTML의 태그만으로 기존의 워드 프로세서와 같이 들여쓰기, 정렬, 공백, 간격 등과 세밀한 <span>텍스트 제어</span>를 할 수 없다.</p>
+        <!--p 단락 블록 text 작성, style class 적용-->
+		<p class="p2">그러나,<strong>스타일 시트</strong>는 이를 가능하게 한다. 들여쓰기, 정렬에 대해서 알아본다.</p>
+        <!--text 클릭시 지정된 링크로 이동, 밑줄이 없는 text a블록 적용-->
+		<a href="http://naver.com">밑줄이 없는 네이버 링크</a>
+    </body><!--body 종료-->
+</html><!--html 종료-->

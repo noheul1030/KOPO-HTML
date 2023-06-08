@@ -1,0 +1,62 @@
+<!DOCTYPE html><!--시작을 html 형식으로 지정-->
+<html lang="en"><!--언어 english-->
+	<head><!--head 시작-->
+		<meta charset="UTF-8"><!--작성 형태는 UTF-8로 한다.-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>목록을 정리해주는 태그</title><!--title시작 문구 작성 title종료-->
+	</head><!--head종료-->
+	<!--body시작 text는 검정색 link는 빨강색 vlink는 초록색 alink는 파란색-->
+	<body text="#000000" link="#ff0000" vlink="#00ff00" alink="0000ff">
+		<style>
+			/* table 테두리 스타일 지정 */
+			table{
+				border-collapse: collapse;
+			}
+			/* thead text 정렬 스타일 지정 */
+			thead {
+				text-align: center; background-color: rgb(168, 166, 166);
+			}
+			/* th,td 최소 넓이, 테두리 색상 지정 */
+			th, td{
+				min-width: 200px;
+				border: 1px solid black;
+			}
+		</style>
+		<table border="1"><!--table시작 border속성 굵기 1px지정(경계선 굵기 1) -->
+			<thead><!--thead시작-->
+				<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+					<td width="10%" align=center><b>형식</b></td><!--td(표에서 셀을 생성)가운데(center) 굵은글씨(<b>)로 셀 내용작성 td셀 작성종료-->
+					<td width="20%" align=center><b>구성</b></td><!--td(표에서 셀을 생성)가운데(center) 굵은글씨(<b>)로 셀 내용작성 td셀 작성종료-->
+					<td width="40%" align=center><b>내용</b></td><!--td(표에서 셀을 생성)가운데(center) 굵은글씨(<b>)로 셀 내용작성 td셀 작성종료-->
+				</tr><!--tr 종료-->
+			</thead><!--thead종료-->
+				<tr><!--tr(table row의 약어)시작 표의 각행 정의-->
+					<td rowspan="5">&lt;LI&gt;</td><!--rowspan 해당 셀의 5개행 병합-->
+					<td>&lt;UL&gt;....&lt;/UL&gt;</td><!--셀 내용작성 td셀 작성종료-->
+					<td>순서가 없는 목록으로 일반적인 나열을 말합니다.</td><!--셀 내용작성 td셀 작성종료-->
+				</tr><!--tr 종료-->
+				<tr><!--tr(table row의 약어)시작 표의 각행 정의-->				
+					<td>&lt;OL&gt;....&lt;/OL&gt;</td><!--셀 내용작성 td셀 작성종료-->
+					<td>순서가 있는 목록으로 위에서부터 번호를 매깁니다.
+					</td><!--셀 내용작성 td셀 작성종료-->
+				</tr><!--tr 종료-->
+				<tr><!--tr(table row의 약어)시작 표의 각행 정의-->				
+					<td>&lt;MENU&gt;....&lt;/MENU&gt;</td><!--셀 내용작성 td셀 작성종료-->
+					<td>메뉴 목록으로 메뉴 목록보다 짧은 문장을 나열합니다.
+					</td><!--셀 내용작성 td셀 작성종료-->
+				</tr><!--tr 종료--> 
+				<tr><!--tr(table row의 약어)시작 표의 각행 정의-->				
+					<td>&lt;DIR&gt;....&lt;/DIR&gt;</td><!--셀 내용작성 td셀 작성종료-->
+					<td>디렉토리 목록으로 메뉴 목록보다 짧은 문장을 나열합니다.
+					</td><!--셀 내용작성 td셀 작성종료-->
+				</tr> <!--tr 종료-->
+				<tr><!--tr(table row의 약어)시작 표의 각행 정의-->				
+					<td>&lt;DL&gt;....&lt;/DL&gt;</td><!--셀 내용작성 td셀 작성종료-->
+					<td>정의목록 태그입니다. &lt;/LI&gt;가 아닌 &lt;/DT&gt;와 
+						&lt;/DD&gt;를 사용합니다.
+					</td><!--셀 내용작성 td셀 작성종료-->
+				</tr><!--tr 종료-->       
+		</table><!--table 종료-->
+	</body><!--body 종료-->
+</html><!--html 종료-->
