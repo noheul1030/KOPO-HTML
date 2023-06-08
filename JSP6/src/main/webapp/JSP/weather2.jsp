@@ -11,7 +11,7 @@
 		table{
 			cellspacing:1; 
 			table-layout: fixed; 
-			width:1000;
+			width:1200;
 			border-collapse: collapse;
 			solid black;
 			text-align: center;
@@ -56,7 +56,10 @@
 	out.println("<h2>날씨 조회</h2>"); // h2크기 text 작성
 	out.println("<table border =1>"); // 테이블 스타일 지정
 	
-	int check = -1;
+	
+	int day0=0;
+	int day1=0;
+	int day2=0;
 	out.println("<tr>");
 	// 날짜
     out.println("<td><b>날짜</td>");
@@ -64,29 +67,19 @@
 	    Element elmt = (Element) tag_001.item(i);
 	    day = elmt.getElementsByTagName("day").item(0).getFirstChild().getNodeValue();
 	    
-	    if(day.equals("0")&&check==0){
-			out.println("<td></td>");
-		}else if(day.equals("0")&&check!=0){
-			out.println("<td><b>오늘</td>");
-			check = 0;
+	    if(day.equals("0")){
+			day0++;
 		}
-		
-	    
-	    if(day.equals("1")&&check==1){
-			out.println("<td  bgcolor=CCCCCC></td>");
-		}else if(day.equals("1")&&check!=1){
-			out.println("<td bgcolor=CCCCCC><b>내일</td>");
-			check = 1;
+	    if(day.equals("1")){
+			day1++;
 		}
-		
-	    
-		if(day.equals("2")&&check==2){
-			out.println("<td></td>");
-		}else if(day.equals("2")&&check!=2){
-			out.println("<td><b>모레</td>");
-			check = 2;
+	    if(day.equals("2")){
+			day2++;
 		}
 	}
+	out.println("<td colspan="+day0+">"+ "오늘" +"</td>");
+	out.println("<td bgcolor = CCCCCC colspan="+day1+">"+ "내일" +"</td>");
+	out.println("<td colspan="+day2+">"+ "모레" +"</td>");
 	out.println("</tr>");
 	
 	
@@ -140,10 +133,16 @@
 	
 	
 	out.println("<tr>");
-	// 기온
-	int min = Integer.MAX_VALUE;
-	int max = Integer.MIN_VALUE;
-	int col=0;
+	// 오늘 기온
+	int min0 = Integer.MAX_VALUE;
+	int max0 = Integer.MIN_VALUE;
+	int min1 = Integer.MAX_VALUE;
+	int max1 = Integer.MIN_VALUE;
+	int min2 = Integer.MAX_VALUE;
+	int max2 = Integer.MIN_VALUE;
+	int 기온0=0;
+	int 기온1=0;
+	int 기온2=0;
 	
 	out.println("<td><b>기온</td>");
 	for(int i = 0; i < tag_001.getLength(); i++) { // tag_001의 길이만큼 도는 반복문
@@ -152,17 +151,39 @@
 	    tmx = elmt.getElementsByTagName("tmx").item(0).getFirstChild().getNodeValue(); 
 	    tmn = elmt.getElementsByTagName("tmn").item(0).getFirstChild().getNodeValue(); 
 	    
+	    if(day.equals("0")){
+			if(Double.parseDouble(tmn) <= min0){
+				min0 = (int) Double.parseDouble(tmn);
+			}
+			if(Double.parseDouble(tmx) >= max0){
+				max0 = (int) Double.parseDouble(tmx);
+			}
+			기온0++;
+		}
+	    
 	    if(day.equals("1")){
-			if(Integer.parseInt(tmn) <= min){
-				min = Integer.parseInt(tmn);
+			if(Double.parseDouble(tmn) <= min1){
+				min1 = (int) Double.parseDouble(tmn);
 			}
-			if(Integer.parseInt(tmx) >= max){
-				max = Integer.parseInt(tmx);
+			if(Double.parseDouble(tmx) >= max1){
+				max1 = (int) Double.parseDouble(tmx);
 			}
-			col++;
+			기온1++;
+		}
+	    
+	    if(day.equals("2")){
+			if(Double.parseDouble(tmn) <= min2){
+				min2 = (int) Double.parseDouble(tmn);
+			}
+			if(Double.parseDouble(tmx) >= max2){
+				max2 = (int) Double.parseDouble(tmx);
+			}
+			기온2++;
 		}
 	}
-	out.println("<td colspan="+col+">"+ "최고기온: "+max+"/최저기온: "+min+"</td>");
+	out.println("<td colspan="+기온0+">"+ "최고기온: "+max0+"/최저기온: "+min0+"</td>");
+	out.println("<td colspan="+기온1+">"+ "최고기온: "+max1+"/최저기온: "+min1+"</td>");
+	out.println("<td colspan="+기온2+">"+ "최고기온: "+max2+"/최저기온: "+min2+"</td>");
 	
 	out.println("</tr>");
 	
