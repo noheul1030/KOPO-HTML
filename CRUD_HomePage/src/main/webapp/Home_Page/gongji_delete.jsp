@@ -37,7 +37,7 @@
 	Home_PageDao dao = new Home_PageDaoImpl();
 	request.setCharacterEncoding("utf-8");
 
-	Integer number = Integer.parseInt(request.getParameter("number"));
+	int number = Integer.parseInt(request.getParameter("number"));
 	
 	dao.delete(number);
 %>	
