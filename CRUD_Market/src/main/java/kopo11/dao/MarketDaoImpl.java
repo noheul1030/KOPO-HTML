@@ -1,6 +1,8 @@
 package kopo11.dao;
 
 import java.sql.*;
+import java.text.*;
+import java.util.Date;
 
 public class MarketDaoImpl implements MarketDao{
 	String driver = "com.mysql.cj.jdbc.Driver";
@@ -25,19 +27,10 @@ public class MarketDaoImpl implements MarketDao{
 	
 	// Date 정보 조회
 	public String date() {
-		String date = null;
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+		Date d = new Date();
 
-		try {
-			ResultSet rset = stmt().executeQuery("select now()");
-	
-			while(rset.next()) {
-				String now[] = (rset.getString(1)).split(" ");
-				date = now[0];
-			}
-		}catch(Exception e) {
-			System.out.println(e);
-		}
-		return date;
+		return sd.format(d);
 	}
 	
 	// 마지막 ID
@@ -130,9 +123,9 @@ public class MarketDaoImpl implements MarketDao{
 	
 	
 	@Override // 4. 컬럼 삭제
-	public void delete(int id) {
+	public void delete(String id) {
 		try {
-			String Query = String.format("delete from market where number = %d;",id);
+			String Query = String.format("delete from market where id ='%s';",id);
 			stmt().execute(Query);
 		}catch(Exception e) {
 			System.out.println(e);
@@ -140,61 +133,28 @@ public class MarketDaoImpl implements MarketDao{
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	@Override // 3. 공지번호,제목,날짜,내용 값 저장
-	public void newinsert(String title, String date, String content) {
-		try {			
-			String sql = String.format
-					("insert into market (title,date,content) values ('%s','%s','%s');",title,date,content);
-			
-			stmt().execute(sql);
-		}catch(Exception e) {
-			System.out.println(e);
-		}
-	}
-	
-
-	@Override // 5. 컬럼 값 수정 update
-	public void update(int number,String title, String content) {
-		try {
-			String Query = String.format("update market set title = '%s',date = '%s',content = '%s' where number = %d;",
-					title,date(),content,number);
-			stmt().execute(Query);
-		}catch(Exception e) {
-			System.out.println(e);
-		}
-		
-	}
-
-
-	@Override // 6. table 한건 조회
+	@Override // 6. table id 한건 조회
 	public ResultSet selectOne(String key) {
 		ResultSet rset= null;
 		try {
-			String Query = String.format("select * from market where title = '%s';",key);
+			String Query = String.format("select * from market where id = '%s';",key);
 			rset = stmt().executeQuery(Query);
 		}catch(Exception e) {
 			System.out.println(e);
 		}
 		return rset;
 	}
-
 	
+
+	@Override // 5. 컬럼 값 수정 update
+	public void update(int key,int inventoryCNT) {
+		try {
+			String Query = String.format("update market set inventoryCNT = %d, inventoryCheck = '%s' where id = %d;",
+					inventoryCNT,date(),key);
+			stmt().execute(Query);
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+	}
 	
 }
