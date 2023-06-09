@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+Hello. Welcome to Tupyo page<br>
+<form method="post" action="index.html">
+<input type="text" name="txtName">
+<input type="button" name="btnSubmit" value="button">
+<input type="submit" name="btnSubmit" value="전송">
+</form>
+</body>
+</html>

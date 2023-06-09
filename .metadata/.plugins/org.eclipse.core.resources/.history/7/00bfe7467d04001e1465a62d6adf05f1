@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<%@ page contentType="text/xml; charset=utf-8" %>
+<%@ page import="java.io.File, java.net.URL" %>
+<%@ page import="org.w3c.dom.*,javax.xml.parsers.*" %>
+<%@ page import="java.sql.*, javax.sql.*, java.io.*, java.net.*" %>
+
+<html>
+	<head>
+	</head>
+	<body>
+<%
+	DocumentBuilder  docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+	Document doc = docBuilder.parse(new File("/var/lib/tomcat9/webapps/ROOT/xml/testdata.xml"));		// local path
+//	Document doc = docBuilder.parse("http://localhost:8080/JSP6/JSP/xmlmake.jsp");		// URL
+	
+	Element root = doc.getDocumentElement();
+	NodeList tag_name = doc.getElementsByTagName("name");		// xml name tag
+	NodeList tag_studentid = doc.getElementsByTagName("studentid");		// xml studentid tag
+	NodeList tag_kor = doc.getElementsByTagName("kor");		// xml kor tag
+	NodeList tag_eng = doc.getElementsByTagName("eng");		// xml eng tag
+	NodeList tag_mat = doc.getElementsByTagName("mat");		// xml mat tag
+	
+	out.println("<table cellspacing=1 width=500 border=1>");
+	out.println("<tr>");
+	out.println("<td width=100>이름</td>");
+	out.println("<td width=100>학번</td>");
+	out.println("<td width=100>국어</td>");
+	out.println("<td width=100>영어</td>");
+	out.println("<td width=100>수학</td>");
+	out.println("</tr>");
+	
+	for(int i = 0; i < tag_name.getLength(); i++){
+		out.println("<tr>");
+		out.println("<td width=100>"+tag_name.item(i).getFirstChild().getNodeValue()+"</td>");
+		out.println("<td width=100>"+tag_studentid.item(i).getFirstChild().getNodeValue()+"</td>");
+		out.println("<td width=100>"+tag_kor.item(i).getFirstChild().getNodeValue()+"</td>");
+		out.println("<td width=100>"+tag_eng.item(i).getFirstChild().getNodeValue()+"</td>");
+		out.println("<td width=100>"+tag_mat.item(i).getFirstChild().getNodeValue()+"</td>");
+		out.println("</tr>");
+	}
+%>
+	</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<script>
+
+function clickBtn() {
+	//alert("버튼이 클릭되었습니다.");
+	document.form1.submit();
+}
+
+</script>
+<body>
+Hello. Welcome to Tupyo page<br>
+<form name="form1" method="get" action="index.html">
+<input type="text" name="txtName">
+<input type="button" name="btn1" value="버튼1" onclick="clickBtn();">
+<input type="submit" name="btnSubmit" value="전송">
+</form>
+</body>
+</html>

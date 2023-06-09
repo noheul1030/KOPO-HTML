@@ -1,0 +1,70 @@
+<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8" />
+<html>
+	<head>
+		<style>
+		  table {
+		    border-collapse: collapse;
+		    width : 75%
+		  }
+		  th, td {
+		    border-bottom: 1px solid #444444;
+		    padding: 10px;
+		  }
+		  th:first-child, td:first-child {
+		    border-left: none;
+		  }
+		
+		.fourth {
+		  background: gold;
+		  border-color: white;
+		  color: black;
+		  background-image: linear-gradient(45deg, yellow 50%, transparent 50%);
+		  background-position: 100%;
+		  background-size: 400%;
+		  transition: background 300ms ease-in-out;
+		}
+		
+		.fourth:hover {
+		  background-position: 0;
+		}
+		</style>
+	
+	</head>
+	<body>
+	<h1 align = center>성적 추가 입력</h1><!-- head Font 사이즈 h1 -->
+	<form method = 'post' action = 'newInsertDB.jsp'> <!-- form 작동시 newInsertDb.jsp로 링크 이동 -->
+		<table cellspacing="1" width="400" border="0" align="center" style="border-collapse: collapse;"> <!-- 테이블 설정 -->
+			<tr>
+				<td width = 300></td> <!-- 가로 넓이 300 -->
+				<td align="right"> <!-- 우측 정렬 -->
+				<!-- css 클래스 적용, 버튼 누를시 Form action 링크작동 -->
+  				<input class="fourth" type="submit" value="추가" style="width: 70px; height: 40px; padding: 0px;font-weight: bold;"></td>
+			</tr>
+		</table>
+		
+		<table cellspacing="1" width="400" align="center" > <!-- 테이블 설정 -->
+			<tr> <!-- 한글만 입력받는 이름 input 설정 -->
+				<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p align="center"><strong>이름</strong></p></td>
+				<td width = 300 style="border-left: 1px solid #444444;"><p align=center><input type='text' pattern="^[가-힣]+$" name='name' value='' title="한글만 입력하세요." required 
+				style="width: 200px; height: 40px; padding: 0px;"></p></td>
+			</tr> <!-- 학번 자동 부여 text만 보여준다. -->
+				<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p align=center><strong>학번</strong></p></td>
+				<td width = 300 style="border-left: 1px solid #444444;"><p align=center><strong>자동부여</strong></p></td>
+			</tr> <!-- 숫자만 입력받는 input 설정 -->
+				<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p align=center><strong>국어</strong></p></td>
+				<td width = 300 style="border-left: 1px solid #444444;"><p align=center><input type='text' pattern="^(?:100|[1-9][0-9]?|0)$" name="korean" value='' title="0에서 100사이 숫자를 입력하세요." required 
+				style="width: 200px; height: 40px; padding: 0px;"></p></td>
+			</tr> <!-- 숫자만 입력받는 input 설정 -->
+				<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p align=center><strong>영어</strong></td>
+				<td width = 300 style="border-left: 1px solid #444444;"><p align=center><input type='text' pattern="^(?:100|[1-9][0-9]?|0)$" name="english" value='' title="0에서 100사이 숫자를 입력하세요." required 
+				style="width: 200px; height: 40px; padding: 0px;"></p></td>
+			</tr> <!-- 숫자만 입력받는 input 설정 -->
+				<td bgcolor="gold" width="100" style="border-right: 1px solid #444444;"><p align=center><strong>수학</strong></p></td>
+				<td width = 300 style="border-left: 1px solid #444444;"><p align=center><input type='text' pattern="^(?:100|[1-9][0-9]?|0)$" name="mathmatic" value='' title="0에서 100사이 숫자를 입력하세요." required 
+				style="width: 200px; height: 40px; padding: 0px;"></p></td>
+			</tr>
+		</table>
+		
+	</form>
+	</body>
+</html>

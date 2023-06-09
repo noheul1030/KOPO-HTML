@@ -1,0 +1,106 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %> 
+<%@ page import="java.io.File, java.net.URL" %>
+<%@ page import="org.w3c.dom.*,javax.xml.parsers.*" %>
+<%@ page import=" java.io.*, java.net.*" %> 
+
+<html>
+	<head>
+	</head>
+	<body>
+<%
+	DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+	Document doc = docBuilder.parse("http://www.kma.go.kr/wid/queryDFS.jsp?gridx=61&gridy=123");
+	
+	String seq=""; 		// 48시간 중 몇번째 인지 가리킴
+	String hour="";		// 동네 예보 3시간 단위
+	String day="";		// 1번째 날 (0: 오늘/1: 내일/2: 모레)
+	String temp=""; 	// 현재 시간온도
+	String tmx=""; 		// 최고 온도
+	String tmn="";		// 최저 온도
+	String sky=""; 		// 하늘 상태코드 (1: 맑음, 2: 구름조금, 3: 구름많음, 4: 흐림)
+	String pty=""; 		// 강수 상태코드 (0: 없음, 1: 비, 2: 비/눈, 3: 눈/비, 4: 눈)
+	String wfKor="";	// 날씨 한국어
+	String wfEn=""; 	// 날씨 영어
+	String pop=""; 		// 강수 확률 %
+	String r12=""; 		// 12시간 예상 강수량
+	String s12=""; 		// 12시간 예상 적설량
+	String ws=""; 		// 풍속 (m/s)
+	String wd="";	 	// 풍향 (0~7: 북, 북동, 동, 남동, 남, 남서, 서, 북서)
+	String wdKor=""; 	// 풍향 한국어
+	String wdEn=""; 	// 풍향 영어
+	String reh=""; 		// 습도 %
+	String r06=""; 		// 6시간 예상 강수량
+	String s06=""; 		// 6시간 예상 적설량
+	
+	Element root = doc.getDocumentElement();
+	NodeList tag_001 = doc.getElementsByTagName("data");
+	
+	for(int i = 0; i < tag_001.getLength(); i++) { // tag_001의 길이만큼 도는 반복문
+	    Element elmt = (Element) tag_001.item(i);
+		
+	    out.println("<tr>");
+	    
+	    seq = tag_001.item(i).getAttributes().getNamedItem("seq").getNodeValue();           // 순번 저장
+	    hour = elmt.getElementsByTagName("hour").item(0).getFirstChild().getNodeValue();	// 시간 저장
+	    day = elmt.getElementsByTagName("day").item(0).getFirstChild().getNodeValue();		// 날짜 저장
+	    temp = elmt.getElementsByTagName("temp").item(0).getFirstChild().getNodeValue();	// 현재온도 저장
+	    tmx = elmt.getElementsByTagName("tmx").item(0).getFirstChild().getNodeValue();		// 최고기온 저장
+	    tmn = elmt.getElementsByTagName("tmn").item(0).getFirstChild().getNodeValue();		// 최저기온 저장
+	    sky = elmt.getElementsByTagName("sky").item(0).getFirstChild().getNodeValue();		// 현재날씨 저장
+	    pty = elmt.getElementsByTagName("pty").item(0).getFirstChild().getNodeValue();		// 강수상태 저장
+	    wfKor = elmt.getElementsByTagName("wfKor").item(0).getFirstChild().getNodeValue();	// 날씨 저장
+	    wfEn = elmt.getElementsByTagName("wfEn").item(0).getFirstChild().getNodeValue();	// Weather 저장
+	    pop = elmt.getElementsByTagName("pop").item(0).getFirstChild().getNodeValue();		// 강수확률 저장
+	    r12 = elmt.getElementsByTagName("r12").item(0).getFirstChild().getNodeValue();		// 예상강수량 저장
+	    s12 = elmt.getElementsByTagName("s12").item(0).getFirstChild().getNodeValue();		// 예상적설량 저장
+	    ws = elmt.getElementsByTagName("ws").item(0).getFirstChild().getNodeValue();		// 풍속 저장
+	    wd = elmt.getElementsByTagName("wd").item(0).getFirstChild().getNodeValue();		// 풍향 저장
+	    wdKor = elmt.getElementsByTagName("wdKor").item(0).getFirstChild().getNodeValue();	// 풍향 저장
+	    wdEn = elmt.getElementsByTagName("wdEn").item(0).getFirstChild().getNodeValue();	// Wind direction 저장
+	    reh = elmt.getElementsByTagName("reh").item(0).getFirstChild().getNodeValue();		// 습도 저장
+	    r06 = elmt.getElementsByTagName("r06").item(0).getFirstChild().getNodeValue();		// 6시간 예상강수량 저장
+	    s06 = elmt.getElementsByTagName("s06").item(0).getFirstChild().getNodeValue();		// 6시간 예상적설량 저장
+	    
+	}
+	
+	out.println("<h2>날씨 조회</h2>"); // h2크기 text 작성
+	out.println("<table cellspacing=1 width=800 border=1>"); // 테이블 스타일 지정
+	out.println("<tr>");
+	out.println("<td>seq</td> <td>hour</td> <td>day</td> <td>temp</td> <td>tmx</td>"); 
+	out.println("<td>tmn</td> <td>sky</td> <td>pty</td> <td>wfKor</td> <td>wfEn</td>"); 
+	out.println("<td>pop</td> <td>r12</td> <td>s12</td> <td>ws</td> <td>wd</td>"); 
+	out.println("<td>wdKor</td> <td>wdEn</td> <td>reh</td> <td>r06</td> <td>s06</td>"); 
+	out.println("</tr>");
+	
+	
+	for(int i = 0; i < tag_001.getLength(); i++) { // tag_001의 길이만큼 도는 반복문
+	    Element elmt = (Element) tag_001.item(i);
+		
+	    out.println("<tr>");
+	    out.println("<td>"+tag_001.item(i).getAttributes().getNamedItem("seq").getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("hour").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("day").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("temp").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("tmx").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("tmn").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("sky").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("pty").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("wfKor").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("wfEn").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("pop").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("r12").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("s12").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("ws").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("wd").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("wdKor").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("wdEn").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("reh").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("r06").item(0).getFirstChild().getNodeValue()+"</td>");
+	    out.println("<td>"+elmt.getElementsByTagName("s06").item(0).getFirstChild().getNodeValue()+"</td>");
+	    
+	    // 추가적인 처리나 출력 로직을 여기에 작성합니다.
+	}
+%>
+	</body>
+</html>

@@ -1,0 +1,64 @@
+<!--태그표 홈페이지 만들기(list)-->
+<!DOCTYPE html><!--시작을 html 형식으로 지정-->
+<html lang="en"><!--언어 english-->
+	<head><!--head 시작-->
+		<meta charset="UTF-8"><!--작성 형태는 UTF-8로 한다.-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>메뉴</title><!--title시작 문구 작성 title종료-->
+		
+	</head><!--head종료-->
+	<style>
+		table{width : 98%;}
+		/*지정 폰트 적용*/
+            @font-face {
+                    font-family: "D2CodingLigature";
+                    src: url(./D2CodingLigature/D2CodingBold-Ver1.3.2-20180524-ligature.ttf) format("truetype");
+                    font-weight: normal;
+                }
+                /*body 폰트 지정*/
+                body{ 
+                    font-family: 'D2CodingLigature',serif;
+                }
+         li{color: #696969;}
+		a { width : 100%vw; text-decoration-line: none; font-size: 25px; color: #696969;
+			transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;}   
+		 a:hover {
+		 box-shadow: 0 0 40px 40px #ffd700 inset;
+		}
+		#myText {
+		    font-size: 8vw;
+		  }
+		
+		  @media (min-width: 400px) {
+		    #myText {
+		      font-size: 30px;
+		    }
+		  }
+		
+	</style>
+	<body><!--body시작-->
+		
+		<ul><!--ul 지정 style 적용-->
+		<table>
+			<tr><td>
+			<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다. text style red 적용,<u> text밑줄 적용-->
+			   
+			<li type="disc"><!--li 지정 style 적용 type="disc" 검은색 동그라미 적용-->
+				<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다. text style red 적용,<u> text밑줄 적용-->
+				<a id="myText" href="./A_01.jsp" target="content"></a></li><br><br>       
+			</td></tr>
+			<li type="disc"><!--li 지정 style 적용 type="disc" 검은색 동그라미 적용-->
+				<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다. text style red 적용,<u> text밑줄 적용-->
+				<a id="myText" href="./B_01_H.jsp" target="content"></a></li><br><br>       
+			</td></tr>
+			<li type="disc"><!--li 지정 style 적용 type="disc" 검은색 동그라미 적용-->
+				<!--href(하이퍼링크 생성), 텍스트를 클릭하면 href=해당 파일로 이동,target "content"프레임에 파일 내용을 보여준다. text style red 적용,<u> text밑줄 적용-->
+				<a id="myText" href="./C_01_H.jsp" target="content"></a></li><br><br>       
+			</td></tr>
+			
+			
+		</table>	       
+		</ul><!--ul 지정 style 종료-->
+	</body><!--body 종료-->
+</html><!--html 종료-->

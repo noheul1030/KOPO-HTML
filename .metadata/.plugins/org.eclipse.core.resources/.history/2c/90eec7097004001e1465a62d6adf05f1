@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<%@ page contentType="text/xml; charset=utf-8" %>
+<%@ page import="java.sql.*, javax.sql.*, java.io.*, java.net.*" %>
+
+<%
+	Class.forName("com.mysql.jdbc.Driver");
+	Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/noheul","root","shdmf1030@");
+	Statement stmt = conn.createStatement();
+	
+	ResultSet rset = stmt.executeQuery("select * from examtable");
+	out.println("<datas>");
+	
+	while (rset.next()){
+		out.println("<datas>");
+		
+		out.println("<name>"+rset.getString(1)+"</name>");
+		out.println("<studentid>"+Integer.toString(rset.getInt(2))+"</studentid>");
+		out.println("<kor>"+rset.getInt(3)+"</kor>");
+		out.println("<eng>"+rset.getInt(4)+"</eng>");
+		out.println("<mat>"+rset.getInt(5)+"</mat>");
+	}
+	

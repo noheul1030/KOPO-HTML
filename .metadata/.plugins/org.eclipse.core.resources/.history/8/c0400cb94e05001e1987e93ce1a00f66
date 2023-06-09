@@ -1,0 +1,182 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %> 
+<%@ page import="java.io.File, java.net.URL" %>
+<%@ page import="org.w3c.dom.*,javax.xml.parsers.*" %>
+<%@ page import=" java.io.*, java.net.*" %> 
+
+<html>
+	<head>
+	</head>
+	<style>
+		table{
+			cellspacing:1; 
+			table-layout: fixed; 
+			width:1000;
+			border-collapse: collapse;
+			solid black;
+			text-align: center;
+		}
+		td{
+			text-align: center;
+			fix-layout: fix;
+			width: auto; 
+			font-size:7px;
+		}
+		img{width:20px; height:20px;}
+	</style>
+	<body>
+<%
+	DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+	Document doc = docBuilder.parse("http://www.kma.go.kr/wid/queryDFS.jsp?gridx=61&gridy=123");
+	
+	String seq=""; 		// 48시간 중 몇번째 인지 가리킴
+	String hour="";		// 동네 예보 3시간 단위
+	String day="";		// 1번째 날 (0: 오늘/1: 내일/2: 모레)
+	String temp=""; 	// 현재 시간온도
+	String tmx=""; 		// 최고 온도
+	String tmn="";		// 최저 온도
+	String sky=""; 		// 하늘 상태코드 (1: 맑음, 2: 구름조금, 3: 구름많음, 4: 흐림)
+	String pty=""; 		// 강수 상태코드 (0: 없음, 1: 비, 2: 비/눈, 3: 눈/비, 4: 눈)
+	String wfKor="";	// 날씨 한국어
+	String wfEn=""; 	// 날씨 영어
+	String pop=""; 		// 강수 확률 %
+	String r12=""; 		// 12시간 예상 강수량
+	String s12=""; 		// 12시간 예상 적설량
+	String ws=""; 		// 풍속 (m/s)
+	String wd="";	 	// 풍향 (0~7: 북, 북동, 동, 남동, 남, 남서, 서, 북서)
+	String wdKor=""; 	// 풍향 한국어
+	String wdEn=""; 	// 풍향 영어
+	String reh=""; 		// 습도 %
+	String r06=""; 		// 6시간 예상 강수량
+	String s06=""; 		// 6시간 예상 적설량
+	
+	Element root = doc.getDocumentElement();
+	NodeList tag_001 = doc.getElementsByTagName("data");
+	
+	out.println("<h2>날씨 조회</h2>"); // h2크기 text 작성
+	out.println("<table border =1>"); // 테이블 스타일 지정
+	
+	int check = -1;
+	int col = 0;
+	out.println("<tr>");
+	// 날짜
+    out.println("<td><b>날짜</td>");
+	for(int i = 0; i < tag_001.getLength(); i++) { // tag_001의 길이만큼 도는 반복문
+	    Element elmt = (Element) tag_001.item(i);
+	    day = elmt.getElementsByTagName("day").item(0).getFirstChild().getNodeValue();
+	    
+	    if(day.equals("0")&&check==0){
+			out.println("<td></td>");
+		}else if(day.equals("0")&&check!=0){
+			out.println("<td><b>오늘</td>");
+			check = 0;
+		}
+	}
+    for(int i = 0; i < tag_001.getLength(); i++) { // tag_001의 길이만큼 도는 반복문
+	    Element elmt = (Element) tag_001.item(i);
+	    day = elmt.getElementsByTagName("day").item(0).getFirstChild().getNodeValue();   
+		if(day.equals("1")&&check==1){
+			out.println("<td  bgcolor=CCCCCC></td>");
+		}else if(day.equals("1")&&check!=1){
+			out.println("<td bgcolor=CCCCCC><b>내일</td>");
+			check = 1;
+	    col++;
+		}else{
+			if(col>0){
+				out.println("<td colspan="+col+" bgcolor=CCCCCC></td>");
+				col = 0;break;
+			}
+		}
+    }
+	for(int i = 0; i < tag_001.getLength(); i++) { // tag_001의 길이만큼 도는 반복문
+	    Element elmt = (Element) tag_001.item(i);
+	    day = elmt.getElementsByTagName("day").item(0).getFirstChild().getNodeValue(); 
+		
+		if(day.equals("2")&&check==2){
+			out.println("<td></td>");
+		}else if(day.equals("2")&&check!=2){
+			out.println("<td><b>모레</td>");
+			check = 2;
+		}
+	}
+	out.println("</tr>");
+	
+	
+	
+	out.println("<tr>");
+	// 시간 
+	out.println("<td><b>시각</td>");
+	for(int i = 0; i < tag_001.getLength(); i++) { // tag_001의 길이만큼 도는 반복문
+	    Element elmt = (Element) tag_001.item(i);
+	    hour = elmt.getElementsByTagName("hour").item(0).getFirstChild().getNodeValue(); // 시간
+		out.println("<td>"+hour+"시"+"</td>");
+	}
+	out.println("</tr>");
+	
+	
+	out.println("<tr>");
+	// 날씨
+	out.println("<td><b>날씨</td>");
+	for(int i = 0; i < tag_001.getLength(); i++) { // tag_001의 길이만큼 도는 반복문
+	    Element elmt = (Element) tag_001.item(i);
+	    sky = elmt.getElementsByTagName("sky").item(0).getFirstChild().getNodeValue(); // 시간
+	    
+		if(sky.equals("1")){
+			out.println("<td><img src='맑음.png'></td>");
+		}
+		if(sky.equals("2")){
+			out.println("<td><img src='구름조금.png'></td>");
+		}
+		if(sky.equals("3")){
+			out.println("<td><img src='구름많음.png'></td>");
+		}
+		if(sky.equals("4")){
+			out.println("<td><img src='흐림.png'></td>");
+		}
+	}
+	out.println("</tr>");
+	
+	
+	
+	out.println("<tr>");
+	// 강수 확률
+	out.println("<td><b>강수확률(%)</td>");
+	for(int i = 0; i < tag_001.getLength(); i++) { // tag_001의 길이만큼 도는 반복문
+	    Element elmt = (Element) tag_001.item(i);
+	    pop = elmt.getElementsByTagName("pop").item(0).getFirstChild().getNodeValue(); 
+	    
+	    out.println("<td>"+pop+"</td>");
+	}
+	out.println("</tr>");
+	
+	
+	
+	out.println("<tr>");
+	// 기온
+	int min = Integer.MAX_VALUE;
+	int max = Integer.MIN_VALUE;
+	
+	out.println("<td><b>기온</td>");
+	for(int i = 0; i < tag_001.getLength(); i++) { // tag_001의 길이만큼 도는 반복문
+	    Element elmt = (Element) tag_001.item(i);
+	    day = elmt.getElementsByTagName("day").item(0).getFirstChild().getNodeValue(); 
+	    tmx = elmt.getElementsByTagName("tmx").item(0).getFirstChild().getNodeValue(); 
+	    tmn = elmt.getElementsByTagName("tmn").item(0).getFirstChild().getNodeValue(); 
+	    
+	    if(day.equals("0")){
+		
+		}
+
+		if(day.equals("1")){
+		
+		}
+		
+		if(day.equals("2")){
+		
+		}
+	}
+	out.println("</tr>");
+	
+%>
+	</body>
+</html>

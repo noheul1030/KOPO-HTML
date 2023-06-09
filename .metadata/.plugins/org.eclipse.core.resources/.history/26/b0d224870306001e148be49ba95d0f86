@@ -1,0 +1,286 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %> 
+<%@ page import="java.io.File, java.net.URL" %>
+<%@ page import="org.w3c.dom.*,javax.xml.parsers.*" %>
+<%@ page import=" java.io.*, java.net.*,java.util.*,java.text.*" %> 
+
+<html>
+	<head>
+		<style>
+		table{
+			cellspacing:1; 
+			table-layout: fixed; 
+			width:100%;
+			border-collapse: collapse;
+			solid black;
+			text-align: center;
+		}
+		td{
+			text-align: center;
+			fix-layout: fix;
+			width: auto; 
+			font-size:7px;
+		}
+		img{width:20px; height:20px;}
+		</style>
+	</head>
+	<body>
+<%
+	DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+	Document doc = docBuilder.parse("http://www.kma.go.kr/wid/queryDFS.jsp?gridx=55&gridy=124");
+	
+	
+	SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar calendar = Calendar.getInstance();
+    Date date = calendar.getTime();
+    String day0="";
+    String day1="";
+    String day2="";
+	
+	
+	String seq=""; 		// 48시간 중 몇번째 인지 가리킴
+	String hour="";		// 동네 예보 3시간 단위
+	String day="";		// 1번째 날 (0: 오늘/1: 내일/2: 모레)
+	String temp=""; 	// 현재 시간온도
+	String tmx=""; 		// 최고 온도
+	String tmn="";		// 최저 온도
+	String sky=""; 		// 하늘 상태코드 (1: 맑음, 2: 구름조금, 3: 구름많음, 4: 흐림)
+	String pty=""; 		// 강수 상태코드 (0: 없음, 1: 비, 2: 비/눈, 3: 눈/비, 4: 눈)
+	String wfKor="";	// 날씨 한국어
+	String wfEn=""; 	// 날씨 영어
+	String pop=""; 		// 강수 확률 %
+	String r12=""; 		// 12시간 예상 강수량
+	String s12=""; 		// 12시간 예상 적설량
+	double ws=0.0; 		// 풍속 (m/s)
+	String wd="";	 	// 풍향 (0~7: 북, 북동, 동, 남동, 남, 남서, 서, 북서)
+	String wdKor=""; 	// 풍향 한국어
+	String wdEn=""; 	// 풍향 영어
+	String reh=""; 		// 습도 %
+	String r06=""; 		// 6시간 예상 강수량
+	String s06=""; 		// 6시간 예상 적설량
+	
+	Element root = doc.getDocumentElement();
+	NodeList tag_001 = doc.getElementsByTagName("data");
+	
+	
+	
+	
+	
+	
+	out.println("<h2>미추홀구 주안동 날씨 조회</h2>"); // h2크기 text 작성
+	out.println("<table cellspacing=1 width=800 border=1>"); // 테이블 스타일 지정
+	out.println("<tr>");
+	out.println("<td>순번</td> <td>시간</td> <td>날짜</td> <td>현재온도</td> <td>최고기온</td>"); 
+	out.println("<td>최저기온</td> <td>현재날씨</td> <td>강수상태</td> <td>날씨</td> <td>Weather</td>"); 
+	out.println("<td>강수확률%</td> <td>예상강수량</td> <td>예상적설량</td> <td>풍속</td> <td>풍향</td>"); 
+	out.println("<td>풍향</td> <td>Wind direction</td> <td>습도%</td>"); 
+	out.println("</tr>");
+	
+	
+	for(int i = 0; i < tag_001.getLength(); i++) { // tag_001의 길이만큼 도는 반복문
+	    Element elmt = (Element) tag_001.item(i);
+	
+	    seq = (tag_001.item(i).getAttributes().getNamedItem("seq").getNodeValue())+1;
+	    hour = elmt.getElementsByTagName("hour").item(0).getFirstChild().getNodeValue();
+	    day = elmt.getElementsByTagName("day").item(0).getFirstChild().getNodeValue();
+	    temp = elmt.getElementsByTagName("temp").item(0).getFirstChild().getNodeValue();
+	    tmx = elmt.getElementsByTagName("tmx").item(0).getFirstChild().getNodeValue();
+	    tmn = elmt.getElementsByTagName("tmn").item(0).getFirstChild().getNodeValue();
+	    sky = elmt.getElementsByTagName("sky").item(0).getFirstChild().getNodeValue();
+	    pty = elmt.getElementsByTagName("pty").item(0).getFirstChild().getNodeValue();
+	    wfKor = elmt.getElementsByTagName("wfKor").item(0).getFirstChild().getNodeValue();
+	    wfEn = elmt.getElementsByTagName("wfEn").item(0).getFirstChild().getNodeValue();
+	    pop = elmt.getElementsByTagName("pop").item(0).getFirstChild().getNodeValue();
+	    r12 = elmt.getElementsByTagName("r12").item(0).getFirstChild().getNodeValue();
+	    s12 = elmt.getElementsByTagName("s12").item(0).getFirstChild().getNodeValue();
+	    ws = Double.parseDouble(elmt.getElementsByTagName("ws").item(0).getFirstChild().getNodeValue());
+	    wd = elmt.getElementsByTagName("wd").item(0).getFirstChild().getNodeValue();
+	    wdKor = elmt.getElementsByTagName("wdKor").item(0).getFirstChild().getNodeValue();
+	    wdEn = elmt.getElementsByTagName("wdEn").item(0).getFirstChild().getNodeValue();
+	    reh = elmt.getElementsByTagName("reh").item(0).getFirstChild().getNodeValue();
+	    
+		//////////////////////////////////////////////////////////////////////////
+	    if(day.equals("0")){
+	    	
+	    	date = calendar.getTime();
+		    day0 = sd.format(date);
+
+		    out.println("<tr>");
+		    out.println("<td>"+tag_001.item(i).getAttributes().getNamedItem("seq").getNodeValue()+"</td>");
+		    out.println("<td>"+"오늘"+hour+"시"+"</td>");
+		    out.println("<td>"+day0+"</td>");
+		    out.println("<td>"+temp+"</td>");
+		    if(tmx.equals("-999.0")){
+		    	tmx = "-";
+		    }
+		    if(tmn.equals("-999.0")){
+		    	tmn = "-";
+		    }
+		    out.println("<td>"+tmx+"</td>");
+		    out.println("<td>"+tmn+"</td>");
+		    if(sky.equals("1")){
+				out.println("<td><img src='맑음.png'></td>");
+			}
+			if(sky.equals("2")){
+				out.println("<td><img src='구름조금.png'></td>");
+			}
+			if(sky.equals("3")){
+				out.println("<td><img src='구름많음.png'></td>");
+			}
+			if(sky.equals("4")){
+				out.println("<td><img src='흐림.png'></td>");
+			}
+			
+			if(pty.equals("0")){
+				out.println("<td>"+"-"+"</td>");
+			}
+			if(pty.equals("1")){
+				out.println("<td><img src='비.png'></td>");
+			}
+			if(pty.equals("2")){
+				out.println("<td><img src='비.png'>&#32;&#47;&#32;<img src='눈.png'></td>");
+			}
+			if(pty.equals("3")){
+				out.println("<td><img src='눈.png'>&#32;&#47;&#32;<img src='비.png'></td>");
+			}
+			if(pty.equals("4")){
+				out.println("<td><img src='눈.png'></td>");
+			}
+		    out.println("<td>"+wfKor+"</td>");
+		    out.println("<td>"+wfEn+"</td>");
+		    out.println("<td>"+pop+"</td>");
+		    out.println("<td>"+r12+"</td>");
+		    out.println("<td>"+s12+"</td>");
+		    out.println("<td>"+String.format("%.1f",ws)+"</td>");
+		    out.println("<td><img src='"+wd+".png'></td>");
+		    out.println("<td>"+wdKor+"</td>");
+		    out.println("<td>"+wdEn+"</td>");
+		    out.println("<td>"+reh+"</td>");
+	    }
+	    /////////////////////////////////////////////////////////////////////////////
+	    if(day.equals("1")){
+
+	    	Calendar tempCalendar = (Calendar) calendar.clone(); // 기존 calendar 객체를 변경하지 않기 위해 복제
+	        tempCalendar.add(Calendar.DAY_OF_MONTH, 1);
+	        Date date1 = tempCalendar.getTime();
+	        day1 = sd.format(date1);
+	        
+		    out.println("<tr>");
+		    out.println("<td>"+tag_001.item(i).getAttributes().getNamedItem("seq").getNodeValue()+"</td>");
+		    out.println("<td>"+"내일"+hour+"시"+"</td>");
+		    out.println("<td>"+day1+"</td>");
+		    out.println("<td>"+temp+"</td>");
+		    if(tmx.equals("-999.0")){
+		    	tmx = "-";
+		    }
+		    if(tmn.equals("-999.0")){
+		    	tmn = "-";
+		    }
+		    out.println("<td>"+tmx+"</td>");
+		    out.println("<td>"+tmn+"</td>");
+		    if(sky.equals("1")){
+				out.println("<td><img src='맑음.png'></td>");
+			}
+			if(sky.equals("2")){
+				out.println("<td><img src='구름조금.png'></td>");
+			}
+			if(sky.equals("3")){
+				out.println("<td><img src='구름많음.png'></td>");
+			}
+			if(sky.equals("4")){
+				out.println("<td><img src='흐림.png'></td>");
+			}
+			
+			if(pty.equals("0")){
+				out.println("<td>"+"-"+"</td>");
+			}
+			if(pty.equals("1")){
+				out.println("<td><img src='비.png'></td>");
+			}
+			if(pty.equals("2")){
+				out.println("<td><img src='비.png' src='눈.png'></td>");
+			}
+			if(pty.equals("3")){
+				out.println("<td><img src='눈.png' src='비.png'></td>");
+			}
+			if(pty.equals("4")){
+				out.println("<td><img src='눈.png'></td>");
+			}
+		    out.println("<td>"+wfKor+"</td>");
+		    out.println("<td>"+wfEn+"</td>");
+		    out.println("<td>"+pop+"</td>");
+		    out.println("<td>"+r12+"</td>");
+		    out.println("<td>"+s12+"</td>");
+		    out.println("<td>"+String.format("%.1f",ws)+"</td>");
+		    out.println("<td><img src='"+wd+".png'></td>");
+		    out.println("<td>"+wdKor+"</td>");
+		    out.println("<td>"+wdEn+"</td>");
+		    out.println("<td>"+reh+"</td>");
+	    }
+	    ///////////////////////////////////////////////////////////////////////////////////
+	    if(day.equals("2")){
+	    	
+	    	Calendar tempCalendar = (Calendar) calendar.clone(); // 기존 calendar 객체를 변경하지 않기 위해 복제
+	        tempCalendar.add(Calendar.DAY_OF_MONTH, 2);
+	        Date date2 = tempCalendar.getTime();
+	        day2 = sd.format(date2);
+	    	
+		    out.println("<tr>");
+		    out.println("<td>"+tag_001.item(i).getAttributes().getNamedItem("seq").getNodeValue()+"</td>");
+		    out.println("<td>"+"모레"+hour+"시"+"</td>");
+		    out.println("<td>"+day2+"</td>");
+		    out.println("<td>"+temp+"</td>");
+		    if(tmx.equals("-999.0")){
+		    	tmx = "-";
+		    }
+		    if(tmn.equals("-999.0")){
+		    	tmn = "-";
+		    }
+		    out.println("<td>"+tmx+"</td>");
+		    out.println("<td>"+tmn+"</td>");
+		    if(sky.equals("1")){
+				out.println("<td><img src='맑음.png'></td>");
+			}
+			if(sky.equals("2")){
+				out.println("<td><img src='구름조금.png'></td>");
+			}
+			if(sky.equals("3")){
+				out.println("<td><img src='구름많음.png'></td>");
+			}
+			if(sky.equals("4")){
+				out.println("<td><img src='흐림.png'></td>");
+			}
+			
+			if(pty.equals("0")){
+				out.println("<td>"+"-"+"</td>");
+			}
+			if(pty.equals("1")){
+				out.println("<td><img src='비.png'></td>");
+			}
+			if(pty.equals("2")){
+				out.println("<td><img src='비.png' src='눈.png'></td>");
+			}
+			if(pty.equals("3")){
+				out.println("<td><img src='눈.png' src='비.png'></td>");
+			}
+			if(pty.equals("4")){
+				out.println("<td><img src='눈.png'></td>");
+			}
+		    out.println("<td>"+wfKor+"</td>");
+		    out.println("<td>"+wfEn+"</td>");
+		    out.println("<td>"+pop+"</td>");
+		    out.println("<td>"+r12+"</td>");
+		    out.println("<td>"+s12+"</td>");
+		    out.println("<td>"+String.format("%.1f",ws)+"</td>");
+		    out.println("<td><img src='"+wd+".png'></td>");
+		    out.println("<td>"+wdKor+"</td>");
+		    out.println("<td>"+wdEn+"</td>");
+		    out.println("<td>"+reh+"</td>");
+	    }
+	    
+	    
+	    // 추가적인 처리나 출력 로직을 여기에 작성합니다.
+	}
+%>
+	</body>
+</html>
