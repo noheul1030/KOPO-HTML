@@ -60,8 +60,9 @@
 			<td>상품등록일</td>
 		</tr>
 <%
+	if(dao.count()!=0){
 	ResultSet rset = dao.stmt().executeQuery("select * from market order by id asc;");
-	while(rset.next()){
+		while(rset.next()){
 %>		
 		<tr class='tr'>
 			<td><a href = 'oneview.jsp?key=<%=rset.getInt(1)%>'><%=rset.getInt(1)%></a></td>
@@ -71,6 +72,7 @@
 			<td><%=rset.getString(5)%></td>
 		</tr>
 <%
+		}
 	}
 %>
 	</table>
@@ -78,8 +80,6 @@
 	<form method='post'>
 	<table>
 		<tr>
-			<td width='15%'></td>
-			<td></td>
 			<td width='15%' align = 'right'>
 			<input class='fourth' type='submit' value='신규등록' formaction = 'insert.jsp'
 				style="width: 80px; height: 30px; padding: 0px;font-weight: bold;"> </td>

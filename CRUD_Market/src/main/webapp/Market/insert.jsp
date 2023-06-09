@@ -69,7 +69,7 @@
 		</tr>
 		<tr>
 			<td width='20%'><span>상품 번호</span></td>
-			<td colspan='2'><input pattern="^(?:100000000|[1-9][0-9]{0,8}?|0)$" type='text' name='id' value='<%=dao.middleID()%>' title="숫자만 입력하세요." required></td>
+			<td colspan='2'><input pattern="^(?:100000000|[1-9][0-9]{0,8}?|0)$" type='text' name='id' value='<%=dao.middleID()%>' title="숫자만 입력하세요." readonly></td>
 		</tr>
 		<tr>
 			<td width='20%'><span>상품명</span></td>

@@ -106,9 +106,7 @@ public class MarketDaoImpl implements MarketDao{
 	
 	
 	@Override
-	public void insert(int id, String name, int inventoryCNT, String inventoryCheck, 
-			String inventoryUpdate,String text, String picture) {
-		
+	public void insert(int id, String name, int inventoryCNT, String inventoryCheck, String inventoryUpdate,String text, String picture) {
 		try {			
 			String sql = String.format
 					("insert into market (id,name,inventoryCNT,inventoryCheck,inventoryUpdate,content,picture)"

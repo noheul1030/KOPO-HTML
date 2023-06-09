@@ -1,7 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.*,java.io.*,java.sql.*" %> <!--java import-->
-<%@ page import="javax.servlet.http.*" %>
+<%@ page import="kopo11.dao.*,kopo11.dto.*,kopo11.service.*" %>
 <%@ page import="kopo11.dao.*,kopo11.dto.*,kopo11.service.*,com.oreilly.servlet.MultipartRequest, 
 				com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
 
@@ -75,63 +75,35 @@
 	</form>
 <%
 	}
-	
-	if(request.getParameter("id") != null){
-		
-		/*id = Integer.parseInt(request.getParameter("id")); 						// 상품 ID
-		name = request.getParameter("name"); 									// 상품명
-		inventoryCNT = Integer.parseInt(request.getParameter("inventoryCNT")); 	// 상품 재고 수
-		inventoryCheck = dao.date(); 											// 재고 등록일
-		inventoryUpdate = dao.date(); 											// 상품 등록일
-		text = request.getParameter("text");									// 상품 설명
-		picture = request.getParameter("picture");								// 상품 사진
-
-		dao.insert(id,name,inventoryCNT,inventoryCheck,inventoryUpdate,text,filename);*/
-%>	
-	<table border='1' style="text-align:left;">
-		<tr>
-			<td align='center'><h2>(주)트와이스 재고 현황 - 상품등록</h2></td>
-		</tr>
-	</table>
-	
-	<br><br><br><br>
-	<form method='post'>
-	<table>
-		<tr>
-			<td><h3>상품번호: <%=id%>, 상품명: <%=name%> 등록 되었습니다.</h3></td>
-		</tr>
-		<tr>
-			<td align = 'center'>
-			<input class='fourth' type='submit' value='재고 현황' formaction = 'create_list.jsp'
-				style="width: 100px; height: 30px; padding: 0px;font-weight: bold;"> </td>
-		</tr>
-	</table>
-	</form>
-<%
-	}
 	// 이미지파일 get
 	int sizeLimit=100*300*300;
-	String path= "./img";
+	String path= "/Market/img";
 	String directory= request.getServletContext().getRealPath(path);
+	//String root = "\\Users\\노을\\Documents\\GitHub\\KOPO-HTML\\CRUD_Market\\src\\main\\webapp\\Market\\img";
+	//String newPath = directory.replace("\\Market\\img mango.png", root);
 	
-	MultipartRequest multi = new MultipartRequest(request, directory, sizeLimit, "UTF-8", new DefaultFileRenamePolicy());
+	String root = "C:\\Users\\노을\\Documents\\GitHub\\KOPO-HTML\\CRUD_Market\\src\\main\\webapp\\Market\\img";
+	String newPath = root;
+	
+	MultipartRequest multi = new MultipartRequest(request, newPath, sizeLimit, "UTF-8", new DefaultFileRenamePolicy());
+	
+	String filename = null;
 
-	if(multi.getParameter("file") != null){
+	
+	if(multi.getFilesystemName("file") != null){
+		filename = multi.getFilesystemName("file");
+	}
+	if(multi.getParameter("id") != null){
 		
-		
-		String file = multi.getParameter("file");
-		String filename = multi.getFilesystemName("file");
-		out.println(filename);
-		
-		/*id = Integer.parseInt(request.getParameter("id")); 						// 상품 ID
-		name = request.getParameter("name"); 									// 상품명
-		inventoryCNT = Integer.parseInt(request.getParameter("inventoryCNT")); 	// 상품 재고 수
+		id = Integer.parseInt(multi.getParameter("id")); 						// 상품 ID
+		name = multi.getParameter("name"); 										// 상품명
+		inventoryCNT = Integer.parseInt(multi.getParameter("inventoryCNT")); 	// 상품 재고 수
 		inventoryCheck = dao.date(); 											// 재고 등록일
 		inventoryUpdate = dao.date(); 											// 상품 등록일
-		text = request.getParameter("text");									// 상품 설명
-		picture = request.getParameter("picture");								// 상품 사진
-
-		dao.insert(id,name,inventoryCNT,inventoryCheck,inventoryUpdate,text,filename);*/
+		text = multi.getParameter("text");										// 상품 설명
+		picture = multi.getParameter("picture");								// 상품 사진
+		
+		dao.insert(id,name,inventoryCNT,inventoryCheck,inventoryUpdate,text,filename);
 %>	
 	<table border='1' style="text-align:left;">
 		<tr>
