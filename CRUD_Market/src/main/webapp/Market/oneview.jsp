@@ -46,18 +46,13 @@
 		oneID = dao.selectOne(key);
 	}
 	
-	//String root = "C:\\Users\\노을\\Documents\\GitHub\\KOPO-HTML\\CRUD_Market\\src\\main\\webapp\\Market\\img\\";
-	String root = "192.168.23.60:8080/CRUD_Market/Market/img/";
-	String relativePath = "../Market/img";	
 %>
 	<form method='post'>
 	<table border='1' style="text-align:left;">
 		<tr>
 			<td colspan='2' align='center'><h2>(주)트와이스 재고 현황 - 상품상세</h2></td>
 		</tr>
-<%	while(oneID.next()){ 
-		root= root+oneID.getString(7);
-%>
+<%	while(oneID.next()){ %>
 		
 		<tr>
 			<td width='20%'><span>상품 번호</span></td>
@@ -86,7 +81,7 @@
 		<tr>
 			<td width='20%'><span>상품사진</span></td>		
 			<td>
-				<img width="250" src ='http://192.168.23.60:8080/CRUD_Market/Market/img/<%=oneID.getString(7)%>'>
+				<img width="250" src ='img/<%=oneID.getString(7)%>' style="margin:10px;">
 			</td>
 		</tr>
 	

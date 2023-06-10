@@ -4,9 +4,12 @@ import java.sql.*;
 import java.text.*;
 import java.util.Date;
 
+import javax.management.InvalidApplicationException;
+
 public class MarketDaoImpl implements MarketDao{
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String connection = "jdbc:mysql://localhost:3307/kopo11";
+//	String connection = "jdbc:mysql://192.168.23.60:3307/kopo11";
+	String connection = "jdbc:mysql://192.168.56.1:3306/noheul";
 	String root = "root";
 	String password = "shdmf1030@";
 	
@@ -20,6 +23,7 @@ public class MarketDaoImpl implements MarketDao{
     	stmt = conn.createStatement();
     	
 		}catch(Exception e){
+			System.out.println("failed db connection");
 			System.out.println(e);
 		}
 		return stmt;
@@ -100,6 +104,7 @@ public class MarketDaoImpl implements MarketDao{
 			}
 		}catch(Exception e) {
 			System.out.println(e);
+			throw new RuntimeException(e);
 		}
 		return count;
 	}

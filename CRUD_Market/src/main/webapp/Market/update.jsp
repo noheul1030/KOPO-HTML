@@ -87,7 +87,7 @@
 		<tr>
 			<td width='20%'><span>상품사진</span></td>		
 			<td>
-				<img width="250" src ='http://192.168.23.60:8080/CRUD_Market/Market/img/<%=oneID.getString(7)%>'>
+				<img width="250" src ='img/<%=oneID.getString(7)%>' style="margin:10px;">
 			</td>
 		</tr>
 	

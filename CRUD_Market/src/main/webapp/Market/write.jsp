@@ -82,7 +82,8 @@
 	//String root = "\\Users\\노을\\Documents\\GitHub\\KOPO-HTML\\CRUD_Market\\src\\main\\webapp\\Market\\img";
 	//String newPath = directory.replace("\\Market\\img mango.png", root);
 	
-	String root = "C:\\Users\\노을\\Documents\\GitHub\\KOPO-HTML\\CRUD_Market\\src\\main\\webapp\\Market\\img";
+	//String root = "C:\\Users\\노을\\Documents\\GitHub\\KOPO-HTML\\CRUD_Market\\src\\main\\webapp\\Market\\img";
+	String root = "C:\\Users\\changyoung.shin\\Desktop\\폴리텍 자료\\KOPO-HTML\\CRUD_Market\\src\\main\\webapp\\Market\\img";
 	String newPath = root;
 	
 	MultipartRequest multi = new MultipartRequest(request, newPath, sizeLimit, "UTF-8", new DefaultFileRenamePolicy());
