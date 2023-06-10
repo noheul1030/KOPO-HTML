@@ -7,6 +7,8 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\changyoung.shin\Desktop\폴리텍 자료\KOPO-HTML\CRUD_HomePage"/>
+			<item value="C:\Users\changyoung.shin\Desktop\폴리텍 자료\KOPO-HTML\CRUD_Market"/>
 			<item value="C:\Users\changyoung.shin\Desktop\폴리텍 자료\KOPO-HTML\Tupyo"/>
 			<item value="C:\Users\changyoung.shin\Desktop\폴리텍 자료\KOPO-HTML\Student_Score"/>
 		</list>

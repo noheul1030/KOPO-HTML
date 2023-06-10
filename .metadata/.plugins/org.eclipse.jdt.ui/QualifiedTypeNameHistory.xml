@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="kr.ac.kopo.ctc.kopo11.dao.StudentItemDaoImpl"/>
+    <fullyQualifiedTypeName name="javax.management.InvalidApplicationException"/>
     <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
 </qualifiedTypeNameHistroy>
