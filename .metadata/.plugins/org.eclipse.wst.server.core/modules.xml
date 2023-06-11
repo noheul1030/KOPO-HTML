@@ -2,5 +2,6 @@
 <modules>
   <module moduleId="org.eclipse.jst.jee.server:JSP6" serverId="apache-tomcat-9.0.71 at localhost"/>
   <module moduleId="org.eclipse.jst.jee.server:CRUD_Market" serverId="apache-tomcat-9.0.71 at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:FreeBoard" serverId="apache-tomcat-9.0.71 at localhost"/>
   <module moduleId="org.eclipse.jst.jee.server:Student_Score" serverId="apache-tomcat-9.0.71 at localhost"/>
 </modules>

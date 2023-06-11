@@ -3,7 +3,11 @@ C:\Users\changyoung.shin\Desktop\폴리텍 자료\KOPO-HTML\.metadata\.plugins\org.ec
 \Student_Score\src\main\java
 C:\Users\changyoung.shin\Desktop\폴리텍 자료\KOPO-HTML\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4052106825.index
 \CRUD_HomePage\src\main\java
+C:\Users\changyoung.shin\Desktop\폴리텍 자료\KOPO-HTML\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2314840866.index
+\FreeBoard\src\main\java
 C:\Users\changyoung.shin\Desktop\폴리텍 자료\KOPO-HTML\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2158332428.index
 \Student_Score\src\main\java
+C:\Users\changyoung.shin\Desktop\폴리텍 자료\KOPO-HTML\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3856693099.index
+\FreeBoard\src\main\java
 C:\Users\changyoung.shin\Desktop\폴리텍 자료\KOPO-HTML\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3174846269.index
 \CRUD_Market\src\main\java
