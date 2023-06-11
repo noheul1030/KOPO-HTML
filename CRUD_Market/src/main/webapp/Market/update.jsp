@@ -16,11 +16,24 @@
 			 margin-right : 4px;
 			}
 			table{
+				margin-left: auto;
+	  			margin-right: auto;
 			  	text-align: center; 
- 				width: 80%; 
+ 				width: 85%;
  				border-collapse: collapse;
- 				border : 1;
  				cellspacing:1;
+ 				table-layout: fixed;
+   			}
+			.table{
+				margin-top :10px;
+				margin-bottom :10px;
+				margin-left: auto;
+	  			margin-right: auto;
+			  	text-align: center; 
+ 				width: 95%; 
+ 				border-collapse: collapse;
+ 				cellspacing:1;
+ 				table-layout: fixed;
    			}
    			input:hover{
 			 background-color: #f5f5f5; 
@@ -54,55 +67,65 @@
 	ResultSet oneID = dao.selectOne(key);
 	
 %>
-	<form method='post'>
-	<table border='1' style="text-align:left;">
+	<table border='2'>
 		<tr>
-			<td colspan='2' align='center'><h2>(주)트와이스 재고 현황 - 재고수정</h2></td>
+			<td align='center'><h2>(주)과일상회 재고 현황 - 재고수정</h2></td>
 		</tr>
-<%	while(oneID.next()){ %>
-		<tr>
-			<td width='20%'><span>상품 번호</span></td>
-			<td><input name='key' value='<%=oneID.getInt(1)%>'readonly style="all: unset; margin-left:5px;"></td>
-		</tr>
-		<tr>
-			<td width='20%'><span>상품명</span></td>
-			<td><input name='name' value='<%=oneID.getString(2)%>'readonly style="all: unset; margin-left:5px;"></td>
-		</tr>
-		<tr>
-			<td width='20%'><span>재고 현황</span></td>		
-			<td><input pattern="^(?:100000000|[1-9][0-9]{0,8}?|0)$" type='text' name='inventoryCNT' value='<%=oneID.getInt(3)%>' title="숫자만 입력하세요." required></td>
-		</tr>
-		<tr>
-			<td width='20%'><span>상품등록일</span></td>		
-			<td><span><%=oneID.getString(4)%></span></td>
-		</tr>
-		<tr>
-			<td width='20%'><span>재고등록일</span></td>		
-			<td><span><%=oneID.getString(5)%></span></td>
-		</tr>
-		<tr>
-			<td width='20%'><span>상품설명</span></td>		
-			<td><span><%=oneID.getString(6)%></span></td>
-		</tr>
-		<tr>
-			<td width='20%'><span>상품사진</span></td>		
+		<tr style="border-bottom:none;">
 			<td>
-				<img width="250" src ='img/<%=oneID.getString(7)%>' style="margin:10px;">
-			</td>
-		</tr>
-	
-	</table>
-	<table>
-		<tr>
-			<td width='15%' align = 'right'>
-				<input class='fourth' type='submit' value='재고 수정' formaction = 'write.jsp'
-					style="width: 80px; height: 30px; padding: 0px;font-weight: bold;"> 
-			</td>
-		</tr>
-	</table>
-	</form>	
+			
+			<form method='post' enctype="multipart/form-data">
+			<table border='1' class='table' style="text-align:left; table-layout: fixed;">		
+<%	while(oneID.next()){ %>
+				<tr>
+					<td width='20%'><span>상품 번호</span></td>
+					<td><input name='key' value='<%=oneID.getInt(1)%>'readonly style="all: unset; margin-left:5px;"></td>
+				</tr>
+				<tr>
+					<td width='20%'><span>상품명</span></td>
+					<td><input name='name' value='<%=oneID.getString(2)%>'readonly style="all: unset; margin-left:5px;"></td>
+				</tr>
+				<tr>
+					<td width='20%'><span>재고 현황</span></td>		
+					<td><input pattern="^(?:100000000|[1-9][0-9]{0,8}?|0)$" type='text' name='inventoryCNT' value='<%=oneID.getInt(3)%>' title="숫자만 입력하세요." required></td>
+				</tr>
+				<tr>
+					<td width='20%'><span>상품등록일</span></td>		
+					<td><span><%=oneID.getString(4)%></span></td>
+				</tr>
+				<tr>
+					<td width='20%'><span>재고등록일</span></td>		
+					<td><span><%=oneID.getString(5)%></span></td>
+				</tr>
+				<tr>
+					<td width='20%'><span>상품설명</span></td>		
+					<td><span><%=oneID.getString(6)%></span></td>
+				</tr>
+				<tr>
+					<td width='20%'><span>상품사진</span></td>		
+					<td>
+						<img width="250" src ='img/<%=oneID.getString(7)%>' style="margin:10px;">
+					</td>
+				</tr>
+				</table>
+				</td>
+			</tr>
 <%	
 	}
 %>
+		<tr style="border-top:none;">
+			<td>	
+			<table class='table'>
+				<tr>
+			<td width='15%' align = 'right'>
+				<input class='fourth' type='submit' value='재고 수정' formaction = 'write.jsp'
+					style="width: 80px; height: 30px; padding: 0px;font-weight: bold;"> 
+					</td>
+				</tr>
+			</table>
+			</form>	
+			</td>
+		</tr>
+	</table>			
 	</body>
 </html>

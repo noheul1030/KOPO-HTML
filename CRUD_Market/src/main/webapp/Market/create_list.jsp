@@ -8,10 +8,22 @@
 	<head>
 		<style>
 			table{
+				margin-left: auto;
+	  			margin-right: auto;
 			  	text-align: center; 
- 				width: 80%; 
+ 				width: 85%;
  				border-collapse: collapse;
- 				border : 1;
+ 				cellspacing:1;
+ 				table-layout: fixed;
+   			}
+			.table{
+				margin-top :10px;
+				margin-bottom :10px;
+				margin-left: auto;
+	  			margin-right: auto;
+			  	text-align: center; 
+ 				width: 95%; 
+ 				border-collapse: collapse;
  				cellspacing:1;
  				table-layout: fixed;
    			}
@@ -38,7 +50,11 @@
 			}
 			.fourth:hover {
 			  background-position: 0;
-			}    			
+			} 
+			.custom-size {
+        	font-size: 15px;
+        	background-color: #ffdddd;
+        	}    			
 		</style>	
 	</head>
 	
@@ -47,49 +63,145 @@
 	MarketDao dao = new MarketDaoImpl();
 	dao.createTable();
 	
-%>	
-	<table border='1'>
-		<tr>
-			<td colspan='5'><h2>(주)트와이스 재고 현황 - 전체현황</h2></td>
-		</tr>
-		<tr bgcolor= ffdddd>
-			<td>상품번호</td>
-			<td>상품명</td>
-			<td>현재 재고수</td>
-			<td>재고파악일</td>
-			<td>상품등록일</td>
-		</tr>
-<%
-	if(dao.count()!=0){
-	ResultSet rset = dao.stmt().executeQuery("select * from market order by id asc;");
-		while(rset.next()){
-%>		
-		<tr class='tr'>
-			<td><a href = 'oneview.jsp?key=<%=rset.getInt(1)%>'><%=rset.getInt(1)%></a></td>
-			<td><a href = 'oneview.jsp?key=<%=rset.getInt(1)%>'><%=rset.getString(2)%></a></td>
-			<td><%=rset.getInt(3)%></td>
-			<td><%=rset.getString(4)%></td>
-			<td><%=rset.getString(5)%></td>
-		</tr>
-<%
-		}
-	}
-%>
-	</table>
 	
-	<form method='post'>
-	<table>
+	int total = dao.count(); // 변수 값 리스트 크기 지정
+    
+    String fromParam = request.getParameter("from"); // input받은 from 값 변수에 저장
+	String cntParam = request.getParameter("cnt"); // input받은 cnt 값 변수에 저장
+	
+	int from = 0; // 변수 초기값 지정
+	int cnt = 10; // 변수 초기값 지정
+	int fromByTen = 0; // 변수 초기값 지정
+	int minpage = 1;
+	int maxpage = (total%cnt == 0)?(total/cnt):(total/cnt)+1; // 변수 초기값 지정
+	int LineCnt = 1; // 변수 초기값 지정
+	
+	int pageCheck=0; // 현재 페이지 계산
+	
+	
+	// 각 변수의 값이 null 아니면 true 조건 
+    if (fromParam != null && cntParam != null) {
+        from = Integer.parseInt(fromParam); // 정수로 형변환 값 저장
+        cnt = Integer.parseInt(cntParam);   // 정수로 형변환 값 저장
+        // from을 정제하여 fromByTen 변수에 저장
+		fromByTen = (int) (Math.floor((from - 1) / 10) * 10);
+    }
+	
+	if(from > maxpage) {
+        from = maxpage;
+        fromByTen = (int) (Math.floor((from - 1) / 10) * 10);
+    }
+    	    
+ 	// 5. C 현재 페이지 조정
+	/* 현재페이지가 0보다 작으면 */
+	if (from <= 1){pageCheck = 1;}
+	/* 현재 페이지가 최대페이지 보다 크면 */
+	else if (from > maxpage){pageCheck = maxpage;}
+	/* 1 ~ 최대페이지 */
+	else{pageCheck = from;}
+	
+	ResultSet rset = dao.stmt().executeQuery("select * from market order by id asc;");	
+	List<String> market = new ArrayList<String>(); // new 리스트 선언
+	
+	while(rset.next()){
+		market.add(Integer.toString(rset.getInt(1))+"\t"+rset.getString(2)+"\t"
+					+Integer.toString(rset.getInt(3))+"\t"+rset.getString(4)+"\t"+rset.getString(5));
+ 	}
+	try{
+		// 반복문 
+        while (true){ // rset의 next값이 true일 때 	
+%>	
+	<table border='2'>
 		<tr>
-			<td width='15%' align = 'right'>
+			<td height='50px'><h2>(주)과일상회 재고 현황 - 전체현황</h2></td>
+		</tr>
+		<tr style="border-bottom:none;">
+			<td>
+	
+			<table border='1' class='table' style="table-layout: fixed;">
+				<tr bgcolor= ffdddd>
+					<td>상품번호</td>
+					<td>상품명</td>
+					<td>현재 재고수</td>
+					<td>재고파악일</td>
+					<td>상품등록일</td>
+				</tr>
+<%
+			if(from <=1){                                  
+			    from = 1;
+			    fromByTen = 0;    
+			    for(int i = 0; i < cnt; i++){               // 0~ cnt까지 도는 반복문
+			       String[] listcut = market.get(i).split("\t");
+%>		
+				<tr class='tr'>
+					<td><a href = 'oneview.jsp?key=<%=listcut[0]%>'><%=listcut[0]%></a></td>
+					<td><a href = 'oneview.jsp?key=<%=listcut[0]%>'><%=listcut[1]%></a></td>
+					<td><%=listcut[2]%></td>
+					<td><%=listcut[3]%></td>
+					<td><%=listcut[4]%></td>
+				</tr>
+<%
+                } break;    // 반복문이 다 돌고 난후 break; 
+	           }
+			}
+        }catch(Exception e){
+        		e.printStackTrace();
+        }
+%>
+			</table>
+			</td>
+		</tr>
+		<tr style="border-top:none;">
+			<td>
+	
+			<form method = 'post'>
+			<table border='1' class='table'>
+        		<tr align = center>          
+
+<%			if(from <= maxpage-(maxpage%10)) { %>                                                                           <!--from 값이 maxpage 보다 작거나 같으면 true 조건-->
+					<td><a href="create_list.jsp?from=1&cnt=<%=cnt%>"><<</a></td>                                                      <!-- 테이블 링크 연결 -->
+<%				if(from <= 10) { %>                                                                                         <!--from 값이 10보다 작거나 크면 true 조건-->
+					<td><a href="create_list.jsp?from=1&cnt=<%=cnt%>"><</a></td>                                                   <!-- 테이블 링크 연결 -->
+<%				}else { %>
+					<td><a href="create_list.jsp?from=<%=pageCheck-10%>&cnt=<%=cnt%>"><</a></td>                                    <!-- 테이블 링크 연결 -->
+<%				} %>
+<%				for(int i = 1; i <= 10; i++){ 
+					if(pageCheck == fromByTen+i){%>                                                                            <!--1~10까지 도는 반복문-->
+						<td class="custom-size"><a href="create_list.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td>                         <!-- 테이블 링크 연결 -->
+<%					}else{ %>
+						<td><a href="create_list.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td> 
+<%					} %>
+<%				} %>
+				<td><a href="create_list.jsp?from=<%=pageCheck+10%>&cnt=<%=cnt%>">></a></td>                                       <!-- 테이블 링크 연결 -->
+				<td><a href="create_list.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                           <!-- 테이블 링크 연결 -->
+<%			}else { %>
+				<td><a href="create_list.jsp?from=1&cnt=<%=cnt%>"><<</a></td>                                                      <!-- 테이블 링크 연결 -->
+				<td><a href="create_list.jsp?from=<%=pageCheck-10%>&cnt=<%=cnt%>"><</a></td>                                        <!-- 테이블 링크 연결 -->
+
+<%				for(int i = 1; i <= maxpage%10; i++){ 
+					if(pageCheck == fromByTen+i){%>                                                                    <!--1~나머지 값 만큼 도는 반복문 -->
+						<td class="custom-size"><a href="create_list.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td>                         <!-- 테이블 링크 연결 -->
+<%					}else{ %>
+						<td><a href="create_list.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td> 
+<%					} %>
+<%				} %>
+<%				if(maxpage-(maxpage%10)< from){ %>                                                                          <!--ㅡmaxpage-나머지 값이 from보다 작으면 -->
+					<td><a href="create_list.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">></a></td>                                        <!-- 테이블 링크 연결 -->
+<%				}else { %>
+					<td><a href="create_list.jsp?from=<%=pageCheck+10%>&cnt=<%=cnt%>">></a></td>                                   <!-- 테이블 링크 연결 -->
+<%				} %>
+				<td><a href="create_list.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                           <!-- 테이블 링크 연결 -->
+<%			} %>
+		
+			<td width='80px' align = 'right'>
 			<input class='fourth' type='submit' value='신규등록' formaction = 'insert.jsp'
 				style="width: 80px; height: 30px; padding: 0px;font-weight: bold;"> </td>
-		</tr>	
+				</tr>	
+			</table>
+			</form>
+	
+			</td>
+		</tr>
 	</table>
-	</form>
-	
-	
-	
-	
-	
 	</body>
 </html>

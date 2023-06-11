@@ -9,22 +9,22 @@ import javax.management.InvalidApplicationException;
 public class MarketDaoImpl implements MarketDao{
 	String driver = "com.mysql.cj.jdbc.Driver";
 //	String connection = "jdbc:mysql://192.168.23.60:3307/kopo11";
-//	String connection = "jdbc:mysql://localhost:3306/noheul";
+	String connection = "jdbc:mysql://localhost:3306/noheul";
 	String root = "root";
 	String password = "shdmf1030@";
 	
-	String connection = null;
-	{
-		String osName = System.getProperty("os.name").toLowerCase();
-		System.out.println("osName is " + osName);
-		if (osName.contains("win")) {
-			connection = "jdbc:mysql://localhost:3307/noheul";
-		} else {
-			connection = "jdbc:mysql://localhost:3306/noheul";
-		}
-	}
+//	String connection = null;
+//	{
+//		String osName = System.getProperty("os.name").toLowerCase();
+//		System.out.println("osName is " + osName);
+//		if (osName.contains("win")) {
+//			connection = "jdbc:mysql://localhost:3307/noheul";
+//		} else {
+//			connection = "jdbc:mysql://localhost:3306/noheul";
+//		}
+//	}
 	
-	Logger logger = LoggerFactory.getLogger(MarketDaoImpl.class);
+//	Logger logger = LoggerFactory.getLogger(MarketDaoImpl.class);
 	
 	// DB연동
 	public Statement stmt() {
@@ -36,12 +36,12 @@ public class MarketDaoImpl implements MarketDao{
     	stmt = conn.createStatement();
     	
 		}catch(Exception e){
-			System.out.println("DBConnection Error !!!!!!!!!!!!!!!!!!!!!!!!!!");
-			e.printStackTrace();
 			System.out.println(e);
-			logger.debug("11111333333333333333333333333333333333333333");
-			logger.error("11111");
-			System.out.println("11111");
+//			System.out.println("DBConnection Error !!!!!!!!!!!!!!!!!!!!!!!!!!");
+//			e.printStackTrace();
+//			logger.debug("11111333333333333333333333333333333333333333");
+//			logger.error("11111");
+//			System.out.println("11111");
 		}
 		return stmt;
 	}
