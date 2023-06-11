@@ -9,21 +9,25 @@
 	<head>
 		<style>
 			table{
+				margin-left: auto;
+	  			margin-right: auto;			
 			  	text-align: center; 
- 				width: 600px; 
+ 				width: 80%; 
  				border-collapse: collapse;
  				border-width: 2px;
  				cellspacing="1"
    			}
    			tr,td{border-width: 2px;}
    			textarea,input{
-   				width: 500px;
-   				margin-top : 4px;
-   				margin-bottom : 4px;
-   				margin-left : 4px;
-   				margin-right : 4px;
-   				
+   				width: 98%;
+   				margin: 4px;
    			}
+			input:hover{
+			 background-color: #f5f5f5; 
+			}
+			textarea:hover{
+			 background-color: #f5f5f5; 
+			}
     		.fourth{
 			  background: gold;
 			  border-color: white;
@@ -38,7 +42,6 @@
 			.fourth:hover {
 			  background-position: 0;
 			}   			
-   			
 		</style>
 	</head>
 	
@@ -87,7 +90,7 @@
 		<tr>
 			<td width= 10%>내용</td>
 			<td align= 'left' width= 85%>
-			<textarea name="content"style="width: 500px; height: 200px; max-width: 500px; max-height: 150px; overflow-x: auto; overflow-y: scroll;resize: none;"><%=content%></textarea>
+			<textarea name="content"style="height: 200px;max-height: 150px; overflow-x: auto; overflow-y: scroll;resize: none;"><%=content%></textarea>
 			</td>
 		</tr>
 	</table>

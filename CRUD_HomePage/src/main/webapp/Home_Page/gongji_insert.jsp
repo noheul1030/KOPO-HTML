@@ -9,21 +9,25 @@
 	<head>
 		<style>
 			table{
+				margin-left: auto;
+	  			margin-right: auto;			
 			  	text-align: center; 
- 				width: 600px; 
+ 				width: 80%; 
  				border-collapse: collapse;
  				border-width: 2px;
  				cellspacing="1"
    			}
    			tr,td{border-width: 2px;}
    			textarea,input{
-   				width: 500px;
-   				margin-top : 4px;
-   				margin-bottom : 4px;
-   				margin-left : 4px;
-   				margin-right : 4px;
-   				
+   				width: 98%;
+   				margin: 4px;
    			}
+			input:hover{
+			 background-color: #f5f5f5; 
+			}
+			textarea:hover{
+			 background-color: #f5f5f5; 
+			}
     		.fourth{
 			  background: gold;
 			  border-color: white;
@@ -37,8 +41,7 @@
 			
 			.fourth:hover {
 			  background-position: 0;
-			}   			
-   			
+			}  
 		</style>		
 	</head>
 	
@@ -54,7 +57,7 @@
 	
 	int count = dao.lastNumber();
 	
-	String title = "공지사항";
+	String title = null;
 	String date = dao.date();
 	
 	dao.stmt().close();
@@ -62,9 +65,11 @@
 	<table border='1'>
 		<tr>
 			<td width= 10%>번호</td>
-<%		if(count == 1){ %>
+<%		if(count == 1){ 
+			title = "공지사항"; %>
 			<td align='left' width= 85%><input type='text' name='number' value='신규(insert)' readonly style="all: unset;"></td>
-<%		}else{ %>
+<%		}else{ 
+			title = "공지사항"+count; %>
 			<td align='left' width= 85%><input type='text' name='number' value='<%=count%>' readonly style="all: unset;"></td>
 <%		} %>
 		</tr>
@@ -79,7 +84,7 @@
 		<tr>
 			<td width= 10%>내용</td>
 			<td align= 'left' width= 85%>
-			<textarea name="content"style="width: 500px; height: 200px; max-width: 500px; max-height: 150px; overflow-x: auto; overflow-y: scroll;resize: none;"></textarea>
+			<textarea name="content"style="height: 200px;max-height: 150px; overflow-x: auto; overflow-y: scroll;resize: none;"></textarea>
 			</td>
 		</tr>
 	</table>

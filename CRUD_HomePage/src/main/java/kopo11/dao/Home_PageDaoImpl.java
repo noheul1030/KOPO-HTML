@@ -4,7 +4,8 @@ import java.sql.*;
 
 public class Home_PageDaoImpl implements Home_PageDao{
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String connection = "jdbc:mysql://localhost:3307/kopo11";
+//	String connection = "jdbc:mysql://localhost:3307/kopo11";
+	String connection = "jdbc:mysql://localhost:3306/noheul";
 	String root = "root";
 	String password = "shdmf1030@";
 	
@@ -131,7 +132,7 @@ public class Home_PageDaoImpl implements Home_PageDao{
 	public ResultSet selectOne(String key) {
 		ResultSet rset= null;
 		try {
-			String Query = String.format("select * from gongji where title = '%s';",key);
+			String Query = String.format("select * from gongji where number = '%s';",key);
 			rset = stmt().executeQuery(Query);
 		}catch(Exception e) {
 			System.out.println(e);
