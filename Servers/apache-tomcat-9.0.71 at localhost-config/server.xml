@@ -152,7 +152,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="WebTest" path="/WebTest" reloadable="true" source="org.eclipse.jst.jee.server:WebTest"/><Context docBase="JSP6" path="/JSP6" reloadable="true" source="org.eclipse.jst.jee.server:JSP6"/><Context docBase="CRUD_Market" path="/CRUD_Market" reloadable="true" source="org.eclipse.jst.jee.server:CRUD_Market"/><Context docBase="CRUD_HomePage" path="/CRUD_HomePage" reloadable="true" source="org.eclipse.jst.jee.server:CRUD_HomePage"/></Host>
+      <Context docBase="WebTest" path="/WebTest" reloadable="true" source="org.eclipse.jst.jee.server:WebTest"/><Context docBase="JSP6" path="/JSP6" reloadable="true" source="org.eclipse.jst.jee.server:JSP6"/><Context docBase="CRUD_Market" path="/CRUD_Market" reloadable="true" source="org.eclipse.jst.jee.server:CRUD_Market"/><Context docBase="CRUD_HomePage" path="/CRUD_HomePage" reloadable="true" source="org.eclipse.jst.jee.server:CRUD_HomePage"/><Context docBase="FreeBoard" path="/FreeBoard" reloadable="true" source="org.eclipse.jst.jee.server:FreeBoard"/></Host>
 	  
 	</Engine>
   </Service>
