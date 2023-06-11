@@ -1,9 +1,6 @@
 INDEX VERSION 1.4+C:\Users\changyoung.shin\Desktop\폴리텍 자료\KOPO-HTML\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-2680614842.index
-3360916853.index
 3566417322.index
-1708521455.index
-530481118.index
-324750789.index
 765626455.index
-615129105.index
+4052106825.index
+3174846269.index
+3360916853.index
