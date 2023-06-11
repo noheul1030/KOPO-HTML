@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="출력"/>
+		<item key="selection" value="freeboard"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="gongji"/>
+			<item value="Home_Page"/>
+			<item value="&apos;20%&apos;"/>
+			<item value="gongji_list"/>
+			<item value="AllviewDB"/>
 			<item value="저장"/>
 			<item value="\\"/>
 			<item value="A_01.jsp"/>
@@ -18,10 +23,13 @@
 			<item value="name"/>
 			<item value="8080"/>
 			<item value="8"/>
-			<item value="currentPage"/>
-			<item value="getStudentItemDao"/>
 		</list>
 		<list key="replacehistory">
+			<item value="freeboard"/>
+			<item value="FreeBoard"/>
+			<item value="150px"/>
+			<item value="create_list"/>
+			<item value="gongji_list"/>
 			<item value="출력"/>
 			<item value="//"/>
 			<item value="/"/>
