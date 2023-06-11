@@ -59,7 +59,8 @@
 	
 	//String root = "C:\\Users\\노을\\Documents\\GitHub\\KOPO-HTML\\CRUD_Market\\src\\main\\webapp\\Market\\img";
 	String root = "C:\\Users\\changyoung.shin\\Desktop\\폴리텍 자료\\KOPO-HTML\\CRUD_Market\\src\\main\\webapp\\Market\\img";
-	String newPath = root;
+// 	String newPath = root;
+	String newPath = directory + "\\Market\\img";
 	
 	MultipartRequest multi = new MultipartRequest(request, newPath, sizeLimit, "UTF-8", new DefaultFileRenamePolicy());
 	
@@ -125,7 +126,7 @@
 %>	
 	<table border='2'>
 		<tr>
-			<td height='50px' align='center'><h2>(주)트와이스 재고 현황 - 상품등록</h2></td>
+			<td height='50px' align='center'><h2>(주)과일상회 재고 현황 - 상품등록</h2></td>
 		</tr>
 		<tr>
 			<td>	
