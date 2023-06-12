@@ -9,9 +9,12 @@
 	<head>
 		<style>
 			table{
+				margin-left: auto;
+	  			margin-right: auto;			
 			  	text-align: center; 
- 				width: 600px; 
+ 				width: 80%; 
  				border-collapse: collapse;
+ 				border-width: 2px;
  				cellspacing="1"
    			}
    			

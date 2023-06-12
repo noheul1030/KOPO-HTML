@@ -4,8 +4,8 @@ import java.sql.*;
 
 public class Home_PageDaoImpl implements Home_PageDao{
 	String driver = "com.mysql.cj.jdbc.Driver";
-//	String connection = "jdbc:mysql://localhost:3307/kopo11";
-	String connection = "jdbc:mysql://localhost:3306/noheul";
+	String connection = "jdbc:mysql://192.168.23.60:3307/kopo11";
+//	String connection = "jdbc:mysql://localhost:3306/noheul";
 	String root = "root";
 	String password = "shdmf1030@";
 	

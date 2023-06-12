@@ -12,7 +12,7 @@
 				margin-left: auto;
 	  			margin-right: auto;
 			  	text-align: center; 
- 				width: 85%; 
+ 				width: 80%; 
  				border-collapse: collapse;
  				cellspacing:1;
    			}
@@ -43,7 +43,10 @@
 			}			
 			.custom-size {
         	font-size: 15px;
-        	background-color: gold;
+        	background-color: #fff6dd;
+        	}
+        	span{
+        	  margin-left:5px;	
         	}     			
 		</style>
 	</head>
@@ -99,41 +102,41 @@
         while (true){ // rset의 next값이 true일 때 
 %>		
 	<table border = '1'>
-		<tr>
-			<td width = '10%'><b>번호</b></td>
-			<td width = '65%'><b>제목</b></td>
-			<td width = '25%'><b>등록일</b></td>
+		<tr bgcolor='#fff6dd'>
+			<td width='70'><b>번호</b></td>
+			<td><b>제목</b></td>
+			<td width='100'><b>등록일</b></td>
 		</tr>
 <%           
 			if(from <=1){                                  
-                 from = 1;
-                 fromByTen = 0;    
-                 for(int i = 0; i < cnt; i++){               // 0~ cnt까지 도는 반복문
+                from = 1;
+                fromByTen = 0;    
+                for(int i = 0; i < cnt; i++){               // 0~ cnt까지 도는 반복문
                     String[] listcut = gongji.get(i).split("\t");
 %>               
         <tr class = 'tr' align = center>
              <td><%=listcut[0]%></td>   <!--배열 0번째 값-->
-             <td align = left><a href =gongji_view.jsp?key=<%=listcut[0]%>><%=listcut[1]%></a></td>
+             <td align = left><a href =gongji_view.jsp?key=<%=listcut[0]%>><span><%=listcut[1]%></span></a></td>
               <td><%=listcut[2]%></td>                                             <!--배열 2번째 값-->
         </tr>
 <%              
-                 } break;                                                // 반복문이 다 돌고 난후 break;
-             }else if(from > 1){                                         // from이 1보다 크면 true 
-                 for(int i = (from-1)*cnt; i < ((from-1)*cnt)+cnt; i++){ // cnt의 값에 따라 바뀌는 반복문
+                } break;                                                // 반복문이 다 돌고 난후 break;
+			}else if(from > 1){                                         // from이 1보다 크면 true 
+				for(int i = (from-1)*cnt; i < ((from-1)*cnt)+cnt; i++){ // cnt의 값에 따라 바뀌는 반복문
                     String[] listcut = gongji.get(i).split("\t");         // score 리스트의 i값 가져와서 배열에 탭기준 구분 저장
 %>
         <tr class = 'tr' align = center>
              <td><%=listcut[0]%></td>   <!--배열 0번째 값-->
-             <td align = left><a href =gongji_view.jsp?key=<%=listcut[0]%>><%=listcut[1]%></a></td>
+             <td align = left><a href =gongji_view.jsp?key=<%=listcut[0]%>><span><%=listcut[1]%></span></a></td>
               <td><%=listcut[2]%></td>                                             <!--배열 2번째 값-->
         </tr>
 <%
-                   } break;    // 반복문이 다 돌고 난후 break; 
-	           }
+				} break;    // 반복문이 다 돌고 난후 break; 
 			}
-           }catch(Exception e){
-           		e.printStackTrace();
-           }
+		}
+	}catch(Exception e){
+		e.printStackTrace();
+	}
 %>	
 	</table>
 	<br>
@@ -176,9 +179,9 @@
 			<td><a href="gongji_list.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                           <!-- 테이블 링크 연결 -->
 <%		} %>
 		
-			<td align = 'right' width= 60px>
+			<td align = 'right' width= 80px>
 			<input class='fourth' type='submit' value='신규' formaction = 'gongji_insert.jsp'
-				style="width: 60px; height: 30px; padding: 0px;font-weight: bold;"> </td>
+				style="width: 80px; height: 30px; padding: 0px;font-weight: bold;"> </td>
 		</tr>
 	</table>
 	</form>
