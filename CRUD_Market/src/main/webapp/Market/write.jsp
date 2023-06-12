@@ -54,15 +54,12 @@
 	int sizeLimit=100*300*300;
 	String path= "/Market/img";
 	String directory= request.getServletContext().getRealPath(path);
-	//String root = "\\Users\\노을\\Documents\\GitHub\\KOPO-HTML\\CRUD_Market\\src\\main\\webapp\\Market\\img";
-	//String newPath = directory.replace("\\Market\\img mango.png", root);
 	
-	//String root = "C:\\Users\\노을\\Documents\\GitHub\\KOPO-HTML\\CRUD_Market\\src\\main\\webapp\\Market\\img";
-	String root = "C:\\Users\\changyoung.shin\\Desktop\\폴리텍 자료\\KOPO-HTML\\CRUD_Market\\src\\main\\webapp\\Market\\img";
+	String root = "/var/lib/tomcat9/webapps/CRUD_Market/Market/img";
 // 	String newPath = root;
-	String newPath = directory + "\\Market\\img";
+	String newPath = directory + path;
 	
-	MultipartRequest multi = new MultipartRequest(request, newPath, sizeLimit, "UTF-8", new DefaultFileRenamePolicy());
+	MultipartRequest multi = new MultipartRequest(request, root, sizeLimit, "UTF-8", new DefaultFileRenamePolicy());
 	
 	String filename = null;
 
@@ -140,7 +137,7 @@
 				<tr>
 					<td align = 'center'>
 					<input class='fourth' type='submit' value='재고 현황' formaction = 'create_list.jsp'
-						style="width: 100px; height: 30px; padding: 0px;font-weight: bold;"> </td>
+						style="width: 130px; height: 30px; padding: 0px;font-weight: bold;"> </td>
 				</tr>
 			</table>
 			</form>

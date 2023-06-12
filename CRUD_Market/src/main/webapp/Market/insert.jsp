@@ -70,7 +70,11 @@
 		    document.getElementById('previewImg').src = "";
 		  }
 		}
+		function trimSpace(input) {
+			  return input.replace(/^\s+/, '');
+			}
 	</script>
+	
 	<body>
 <%
 	MarketDao dao = new MarketDaoImpl();
@@ -85,31 +89,31 @@
 		<form method="post" enctype="multipart/form-data">
 			<table border='1' class='table' style="text-align:left; table-layout: fixed;">		
 				<tr>
-					<td width='20%'><span>상품 번호</span></td>
+					<td bgcolor='#ffdddd' width='20%'><span>상품 번호</span></td>
 					<td colspan='2'><input pattern="^(?:100000000|[1-9][0-9]{0,8}?|0)$" type='text' name='id' value='<%=dao.middleID()%>' title="숫자만 입력하세요." readonly></td>
 				</tr>
 				<tr>
-					<td width='20%'><span>상품명</span></td>
-					<td colspan='2'><input pattern="^[가-힣]{1,10}$" type='text' name='name' value='' title="한글만 입력하세요." required></td>
+					<td bgcolor='#ffdddd' width='20%'><span>상품명</span></td>
+					<td colspan='2'><input pattern="^[^<>]{1,10}$" type='text' name='name' value='' title="<> 금지,글자수 제한 10"  onblur="this.value = trimSpace(this.value);"required></td>
 				</tr>
 				<tr>
-					<td width='20%'><span>재고 현황</span></td>		
+					<td bgcolor='#ffdddd' width='20%'><span>재고 현황</span></td>		
 					<td colspan='2'><input pattern="^(?:100000000|[1-9][0-9]{0,8}?|0)$" type='text' name='inventoryCNT' value='' title="숫자만 입력하세요." required></td>
 				</tr>
 				<tr>
-					<td width='20%'><span>상품등록일</span></td>		
+					<td bgcolor='#ffdddd' width='20%'><span>상품등록일</span></td>		
 					<td colspan='2'><span><%=dao.date()%></span></td>
 				</tr>
 				<tr>
-					<td width='20%'><span>재고등록일</span></td>		
+					<td bgcolor='#ffdddd' width='20%'><span>재고등록일</span></td>		
 					<td colspan='2'><span><%=dao.date()%></span></td>
 				</tr>
 				<tr>
-					<td width='20%'><span>상품설명</span></td>		
-					<td colspan='2'><input pattern="^{1,50}$" type='text' name='text' value='' title="상품설명을 입력하세요." required></td>
+					<td bgcolor='#ffdddd' width='20%'><span>상품설명</span></td>		
+					<td colspan='2'><input pattern="^[^<>]{1,30}$" type='text' name='text' value='' title="상품설명을 입력하세요." required></td>
 				</tr>
 				<tr>
-					<td width='20%' rowspan='2'><span>상품사진</span></td>		
+					<td bgcolor='#ffdddd' width='20%' rowspan='2'><span>상품사진</span></td>		
 				</tr>
 				<tr>
 					<td style="border-right: none;">
@@ -128,8 +132,10 @@
 			<table class='table'>
 				<tr>
 					<td width='15%' align = 'right'>
+					<input class='fourth' type='submit' value='등록 취소' formaction='create_list.jsp'
+						style="width: 80px; height: 30px; padding: 0px;font-weight: bold;"formnovalidate>
 					<input class='fourth' type='submit' value='완료' formaction='write.jsp'
-						style="width: 60px; height: 30px; padding: 0px;font-weight: bold;"> </td>
+						style="width: 80px; height: 30px; padding: 0px;font-weight: bold;"> </td>
 				</tr>
 			</table>
 			</form>

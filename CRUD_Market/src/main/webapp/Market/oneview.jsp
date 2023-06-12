@@ -71,33 +71,37 @@
 			<table border='1' class='table' style="text-align:left; table-layout: fixed;">
 <%	while(oneID.next()){ %>
 				<tr>
-					<td width='20%'><span>상품 번호</span></td>
+					<td bgcolor='#ffdddd' width='20%'><span>상품 번호</span></td>
 					<td><input type='text' name='key' value='<%=oneID.getInt(1)%>'readonly style="all: unset; margin-left:5px;"></td>
 				</tr>
 				<tr>
-					<td width='20%'><span>상품명</span></td>
+					<td bgcolor='#ffdddd' width='20%'><span>상품명</span></td>
 					<td><span><%=oneID.getString(2)%></span></td>
 				</tr>
 				<tr>
-					<td width='20%'><span>재고 현황</span></td>		
+					<td bgcolor='#ffdddd' width='20%'><span>재고 현황</span></td>		
 					<td><span><%=oneID.getInt(3)%></span></td>
 				</tr>
 				<tr>
-					<td width='20%'><span>상품등록일</span></td>		
+					<td bgcolor='#ffdddd' width='20%'><span>상품등록일</span></td>		
 					<td><span><%=oneID.getString(4)%></span></td>
 				</tr>
 				<tr>
-					<td width='20%'><span>재고등록일</span></td>		
+					<td bgcolor='#ffdddd' width='20%'><span>재고등록일</span></td>		
 					<td><span><%=oneID.getString(5)%></span></td>
 				</tr>
 				<tr>
-					<td width='20%'><span>상품설명</span></td>		
+					<td bgcolor='#ffdddd' width='20%'><span>상품설명</span></td>		
 					<td><span><%=oneID.getString(6)%></span></td>
 				</tr>
 				<tr>
-					<td width='20%'><span>상품사진</span></td>		
+					<td bgcolor='#ffdddd' width='20%'><span>상품사진</span></td>		
 					<td>
+<%			if(oneID.getString(7).contains("null")){ %>
+						<span>사진이 없습니다.</span>
+<%			}else{ %>
 						<img width="250" src ='img/<%=oneID.getString(7)%>' style="margin:10px;">
+<%			} %>
 					</td>
 				</tr>
 				</table>
@@ -111,6 +115,8 @@
 			<table class='table'>
 				<tr>
 					<td width='15%' align = 'right'>
+						<input class='fourth' type='submit' value='뒤로 가기' formaction = 'create_list.jsp'
+							style="width: 80px; height: 30px; padding: 0px;font-weight: bold;">
 						<input class='fourth' type='submit' value='상품 삭제' formaction = 'delete.jsp'
 							style="width: 80px; height: 30px; padding: 0px;font-weight: bold;">
 						<input class='fourth' type='submit' value='재고 수정' formaction = 'update.jsp'

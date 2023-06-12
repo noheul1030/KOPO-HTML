@@ -48,13 +48,23 @@
 	MarketDao dao = new MarketDaoImpl();
 	request.setCharacterEncoding("utf-8");
 	
-	String name ="";
+	String root = "/var/lib/tomcat9/webapps/CRUD_Market/Market/img";
+	String name = null;	
+	String picture = null;
+	
 	String deleteKey = request.getParameter("key");
-	String query = String.format("select name from market where id = '%s'",deleteKey);
+	String query = String.format("select * from market where id = '%s'",deleteKey);
 	ResultSet rset = dao.stmt().executeQuery(query);
 
 	while(rset.next()){
-		name=rset.getString(1);
+		name = rset.getString(2);
+		picture = rset.getString(7);
+	}
+	
+	String filePath = root + "/" + picture;
+	File file = new File(filePath);
+	if (file.exists()) {
+	    file.delete();
 	}
 	
 	dao.delete(deleteKey);

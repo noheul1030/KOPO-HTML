@@ -133,20 +133,33 @@
 			    for(int i = 0; i < cnt; i++){               // 0~ cnt까지 도는 반복문
 			       String[] listcut = market.get(i).split("\t");
 %>		
-				<tr class='tr'>
-					<td><a href = 'oneview.jsp?key=<%=listcut[0]%>'><%=listcut[0]%></a></td>
-					<td><a href = 'oneview.jsp?key=<%=listcut[0]%>'><%=listcut[1]%></a></td>
-					<td><%=listcut[2]%></td>
-					<td><%=listcut[3]%></td>
-					<td><%=listcut[4]%></td>
-				</tr>
+					<tr class='tr'>
+						<td><a href = 'oneview.jsp?key=<%=listcut[0]%>'><%=listcut[0]%></a></td>
+						<td><a href = 'oneview.jsp?key=<%=listcut[0]%>'><%=listcut[1]%></a></td>
+						<td><%=listcut[2]%></td>
+						<td><%=listcut[3]%></td>
+						<td><%=listcut[4]%></td>
+					</tr>
 <%
                 } break;    // 반복문이 다 돌고 난후 break; 
-	           }
+			}else if(from > 1){                                         // from이 1보다 크면 true 
+				for(int i = (from-1)*cnt; i < ((from-1)*cnt)+cnt; i++){ // cnt의 값에 따라 바뀌는 반복문
+                    String[] listcut = market.get(i).split("\t");         // score 리스트의 i값 가져와서 배열에 탭기준 구분 저장
+%>		
+    				<tr class='tr'>
+    					<td><a href = 'oneview.jsp?key=<%=listcut[0]%>'><%=listcut[0]%></a></td>
+    					<td><a href = 'oneview.jsp?key=<%=listcut[0]%>'><%=listcut[1]%></a></td>
+    					<td><%=listcut[2]%></td>
+    					<td><%=listcut[3]%></td>
+    					<td><%=listcut[4]%></td>
+    				</tr>
+<%
+				} break;    // 반복문이 다 돌고 난후 break; 
 			}
-        }catch(Exception e){
-        		e.printStackTrace();
-        }
+		}
+	}catch(Exception e){
+		e.printStackTrace();
+	}
 %>
 			</table>
 			</td>
