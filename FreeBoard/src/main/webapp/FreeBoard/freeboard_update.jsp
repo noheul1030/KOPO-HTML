@@ -97,14 +97,14 @@
 	<table>
 		<tr>
 			<td colspan='2' align='right'>
-				<input class='fourth' type='submit' value='취소' formaction = 'freeboard_list.jsp' 
-					style="width: 60px; height: 30px; padding: 0px;font-weight: bold;">
+				<input class='fourth' type='submit' value='뒤로가기' formaction = 'freeboard_list.jsp' 
+					style="width: 80px; height: 30px; padding: 0px;font-weight: bold;"formnovalidate>
 					
-				<input class='fourth' type='submit' value='쓰기' formaction = 'freeboard_write.jsp' 
-					style="width: 60px; height: 30px; padding: 0px;font-weight: bold;">
+				<input class='fourth' type='submit' value='저장' formaction = 'freeboard_write.jsp' 
+					style="width: 80px; height: 30px; padding: 0px;font-weight: bold;">
 					
 				<input class='fourth' type='submit' value='삭제' formaction = 'freeboard_delete.jsp' 
-					style="width: 60px; height: 30px; padding: 0px;font-weight: bold;">
+					style="width: 80px; height: 30px; padding: 0px;font-weight: bold;"formnovalidate>
 			</td>
 		</tr>
 	</table>

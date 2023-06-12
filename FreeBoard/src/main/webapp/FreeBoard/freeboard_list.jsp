@@ -87,11 +87,12 @@
 	/* 1 ~ 최대페이지 */
 	else{pageCheck = from;}
 	
-	ResultSet rset = dao.stmt().executeQuery("select * from freeboard order by id desc;");	
+	//ResultSet rset = dao.stmt().executeQuery("select * from freeboard order by id desc;");	
+	ResultSet rset = dao.stmt().executeQuery("select id,title,date,recnt,viewcnt from freeboard order by rootid desc,recnt asc;");	
 	List<String> freeboard = new ArrayList<String>(); // new 리스트 선언
 	
 	while(rset.next()){
-		freeboard.add(Integer.toString(rset.getInt(1))+"\t"+rset.getString(2)+"\t"+rset.getString(3)+"\t"+rset.getString(8));
+		freeboard.add(Integer.toString(rset.getInt(1))+"\t"+rset.getString(2)+"\t"+rset.getString(3)+"\t"+rset.getString(5));
  	}
 	try{
 		// 반복문 
@@ -99,10 +100,10 @@
 %>		
 	<table border = '1'>
 		<tr>
-			<td width = '10%'><b>번호</b></td>
-			<td width = '60%'><b>제목</b></td>
-			<td width = '15%'><b>조회수</b></td>
-			<td width = '15%'><b>등록일</b></td>
+			<td bgcolor='#dde5ff' width = '70'><b>번호</b></td>
+			<td bgcolor='#dde5ff'><b>제목</b></td>
+			<td bgcolor='#dde5ff' width = '70'><b>조회수</b></td>
+			<td bgcolor='#dde5ff' width = '100'><b>등록일</b></td>
 		</tr>
 <%           
 			if(from <=1){                                  

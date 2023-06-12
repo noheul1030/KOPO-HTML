@@ -21,6 +21,7 @@ public interface FreeBoardDao {
 	
 	// 3. 공지번호,제목,날짜,내용 값 저장
 	void newinsert(String title, String date, String content);
+	 void reinsert(String title, String date, String content, int rootid, int relevel, int recnt);
 	
 	// 4. 컬럼 삭제
 	void delete(int number);		

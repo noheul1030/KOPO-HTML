@@ -40,7 +40,7 @@
 			  background-position: 0;
 			}	
 			span{
-				margin-left:3px;
+				margin-left:5px;
 			}
 		</style>
 	</head>
@@ -84,7 +84,7 @@
 		</tr>
 		<tr>
 			<td width= 15%><span>제목</span></td>
-			<td colspan='3' align= 'left' width= 85%><input type='text' name= 'title' value='<%=title%>' readonly style="all: unset; margin-left:5px;"></td>
+			<td colspan='3' align= 'left' width= 85%><span type='text' name= 'title'><%=title%></span></td>
 		</tr>
 		<tr>
 			<td width= 15%><span>일자</span></td>
@@ -92,7 +92,7 @@
 		</tr>
 		<tr>
 			<td width= 15%><span>조회수</span></td>
-			<td colspan='3' align='left' width = 85%><input type='text' name='date' value='<%=viewcnt%>' readonly style="all: unset; margin-left:5px;"></td>
+			<td colspan='3' align='left' width = 85%><input type='text' name=viewcnt value='<%=viewcnt%>' readonly style="all: unset; margin-left:5px;"></td>
 		</tr>
 		<tr>
 			<td width= 15%><span>내용</span></td>
@@ -102,13 +102,13 @@
 		</tr>
 		<tr>
 			<td width= 15%><span>원글</span></td>
-			<td colspan='3' align='left' width = 85%><input type='text' name='date' value='<%=rootid%>' readonly style="all: unset; margin-left:5px;"></td>
+			<td colspan='3' align='left' width = 85%><input type='text' name='rootid' value='<%=rootid%>' readonly style="all: unset; margin-left:5px;"></td>
 		</tr>
 		<tr>
 			<td width= 15%><span>댓글수준</span></td>
-			<td align='left' width = 40% style="border:none;"><input type='text' name='date' value='<%=relevel%>' readonly style="all: unset; margin-left:5px;"></td>
+			<td align='left' width = 40% style="border:none;"><input type='text' name='relevel' value='<%=relevel%>' readonly style="all: unset; margin-left:5px;"></td>
 			<td width= 15% style="border:none;"><span>댓글내 순서</span></td>
-			<td align='left' width = 40% style="border:none;"><input type='text' name='date' value='<%=recnt%>' readonly style="width:100px;margin-left:5px;"></td>
+			<td align='left' width = 40% style="border:none;"><input type='text' name='recnt' value='<%=recnt%>' readonly style="width:100px;margin-left:5px;"></td>
 		</tr>
 	</table>
 	
@@ -116,13 +116,13 @@
 		<tr>
 			<td colspan='2' style="text-align:right;">
 				<input class='fourth' type='submit' value='목록' formaction = 'freeboard_list.jsp' 
-					style="width: 60px; height: 30px; padding: 0px;font-weight: bold;">
+					style="width: 60px; height: 30px; padding: 0px;font-weight: bold;"formnovalidate>
 					
 				<input class='fourth' type='submit' value='수정' formaction = 'freeboard_update.jsp'
 					style="width: 60px; height: 30px; padding: 0px;font-weight: bold;">
 
 				<input class='fourth' type='submit' value='삭제' formaction = 'freeboard_delete.jsp'
-					style="width: 60px; height: 30px; padding: 0px;font-weight: bold;">
+					style="width: 60px; height: 30px; padding: 0px;font-weight: bold;"formnovalidate>
 
 				<input class='fourth' type='submit' value='댓글' formaction = 'freeboard_reinsert.jsp'
 					style="width: 60px; height: 30px; padding: 0px;font-weight: bold;">

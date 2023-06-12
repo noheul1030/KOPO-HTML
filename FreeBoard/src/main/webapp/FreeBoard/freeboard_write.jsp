@@ -8,10 +8,12 @@
 	<head>
 		<style>
 			table{
+				margin-left: auto;
+	  			margin-right: auto;
 			  	text-align: center; 
- 				width: 600px; 
+ 				width: 80%; 
  				border-collapse: collapse;
- 				cellspacing="1"
+ 				cellspacing:1;
    			}
    			
     		.fourth{
@@ -36,22 +38,34 @@
 	FreeBoardDao dao = new FreeBoardDaoImpl();
 	request.setCharacterEncoding("utf-8");
 
-	Integer number = null;
+	Integer id = null;
 	String title = null;
 	String date = null;
 	String content = null;
+	Integer rootid = null;
+	Integer relevel = null;
+	Integer recnt = null;
 	
 	if(request.getParameter("id").equals("신규(insert)")){
 		title = request.getParameter("title");
 		date = request.getParameter("date");
 		content = request.getParameter("content");
 	}else{
+		id = Integer.parseInt(request.getParameter("id"));
 		title = request.getParameter("title");
 		date = request.getParameter("date");
 		content = request.getParameter("content");
-		number = Integer.parseInt(request.getParameter("id"));
+		
+		if(request.getParameter("rootid") != null){
+		rootid = Integer.parseInt(request.getParameter("rootid"));
+		relevel = Integer.parseInt(request.getParameter("relevel"));
+		recnt = Integer.parseInt(request.getParameter("recnt"));
+			if(relevel > 0){
+				dao.reinsert(title, date, content, rootid, relevel, recnt);
+			}
+		}
 	}
-	
+	 
 	int result = 0;
 	if(dao.count()!=0){
 	// number의 값이 존재하는지 여부 확인
@@ -80,7 +94,7 @@
 		</form>
 <%
 	}else if(result == 1){
-		dao.update(number, title, content);
+		dao.update(id, title, content);
 %>	
 	<br><br><br><br>
 	<form method='post'>

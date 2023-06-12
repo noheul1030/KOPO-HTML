@@ -6,8 +6,8 @@ import java.util.Date;
 
 public class FreeBoardDaoImpl implements FreeBoardDao{
 	String driver = "com.mysql.cj.jdbc.Driver";
-//	String connection = "jdbc:mysql://localhost:3307/kopo11";
-	String connection = "jdbc:mysql://localhost:3306/noheul";
+	String connection = "jdbc:mysql://192.168.23.60:3307/kopo11";
+//	String connection = "jdbc:mysql://localhost:3306/noheul";
 	String root = "root";
 	String password = "shdmf1030@";
 	
@@ -93,14 +93,29 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	@Override // 3. 공지번호,제목,날짜,내용 값 저장
 	public void newinsert(String title, String date, String content) {
 		try {			
+			int lastNumber = lastNumber();
 			String sql = String.format
 					("insert into freeboard (title,date,content,viewcnt) values ('%s','%s','%s',%d);",title,date,content,0);
-			
+			stmt().execute(sql);
+			String query = String.format
+					("update freeboard SET rootid = %d, relevel = %d, recnt = %d WHERE id = %d;",lastNumber,0,0,lastNumber);
+			stmt().execute(query);
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	public void reinsert(String title, String date, String content, int rootid, int relevel, int recnt) {
+		try {
+			String sql = String.format
+					("insert into freeboard (title,date,content,rootid,relevel,recnt,viewcnt) "
+							+ "values ('%s','%s','%s',%d,%d,%d,%d);",title,date,content,rootid,relevel,recnt,0);
 			stmt().execute(sql);
 		}catch(Exception e) {
 			System.out.println(e);
 		}
 	}
+
 	
 	@Override // 4. 컬럼 삭제
 	public void delete(int number) {

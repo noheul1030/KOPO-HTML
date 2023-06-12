@@ -8,10 +8,12 @@
 	<head>
 		<style>
 			table{
+				margin-left: auto;
+	  			margin-right: auto;
 			  	text-align: center; 
- 				width: 600px; 
+ 				width: 80%; 
  				border-collapse: collapse;
- 				cellspacing="1"
+ 				cellspacing:1;
    			}
    			
     		.fourth{
@@ -36,9 +38,9 @@
 	FreeBoardDao dao = new FreeBoardDaoImpl();
 	request.setCharacterEncoding("utf-8");
 
-	int number = Integer.parseInt(request.getParameter("number"));
+	int id = Integer.parseInt(request.getParameter("id"));
 	
-	dao.delete(number);
+	dao.delete(id);
 %>	
 	<br><br><br><br>
 	<form method='post'>
