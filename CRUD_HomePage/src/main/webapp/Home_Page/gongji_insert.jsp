@@ -56,7 +56,7 @@
 		function trimSpace(input) {
 		  return input.replace(/^\s+/, '');
 		}
-		// input받는 값의 유효성 검사(<,> 입력방지)
+		// input받는 값의 유효성 검사(<,> 입력방지, 글자수 70자)
 		function InputCheck(input) {
 		  var inputValue = input; // 입력 받는 변수 혹은 데이터베이스에서 가져온 값 등
 		  var pattern = /^(?!(&nbsp;|\s)*$).{1,70}$/;
@@ -75,6 +75,7 @@
 		    }
 		  }
 		}
+		// form안에 들어오는 id 값들의 유효성 검사 
 		function validateForm() {
 			var title = document.forms["myForm"]["title"].value;
 			var content = document.forms["myForm"]["content"].value;
@@ -101,7 +102,8 @@
 	String date = dao.date(); // 날짜 값 저장
 	
 	dao.stmt().close();
-%>	<form name="myForm" method="post" onsubmit="return validateForm()"> <!-- form 메소드 post 지정 -->
+	 // form 메소드 post 지정 submit 발생 시 해당 function 실행
+%>	<form name="myForm" method="post" onsubmit="return validateForm()">
 	<table border='1'> <!-- 테이블 테두리 1 지정 -->
 		<tr><!-- 셀 스타일 지정,text 출력 -->
 			<td width= 10% bgcolor='#fff6dd'>번호</td>

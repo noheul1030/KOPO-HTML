@@ -85,16 +85,15 @@
 	<table>
 		<tr> <!-- 셀 스타일 지정,text 출력 -->
 			<td colspan='2' align='right'>
-			<!-- 버튼 클릭 시 gongji_list.jsp 이동 -->
+				<!-- 버튼 클릭 시 gongji_list.jsp 이동 -->
 				<input class='fourth' type='submit' value='뒤로 가기' formaction = 'gongji_list.jsp' 
 					style="width: 80px; height: 30px; padding: 0px;font-weight: bold;" formnovalidate>
-			<!-- 버튼 클릭 시 gongji_update.jsp 이동 -->		
+				<!-- 버튼 클릭 시 gongji_update.jsp 이동 -->		
 				<input class='fourth' type='submit' value='수정 하기' formaction = 'gongji_update.jsp'
 					style="width: 80px; height: 30px; padding: 0px;font-weight: bold;">
 			</td>
 		</tr>
 	</table>
 	</form> <!-- form 태그 종료 -->
-	
 	</body>
 </html>

@@ -38,7 +38,8 @@
 	<body>
 <%
 	Home_PageDao dao = new Home_PageDaoImpl();
-	request.setCharacterEncoding("utf-8"); // 전달 받는 값들의 인코딩 설정을 utf-8로 지정
+	//전달 받는 값들의 인코딩 설정을 utf-8로 지정
+	request.setCharacterEncoding("utf-8"); 
 
 	Integer number = null; // 변수 선언 
 	String title = null; // 변수 선언
