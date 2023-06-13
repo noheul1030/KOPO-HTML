@@ -64,16 +64,6 @@
         document.form1.action = "A_02_H.jsp";
         document.form1.submit();
 	  } 
-	  function HangleCheck(input) {
-	        var inputValue = input; // 입력 받는 변수 혹은 데이터베이스에서 가져온 값 등
-
-	        if (inputValue.match("^[가-힣]{1,10}$")) {
-	            return inputValue;
-	        } else {
-	            alert("한글 입력 오류");
-	            return false; // 오류 발생 시 false를 반환하여 처리
-	        }
-	    }
 	</script>
     <body>
 <%
