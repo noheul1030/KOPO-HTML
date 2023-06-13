@@ -81,7 +81,7 @@
 %>	
 	<table border='2'>
 		<tr>
-			<td height='50px' align='center'><h2>(주)과일상회 재고 현황 - 상품등록</h2></td>
+			<td height='50px' align='center'><h2>(주)과일상회 재고 현황 - 재고수정</h2></td>
 		</tr>
 		<tr>
 			<td>

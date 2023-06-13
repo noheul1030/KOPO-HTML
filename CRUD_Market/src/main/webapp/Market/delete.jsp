@@ -46,14 +46,14 @@
 	<body>
 <%
 	MarketDao dao = new MarketDaoImpl();
-	request.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("utf-8"); // 전달 받는 값들의 인코딩 설정을 utf-8로 지정
 	
-	String root = "/var/lib/tomcat9/webapps/CRUD_Market/Market/img";
-	String name = null;	
-	String picture = null;
+	String root = "/var/lib/tomcat9/webapps/CRUD_Market/Market/img"; // 이미지가 저장되는 파일 경로
+	String name = null;	// 변수 선언
+	String picture = null;	// 변수 선언
 	
-	String deleteKey = request.getParameter("key");
-	String query = String.format("select * from market where id = '%s'",deleteKey);
+	String deleteKey = request.getParameter("key");  // 전달받은 값 저장
+	String query = String.format("select * from market where id = '%s'",deleteKey); // 삭제할 id키rkqt 조회
 	ResultSet rset = dao.stmt().executeQuery(query);
 
 	while(rset.next()){

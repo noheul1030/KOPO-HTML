@@ -7,6 +7,7 @@
 <html>
 	<head>
 		<style>
+			/*테이블 스타일 지정*/
 			table{
 				margin-left: auto;
 	  			margin-right: auto;
@@ -27,17 +28,22 @@
  				cellspacing:1;
  				table-layout: fixed;
    			}
+   			/*.tr:hover 스타일 지정*/
    			.tr:hover{
    			 background-color : #f5f5f5;
    			}
+   			/*h2 스타일 지정*/
    			h2{margin-top:20px;}
+   			/*a 스타일 지정*/
 			a {text-decoration-line: none;  color: #696969;}
+			/*a:hover 스타일 지정*/
 			a:hover {
 			  font-size : 16px;
 			  font-weight: bold;
 			  background-position: 100%;
 		  	  background-size: 400%;
 			}
+			/*버튼의 스타일 지정*/
     		.fourth{
 			  background: #ffdddd;
 			  border-color: white;
@@ -51,6 +57,7 @@
 			.fourth:hover {
 			  background-position: 0;
 			} 
+			/*.custom-size 스타일 지정*/
 			.custom-size {
         	font-size: 15px;
         	background-color: #ffdddd;
@@ -61,7 +68,7 @@
 	<body>
 <%
 	MarketDao dao = new MarketDaoImpl();
-	dao.createTable();
+	dao.createTable(); // 테이블 생성
 	
 	
 	int total = dao.count(); // 변수 값 리스트 크기 지정
@@ -72,7 +79,7 @@
 	int from = 0; // 변수 초기값 지정
 	int cnt = 10; // 변수 초기값 지정
 	int fromByTen = 0; // 변수 초기값 지정
-	int minpage = 1;
+	int minpage = 1; // 변수 초기값 지정
 	int maxpage = (total%cnt == 0)?(total/cnt):(total/cnt)+1; // 변수 초기값 지정
 	int LineCnt = 1; // 변수 초기값 지정
 	
@@ -100,7 +107,7 @@
 	/* 1 ~ 최대페이지 */
 	else{pageCheck = from;}
 	
-	ResultSet rset = dao.stmt().executeQuery("select * from market order by id asc;");	
+	ResultSet rset = dao.stmt().executeQuery("select * from market order by inventoryUpdate desc;");	
 	List<String> market = new ArrayList<String>(); // new 리스트 선언
 	
 	while(rset.next()){
@@ -111,28 +118,31 @@
 		// 반복문 
         while (true){ // rset의 next값이 true일 때 	
 %>	
-	<table border='2'>
-		<tr>
+	<table border='2'> <!-- 테이블 테두리 2 지정 -->
+		<tr> <!-- 셀 스타일 지정,text 출력 -->
 			<td height='50px'><h2>(주)과일상회 재고 현황 - 전체현황</h2></td>
-		</tr>
+		</tr> <!-- 셀 스타일 지정,text 출력 -->
 		<tr style="border-bottom:none;">
 			<td>
-	
+			<!-- 여기부터는 테이블 안에 테이블 구성 -->
 			<table border='1' class='table' style="table-layout: fixed;">
-				<tr bgcolor= ffdddd>
+				<tr bgcolor= ffdddd> <!-- 셀 스타일 지정,text 출력 -->
 					<td>상품번호</td>
 					<td>상품명</td>
 					<td>현재 재고수</td>
 					<td>재고파악일</td>
 					<td>상품등록일</td>
 				</tr>
-<%
-			if(from <=1){                                  
-			    from = 1;
+<%          // 전체 행의 값 조회 시 0이면 true
+			if(dao.count()==0){ %>
+		<tr><td><br><br><h3>게시글이 존재하지 않습니다.</h3></td></tr> <!-- 해당 문구 출력 -->
+<%			}
+			if(from <=1){                                   // from이 1이하이면
+			    from = 1;									// from 값 지정
 			    fromByTen = 0;    
 			    for(int i = 0; i < cnt; i++){               // 0~ cnt까지 도는 반복문
-			       String[] listcut = market.get(i).split("\t");
-%>		
+			       String[] listcut = market.get(i).split("\t"); // market list의 값을 \t 기준으로 배열 저장
+%>					<!-- 셀 스타일 지정,text 출력 -->
 					<tr class='tr'>
 						<td><a href = 'oneview.jsp?key=<%=listcut[0]%>'><%=listcut[0]%></a></td>
 						<td><a href = 'oneview.jsp?key=<%=listcut[0]%>'><%=listcut[1]%></a></td>
@@ -145,7 +155,7 @@
 			}else if(from > 1){                                         // from이 1보다 크면 true 
 				for(int i = (from-1)*cnt; i < ((from-1)*cnt)+cnt; i++){ // cnt의 값에 따라 바뀌는 반복문
                     String[] listcut = market.get(i).split("\t");         // score 리스트의 i값 가져와서 배열에 탭기준 구분 저장
-%>		
+%>					<!-- 셀 스타일 지정,text 출력 -->
     				<tr class='tr'>
     					<td><a href = 'oneview.jsp?key=<%=listcut[0]%>'><%=listcut[0]%></a></td>
     					<td><a href = 'oneview.jsp?key=<%=listcut[0]%>'><%=listcut[1]%></a></td>
@@ -167,8 +177,8 @@
 		<tr style="border-top:none;">
 			<td>
 	
-			<form method = 'post'>
-			<table border='1' class='table'>
+			<form method = 'post'>  <!-- form 메소드 post 지정 -->
+			<table border='1' class='table'>  <!-- 테이블 테두리 1 지정 -->
         		<tr align = center>          
 
 <%			if(from <= maxpage-(maxpage%10)) { %>                                                                           <!--from 값이 maxpage 보다 작거나 같으면 true 조건-->
@@ -211,7 +221,7 @@
 				style="width: 80px; height: 30px; padding: 0px;font-weight: bold;"> </td>
 				</tr>	
 			</table>
-			</form>
+			</form>  <!-- form 태그 종료 -->
 	
 			</td>
 		</tr>

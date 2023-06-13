@@ -60,6 +60,16 @@
 	</head>
 	<script>
 		function readURL(input) {
+		  var fileExtensions = [".gif", ".jpg", ".png"];
+		  var file = input.files[0];
+		  var fileExtension = file.name.substring(file.name.lastIndexOf(".")).toLowerCase();
+
+		  if (!fileExtensions.includes(fileExtension)) {
+		    alert(".gif, .jpg, .png과 같은 이미지 파일만 업로드 가능합니다.");
+		    input.value = ""; // 입력된 파일 초기화
+		    return false;
+		  }
+
 		  if (input.files && input.files[0]) {
 		    var reader = new FileReader();
 		    reader.onload = function(e) {
@@ -70,9 +80,61 @@
 		    document.getElementById('previewImg').src = "";
 		  }
 		}
+		
 		function trimSpace(input) {
 			  return input.replace(/^\s+/, '');
+		}
+		
+		function InputCheck(input) {
+		  var inputValue = input; // 입력 받는 변수 혹은 데이터베이스에서 가져온 값 등
+		  var pattern = /^(?!(&nbsp;|\s)*$).{1,20}$/;
+		  
+		  if(inputValue.trim().length === 0){
+			alert("제목의 내용을 입력하세요");
+		  	return false;
+		  }else{
+		    if (pattern.test(inputValue) && !inputValue.includes("&lt") && !inputValue.includes("&gt") 
+		    	  && !inputValue.includes("&#60") && !inputValue.includes("&#62")
+				  && !inputValue.includes("<") && !inputValue.includes(">")) {
+		      return inputValue;
+		    } else {
+		      alert("제목에는 공백,<,>는 사용할 수 없습니다.");
+		      return false; // 오류 발생 시 false를 반환하여 처리
+		    }
+		  }
+		}
+		function InputCheck2(input) {
+		  var inputValue = input; // 입력 받는 변수 혹은 데이터베이스에서 가져온 값 등
+		  var pattern = /^(?!(&nbsp;|\s)*$).{1,70}$/;
+		  
+		  if(inputValue.trim().length === 0){
+			alert("제목의 내용을 입력하세요");
+		  	return false;
+		  }else{
+		    if (pattern.test(inputValue) && !inputValue.includes("&lt") && !inputValue.includes("&gt") 
+		    	  && !inputValue.includes("&#60") && !inputValue.includes("&#62")
+				  && !inputValue.includes("<") && !inputValue.includes(">")) {
+		      return inputValue;
+		    } else {
+		      alert("제목에는 공백,<,>는 사용할 수 없습니다.");
+		      return false; // 오류 발생 시 false를 반환하여 처리
+		    }
+		  }
+		}
+		function validateForm() {
+			var title = document.forms["myForm"]["name"].value;
+			var content = document.forms["myForm"]["text"].value;
+			
+			title = trimSpace(title);
+			
+			if (InputCheck(title) == false) {
+				return false;
 			}
+			if (InputCheck2(content) == false) {
+				return false;
+			}
+			
+		}
 	</script>
 	
 	<body>
@@ -86,7 +148,7 @@
 		<tr style="border-bottom:none;">
 			<td>
 	
-		<form method="post" enctype="multipart/form-data">
+		<form  name="myForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 			<table border='1' class='table' style="text-align:left; table-layout: fixed;">		
 				<tr>
 					<td bgcolor='#ffdddd' width='20%'><span>상품 번호</span></td>
@@ -94,7 +156,8 @@
 				</tr>
 				<tr>
 					<td bgcolor='#ffdddd' width='20%'><span>상품명</span></td>
-					<td colspan='2'><input pattern="^[^<>]{1,10}$" type='text' name='name' value='' title="<> 금지,글자수 제한 10"  onblur="this.value = trimSpace(this.value);"required></td>
+					<td colspan='2'><input pattern="^{1,20}$" type='text' maxlength='20' name='name' value='' title="글자수 제한 20"
+					  required></td>
 				</tr>
 				<tr>
 					<td bgcolor='#ffdddd' width='20%'><span>재고 현황</span></td>		
@@ -110,7 +173,8 @@
 				</tr>
 				<tr>
 					<td bgcolor='#ffdddd' width='20%'><span>상품설명</span></td>		
-					<td colspan='2'><input pattern="^[^<>]{1,30}$" type='text' name='text' value='' title="상품설명을 입력하세요." required></td>
+					<td colspan='2'><input pattern="^{1,70}$" maxlength='70' type='text' name='text' value='' title="상품설명을 입력하세요." 
+					 required></td>
 				</tr>
 				<tr>
 					<td bgcolor='#ffdddd' width='20%' rowspan='2'><span>상품사진</span></td>		
@@ -120,7 +184,7 @@
 						<img id="previewImg" width="250" style="margin:10px;"/>
 					</td>
 					<td style="width: 200px; border-left: none; text-align: right;">
-						<input type='file' name='file' onchange="readURL(this);">	
+						<input type='file' accept='.gif, .jpg, .png' name='file' onchange="readURL(this);">	
 					</td>
 				</tr>
 				
@@ -132,8 +196,8 @@
 			<table class='table'>
 				<tr>
 					<td width='15%' align = 'right'>
-					<input class='fourth' type='submit' value='등록 취소' formaction='create_list.jsp'
-						style="width: 80px; height: 30px; padding: 0px;font-weight: bold;"formnovalidate>
+					<input class='fourth' type='button' value='등록 취소' formaction='create_list.jsp'
+						style="width: 80px; height: 30px; padding: 0px;font-weight: bold;"onclick="window.location.href = 'create_list.jsp';">
 					<input class='fourth' type='submit' value='완료' formaction='write.jsp'
 						style="width: 80px; height: 30px; padding: 0px;font-weight: bold;"> </td>
 				</tr>
