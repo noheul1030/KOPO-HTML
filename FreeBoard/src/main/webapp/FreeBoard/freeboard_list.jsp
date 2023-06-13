@@ -43,6 +43,9 @@
 			.custom-size {
         	font-size: 15px;
         	background-color: gold;
+        	}
+        	span{
+        	 margin-left:5px;
         	}     			
 		</style>
 	</head>
@@ -88,11 +91,11 @@
 	else{pageCheck = from;}
 	
 	//ResultSet rset = dao.stmt().executeQuery("select * from freeboard order by id desc;");	
-	ResultSet rset = dao.stmt().executeQuery("select id,title,date,recnt,viewcnt from freeboard order by rootid desc,recnt asc;");	
+	ResultSet rset = dao.stmt().executeQuery("select id,title,viewcnt,date,relevel from freeboard order by rootid desc, recnt asc;");	
 	List<String> freeboard = new ArrayList<String>(); // new 리스트 선언
 	
 	while(rset.next()){
-		freeboard.add(Integer.toString(rset.getInt(1))+"\t"+rset.getString(2)+"\t"+rset.getString(3)+"\t"+rset.getString(5));
+		freeboard.add(Integer.toString(rset.getInt(1))+"\t"+rset.getString(2)+"\t"+rset.getString(3)+"\t"+rset.getString(4)+"\t"+rset.getString(5));
  	}
 	try{
 		// 반복문 
@@ -105,18 +108,39 @@
 			<td bgcolor='#dde5ff' width = '70'><b>조회수</b></td>
 			<td bgcolor='#dde5ff' width = '100'><b>등록일</b></td>
 		</tr>
-<%           
+<%          
+			if(dao.count()==0){ %>
+		<tr style="border:none;"><td colspan='4'><h3 style="margin-top:15px;">게시글이 존재하지 않습니다.</h3></td></tr>
+<%			}
 			if(from <=1){                                  
                  from = 1;
                  fromByTen = 0;    
                  for(int i = 0; i < cnt; i++){               // 0~ cnt까지 도는 반복문
                     String[] listcut = freeboard.get(i).split("\t");
+                 	String re = "";
+                 	for(int j = 0; j < Integer.parseInt(listcut[4]);j++){
+                 		if(i > 0){
+                			re = re + "-";
+                		}
+                 	}
 %>               
         <tr class = 'tr' align = center>
              <td><%=listcut[0]%></td>   <!--배열 0번째 값-->
-             <td align = left><a href =freeboard_view.jsp?key=<%=listcut[0]%>><%=listcut[1]%></a></td>
-             <td><%=listcut[3]%></td>                                             <!--배열 7번째 값-->
-             <td><%=listcut[2]%></td>                                             <!--배열 2번째 값-->
+<%			if(listcut[2].equals("0")){ 
+				if(Integer.parseInt(listcut[4]) == 0){%>
+             		<td align = left><a href =freeboard_view.jsp?key=<%=listcut[0]%>><span style="font-weight: bold;"><%=listcut[1] +" [New]"%></span></a></td>
+<%				}else{ %>
+             		<td align = left><a href =freeboard_view.jsp?key=<%=listcut[0]%>><span style="font-weight: bold;"><%=re +">"+ listcut[1] +" [New]"%></span></a></td>
+<%				}%>
+<%			}else{
+				if(Integer.parseInt(listcut[4]) == 0){%>
+             		<td align = left><a href =freeboard_view.jsp?key=<%=listcut[0]%>><span><%=listcut[1]%></span></a></td>
+<%				}else{ %>
+             		<td align = left><a href =freeboard_view.jsp?key=<%=listcut[0]%>><span><%=re +">"+ listcut[1]%></span></a></td>
+<%				}%>
+<%			} %>
+             <td><%=listcut[2]%></td>                                             <!--배열 7번째 값-->
+             <td><%=listcut[3]%></td>                                             <!--배열 2번째 값-->
         </tr>
 <%              
                  } break;                                                // 반복문이 다 돌고 난후 break;
@@ -126,9 +150,13 @@
 %>
         <tr class = 'tr' align = center>
              <td><%=listcut[0]%></td>   <!--배열 0번째 값-->
-             <td align = left><a href =freeboard_view.jsp?key=<%=listcut[0]%>><%=listcut[1]%></a></td>
-             <td><%=listcut[3]%></td>                                             <!--배열 7번째 값-->
-             <td><%=listcut[2]%></td>                                             <!--배열 2번째 값-->
+<%			if(listcut[2].equals("0")){ %>
+             <td align = left><a href =freeboard_view.jsp?key=<%=listcut[0]%>><span style="font-weight: bold;"><%=listcut[1]+" [New]"%></span></a></td>
+<%			}else{%>
+             <td align = left><a href =freeboard_view.jsp?key=<%=listcut[0]%>><span><%=listcut[1]%></span></a></td>
+<%			} %>
+             <td><%=listcut[2]%></td>                                             <!--배열 7번째 값-->
+             <td><%=listcut[3]%></td>                                             <!--배열 2번째 값-->
         </tr>
 <%
                    } break;    // 반복문이 다 돌고 난후 break; 

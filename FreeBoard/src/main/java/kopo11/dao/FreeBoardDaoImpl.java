@@ -118,10 +118,23 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 
 	
 	@Override // 4. 컬럼 삭제
-	public void delete(int number) {
+	public void delete(int id) {
+		String Query = null;
 		try {
-			String Query = String.format("delete from freeboard where id = %d;",number);
-			stmt().execute(Query);
+			String rootidCheck = String.format("select relevel from freeboard where id = %d",id);
+			ResultSet rset = stmt().executeQuery(rootidCheck);
+			Integer numberRelevel=null;
+			while(rset.next()) {
+				numberRelevel = rset.getInt(1);
+			}
+			
+			if(numberRelevel == 0) {
+				Query = String.format("delete from freeboard where rootid = %d;",id);
+				stmt().execute(Query);
+			}else {
+				Query = String.format("delete from freeboard where id = %d;",id);
+				stmt().execute(Query);
+			}
 		}catch(Exception e) {
 			System.out.println(e);
 		}

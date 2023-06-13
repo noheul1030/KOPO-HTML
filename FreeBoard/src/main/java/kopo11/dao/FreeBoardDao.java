@@ -24,7 +24,7 @@ public interface FreeBoardDao {
 	 void reinsert(String title, String date, String content, int rootid, int relevel, int recnt);
 	
 	// 4. 컬럼 삭제
-	void delete(int number);		
+	void delete(int id);		
 		
 	// 5. 컬럼 값 수정 update
 	void update(int number,String title, String content);

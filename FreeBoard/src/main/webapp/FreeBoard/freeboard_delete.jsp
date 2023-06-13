@@ -39,8 +39,11 @@
 	request.setCharacterEncoding("utf-8");
 
 	int id = Integer.parseInt(request.getParameter("id"));
+	int recnt = Integer.parseInt(request.getParameter("recnt"));
 	
 	dao.delete(id);
+	String recntSet = String.format("update freeboard set recnt = recnt-1 where recnt > %d",recnt);
+	dao.stmt().execute(recntSet);
 %>	
 	<br><br><br><br>
 	<form method='post'>

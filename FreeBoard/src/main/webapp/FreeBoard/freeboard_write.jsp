@@ -60,9 +60,6 @@
 		rootid = Integer.parseInt(request.getParameter("rootid"));
 		relevel = Integer.parseInt(request.getParameter("relevel"));
 		recnt = Integer.parseInt(request.getParameter("recnt"));
-			if(relevel > 0){
-				dao.reinsert(title, date, content, rootid, relevel, recnt);
-			}
 		}
 	}
 	 
@@ -77,7 +74,13 @@
 	}
 	
 	if(result == 0){
+		if(relevel == null){
 		dao.newinsert(title, date, content);
+		}else if(relevel > 0){
+			String recntSet = String.format("update freeboard set recnt = recnt+1 where recnt > %d",recnt-1);
+			dao.stmt().execute(recntSet);
+			dao.reinsert(title, date, content, rootid, relevel, recnt);
+		}
 %>	
 		<br><br><br><br>
 		<form method='post'>
@@ -93,7 +96,7 @@
 		</table>
 		</form>
 <%
-	}else if(result == 1){
+	}else{
 		dao.update(id, title, content);
 %>	
 	<br><br><br><br>

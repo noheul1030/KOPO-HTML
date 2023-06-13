@@ -22,9 +22,7 @@
    				margin: 4px;
    				margin-left:5px;
    			}
-			textarea:hover{
-			 background-color: #f5f5f5; 
-			}
+			
     		.fourth{
 			  background: gold;
 			  border-color: white;
@@ -44,6 +42,7 @@
 			}
 		</style>
 	</head>
+	
 	<body>
 <%
 	FreeBoardDao dao = new FreeBoardDaoImpl();
@@ -79,36 +78,36 @@
 	<form method='post'>
 	<table border='1'>
 		<tr>
-			<td width= 15%><span>번호</span></td>
+			<td bgcolor='#dde5ff' width= 15%><span>번호</span></td>
 			<td colspan='3' align='left' width= 85%><input type='text' name='id' value='<%=id%>' readonly style="all: unset; margin-left:5px;"></td>
 		</tr>
 		<tr>
-			<td width= 15%><span>제목</span></td>
+			<td bgcolor='#dde5ff' width= 15%><span>제목</span></td>
 			<td colspan='3' align= 'left' width= 85%><span type='text' name= 'title'><%=title%></span></td>
 		</tr>
 		<tr>
-			<td width= 15%><span>일자</span></td>
+			<td bgcolor='#dde5ff' width= 15%><span>일자</span></td>
 			<td colspan='3' align='left' width = 85%><input type='text' name='date' value='<%=date%>' readonly style="all: unset; margin-left:5px;"></td>
 		</tr>
 		<tr>
-			<td width= 15%><span>조회수</span></td>
+			<td bgcolor='#dde5ff' width= 15%><span>조회수</span></td>
 			<td colspan='3' align='left' width = 85%><input type='text' name=viewcnt value='<%=viewcnt%>' readonly style="all: unset; margin-left:5px;"></td>
 		</tr>
 		<tr>
-			<td width= 15%><span>내용</span></td>
+			<td bgcolor='#dde5ff' width= 15%><span>내용</span></td>
 			<td colspan='3' align= 'left' width= 85%>
-			<textarea name="content" readonly style="height: 200px; max-height: 150px; overflow-x: auto; overflow-y: scroll;resize: none;"><%=content%></textarea>
+			<textarea name="content" readonly style="height: 300px; max-height: 300px; overflow-x: auto; overflow-y: scroll;resize: none;"><%=content%></textarea>
 			</td>
 		</tr>
 		<tr>
-			<td width= 15%><span>원글</span></td>
+			<td bgcolor='#dde5ff' width= 15%><span>원글</span></td>
 			<td colspan='3' align='left' width = 85%><input type='text' name='rootid' value='<%=rootid%>' readonly style="all: unset; margin-left:5px;"></td>
 		</tr>
 		<tr>
-			<td width= 15%><span>댓글수준</span></td>
+			<td bgcolor='#dde5ff' width= 15%><span>댓글수준</span></td>
 			<td align='left' width = 40% style="border:none;"><input type='text' name='relevel' value='<%=relevel%>' readonly style="all: unset; margin-left:5px;"></td>
-			<td width= 15% style="border:none;"><span>댓글내 순서</span></td>
-			<td align='left' width = 40% style="border:none;"><input type='text' name='recnt' value='<%=recnt%>' readonly style="width:100px;margin-left:5px;"></td>
+			<td bgcolor='#dde5ff' width= 18%"><span>댓글내 순서</span></td>
+			<td align='left' width = 40% style="border:none;"><input type='text' name='recnt' value='<%=recnt%>' readonly style="all: unset; width:100px;margin-left:5px;"></td>
 		</tr>
 	</table>
 	
