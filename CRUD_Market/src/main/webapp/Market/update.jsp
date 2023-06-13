@@ -60,53 +60,55 @@
 	<body>
 <%
 	MarketDao dao = new MarketDaoImpl();
-	
+	//전달 받는 값들의 인코딩 설정을 utf-8로 지정
 	request.setCharacterEncoding("utf-8");
-	String key = request.getParameter("key");
-	
+	// key 값 저장
+	String key = request.getParameter("key"); 
+	// key값을 조건으로 해당 한건 조회
 	ResultSet oneID = dao.selectOne(key);
 	
 %>
-	<table border='2'>
+	<table border='2'> <!-- 테이블 테두리 2 지정 -->
 		<tr>
 			<td align='center'><h2>(주)과일상회 재고 현황 - 재고수정</h2></td>
 		</tr>
-		<tr style="border-bottom:none;">
+		<tr style="border-bottom:none;"> <!-- 셀 스타일 지정,테두리 아래 선 없음 -->
 			<td>
 			
 			<form method='post' enctype="multipart/form-data">
 			<table border='1' class='table' style="text-align:left; table-layout: fixed;">		
 <%	while(oneID.next()){ %>
-				<tr>
+				<tr> <!-- 셀 스타일 지정,text 출력 -->
 					<td bgcolor='#ffdddd' width='20%'><span>상품 번호</span></td>
 					<td><input name='key' value='<%=oneID.getInt(1)%>'readonly style="all: unset; margin-left:5px;"></td>
 				</tr>
-				<tr>
+				<tr> <!-- 셀 스타일 지정,text 출력 -->
 					<td bgcolor='#ffdddd' width='20%'><span>상품명</span></td>
 					<td><input name='name' value='<%=oneID.getString(2)%>'readonly style="all: unset; margin-left:5px;"></td>
 				</tr>
-				<tr>
+				<tr> <!-- 셀 스타일 지정,text 출력 -->
 					<td bgcolor='#ffdddd' width='20%'><span>재고 현황</span></td>		
 					<td><input pattern="^(?:100000000|[1-9][0-9]{0,8}?|0)$" type='text' name='inventoryCNT' value='<%=oneID.getInt(3)%>' title="숫자만 입력하세요." required></td>
 				</tr>
-				<tr>
+				<tr> <!-- 셀 스타일 지정,text 출력 -->
 					<td bgcolor='#ffdddd' width='20%'><span>상품등록일</span></td>		
 					<td><span><%=oneID.getString(4)%></span></td>
 				</tr>
-				<tr>
+				<tr> <!-- 셀 스타일 지정,text 출력 -->
 					<td bgcolor='#ffdddd' width='20%'><span>재고등록일</span></td>		
 					<td><span><%=oneID.getString(5)%></span></td>
 				</tr>
-				<tr>
+				<tr> <!-- 셀 스타일 지정,text 출력 -->
 					<td bgcolor='#ffdddd' width='20%'><span>상품설명</span></td>		
 					<td><span><%=oneID.getString(6)%></span></td>
 				</tr>
-				<tr>
+				<tr> <!-- 셀 스타일 지정,text 출력 -->
 					<td bgcolor='#ffdddd' width='20%'><span>상품사진</span></td>		
 					<td>
+			<!-- 해당 값에 null을 포함하고 있으면 -->
 <%			if(oneID.getString(7).contains("null")){ %>
 						<span>사진이 없습니다.</span>
-<%			}else{ %>
+<%			}else{ %> <!-- 이미지 출력 -->
 						<img width="250" src ='img/<%=oneID.getString(7)%>' style="margin:10px;">
 <%			} %>
 					</td>
@@ -116,14 +118,16 @@
 			</tr>
 <%	
 	}
-%>
+%>		 <!-- 셀 스타일 지정,text 출력 -->
 		<tr style="border-top:none;">
 			<td>	
-			<table class='table'>
-				<tr>
+			<table class='table'> <!-- table 서비스 지정 -->
+				<tr> <!-- 셀 스타일 지정,text 출력 -->
 			<td width='15%' align = 'right'>
+				<!-- 버튼 클릭 시 write.jsp 이동 -->
 				<input class='fourth' type='submit' value='저장' formaction = 'write.jsp'
 					style="width: 80px; height: 30px; padding: 0px;font-weight: bold;"> 
+				<!-- 버튼 클릭 시 create_list.jsp 이동 -->
 				<input class='fourth' type='submit' value='취소' formaction = 'create_list.jsp'
 					style="width: 80px; height: 30px; padding: 0px;font-weight: bold;"formnovalidate> 
 			</td>

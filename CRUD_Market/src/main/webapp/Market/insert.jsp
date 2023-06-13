@@ -59,6 +59,8 @@
 		</style>
 	</head>
 	<script>
+		// 입력받는 이미지의 값에 대한 제한 조건
+		//.gif, .jpg, .png의 이미지 파일에 대한 업로드만 가능하도록 구현하였다.
 		function readURL(input) {
 		  var fileExtensions = [".gif", ".jpg", ".png"];
 		  var file = input.files[0];
@@ -80,11 +82,11 @@
 		    document.getElementById('previewImg').src = "";
 		  }
 		}
-		
+		// input받는 값의 앞 공백 제거
 		function trimSpace(input) {
 			  return input.replace(/^\s+/, '');
 		}
-		
+		// input받는 값의 유효성 검사(<,> 입력방지, 글자수 20자)
 		function InputCheck(input) {
 		  var inputValue = input; // 입력 받는 변수 혹은 데이터베이스에서 가져온 값 등
 		  var pattern = /^(?!(&nbsp;|\s)*$).{1,20}$/;
@@ -103,6 +105,7 @@
 		    }
 		  }
 		}
+		// input받는 값의 유효성 검사(<,> 입력방지, 글자수 70자)
 		function InputCheck2(input) {
 		  var inputValue = input; // 입력 받는 변수 혹은 데이터베이스에서 가져온 값 등
 		  var pattern = /^(?!(&nbsp;|\s)*$).{1,70}$/;
@@ -121,6 +124,7 @@
 		    }
 		  }
 		}
+		// form안에 들어오는 id 값들의 유효성 검사 
 		function validateForm() {
 			var title = document.forms["myForm"]["name"].value;
 			var content = document.forms["myForm"]["text"].value;
@@ -141,48 +145,48 @@
 <%
 	MarketDao dao = new MarketDaoImpl();
 %>	
-	<table border='2'>
-		<tr>
+	<table border='2'> <!-- 테이블 테두리 2 지정 -->
+		<tr> <!-- 셀 스타일 지정,text 출력 -->
 			<td height='50px'><h2>(주)과일상회 재고 현황 - 상품등록</h2></td>
-		</tr>
+		</tr> <!-- 셀 스타일 지정,text 출력 -->
 		<tr style="border-bottom:none;">
 			<td>
-	
+		<!-- form 메소드 post 지정 submit 발생 시 해당 function 실행 -->
 		<form  name="myForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 			<table border='1' class='table' style="text-align:left; table-layout: fixed;">		
-				<tr>
+				<tr> <!-- 셀 스타일 지정,text 출력 -->
 					<td bgcolor='#ffdddd' width='20%'><span>상품 번호</span></td>
 					<td colspan='2'><input pattern="^(?:100000000|[1-9][0-9]{0,8}?|0)$" type='text' name='id' value='<%=dao.middleID()%>' title="숫자만 입력하세요." readonly></td>
 				</tr>
-				<tr>
+				<tr> <!-- 셀 스타일 지정,text 출력 -->
 					<td bgcolor='#ffdddd' width='20%'><span>상품명</span></td>
 					<td colspan='2'><input pattern="^{1,20}$" type='text' maxlength='20' name='name' value='' title="글자수 제한 20"
 					  required></td>
 				</tr>
-				<tr>
+				<tr> <!-- 셀 스타일 지정,text 출력 -->
 					<td bgcolor='#ffdddd' width='20%'><span>재고 현황</span></td>		
 					<td colspan='2'><input pattern="^(?:100000000|[1-9][0-9]{0,8}?|0)$" type='text' name='inventoryCNT' value='' title="숫자만 입력하세요." required></td>
 				</tr>
-				<tr>
+				<tr> <!-- 셀 스타일 지정,text 출력 -->
 					<td bgcolor='#ffdddd' width='20%'><span>상품등록일</span></td>		
 					<td colspan='2'><span><%=dao.date()%></span></td>
 				</tr>
-				<tr>
+				<tr> <!-- 셀 스타일 지정,text 출력 -->
 					<td bgcolor='#ffdddd' width='20%'><span>재고등록일</span></td>		
 					<td colspan='2'><span><%=dao.date()%></span></td>
 				</tr>
-				<tr>
+				<tr> <!-- 셀 스타일 지정,text 출력 -->
 					<td bgcolor='#ffdddd' width='20%'><span>상품설명</span></td>		
 					<td colspan='2'><input pattern="^{1,70}$" maxlength='70' type='text' name='text' value='' title="상품설명을 입력하세요." 
 					 required></td>
 				</tr>
-				<tr>
+				<tr> <!-- 셀 스타일 지정,text 출력 -->
 					<td bgcolor='#ffdddd' width='20%' rowspan='2'><span>상품사진</span></td>		
 				</tr>
-				<tr>
+				<tr> <!-- 셀 스타일 지정,이미지 미리보기 출력 -->
 					<td style="border-right: none;">
 						<img id="previewImg" width="250" style="margin:10px;"/>
-					</td>
+					</td> <!-- 이미지를 입력받는 태그, function으로 입력받는 파일의 유효성 검사 -->
 					<td style="width: 200px; border-left: none; text-align: right;">
 						<input type='file' accept='.gif, .jpg, .png' name='file' onchange="readURL(this);">	
 					</td>
@@ -191,13 +195,15 @@
 			</table>
 			</td>
 		</tr>
-		<tr style="border-top:none;">
+		<tr style="border-top:none;"> <!-- 셀 스타일 지정, 테두리 위에 선 없음-->
 			<td>	
 			<table class='table'>
-				<tr>
+				<tr> <!-- 셀 스타일 지정,이미지 미리보기 출력 -->
 					<td width='15%' align = 'right'>
+					<!-- 버튼 클릭 시 create_list.jsp 이동 -->
 					<input class='fourth' type='button' value='등록 취소' formaction='create_list.jsp'
 						style="width: 80px; height: 30px; padding: 0px;font-weight: bold;"onclick="window.location.href = 'create_list.jsp';">
+					<!-- 버튼 클릭 시 write.jsp 이동 -->
 					<input class='fourth' type='submit' value='완료' formaction='write.jsp'
 						style="width: 80px; height: 30px; padding: 0px;font-weight: bold;"> </td>
 				</tr>

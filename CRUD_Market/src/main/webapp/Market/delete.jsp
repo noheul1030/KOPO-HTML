@@ -53,42 +53,43 @@
 	String picture = null;	// 변수 선언
 	
 	String deleteKey = request.getParameter("key");  // 전달받은 값 저장
-	String query = String.format("select * from market where id = '%s'",deleteKey); // 삭제할 id키rkqt 조회
-	ResultSet rset = dao.stmt().executeQuery(query);
+	String query = String.format("select * from market where id = '%s'",deleteKey); // 삭제할 id키값 조회
+	ResultSet rset = dao.stmt().executeQuery(query); // 쿼리 실행 결과 저장
 
-	while(rset.next()){
-		name = rset.getString(2);
-		picture = rset.getString(7);
+	while(rset.next()){ // 결과 값을 한줄씩 출력, 값이 있으면 true
+		name = rset.getString(2); // 변수 값 저장
+		picture = rset.getString(7); // 변수 값 저장
 	}
 	
-	String filePath = root + "/" + picture;
-	File file = new File(filePath);
-	if (file.exists()) {
-	    file.delete();
+	String filePath = root + "/" + picture; // 파일의 경로 저장
+	File file = new File(filePath); // 파일 객체 생성
+	if (file.exists()) { // 파일이 존재하면
+	    file.delete(); // 파일 삭제
 	}
 	
-	dao.delete(deleteKey);
+	dao.delete(deleteKey); // 키값으로 삭제
 %>	
-	<table border='2'>
-		<tr>
+	<table border='2'>  <!-- 테이블 테두리 2 지정 -->
+		<tr> <!-- 셀 스타일 지정,text 출력 -->
 			<td height='50px'><h2>(주)과일상회 재고 현황 - 상품삭제</h2></td>
 		</tr>
 		<tr>
 			<td>
 			<br><br>
 			
-			<form method='post'>
-			<table  class='table'>
-				<tr>
+			<form method='post'>  <!-- form 메소드 post 지정 -->
+			<table  class='table'> <!-- 테이블 스타일 지정 -->
+				<tr> <!-- 삭제되는 정보 출력 -->
 					<td><h3>상품번호: <%=deleteKey%>, 상품명: <%=name%> 삭제 되었습니다.</h3></td>
 				</tr>
 				<tr>
 					<td align = 'center'>
+					<!-- 버튼 클릭 시 create_list.jsp 이동 -->
 					<input class='fourth' type='submit' value='재고 현황' formaction = 'create_list.jsp'
 						style="width: 130px; height: 30px; padding: 0px;font-weight: bold;"> </td>
 				</tr>
 			</table>
-			</form>
+			</form> <!-- form 태그 종료 -->
 			</td>
 		</tr>
 	</table>

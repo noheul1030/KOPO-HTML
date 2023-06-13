@@ -48,17 +48,19 @@
 	<body>
 <%
 	MarketDao dao = new MarketDaoImpl();
+	// 전달 받는 값들의 인코딩 설정을 utf-8로 지정
 	request.setCharacterEncoding("utf-8");
 	
 	// 이미지파일 get
 	int sizeLimit=100*300*300;
-	String path= "/Market/img";
+	String path= "/Market/img"; // 상대 경로 값 지정
 	String directory= request.getServletContext().getRealPath(path);
 	
+	// 이미지 추출
 	String root = "/var/lib/tomcat9/webapps/CRUD_Market/Market/img";
-// 	String newPath = root;
-	String newPath = directory + path;
-	
+	// 	String newPath = root;
+	String newPath = directory + path; // 디렉토리의 경로와 path 경로 합병
+	//
 	MultipartRequest multi = new MultipartRequest(request, root, sizeLimit, "UTF-8", new DefaultFileRenamePolicy());
 	
 	String filename = null;

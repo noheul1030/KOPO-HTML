@@ -182,38 +182,38 @@
         		<tr align = center>          
 
 <%			if(from <= maxpage-(maxpage%10)) { %>                                                                           <!--from 값이 maxpage 보다 작거나 같으면 true 조건-->
-					<td><a href="create_list.jsp?from=1&cnt=<%=cnt%>"><<</a></td>                                                      <!-- 테이블 링크 연결 -->
+					<td><a href="create_list.jsp?from=1&cnt=<%=cnt%>"><<</a></td>                                           <!-- 테이블 링크 연결 -->
 <%				if(from <= 10) { %>                                                                                         <!--from 값이 10보다 작거나 크면 true 조건-->
-					<td><a href="create_list.jsp?from=1&cnt=<%=cnt%>"><</a></td>                                                   <!-- 테이블 링크 연결 -->
+					<td><a href="create_list.jsp?from=1&cnt=<%=cnt%>"><</a></td>                                            <!-- 테이블 링크 연결 -->
 <%				}else { %>
-					<td><a href="create_list.jsp?from=<%=pageCheck-10%>&cnt=<%=cnt%>"><</a></td>                                    <!-- 테이블 링크 연결 -->
+					<td><a href="create_list.jsp?from=<%=pageCheck-10%>&cnt=<%=cnt%>"><</a></td>                            <!-- 테이블 링크 연결 -->
 <%				} %>
 <%				for(int i = 1; i <= 10; i++){ 
-					if(pageCheck == fromByTen+i){%>                                                                            <!--1~10까지 도는 반복문-->
-						<td class="custom-size"><a href="create_list.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td>                         <!-- 테이블 링크 연결 -->
+					if(pageCheck == fromByTen+i){%>                                                                         <!--1~10까지 도는 반복문-->
+						<td class="custom-size"><a href="create_list.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td> <!-- 테이블 링크 연결 -->
 <%					}else{ %>
 						<td><a href="create_list.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td> 
 <%					} %>
 <%				} %>
-				<td><a href="create_list.jsp?from=<%=pageCheck+10%>&cnt=<%=cnt%>">></a></td>                                       <!-- 테이블 링크 연결 -->
-				<td><a href="create_list.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                           <!-- 테이블 링크 연결 -->
+				<td><a href="create_list.jsp?from=<%=pageCheck+10%>&cnt=<%=cnt%>">></a></td>                                 <!-- 테이블 링크 연결 -->
+				<td><a href="create_list.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                     <!-- 테이블 링크 연결 -->
 <%			}else { %>
-				<td><a href="create_list.jsp?from=1&cnt=<%=cnt%>"><<</a></td>                                                      <!-- 테이블 링크 연결 -->
-				<td><a href="create_list.jsp?from=<%=pageCheck-10%>&cnt=<%=cnt%>"><</a></td>                                        <!-- 테이블 링크 연결 -->
+				<td><a href="create_list.jsp?from=1&cnt=<%=cnt%>"><<</a></td>                                                <!-- 테이블 링크 연결 -->
+				<td><a href="create_list.jsp?from=<%=pageCheck-10%>&cnt=<%=cnt%>"><</a></td>                                 <!-- 테이블 링크 연결 -->
 
 <%				for(int i = 1; i <= maxpage%10; i++){ 
-					if(pageCheck == fromByTen+i){%>                                                                    <!--1~나머지 값 만큼 도는 반복문 -->
-						<td class="custom-size"><a href="create_list.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td>                         <!-- 테이블 링크 연결 -->
+					if(pageCheck == fromByTen+i){%>                                                                     	 <!--1~나머지 값 만큼 도는 반복문 -->
+						<td class="custom-size"><a href="create_list.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td> <!-- 테이블 링크 연결 -->
 <%					}else{ %>
 						<td><a href="create_list.jsp?from=<%=fromByTen+i%>&cnt=<%=cnt%>"><%=fromByTen+i%></a></td> 
 <%					} %>
 <%				} %>
-<%				if(maxpage-(maxpage%10)< from){ %>                                                                          <!--ㅡmaxpage-나머지 값이 from보다 작으면 -->
-					<td><a href="create_list.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">></a></td>                                        <!-- 테이블 링크 연결 -->
+<%				if(maxpage-(maxpage%10)< from){ %>                                                                           <!--ㅡmaxpage-나머지 값이 from보다 작으면 -->
+					<td><a href="create_list.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">></a></td>                                  <!-- 테이블 링크 연결 -->
 <%				}else { %>
-					<td><a href="create_list.jsp?from=<%=pageCheck+10%>&cnt=<%=cnt%>">></a></td>                                   <!-- 테이블 링크 연결 -->
+					<td><a href="create_list.jsp?from=<%=pageCheck+10%>&cnt=<%=cnt%>">></a></td>                             <!-- 테이블 링크 연결 -->
 <%				} %>
-				<td><a href="create_list.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                           <!-- 테이블 링크 연결 -->
+				<td><a href="create_list.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                     <!-- 테이블 링크 연결 -->
 <%			} %>
 		
 			<td width='80px' align = 'right'>
