@@ -74,8 +74,9 @@
 		</tr>
 		<tr style="border-bottom:none;"> <!-- 셀 스타일 지정,테두리 아래 선 없음 -->
 			<td>
-			
+			<!-- form 메서드 post 지정 multiform -->
 			<form method='post' enctype="multipart/form-data">
+			<!-- 테이블 스타일 지정 -->
 			<table border='1' class='table' style="text-align:left; table-layout: fixed;">		
 <%	while(oneID.next()){ %>
 				<tr> <!-- 셀 스타일 지정,text 출력 -->
@@ -86,7 +87,7 @@
 					<td bgcolor='#ffdddd' width='20%'><span>상품명</span></td>
 					<td><input name='name' value='<%=oneID.getString(2)%>'readonly style="all: unset; margin-left:5px;"></td>
 				</tr>
-				<tr> <!-- 셀 스타일 지정,text 출력 -->
+				<tr> <!-- 셀 스타일 지정,text 출력, 숫자 제한 1~100000000 -->
 					<td bgcolor='#ffdddd' width='20%'><span>재고 현황</span></td>		
 					<td><input pattern="^(?:100000000|[1-9][0-9]{0,8}?|0)$" type='text' name='inventoryCNT' value='<%=oneID.getInt(3)%>' title="숫자만 입력하세요." required></td>
 				</tr>

@@ -64,7 +64,7 @@ public class MarketDaoImpl implements MarketDao{
 					lastNumber = rset.getInt(1)+1;
 					break;
 				}
-			}
+			} stmt().close();
 		}catch(Exception e) {
 			System.out.println(e);
 		}
@@ -80,7 +80,7 @@ public class MarketDaoImpl implements MarketDao{
 				while(rset.next()) {
 					lastNumber = rset.getInt(1)+1;
 				}
-			}
+			} stmt().close();
 		}catch(Exception e) {
 			System.out.println(e);
 		}
@@ -101,7 +101,7 @@ public class MarketDaoImpl implements MarketDao{
 	                + ") DEFAULT CHARSET=UTF8;";
 	
 	        stmt().execute(sql);
-	       
+	        stmt().close();
         }catch(Exception e) {
         	System.out.println(e);
         }
@@ -119,6 +119,7 @@ public class MarketDaoImpl implements MarketDao{
 			while(rset.next()) {
 				count = rset.getInt(1);
 			}
+			 stmt().close();
 		}catch(Exception e) {
 			System.out.println(e);
 			throw new RuntimeException(e);
@@ -136,6 +137,7 @@ public class MarketDaoImpl implements MarketDao{
 							id,name,inventoryCNT,inventoryCheck,inventoryUpdate,text,picture);
 			
 			stmt().execute(sql);
+			stmt().close();
 		}catch(Exception e) {
 			System.out.println(e);
 		}
@@ -147,6 +149,7 @@ public class MarketDaoImpl implements MarketDao{
 		try {
 			String Query = String.format("delete from market where id ='%s';",id);
 			stmt().execute(Query);
+			stmt().close();
 		}catch(Exception e) {
 			System.out.println(e);
 		}
@@ -159,6 +162,7 @@ public class MarketDaoImpl implements MarketDao{
 		try {
 			String Query = String.format("select * from market where id = '%s';",key);
 			rset = stmt().executeQuery(Query);
+			stmt().close();
 		}catch(Exception e) {
 			System.out.println(e);
 		}
@@ -172,6 +176,7 @@ public class MarketDaoImpl implements MarketDao{
 			String Query = String.format("update market set inventoryCNT = %d, inventoryCheck = '%s' where id = %d;",
 					inventoryCNT,date(),key);
 			stmt().execute(Query);
+			stmt().close();
 		}catch(Exception e) {
 			System.out.println(e);
 		}

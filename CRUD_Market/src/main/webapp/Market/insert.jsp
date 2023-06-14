@@ -154,16 +154,16 @@
 		<!-- form 메소드 post 지정 submit 발생 시 해당 function 실행 -->
 		<form  name="myForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 			<table border='1' class='table' style="text-align:left; table-layout: fixed;">		
-				<tr> <!-- 셀 스타일 지정,text 출력 -->
+				<tr> <!-- 셀 스타일 지정,text 출력, 숫자 제한 1~100000000 -->
 					<td bgcolor='#ffdddd' width='20%'><span>상품 번호</span></td>
 					<td colspan='2'><input pattern="^(?:100000000|[1-9][0-9]{0,8}?|0)$" type='text' name='id' value='<%=dao.middleID()%>' title="숫자만 입력하세요." readonly></td>
 				</tr>
-				<tr> <!-- 셀 스타일 지정,text 출력 -->
+				<tr> <!-- 셀 스타일 지정,text 출력, 글자수 제한 1~20자 -->
 					<td bgcolor='#ffdddd' width='20%'><span>상품명</span></td>
 					<td colspan='2'><input pattern="^{1,20}$" type='text' maxlength='20' name='name' value='' title="글자수 제한 20"
 					  required></td>
 				</tr>
-				<tr> <!-- 셀 스타일 지정,text 출력 -->
+				<tr> <!-- 셀 스타일 지정,text 출력, 숫자 제한 1~100000000 -->
 					<td bgcolor='#ffdddd' width='20%'><span>재고 현황</span></td>		
 					<td colspan='2'><input pattern="^(?:100000000|[1-9][0-9]{0,8}?|0)$" type='text' name='inventoryCNT' value='' title="숫자만 입력하세요." required></td>
 				</tr>
@@ -175,7 +175,7 @@
 					<td bgcolor='#ffdddd' width='20%'><span>재고등록일</span></td>		
 					<td colspan='2'><span><%=dao.date()%></span></td>
 				</tr>
-				<tr> <!-- 셀 스타일 지정,text 출력 -->
+				<tr> <!-- 셀 스타일 지정,text 출력, 글자수 제한 1~70자 -->
 					<td bgcolor='#ffdddd' width='20%'><span>상품설명</span></td>		
 					<td colspan='2'><input pattern="^{1,70}$" maxlength='70' type='text' name='text' value='' title="상품설명을 입력하세요." 
 					 required></td>
