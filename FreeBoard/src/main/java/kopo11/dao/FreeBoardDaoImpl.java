@@ -11,20 +11,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	String root = "root";
 	String password = "shdmf1030@";
 	
-	// DB연동
-	public Statement stmt() {
-		Connection conn;
-		Statement stmt = null;
-		try {
-		Class.forName(driver);
-    	conn = DriverManager.getConnection(connection, root,password);
-    	stmt = conn.createStatement();
-    	
-		}catch(Exception e){
-			System.out.println(e);
-		}
-		return stmt;
-	}
+	
 	
 	// Date 정보 조회
 	public String date() {
@@ -38,8 +25,12 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	public int lastNumber() {
 		Integer lastNumber = 1;
 		try {
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(connection, root,password);
+			Statement stmt = conn.createStatement();
+			
 			if(count()!=0) {
-				ResultSet rset = stmt().executeQuery("select id from freeboard order by id desc;");
+				ResultSet rset = stmt.executeQuery("select id from freeboard order by id desc;");
 				while(rset.next()) {
 					lastNumber = rset.getInt(1)+1;
 					break;
@@ -54,6 +45,10 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	@Override // 1. table 생성
 	public void createTable() {
         try {
+        	Class.forName(driver);
+			Connection conn = DriverManager.getConnection(connection, root,password);
+			Statement stmt = conn.createStatement();
+			
 	        String sql = "create table if not exists freeboard(" 
 	                + "id int not null primary key auto_increment," 
 	                + "title varchar(70), "
@@ -65,8 +60,9 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	                + "viewcnt int"
 	                + ") DEFAULT CHARSET=UTF8;";
 	
-	        stmt().execute(sql);
-	       
+	        stmt.execute(sql);
+			conn.close();
+	        stmt.close();
         }catch(Exception e) {
         	System.out.println(e);
         }
@@ -75,12 +71,16 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	
 	@Override // 2. 전체 table값 count
 	public int count() {
-		Integer count = null;
+		Integer count = 0;
 		try {
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(connection, root,password);
+			Statement stmt = conn.createStatement();
+			
 			String sql = String.format
 					("select count(*) from freeboard;");
 			
-			ResultSet rset = stmt().executeQuery(sql);
+			ResultSet rset = stmt.executeQuery(sql);
 			while(rset.next()) {
 				count = rset.getInt(1);
 			}
@@ -93,13 +93,20 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	@Override // 3. 공지번호,제목,날짜,내용 값 저장
 	public void newinsert(String title, String date, String content) {
 		try {			
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(connection, root,password);
+			Statement stmt = conn.createStatement();
+			
 			int lastNumber = lastNumber();
 			String sql = String.format
 					("insert into freeboard (title,date,content,viewcnt) values ('%s','%s','%s',%d);",title,date,content,0);
-			stmt().execute(sql);
+			stmt.execute(sql);
 			String query = String.format
 					("update freeboard SET rootid = %d, relevel = %d, recnt = %d WHERE id = %d;",lastNumber,0,0,lastNumber);
-			stmt().execute(query);
+			stmt.execute(query);
+			
+			conn.close();
+			stmt.close();
 		}catch(Exception e) {
 			System.out.println(e);
 		}
@@ -107,10 +114,17 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	
 	public void reinsert(String title, String date, String content, int rootid, int relevel, int recnt) {
 		try {
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(connection, root,password);
+			Statement stmt = conn.createStatement();
+			
 			String sql = String.format
 					("insert into freeboard (title,date,content,rootid,relevel,recnt,viewcnt) "
 							+ "values ('%s','%s','%s',%d,%d,%d,%d);",title,date,content,rootid,relevel,recnt,0);
-			stmt().execute(sql);
+			stmt.execute(sql);
+			
+			conn.close();
+			stmt.close();
 		}catch(Exception e) {
 			System.out.println(e);
 		}
@@ -121,8 +135,12 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	public void delete(int id) {
 		String Query = null;
 		try {
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(connection, root,password);
+			Statement stmt = conn.createStatement();
+			
 			String rootidCheck = String.format("select relevel from freeboard where id = %d",id);
-			ResultSet rset = stmt().executeQuery(rootidCheck);
+			ResultSet rset = stmt.executeQuery(rootidCheck);
 			Integer numberRelevel=null;
 			while(rset.next()) {
 				numberRelevel = rset.getInt(1);
@@ -130,11 +148,14 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 			
 			if(numberRelevel == 0) {
 				Query = String.format("delete from freeboard where rootid = %d;",id);
-				stmt().execute(Query);
+				stmt.execute(Query);
 			}else {
 				Query = String.format("delete from freeboard where id = %d;",id);
-				stmt().execute(Query);
+				stmt.execute(Query);
 			}
+			
+			conn.close();
+			stmt.close();
 		}catch(Exception e) {
 			System.out.println(e);
 		}
@@ -143,9 +164,16 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	@Override // 5. 컬럼 값 수정 update
 	public void update(int number,String title, String content) {
 		try {
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(connection, root,password);
+			Statement stmt = conn.createStatement();
+			
 			String Query = String.format("update freeboard set title = '%s',date = '%s',content = '%s' where id = %d;",
 					title,date(),content,number);
-			stmt().execute(Query);
+			stmt.execute(Query);
+			
+			conn.close();
+			stmt.close();
 		}catch(Exception e) {
 			System.out.println(e);
 		}
@@ -157,25 +185,38 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	public ResultSet selectOne(String key) {
 		ResultSet rset= null;
 		try {
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(connection, root,password);
+			Statement stmt = conn.createStatement();
+			
 			String Query = String.format("select * from freeboard where id = '%s';",key);
-			rset = stmt().executeQuery(Query);
+			rset = stmt.executeQuery(Query);
+			
+			
 		}catch(Exception e) {
 			System.out.println(e);
 		}
 		return rset;
 	}
 
-	@Override
+	@Override // 방문자 수 ++
 	public void visit(String key) {
 		Integer count = null;
 		try {
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(connection, root,password);
+			Statement stmt = conn.createStatement();
+			
 			String query = String.format("select viewcnt from freeboard where id = '%s'",key);
-			ResultSet rset = stmt().executeQuery(query);
+			ResultSet rset = stmt.executeQuery(query);
 			while(rset.next()) {
 				count = rset.getInt(1)+1;
 			}
 			String Query = String.format("update freeboard set viewcnt = %d where id = '%s'" ,count,key);
-			stmt().execute(Query);
+			stmt.execute(Query);
+			
+			conn.close();
+			stmt.close();
 		}catch(Exception e) {
 			System.out.println(e);
 		}

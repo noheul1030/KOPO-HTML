@@ -5,8 +5,7 @@ import java.sql.*;
 public interface FreeBoardDao {
 	// CRUD
 	
-	// DB 연동
-	Statement stmt();
+	
 	// 날짜
 	String date(); 
 	// 마지막 게시글

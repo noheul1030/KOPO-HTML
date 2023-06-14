@@ -51,8 +51,26 @@
 	</head>
 	<body>
 <% 
+	String driver = "com.mysql.cj.jdbc.Driver";
+	String connection = "jdbc:mysql://192.168.23.60:3307/kopo11";
+//	String connection = "jdbc:mysql://localhost:3306/noheul";
+	String root = "root";
+	String password = "shdmf1030@";
+	
+	Connection conn = null;
+	Statement stmt = null;
+	
+	try{
+		
+	Class.forName(driver);
+	conn = DriverManager.getConnection(connection, root,password);
+	stmt = conn.createStatement();
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+
 	FreeBoardDao dao = new FreeBoardDaoImpl();
-	dao.createTable();
+	dao.createTable(); // 테이블 생성
 	
 	int total = dao.count(); // 변수 값 리스트 크기 지정
     
@@ -62,7 +80,7 @@
 	int from = 0; // 변수 초기값 지정
 	int cnt = 10; // 변수 초기값 지정
 	int fromByTen = 0; // 변수 초기값 지정
-	int minpage = 1;
+	int minpage = 1; // 변수 초기값 지정
 	int maxpage = (total%cnt == 0)?(total/cnt):(total/cnt)+1; // 변수 초기값 지정
 	int LineCnt = 1; // 변수 초기값 지정
 	
@@ -90,53 +108,58 @@
 	/* 1 ~ 최대페이지 */
 	else{pageCheck = from;}
 	
-	//ResultSet rset = dao.stmt().executeQuery("select * from freeboard order by id desc;");	
-	ResultSet rset = dao.stmt().executeQuery("select id,title,viewcnt,date,relevel from freeboard order by rootid desc, recnt asc;");	
+	//ResultSet rset = dao.stmt.executeQuery("select * from freeboard order by id desc;");	
+	ResultSet rset = stmt.executeQuery("select id,title,viewcnt,date,relevel from freeboard order by rootid desc, recnt asc;");	
 	List<String> freeboard = new ArrayList<String>(); // new 리스트 선언
 	
 	while(rset.next()){
 		freeboard.add(Integer.toString(rset.getInt(1))+"\t"+rset.getString(2)+"\t"+rset.getString(3)+"\t"+rset.getString(4)+"\t"+rset.getString(5));
  	}
+	
+	conn.close();
+	stmt.close();
+	
 	try{
 		// 반복문 
         while (true){ // rset의 next값이 true일 때 
 %>		
-	<table border = '1'>
-		<tr>
+	<table border = '1'> <!-- 테이블 테두리 1 지정 -->
+		<tr> <!-- 셀 스타일 지정,text 출력 -->
 			<td bgcolor='#dde5ff' width = '70'><b>번호</b></td>
 			<td bgcolor='#dde5ff'><b>제목</b></td>
 			<td bgcolor='#dde5ff' width = '70'><b>조회수</b></td>
 			<td bgcolor='#dde5ff' width = '100'><b>등록일</b></td>
 		</tr>
-<%          
+<%           // 전체 행의 값 조회 시 0이면 true
 			if(dao.count()==0){ %>
+			<!-- 셀 스타일 지정,text 출력 -->
 		<tr style="border:none;"><td colspan='4'><h3 style="margin-top:15px;">게시글이 존재하지 않습니다.</h3></td></tr>
 <%			}
-			if(from <=1){                                  
-                 from = 1;
+			if(from <=1){                     				 // from이 1이하이면              
+                 from = 1;									 // from 값 지정
                  fromByTen = 0;    
                  for(int i = 0; i < cnt; i++){               // 0~ cnt까지 도는 반복문
-                    String[] listcut = freeboard.get(i).split("\t");
-                 	String re = "";
-                 	for(int j = 0; j < Integer.parseInt(listcut[4]);j++){
+                    String[] listcut = freeboard.get(i).split("\t"); // freeboard list의 값을 \t 기준으로 배열 저장
+                 	String re = ""; // 변수 선언
+                 	for(int j = 0; j < Integer.parseInt(listcut[4]);j++){ // 댓글의 레벨에 따른 하이픈 길이 조절
                  		if(i > 0){
                 			re = re + "-";
                 		}
                  	}
-%>               
+%>      <!-- 셀 스타일 지정,text 출력 -->            
         <tr class = 'tr' align = center>
              <td><%=listcut[0]%></td>   <!--배열 0번째 값-->
-<%			if(listcut[2].equals("0")){ 
+<%			if(listcut[3].equals(dao.date())){ 
 				if(Integer.parseInt(listcut[4]) == 0){%>
              		<td align = left><a href =freeboard_view.jsp?key=<%=listcut[0]%>><span style="font-weight: bold;"><%=listcut[1] +" [New]"%></span></a></td>
 <%				}else{ %>
-             		<td align = left><a href =freeboard_view.jsp?key=<%=listcut[0]%>><span style="font-weight: bold;"><%=re +">"+ listcut[1] +" [New]"%></span></a></td>
+             		<td align = left><a href =freeboard_view.jsp?key=<%=listcut[0]%>><span style="font-weight: bold;"><%=re +">[Re]"+ listcut[1] +" [New]"%></span></a></td>
 <%				}%>
 <%			}else{
 				if(Integer.parseInt(listcut[4]) == 0){%>
              		<td align = left><a href =freeboard_view.jsp?key=<%=listcut[0]%>><span><%=listcut[1]%></span></a></td>
 <%				}else{ %>
-             		<td align = left><a href =freeboard_view.jsp?key=<%=listcut[0]%>><span><%=re +">"+ listcut[1]%></span></a></td>
+             		<td align = left><a href =freeboard_view.jsp?key=<%=listcut[0]%>><span><%=re +">[Re]"+ listcut[1]%></span></a></td>
 <%				}%>
 <%			} %>
              <td><%=listcut[2]%></td>                                             <!--배열 7번째 값-->
@@ -154,7 +177,7 @@
              <td align = left><a href =freeboard_view.jsp?key=<%=listcut[0]%>><span style="font-weight: bold;"><%=listcut[1]+" [New]"%></span></a></td>
 <%			}else{%>
              <td align = left><a href =freeboard_view.jsp?key=<%=listcut[0]%>><span><%=listcut[1]%></span></a></td>
-<%			} %>
+<%			} %>  
              <td><%=listcut[2]%></td>                                             <!--배열 7번째 값-->
              <td><%=listcut[3]%></td>                                             <!--배열 2번째 값-->
         </tr>
@@ -170,8 +193,9 @@
 	<br>
 
 	<form method = 'post'>
-	<table border='1' style="table-layout: fixed;">
+	<table style="table-layout: fixed;">
         <tr align = center>          
+        <td></td>
 <%		if(from <= maxpage-(maxpage%10)) { %>                                                                           <!--from 값이 maxpage 보다 작거나 같으면 true 조건-->
 			<td><a href="freeboard_list.jsp?from=1&cnt=<%=cnt%>"><<</a></td>                                                      <!-- 테이블 링크 연결 -->
 <%			if(from <= 10) { %>                                                                                         <!--from 값이 10보다 작거나 크면 true 조건-->
@@ -206,7 +230,7 @@
 <%			} %>
 			<td><a href="freeboard_list.jsp?from=<%=maxpage%>&cnt=<%=cnt%>">>></a></td>                                           <!-- 테이블 링크 연결 -->
 <%		} %>
-		
+			<td></td>
 			<td align = 'right' width= 60px>
 			<input class='fourth' type='submit' value='신규' formaction = 'freeboard_insert.jsp'
 				style="width: 60px; height: 30px; padding: 0px;font-weight: bold;"> </td>
