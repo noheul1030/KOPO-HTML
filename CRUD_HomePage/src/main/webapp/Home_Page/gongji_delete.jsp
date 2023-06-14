@@ -59,7 +59,6 @@
 				style="width: 130px; height: 30px; padding: 0px;font-weight: bold;"> </td>
 		</tr>
 	</table>
-	</form> <!-- form 태그 종료 -->
-	
+	</form> <!-- form 태그 종료 -->	
 	</body>
 </html>

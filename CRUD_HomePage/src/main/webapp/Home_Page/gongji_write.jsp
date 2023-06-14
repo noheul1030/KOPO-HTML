@@ -62,7 +62,7 @@
 	if(dao.count()!=0){ // 전체 행count의 값이 0이 아니면 true
 	// number의 값이 존재하는지 여부 확인
 		String query = String.format("SELECT CASE WHEN EXISTS (SELECT * FROM gongji WHERE number = %s) THEN 1 ELSE 0 END AS result;",request.getParameter("number"));
-		ResultSet rset = dao.stmt().executeQuery(query);
+		ResultSet rset = dao.stmt().executeQuery(query); // 쿼리 결과값 저장
 		while (rset.next()){ // 결과 값을 한줄씩 출력, 값이 있으면 true
 			result = rset.getInt(1);  // 가져온 값 저장
 		}

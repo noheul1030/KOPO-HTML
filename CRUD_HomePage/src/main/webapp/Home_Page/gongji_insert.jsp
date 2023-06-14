@@ -98,7 +98,7 @@
 	
 	int count = dao.lastNumber(); // 비어있는 최소 값 찾기
 	
-	String title = null;
+	String title = null; // 변수 선언
 	String date = dao.date(); // 날짜 값 저장
 	
 	dao.stmt().close();
@@ -145,7 +145,6 @@
 			</td>
 		</tr>
 	</table>
-	</form> <!-- form 태그 종료 -->
-	
+	</form> <!-- form 태그 종료 -->	
 	</body>
 </html>
