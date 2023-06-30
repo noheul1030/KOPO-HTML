@@ -100,7 +100,7 @@
 		}else if(relevel > 0){ // 0이 아니면
 			// recnt의 값보다 큰 전체 recnt의 값을 +1해준다.
 			String recntSet = String.format("update freeboard set recnt = recnt+1 where recnt > %d",recnt-1);
-			stmt.execute(recntSet); // 뭐리 실행
+			stmt.execute(recntSet); // 쿼리 실행
 			// 댓글 작성 insert
 			dao.reinsert(title, date, content, rootid, relevel, recnt);
 		}
